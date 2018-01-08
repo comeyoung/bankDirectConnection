@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{5BD25625-7448-4033-801C-0CF9EC46E79C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.PushBankment", "src\BankDirectConnection.PushBankment\BankDirectConnection.PushBankment.csproj", "{99187084-1AB8-4253-A4BB-10D9FD2421EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.Domain", "src\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj", "{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.UTest", "src\BankDirectConnection.UTest\BankDirectConnection.UTest.csproj", "{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99187084-1AB8-4253-A4BB-10D9FD2421EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99187084-1AB8-4253-A4BB-10D9FD2421EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99187084-1AB8-4253-A4BB-10D9FD2421EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99187084-1AB8-4253-A4BB-10D9FD2421EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

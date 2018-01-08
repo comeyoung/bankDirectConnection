@@ -1,0 +1,7 @@
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\obj\Debug\BankDirectConnection.PushBankment.csprojResolveAssemblyReference.cache
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.PushBankment.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.PushBankment.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.Domain.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.Domain.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\obj\Debug\BankDirectConnection.PushBankment.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\obj\Debug\BankDirectConnection.PushBankment.pdb

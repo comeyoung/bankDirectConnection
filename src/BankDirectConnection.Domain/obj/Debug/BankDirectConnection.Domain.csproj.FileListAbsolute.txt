@@ -1,0 +1,4 @@
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Domain\bin\Debug\BankDirectConnection.Domain.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Domain\bin\Debug\BankDirectConnection.Domain.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Domain\obj\Debug\BankDirectConnection.Domain.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Domain\obj\Debug\BankDirectConnection.Domain.pdb
