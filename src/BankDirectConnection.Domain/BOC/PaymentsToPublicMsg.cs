@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.BOC.Message;
+﻿using BankDirectConnection.Application.Transfer;
+using BankDirectConnection.Domain.BOC.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,21 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 对公转账
     /// </summary>
-    public class PaymentsToPublicMsg
+    public class PaymentsToPublicMsg: AbastractTrans
     {
         public PaymentsToPublicMsg()
         {
             this.HeaderMessage = new Header();
-            this.Trans = new PaymentsToPublicTrans();
+            this.Trans = new List<PaymentsToPublicTrans>();
         }
         public Header HeaderMessage { get; set; }
 
-        public PaymentsToPublicTrans Trans { get; set; }
+        public List<PaymentsToPublicTrans> Trans { get; set; }
+
+        public override bool Check()
+        {
+            return base.Check();
+        }
     }
     public class PaymentsToPublicTrans
     {

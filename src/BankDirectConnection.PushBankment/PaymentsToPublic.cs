@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.TransferBO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,12 @@ namespace BankDirectConnection.PushBankment
     public class PaymentsToPublic
     {
         //b2e0009公对公转账汇款
+
+        public static void PushPaymentsToPublic(Transcation trascation)
+        {
+            //创建对公转账对象 校验对象的值是否合法
+            //创建xml
+            //调用服务
+        }
     }
 }

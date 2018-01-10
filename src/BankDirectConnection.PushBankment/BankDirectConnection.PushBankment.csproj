@@ -41,17 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BalanceInquiry.cs" />
-    <Compile Include="BuildXml\BuildBalanceInquiryXML.cs" />
-    <Compile Include="BuildXml\BuildCommonXML.cs" />
-    <Compile Include="BuildXml\BuildPaymentsToPublicXML.cs" />
-    <Compile Include="BuildXml\BuildSignInXML.cs" />
-    <Compile Include="BuildXml\BuildSignOutXML.cs" />
-    <Compile Include="BuildXml\BuildTransactionInquiryXML.cs" />
-    <Compile Include="BuildXml\BuildTransactionStatusInquiryXML.cs" />
-    <Compile Include="BuildXml\BuildWageAndReimbursementXML.cs" />
+    <Compile Include="BankTransfer\BankFactory.cs" />
+    <Compile Include="BankTransfer\BankService.cs" />
+    <Compile Include="BankTransfer\BOCService.cs" />
+    <Compile Include="BankTransfer\ServiceFactory.cs" />
+    <Compile Include="BankTransfer\SGBService.cs" />
+    <Compile Include="BOCService\Deserialization.cs" />
+    <Compile Include="BOCService\Serialization.cs" />
     <Compile Include="Http\BaseHttpClient.cs" />
     <Compile Include="PaymentsToPublic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SGBService\Deserialization.cs" />
+    <Compile Include="SGBService\Serialization.cs" />
     <Compile Include="SignIn.cs" />
     <Compile Include="SignOut.cs" />
     <Compile Include="TransactionInquiry.cs" />
@@ -59,23 +60,28 @@
     <Compile Include="WageAndReimbursement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BuildXml\XMLTemplate\CurrentBalanceInquiry.xml" />
-    <Content Include="BuildXml\XMLTemplate\HistoryBalanceInquir.xml" />
-    <Content Include="BuildXml\XMLTemplate\PaymentsToPublic.xml" />
-    <Content Include="BuildXml\XMLTemplate\SignIn.xml" />
-    <Content Include="BuildXml\XMLTemplate\SignOut.xml" />
-    <Content Include="BuildXml\XMLTemplate\TransactionInquiry.xml">
+    <Content Include="BOCService\BuildXML\XMLTemplate\CurrentBalanceInquiry.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\HistoryBalanceInquir.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\PaymentsToPublic.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\SignIn.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\SignOut.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\TransactionInquiry.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="BuildXml\XMLTemplate\TransactionStatusInquiry.xml" />
-    <Content Include="BuildXml\XMLTemplate\WageAndReimbursement.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\TransactionStatusInquiry.xml" />
+    <Content Include="BOCService\BuildXML\XMLTemplate\WageAndReimbursement.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.Application.csproj">
+      <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
+      <Name>BankDirectConnection.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

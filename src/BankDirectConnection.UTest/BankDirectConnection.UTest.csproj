@@ -65,6 +65,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PaseResponse\TestPaseCommonResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PushBankment\TestSignIn.cs" />
     <Compile Include="PushBankment\TestSignOut.cs" />
@@ -88,37 +89,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\CurrentBalanceInquiry.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\CurrentBalanceInquiry.xml">
       <Link>XMLTemplate\CurrentBalanceInquiry.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\HistoryBalanceInquir.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\HistoryBalanceInquir.xml">
       <Link>XMLTemplate\HistoryBalanceInquir.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\PaymentsToPublic.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\PaymentsToPublic.xml">
       <Link>XMLTemplate\PaymentsToPublic.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\SignIn.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\SignIn.xml">
       <Link>XMLTemplate\SignIn.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\SignOut.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\SignOut.xml">
       <Link>XMLTemplate\SignOut.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\TransactionInquiry.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\TransactionInquiry.xml">
       <Link>XMLTemplate\TransactionInquiry.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\TransactionStatusInquiry.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\TransactionStatusInquiry.xml">
       <Link>XMLTemplate\TransactionStatusInquiry.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\BankDirectConnection.PushBankment\BuildXml\XMLTemplate\WageAndReimbursement.xml">
+    <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\WageAndReimbursement.xml">
       <Link>XMLTemplate\WageAndReimbursement.xml</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Choose>

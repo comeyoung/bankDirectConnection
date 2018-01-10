@@ -15,5 +15,10 @@ namespace BankDirectConnection.PushBankment
     public class TransactionStatusInquiry
     {
         // 交易状态查询：b2e0007（必要）
+
+        public string PullTransactionStatus()
+        {
+            return "";
+        }
     }
 }

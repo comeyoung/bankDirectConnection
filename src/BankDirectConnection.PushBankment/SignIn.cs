@@ -14,6 +14,9 @@ namespace BankDirectConnection.PushBankment
     /// </summary>
     public class SignIn
     {
-
+        public string PushSignIn()
+        {
+            return "";
+        }
     }
 }

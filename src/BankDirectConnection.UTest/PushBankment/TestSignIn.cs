@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using BankDirectConnection.Domain.BOC;
-using BankDirectConnection.PushBankment.BuildXml;
+using BankDirectConnection.PushBankment.BOCService;
 
 namespace BankDirectConnection.UTest.PushBankment
 {
@@ -24,7 +23,7 @@ namespace BankDirectConnection.UTest.PushBankment
             signInMsg.Trans.Custdt = "2002";
             signInMsg.Trans.Oprpwd = "2002";
 
-            string xmlStr = BuildSignInXML.BuildXMLStrForSignInByLinq(signInMsg);
+            string xmlStr = Serialization.BuildXMLStrForSignInByLinq(signInMsg);
             Console.WriteLine(xmlStr);
         }
     }
