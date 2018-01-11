@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.Application.Transfer;
+using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 	===============================================================================================================================*/
     public class BankFactory
     {
-        public static IBankService CreateBank(ITranscation transcation)
+        public static IBankService CreateBank(emBankService BankService)
         {
             IBankService bankService;
-            switch (transcation.BusinessType)
+            switch (BankService)
             {
-                case "0": bankService = new BOCService();break;
-                case "1":bankService = new SGBService();break;
-                default:throw new Exception("业务代码错误");
+                case emBankService.emBOCService: bankService = new BOCService();break;
+                case emBankService.emSGBService: bankService = new SGBService();break;
+                default:throw new Exception("inner error,bad bank service.");
             }
             return bankService;
         }

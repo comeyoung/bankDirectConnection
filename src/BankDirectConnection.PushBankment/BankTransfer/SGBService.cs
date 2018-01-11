@@ -24,7 +24,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
       
         public IResResult QueryTransStatus(ITransferQueryData ITransferQueryData)
         {
-            throw new NotImplementedException();
+            IResResult result = new ResResult();
+            //
+            return result;
         }
     }
 }

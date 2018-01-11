@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.PushBankment.BOCService
+namespace BankDirectConnection.PushBankment.SGBService
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 15:22:10
+	*	Create by Fancy at 2018/1/11 13:34:39
 	===============================================================================================================================*/
-    public class Deserialization
+    public class SGBHttp
     {
-        // public static 
     }
 }

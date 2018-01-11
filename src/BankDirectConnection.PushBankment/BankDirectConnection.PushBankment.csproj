@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SGBService\Deserialization.cs" />
     <Compile Include="SGBService\Serialization.cs" />
+    <Compile Include="SGBService\SGBHttp.cs" />
     <Compile Include="SignIn.cs" />
     <Compile Include="SignOut.cs" />
     <Compile Include="TransactionInquiry.cs" />

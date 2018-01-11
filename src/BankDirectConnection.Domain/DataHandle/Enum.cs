@@ -24,4 +24,32 @@ namespace BankDirectConnection.Domain.DataHandle
         emHistory
 
     }
+    /// <summary>
+    /// 银行接口
+    /// </summary>
+    public enum emBankService
+    {
+        /// <summary>
+        /// 中国银行接口
+        /// </summary>
+        emBOCService,
+        /// <summary>
+        /// 法兴银行借款
+        /// </summary>
+        emSGBService
+    }
+    /// <summary>
+    /// 优先级
+    /// </summary>
+    public enum emPriority
+    {
+        /// <summary>
+        /// 普通
+        /// </summary>
+        emNormal,
+        /// <summary>
+        /// 加急
+        /// </summary>
+        emUrgent
+    }
 }

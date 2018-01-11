@@ -55,11 +55,13 @@
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
     <Compile Include="DataHandle\Instruction.cs" />
+    <Compile Include="Exception\BusinessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBO\ITransferQueryData.cs" />
     <Compile Include="QueryBO\TransferQueryData.cs" />
     <Compile Include="Service\IResResult.cs" />
     <Compile Include="Service\ResResult.cs" />
+    <Compile Include="SGB\BatchTransResponse.cs" />
     <Compile Include="SGB\CommonHeader.cs" />
     <Compile Include="SGB\CommonResponseMsg.cs" />
     <Compile Include="SGB\ForeignCurryPaymentMsg.cs" />
