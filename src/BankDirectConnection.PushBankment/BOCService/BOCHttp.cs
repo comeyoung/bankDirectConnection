@@ -4,24 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.BOC
+namespace BankDirectConnection.PushBankment.BOCService
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2017/12/24 17:55:10
+	*	Create by Fancy at 2018/1/11 9:53:39
 	===============================================================================================================================*/
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum emBalanceType
+    public class BOCHttp
     {
-        /// <summary>
-        /// 今日余额查询
-        /// </summary>
-        emCurrentDate,
-        /// <summary>
-        /// 历史余额查询
-        /// </summary>
-        emHistory
-
+        //T4测试环境专线 http://10.16.253.167:9082/B2EP/XmlServlet
+        //T4测试环境公网 http://180.168.146.79:81/B2EP/XmlServlet
+        public static string BaseUrl = "http://180.168.146.79:81/B2EP/XmlServlet";
     }
 }

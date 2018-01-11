@@ -7,3 +7,6 @@ D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Applicatio
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.Application.pdb
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.Application.dll
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.Application.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.Domain.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.Domain.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.Application.csprojResolveAssemblyReference.cache

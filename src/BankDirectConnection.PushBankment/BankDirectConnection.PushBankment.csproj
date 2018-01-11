@@ -46,6 +46,7 @@
     <Compile Include="BankTransfer\BOCService.cs" />
     <Compile Include="BankTransfer\ServiceFactory.cs" />
     <Compile Include="BankTransfer\SGBService.cs" />
+    <Compile Include="BOCService\BOCHttp.cs" />
     <Compile Include="BOCService\Deserialization.cs" />
     <Compile Include="BOCService\Serialization.cs" />
     <Compile Include="Http\BaseHttpClient.cs" />

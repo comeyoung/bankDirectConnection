@@ -4,20 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.DataConvert
+namespace BankDirectConnection.Domain.Abstract
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/2 13:54:17
+	*	Create by Fancy at 2018/1/11 10:30:07
 	===============================================================================================================================*/
-    public class Date
+    public abstract class AbastractTrans
     {
-        /// <summary>
-        /// 返回yyyyMMdd格式
-        /// </summary>
-        /// <param name="Date"></param>
-        public static string ToString(DateTime Date)
+        public virtual bool Check()
         {
-            return Date.ToString("yyyyMMdd");
+            return true;
         }
     }
 }

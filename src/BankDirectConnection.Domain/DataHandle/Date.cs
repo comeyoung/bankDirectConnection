@@ -1,17 +1,23 @@
-﻿using BankDirectConnection.Domain.TransferBO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Application.Transfer
+namespace BankDirectConnection.Domain.DataHandle
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:05:12
+	*	Create by Fancy at 2018/1/2 13:54:17
 	===============================================================================================================================*/
-    public interface ITransferService
+    public class Date
     {
-        void PaymentTransfer(ITranscation Transcation);
+        /// <summary>
+        /// 返回yyyyMMdd格式
+        /// </summary>
+        /// <param name="Date"></param>
+        public static string ToString(DateTime Date)
+        {
+            return Date.ToString("yyyyMMdd");
+        }
     }
 }

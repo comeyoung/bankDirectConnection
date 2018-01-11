@@ -7,48 +7,39 @@ using System.Threading.Tasks;
 namespace BankDirectConnection.Domain.Service
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 17:18:55
+	*	Create by Fancy at 2018/1/11 10:25:28
 	===============================================================================================================================*/
-    /// <summary>
-    /// 对外接口返回
-    /// </summary>
-    public class ResResult: IResResult
+    public interface IResResult
     {
-        public ResResult()
-        {
-            this.status = new Status();
-            this.response = new List<IResponse>();
-        }
+         IStatus status { get; set; }
 
-        public IStatus status { get; set; }
-
-        public IList<IResponse> response { get; set; }
+         IList<IResponse> response { get; set; }
     }
 
-    public class Status: IStatus
+    public interface IStatus
     {
-        public string RspCod { get; set; }
+         string RspCod { get; set; }
 
-        public string RspMsg { get; set; }
+         string RspMsg { get; set; }
     }
 
-    public class Response: IResponse
+    public interface IResponse
     {
-        public Status status { get; set; }
+         Status status { get; set; }
 
         /// <summary>
         /// 客户端生成
         /// </summary>
-        public string ClientId { get; set; }
+         string ClientId { get; set; }
 
         /// <summary>
         /// 转账指令ID 中间件生成
         /// </summary>
-        public string InsId { get; set; }
+         string InsId { get; set; }
 
         /// <summary>
         /// 网银交易流水号
         /// </summary>
-        public string ObssId { get; set; }
+         string ObssId { get; set; }
     }
 }

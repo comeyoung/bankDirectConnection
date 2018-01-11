@@ -1,17 +1,27 @@
-﻿using BankDirectConnection.Domain.TransferBO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Application.Transfer
+namespace BankDirectConnection.Domain.DataHandle
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:05:12
+	*	Create by Fancy at 2017/12/24 17:55:10
 	===============================================================================================================================*/
-    public interface ITransferService
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum emBalanceType
     {
-        void PaymentTransfer(ITranscation Transcation);
+        /// <summary>
+        /// 今日余额查询
+        /// </summary>
+        emCurrentDate,
+        /// <summary>
+        /// 历史余额查询
+        /// </summary>
+        emHistory
+
     }
 }

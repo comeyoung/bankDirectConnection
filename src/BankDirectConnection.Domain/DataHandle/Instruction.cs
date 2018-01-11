@@ -1,17 +1,22 @@
-﻿using BankDirectConnection.Domain.TransferBO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Application.Transfer
+namespace BankDirectConnection.Domain.DataHandle
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:05:12
+	*	Create by Fancy at 2018/1/11 13:23:37
 	===============================================================================================================================*/
-    public interface ITransferService
+    /// <summary>
+    /// 指令处理
+    /// </summary>
+    public class Instruction
     {
-        void PaymentTransfer(ITranscation Transcation);
+        public static string NewInsSid()
+        {
+            return Guid.NewGuid().ToString().Trim('-');
+        }
     }
 }

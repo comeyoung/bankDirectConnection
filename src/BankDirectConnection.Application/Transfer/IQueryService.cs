@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.QueryBO;
+using BankDirectConnection.Domain.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,6 @@ namespace BankDirectConnection.Application.Transfer
 	===============================================================================================================================*/
     public interface IQueryService
     {
-        void QueryTransStatus();
+        IResResult QueryTransStatus(ITransferQueryData TransferQueryData);
     }
 }

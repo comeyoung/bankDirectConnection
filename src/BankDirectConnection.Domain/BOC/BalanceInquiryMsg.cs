@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.Domain.BOC.Message;
+using BankDirectConnection.Domain.DataHandle;
 using System;
 using System.Collections.Generic;
 using System.Linq;

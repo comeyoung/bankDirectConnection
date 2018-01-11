@@ -1,4 +1,8 @@
-﻿using BankDirectConnection.Application.Transfer;
+﻿using System;
+using BankDirectConnection.Application.Transfer;
+using BankDirectConnection.Domain.QueryBO;
+using BankDirectConnection.Domain.Service;
+using BankDirectConnection.Domain.TransferBO;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -10,14 +14,17 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// </summary>
     public class SGBService : IBankService
     {
-        public void PaymentTransfer()
+      
+
+        public void PaymentTransfer(ITranscation Transcation)
         {
-            //
+            throw new NotImplementedException();
         }
 
-        public void QueryTransStatus()
+      
+        public IResResult QueryTransStatus(ITransferQueryData ITransferQueryData)
         {
-           //
+            throw new NotImplementedException();
         }
     }
 }

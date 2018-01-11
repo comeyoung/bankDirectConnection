@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\AbastractTrans.cs" />
     <Compile Include="BOC\BalanceInquiryMsg.cs" />
-    <Compile Include="BOC\Enum.cs" />
+    <Compile Include="DataHandle\Enum.cs" />
     <Compile Include="BOC\Fractn.cs" />
     <Compile Include="BOC\Message\Header.cs" />
     <Compile Include="BOC\Message\Trans.cs" />
@@ -52,10 +53,12 @@
     <Compile Include="BOC\TransactionStatusInquiryMsg.cs" />
     <Compile Include="BOC\TransferResponseMsg.cs" />
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
-    <Compile Include="DataConvert\Date.cs" />
+    <Compile Include="DataHandle\Date.cs" />
+    <Compile Include="DataHandle\Instruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBO\ITransferQueryData.cs" />
     <Compile Include="QueryBO\TransferQueryData.cs" />
+    <Compile Include="Service\IResResult.cs" />
     <Compile Include="Service\ResResult.cs" />
     <Compile Include="SGB\CommonHeader.cs" />
     <Compile Include="SGB\CommonResponseMsg.cs" />
@@ -70,12 +73,6 @@
     <Compile Include="TransferBO\TransDetail.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.Application.csproj">
-      <Project>{1350D02A-99B2-44D5-AD91-73AB93362F41}</Project>
-      <Name>BankDirectConnection.Application</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

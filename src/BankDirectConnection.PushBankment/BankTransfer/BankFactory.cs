@@ -13,7 +13,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 	===============================================================================================================================*/
     public class BankFactory
     {
-        public IBankService CreateBank(ITranscation transcation)
+        public static IBankService CreateBank(ITranscation transcation)
         {
             IBankService bankService;
             switch (transcation.BusinessType)
