@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BankDirectConnection.PushBankment.BOCService;
 
 namespace BankDirectConnection.UTest.PaseResponse
 {
@@ -9,8 +10,10 @@ namespace BankDirectConnection.UTest.PaseResponse
         [TestMethod]
         public void TestResponseMsg()
         {
-            string msg = "";
-
+            // test 0009
+            string msg = "<trn-b2e0009-rs><status><rspcod>0</rspcod><rspmsg>successful</rspmsg></status><b2e0009-rs><status><rspcod>0</rspcod><rspmsg>successful</rspmsg></status><insid>012452574sdds548ee</insid><obssid>514552842</obssid></b2e0009-rs><b2e0009-rs><status><rspcod>0</rspcod><rspmsg>successful</rspmsg></status><insid>012452574sdds548ee</insid><obssid>514552842</obssid></b2e0009-rs></trn-b2e0009-rs>";
+            var rt =  Deserialization.ParseResponseMsg(msg, "b2e0009");
+            Console.WriteLine(rt.serverdt);
         }
     }
 }
