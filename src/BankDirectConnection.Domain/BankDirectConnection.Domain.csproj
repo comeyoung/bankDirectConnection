@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Abstract\AbastractTrans.cs" />
     <Compile Include="BOC\BalanceInquiryMsg.cs" />
+    <Compile Include="BOC\ResponseMsg.cs" />
+    <Compile Include="DataHandle\DataConvert.cs" />
     <Compile Include="DataHandle\Enum.cs" />
     <Compile Include="BOC\Fractn.cs" />
     <Compile Include="BOC\Message\Header.cs" />

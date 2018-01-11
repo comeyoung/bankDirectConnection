@@ -6,8 +6,11 @@ using BankDirectConnection.PushBankment.SGBService;
 namespace BankDirectConnection.UTest.PaseResponse
 {
     [TestClass]
-    public class TestPaseCommonResponseMsg
+    public class TestParseCommonResponseMsg
     {
+        /// <summary>
+        /// 测试SG银行公共包头反序列化
+        /// </summary>
         [TestMethod]
         public void TestParseResponseMsg()
         {
