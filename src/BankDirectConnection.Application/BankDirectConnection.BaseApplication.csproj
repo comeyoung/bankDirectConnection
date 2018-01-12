@@ -44,10 +44,12 @@
     <Compile Include="BaseTranscation\Account.cs" />
     <Compile Include="BaseTranscation\BaseResult.cs" />
     <Compile Include="BaseTranscation\BaseTranscation.cs" />
+    <Compile Include="BaseTranscation\BaseTranscations.cs" />
     <Compile Include="BaseTranscation\IAccount.cs" />
     <Compile Include="BaseTranscation\IBaseQueryData.cs" />
     <Compile Include="BaseTranscation\IBaseResult.cs" />
     <Compile Include="BaseTranscation\IBaseTranscation.cs" />
+    <Compile Include="BaseTranscation\IBaseTranscations.cs" />
     <Compile Include="ExceptionMsg\BusinessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transfer\IBankService.cs" />

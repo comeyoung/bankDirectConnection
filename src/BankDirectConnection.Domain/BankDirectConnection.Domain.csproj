@@ -70,8 +70,10 @@
     <Compile Include="SGB\InnerTransferMsg.cs" />
     <Compile Include="SGB\RMBPaymentMsg.cs" />
     <Compile Include="TransferBO\ITranscation.cs" />
+    <Compile Include="TransferBO\ITranscations.cs" />
     <Compile Include="TransferBO\ITransDetail.cs" />
     <Compile Include="TransferBO\Transcation.cs" />
+    <Compile Include="TransferBO\Transcations.cs" />
     <Compile Include="TransferBO\TransDetail.cs" />
   </ItemGroup>
   <ItemGroup>

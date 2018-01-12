@@ -15,14 +15,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 客户端流水号
         /// </summary>
         string ClientId { get; set; }
-        /// <summary>
-        /// 转账方式
-        /// </summary>
-        string TransWay { get; set; }
-        /// <summary>
-        /// 转账业务类型
-        /// </summary>
-        string BusinessType { get; set; }
+        
         /// <summary>
         /// 付款币种
         /// </summary>

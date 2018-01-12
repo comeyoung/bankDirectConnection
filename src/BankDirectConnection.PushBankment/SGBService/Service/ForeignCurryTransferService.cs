@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.Abstract
+namespace BankDirectConnection.PushBankment.SGBService.Service
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/11 10:30:07
+	*	Create by Fancy at 2018/1/12 16:37:09
 	===============================================================================================================================*/
-    public abstract class AbastractTrans
+    /// <summary>
+    /// 外币转账 收款账户不是人民币且不是法兴银行
+    /// </summary>
+    public class ForeignCurryTransferService
     {
-
-        public virtual bool Check()
-        {
-            return true;
-        }
-
     }
 }

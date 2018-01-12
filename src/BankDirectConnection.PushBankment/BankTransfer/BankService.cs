@@ -26,11 +26,12 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
-                Transcation.Check();
-                string insId = Instruction.NewInsSid(Transcation.TransWay);
-                //获取银行信息，调用具体银行的服务
-                var bankService = BankFactory.CreateBank(Instruction.ParseInsId(insId));
-                bankService.PaymentTransfer(Transcation);
+                //Transcation.Check();
+                //string insId = Instruction.NewInsSid(Transcation.TransWay);
+                ////获取银行信息，调用具体银行的服务
+                //var bankService = BankFactory.CreateBank(Instruction.ParseInsId(insId));
+                //bankService.PaymentTransfer(Transcation);
+                throw new NotImplementedException();
             }
             catch (BusinessException ex)
             {

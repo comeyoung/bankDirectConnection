@@ -4,18 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.Abstract
+namespace BankDirectConnection.PushBankment.SGBService.Service
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/11 10:30:07
+	*	Create by Fancy at 2018/1/12 16:36:24
 	===============================================================================================================================*/
-    public abstract class AbastractTrans
+    /// <summary>
+    /// 内部转账
+    /// </summary>
+    public class InnerTransferService
     {
-
-        public virtual bool Check()
-        {
-            return true;
-        }
-
     }
 }

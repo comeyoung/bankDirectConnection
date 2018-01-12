@@ -1,5 +1,7 @@
-﻿using BankDirectConnection.Domain.Abstract;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.Abstract;
 using BankDirectConnection.Domain.BOC.Message;
+using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
 
 namespace BankDirectConnection.Domain.BOC
@@ -17,6 +19,19 @@ namespace BankDirectConnection.Domain.BOC
             this.HeaderMessage = new Header();
             this.Trans = new List<PaymentsToPublicTrans>();
         }
+
+        public static PaymentsToPublicMsg Create(ITranscation Transcation)
+        {
+            if (null == Transcation)
+                throw new BusinessException("the value of transcation is null") { Code = "2002002" };
+            PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
+
+            PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
+
+            //msg.Trans.Add()
+            return msg;
+        }
+
         public Header HeaderMessage { get; set; }
 
         public List<PaymentsToPublicTrans> Trans { get; set; }

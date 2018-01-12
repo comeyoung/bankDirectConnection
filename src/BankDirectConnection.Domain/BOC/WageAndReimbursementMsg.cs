@@ -1,5 +1,6 @@
 ﻿using BankDirectConnection.Domain.Abstract;
 using BankDirectConnection.Domain.BOC.Message;
+using BankDirectConnection.Domain.TransferBO;
 
 namespace BankDirectConnection.Domain.BOC
 {
@@ -9,12 +10,19 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 代发工资、报销
     /// </summary>
-    public class WageAndReimbursementMsg:AbastractTrans
+    public class WageAndReimbursementMsg : AbastractTrans
     {
+       
         public WageAndReimbursementMsg()
         {
             this.HeaderMessage = new Header();
             this.Trans = new WageAndReimbursementTrans();
+        }
+        public WageAndReimbursementMsg(ITranscation Transcation)
+        {
+            this.HeaderMessage = new Header();
+            this.Trans = new WageAndReimbursementTrans();
+
         }
         public Header HeaderMessage { get; set; }
 
@@ -27,7 +35,7 @@ namespace BankDirectConnection.Domain.BOC
         public override bool Check()
         {
             return base.Check();
-            
+
         }
     }
     public class WageAndReimbursementTrans
