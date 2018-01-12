@@ -1,15 +1,16 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.TransferBO
+namespace BankDirectConnection.Application.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:34:19
+	*	Create by Fancy at 2018/1/12 14:22:19
 	===============================================================================================================================*/
-    public class Account: IAccount
+    public class Account : IAccount
     {
         /// <summary>
         /// 收款行联行号

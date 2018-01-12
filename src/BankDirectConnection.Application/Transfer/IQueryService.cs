@@ -1,18 +1,12 @@
-﻿using BankDirectConnection.Domain.QueryBO;
-using BankDirectConnection.Domain.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 
 namespace BankDirectConnection.Application.Transfer
 {
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:04:30
 	===============================================================================================================================*/
-    public interface IQueryService
+    public interface IQueryService<T,In,Out> where T: IBaseQueryData where In: BaseApplication.BaseTranscation.IBaseQueryDatas<T> where Out:IBaseResult
     {
-        IResResult QueryTransStatus(ITransferQueryData TransferQueryData);
+        Out QueryTransStatus(In TransferQueryData);
     }
 }

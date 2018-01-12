@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.PushBankment
+namespace BankDirectConnection.PushBankment.BOCService.Service
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2017/12/24 14:27:54
+	*	Create by Fancy at 2018/1/12 11:19:03
 	===============================================================================================================================*/
     /// <summary>
-    /// 签到
+    /// 交易状态查询业务
     /// </summary>
-    public class SignIn
+    public class TransactionStatusInquiryService
     {
-        public string PushSignIn()
-        {
-            return "";
-        }
+
     }
 }

@@ -5,5 +5,5 @@ D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankme
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.Domain.pdb
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\obj\Debug\BankDirectConnection.PushBankment.dll
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\obj\Debug\BankDirectConnection.PushBankment.pdb
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.Application.dll
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.Application.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.BaseApplication.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.PushBankment\bin\Debug\BankDirectConnection.BaseApplication.pdb

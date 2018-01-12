@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.UTest", "src\BankDirectConnection.UTest\BankDirectConnection.UTest.csproj", "{F1D66F0A-2A57-4DF1-A489-9B3338B39AFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.Application", "src\BankDirectConnection.Application\BankDirectConnection.Application.csproj", "{1350D02A-99B2-44D5-AD91-73AB93362F41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.BaseApplication", "src\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj", "{1350D02A-99B2-44D5-AD91-73AB93362F41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankDirectConnection.Service", "src\BankDirectConnection.Service\BankDirectConnection.Service.csproj", "{7B3D99E9-5D83-4DC1-84A0-096101F12CED}"
 EndProject

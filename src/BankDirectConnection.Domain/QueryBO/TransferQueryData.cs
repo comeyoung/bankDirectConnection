@@ -9,13 +9,16 @@ namespace BankDirectConnection.Domain.QueryBO
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 17:39:21
 	===============================================================================================================================*/
+    /// <summary>
+    /// 交易查询数据
+    /// </summary>
     public class TransferQueryDataList : ITransferQueryDataList
     {
         public TransferQueryDataList()
         {
-            this.ITransferQueryDatas = new List<ITransferQueryData>();
+            this.TransferQueryDatas = new List<ITransferQueryData>();
         }
-        public IList<ITransferQueryData> ITransferQueryDatas
+        public IList<ITransferQueryData> TransferQueryDatas
         {
             get;set;
         }

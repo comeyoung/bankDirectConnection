@@ -31,3 +31,5 @@ D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\ob
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\bin\BankDirectConnection.Domain.dll
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\bin\BankDirectConnection.Domain.pdb
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\obj\Debug\BankDirectConnection.Service.csprojResolveAssemblyReference.cache
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\bin\BankDirectConnection.BaseApplication.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Service\bin\BankDirectConnection.BaseApplication.pdb

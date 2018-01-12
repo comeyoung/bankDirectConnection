@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.Service;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.Domain.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,25 +15,29 @@ namespace BankDirectConnection.Domain.BOC
     {
         public ResponseMsg()
         {
-            this.status = new Status();
+            this.Status = new Status();
             this.DetailResponses = new List<DetailResponse>();
         }
-        public Status status { get; set; }
+        public Status Status { get; set; }
 
-        public string serverdt { get; set; }
+        public string Serverdt { get; set; }
 
-        public string token { get; set; }
+        public string Token { get; set; }
 
         public List<DetailResponse> DetailResponses { get; set; }
     }
 
     public class DetailResponse
     {
-        public Status status { get; set; }
+        public DetailResponse()
+        {
+            this.Status = new Status();
+        }
+        public Status Status { get; set; }
 
-        public string insid { get; set; }
+        public string Insid { get; set; }
 
-        public string obssid { get; set; }
+        public string Obssid { get; set; }
 
     }
 

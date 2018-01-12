@@ -4,21 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.PushBankment
+namespace BankDirectConnection.BaseApplication.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2017/12/24 18:00:59
+	*	Create by Fancy at 2018/1/12 14:21:35
 	===============================================================================================================================*/
-    /// <summary>
-    /// 交易状态查询
-    /// </summary>
-    public class TransactionStatusInquiry
+    public interface IBaseTranscation
     {
-        // 交易状态查询：b2e0007（必要）
+        bool Check();
 
-        public string PullTransactionStatus()
-        {
-            return "";
-        }
+        /// <summary>
+        /// 付款账号信息
+        /// </summary>
+        IAccount FromAcct { get; set; }
     }
 }

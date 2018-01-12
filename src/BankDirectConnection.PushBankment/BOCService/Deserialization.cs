@@ -1,10 +1,6 @@
-﻿using BankDirectConnection.Domain.BOC;
-using BankDirectConnection.Domain.Exception;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC;
+using BankDirectConnection.Domain.ExceptionMsg;
 using System.Xml.Linq;
 
 namespace BankDirectConnection.PushBankment.BOCService
@@ -18,24 +14,24 @@ namespace BankDirectConnection.PushBankment.BOCService
         {
             ResponseMsg res = new ResponseMsg();
             if (string.IsNullOrEmpty(ResponseMsg))
-                throw new BusinessException("null callback") { Code = "10021" };
+                throw new BusinessException("null callback") { Code = "3011001" };
             if (string.IsNullOrEmpty(BussinessType))
-                throw new BusinessException("inner code,bussinesstype is null") { Code = "20001" };
+                throw new BusinessException("bussinesstype is null") { Code = "3011002" };
             XDocument xDoc = XDocument.Parse(ResponseMsg);
             var xElement = xDoc.Descendants("trn-"+ BussinessType + "-rs");
             foreach(var item in xElement)
             {
-                res.token = GetElementValue(item.Element("token"));
-                res.serverdt = GetElementValue(item.Element("serverdt"));
+                res.Token = GetElementValue(item.Element("token"));
+                res.Serverdt = GetElementValue(item.Element("serverdt"));
             }
 
-            var status = xElement.Descendants("status");
+            var status = xElement.Elements("status");
             if(null != status)
             {
                 foreach (var item in status)
                 {
-                    res.status.RspCod = GetElementValue(item.Element("rspcode"));
-                    res.status.RspMsg = GetElementValue(item.Element("rspmsg"));
+                    res.Status.RspCod = GetElementValue(item.Element("rspcod"));
+                    res.Status.RspMsg = GetElementValue(item.Element("rspmsg"));
                 }
             }
             var resDetail = xElement.Descendants(BussinessType + "-rs");
@@ -47,11 +43,11 @@ namespace BankDirectConnection.PushBankment.BOCService
                     var detailStatus = resDetail.Descendants("status");
                     foreach(var detailItem in detailStatus)
                     {
-                        detailLine.status.RspCod = GetElementValue(detailItem.Element("rspcode"));
-                        detailLine.status.RspMsg = GetElementValue(detailItem.Element("rspmsg"));
+                        detailLine.Status.RspCod = GetElementValue(detailItem.Element("rspcod"));
+                        detailLine.Status.RspMsg = GetElementValue(detailItem.Element("rspmsg"));
                     }
-                    detailLine.insid = GetElementValue(item.Element("insid"));
-                    detailLine.obssid = GetElementValue(item.Element("obssid"));
+                    detailLine.Insid = GetElementValue(item.Element("insid"));
+                    detailLine.Obssid = GetElementValue(item.Element("obssid"));
                     res.DetailResponses.Add(detailLine);
                 }
             }

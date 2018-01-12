@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.Exception
+namespace BankDirectConnection.BaseApplication.ExceptionMsg
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/11 15:03:41
+	*	Create by Fancy at 2018/1/12 14:25:10
 	===============================================================================================================================*/
-    public class BusinessException:ApplicationException
+    public class BusinessException : ApplicationException
     {
         public BusinessException(string message) : base(message)
         {

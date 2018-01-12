@@ -1,9 +1,5 @@
-﻿using BankDirectConnection.Domain.Exception;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.DataHandle
 {
@@ -22,12 +18,12 @@ namespace BankDirectConnection.Domain.DataHandle
         public static string NewInsSid(string TransWay)
         {
             if (string.IsNullOrEmpty(TransWay))
-                throw new BusinessException("the value of transway is null") { Code="10001"};
+                throw new BusinessException("the value of transway is null") { Code= "1001006" };
             switch (TransWay)
             {
                 case "01": return "01" + Guid.NewGuid().ToString().Trim('-');
                 case "02": return "02"+ Guid.NewGuid().ToString().Trim('-');
-                default:throw new BusinessException("the value of transway is bad") { Code="10002"};
+                default:throw new BusinessException("the value of transway is bad") { Code= "1001006" };
             }
         }
 
@@ -39,13 +35,13 @@ namespace BankDirectConnection.Domain.DataHandle
         public static emBankService ParseInsId(string InsId)
         {
             if (string.IsNullOrEmpty(InsId))
-                throw new BusinessException("the value of insid is null") { Code="10011"};
+                throw new BusinessException("the value of insid is null") { Code= "1001009" };
             string bankCode = InsId.Substring(0, 2);
             switch (bankCode)
             {
                 case "01":return emBankService.emBOCService;
                 case "02": return emBankService.emSGBService;
-                default: throw new BusinessException("error insid") { Code = "10012" };
+                default: throw new BusinessException("error insid") { Code = "1001009" };
             }
         }
     }

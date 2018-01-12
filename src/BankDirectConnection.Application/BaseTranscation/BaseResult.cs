@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Application.Transfer
+namespace BankDirectConnection.BaseApplication.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:03:53
+	*	Create by Fancy at 2018/1/12 14:31:00
 	===============================================================================================================================*/
-    public abstract class AbastractTrans
+    public class BaseResult: IBaseResult
     {
-        public virtual bool Check()
+        public BaseResult()
         {
-            return true;
+            this.Status = new Status();
         }
+        public IStatus Status { get; set; }
+    }
+
+    public class Status : IStatus
+    {
+        public string RspCod { get; set; }
+
+        public string RspMsg { get; set; }
     }
 }

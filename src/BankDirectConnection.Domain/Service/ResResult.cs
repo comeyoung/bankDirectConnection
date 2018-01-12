@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,25 +17,22 @@ namespace BankDirectConnection.Domain.Service
     {
         public ResResult()
         {
-            this.status = new Status();
-            this.response = new List<IResponse>();
+            this.Status = new Status();
+            this.Response = new List<IResponse>();
         }
 
-        public IStatus status { get; set; }
+        public IStatus Status { get; set; }
 
-        public IList<IResponse> response { get; set; }
+        public IList<IResponse> Response { get; set; }
+
+        
     }
 
-    public class Status: IStatus
-    {
-        public string RspCod { get; set; }
-
-        public string RspMsg { get; set; }
-    }
+   
 
     public class Response: IResponse
     {
-        public Status status { get; set; }
+        public Status Status { get; set; }
 
         /// <summary>
         /// 客户端生成

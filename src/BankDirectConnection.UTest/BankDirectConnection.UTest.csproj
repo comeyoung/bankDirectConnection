@@ -80,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
+      <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
+      <Name>BankDirectConnection.BaseApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>

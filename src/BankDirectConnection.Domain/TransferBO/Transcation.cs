@@ -1,17 +1,32 @@
-﻿using BankDirectConnection.Domain.DataHandle;
-using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:34:34
 	===============================================================================================================================*/
-    public class Transcation: ITranscation
+    public class Transcation: BaseTranscation,ITranscation
     {
+        /// <summary>
+        /// 检查数据格式是否符合要求
+        /// </summary>
+        /// <returns></returns>
+        public override bool Check()
+        {
+            base.Check();
+            if (string.IsNullOrEmpty(this.ClientId))
+                throw new BusinessException("the value of clientid is null.") { Code = "1001005" };
+            if (string.IsNullOrEmpty(this.TransWay))
+                throw new BusinessException("the value of transway is null.") { Code = "1001006" };
+            if (string.IsNullOrEmpty(this.BusinessType))
+                throw new BusinessException("the value of businesstype is null.") { Code = "1001007" };
+            if (string.IsNullOrEmpty(this.PaymentCur))
+                throw new BusinessException("the value of paymentcur is null.") { Code = "1001008" };
+            return true;
+        }
+
         /// <summary>
         /// 客户端流水号
         /// </summary>
@@ -72,6 +87,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// TransDetail
         /// </summary>
         public IList<ITransDetail> TransDetail { get; set; }
+
 
     }
 }

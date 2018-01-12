@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.PushBankment
+namespace BankDirectConnection.BaseApplication.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2017/12/24 16:18:04
+	*	Create by Fancy at 2018/1/12 14:30:36
 	===============================================================================================================================*/
-    /// <summary>
-    /// 交易查询
-    /// </summary>
-    public class TransactionInquiry
+    public interface IBaseResult
     {
-        // b2e0035今日及历史交易信息查询
-        
+        IStatus Status { get; set; }
+    }
+
+    public interface IStatus
+    {
+        string RspCod { get; set; }
+
+        string RspMsg { get; set; }
     }
 }

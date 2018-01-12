@@ -1,9 +1,5 @@
-﻿using BankDirectConnection.Domain.DataHandle;
-using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
@@ -13,7 +9,7 @@ namespace BankDirectConnection.Domain.TransferBO
     /// <summary>
     /// 交易信息
     /// </summary>
-    public interface ITranscation
+    public interface ITranscation:IBaseTranscation
     {
         /// <summary>
         /// 客户端流水号
@@ -67,10 +63,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 备注/附言
         /// </summary>
         string Comments { get; set; }
-        /// <summary>
-        /// 付款账号信息
-        /// </summary>
-        IAccount FromAcct { get; set; }
+        
         /// <summary>
         /// 交易明细
         /// </summary>

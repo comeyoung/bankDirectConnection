@@ -1,5 +1,7 @@
 ﻿using BankDirectConnection.Application.Transfer;
 using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.Domain.QueryBO;
+using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 	===============================================================================================================================*/
     public class BankFactory
     {
-        public static IBankService CreateBank(emBankService BankService)
+        public static IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(emBankService BankService)
         {
-            IBankService bankService;
+            IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService;
             switch (BankService)
             {
                 case emBankService.emBOCService: bankService = new BOCService();break;

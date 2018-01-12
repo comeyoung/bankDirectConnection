@@ -7,8 +7,8 @@
     <ProjectGuid>{1350D02A-99B2-44D5-AD91-73AB93362F41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankDirectConnection.Application</RootNamespace>
-    <AssemblyName>BankDirectConnection.Application</AssemblyName>
+    <RootNamespace>BankDirectConnection.BaseApplication</RootNamespace>
+    <AssemblyName>BankDirectConnection.BaseApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,18 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTranscation\Account.cs" />
+    <Compile Include="BaseTranscation\BaseResult.cs" />
+    <Compile Include="BaseTranscation\BaseTranscation.cs" />
+    <Compile Include="BaseTranscation\IAccount.cs" />
+    <Compile Include="BaseTranscation\IBaseQueryData.cs" />
+    <Compile Include="BaseTranscation\IBaseResult.cs" />
+    <Compile Include="BaseTranscation\IBaseTranscation.cs" />
+    <Compile Include="ExceptionMsg\BusinessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transfer\AbastractTrans.cs" />
     <Compile Include="Transfer\IBankService.cs" />
     <Compile Include="Transfer\IQueryService.cs" />
     <Compile Include="Transfer\ITransferService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
-      <Project>{7e32d0da-c741-49c5-9d47-8a8915e8e6cd}</Project>
-      <Name>BankDirectConnection.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

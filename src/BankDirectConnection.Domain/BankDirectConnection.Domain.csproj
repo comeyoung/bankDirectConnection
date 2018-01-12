@@ -57,7 +57,7 @@
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
     <Compile Include="DataHandle\Instruction.cs" />
-    <Compile Include="Exception\BusinessException.cs" />
+    <Compile Include="ExceptionMsg\ErrorResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBO\ITransferQueryData.cs" />
     <Compile Include="QueryBO\TransferQueryData.cs" />
@@ -69,14 +69,17 @@
     <Compile Include="SGB\ForeignCurryPaymentMsg.cs" />
     <Compile Include="SGB\InnerTransferMsg.cs" />
     <Compile Include="SGB\RMBPaymentMsg.cs" />
-    <Compile Include="TransferBO\Account.cs" />
-    <Compile Include="TransferBO\IAccount.cs" />
     <Compile Include="TransferBO\ITranscation.cs" />
     <Compile Include="TransferBO\ITransDetail.cs" />
     <Compile Include="TransferBO\Transcation.cs" />
     <Compile Include="TransferBO\TransDetail.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
+      <Project>{1350D02A-99B2-44D5-AD91-73AB93362F41}</Project>
+      <Name>BankDirectConnection.BaseApplication</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

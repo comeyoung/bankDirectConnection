@@ -11,6 +11,7 @@ namespace BankDirectConnection.Domain.Abstract
 	===============================================================================================================================*/
     public abstract class AbastractTrans
     {
+
         public virtual bool Check()
         {
             return true;

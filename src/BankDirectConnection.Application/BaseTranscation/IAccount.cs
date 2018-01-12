@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.TransferBO
+namespace BankDirectConnection.BaseApplication.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/10 11:05:43
+	*	Create by Fancy at 2018/1/12 14:21:45
 	===============================================================================================================================*/
     /// <summary>
     /// 账户信息

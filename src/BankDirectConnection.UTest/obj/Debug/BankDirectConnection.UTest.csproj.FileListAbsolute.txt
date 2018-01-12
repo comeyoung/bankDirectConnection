@@ -14,5 +14,5 @@ D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\Moq.pdb
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\Moq.xml
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\System.Threading.Tasks.Extensions.xml
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\BankDirectConnection.Application.dll
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\BankDirectConnection.Application.pdb
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\BankDirectConnection.BaseApplication.dll
+D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.UTest\bin\Debug\BankDirectConnection.BaseApplication.pdb

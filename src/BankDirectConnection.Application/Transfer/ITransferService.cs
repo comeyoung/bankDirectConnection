@@ -1,17 +1,17 @@
-﻿using BankDirectConnection.Domain.TransferBO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 
 namespace BankDirectConnection.Application.Transfer
 {
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:05:12
 	===============================================================================================================================*/
-    public interface ITransferService
+    public interface ITransferService<T> where T: IBaseTranscation
     {
-        void PaymentTransfer(ITranscation Transcation);
+        /// <summary>
+        /// 转账付款
+        /// </summary>
+        /// <param name="Transcation"></param>
+        void PaymentTransfer(T Transcation);
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +10,16 @@ namespace BankDirectConnection.Domain.QueryBO
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 17:37:16
 	===============================================================================================================================*/
-    public interface ITransferQueryDataList
+    /// <summary>
+    /// 交易查询数据接口
+    /// </summary>
+    public interface ITransferQueryDataList: IBaseQueryDatas<ITransferQueryData>
     {
-        IList<ITransferQueryData> ITransferQueryDatas { get; set; }
+        
     }
 
-    public interface ITransferQueryData
+    public interface ITransferQueryData: IBaseQueryData
     {
-        string ClientId { get; set; }
-
-        string InsId { get; set; }
 
         string ObssId { get; set; }
 
