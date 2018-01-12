@@ -19,9 +19,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// <summary>
     /// 银行服务
     /// </summary>
-    public class BankService : IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
+    public class BankService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
-        public void PaymentTransfer(ITranscation Transcation)
+        public void PaymentTransfer(ITranscations Transcation)
         {
             //检查transcation消息
             try

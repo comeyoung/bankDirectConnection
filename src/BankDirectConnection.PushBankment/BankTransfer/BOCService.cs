@@ -13,11 +13,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// <summary>
     /// 中国银行服务
     /// </summary>
-    public class BOCService : IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
+    public class BOCService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
     
 
-        public void PaymentTransfer(ITranscation Transcation)
+        public void PaymentTransfer(ITranscations Transcation)
         {
             throw new NotImplementedException();
         }

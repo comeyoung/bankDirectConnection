@@ -12,11 +12,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// <summary>
     /// 法兴银行服务
     /// </summary>
-    public class SGBService : IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
+    public class SGBService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
       
 
-        public void PaymentTransfer(ITranscation Transcation)
+        public void PaymentTransfer(ITranscations Transcation)
         {
             // 
             throw new NotImplementedException();

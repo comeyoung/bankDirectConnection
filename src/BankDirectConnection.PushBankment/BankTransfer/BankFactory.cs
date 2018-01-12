@@ -16,9 +16,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 	===============================================================================================================================*/
     public class BankFactory
     {
-        public static IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(emBankService BankService)
+        public static IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(emBankService BankService)
         {
-            IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService;
+            IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService;
             switch (BankService)
             {
                 case emBankService.emBOCService: bankService = new BOCService();break;
