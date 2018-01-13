@@ -4,6 +4,7 @@ using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.PushBankment.BOCService.Service;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -16,14 +17,14 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     public class BOCService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
     
-
         public IResResult PaymentTransfer(ITranscations Transcations)
         {
             // 分析走转账还是代发业务
             if (Transcations.BusinessType == "01")
             {
                 //获取代发业务
-
+                WageAndReimbursementService service = new WageAndReimbursementService();
+                service.PushWageOrReimbursementInfo(Transcations);
             }
             else
             {

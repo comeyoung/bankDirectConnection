@@ -18,7 +18,7 @@ namespace BankDirectConnection.Domain.BOC
     {
         public PaymentsToPublicMsg()
         {
-            this.HeaderMessage = new Header();
+            this.HeaderMessage = new Header("b2e0009");
             this.Trans = new List<PaymentsToPublicTrans>();
         }
 
@@ -48,7 +48,7 @@ namespace BankDirectConnection.Domain.BOC
                 foreach (var item in Transcation.TransDetail)
                 {
                     PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
-                    trans.Insid = Instruction.NewInsSid(Transcations.TransWay);
+                    trans.Insid = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
                     trans.Fractn.Actacn = Transcation.FromAcct.AcctId;
                     trans.Fractn.Actnam = Transcation.FromAcct.AcctName;

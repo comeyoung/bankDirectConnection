@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.Service;
+using BankDirectConnection.Domain.TransferBO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,15 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class WageAndReimbursementService
     {
-
+        public IResResult PushWageOrReimbursementInfo(ITranscations Transcations)
+        {
+            IResResult result = new ResResult();
+            //获取token
+            //构建xml
+            //调用接口
+            //处理result
+            
+            return result;
+        }
     }
 }

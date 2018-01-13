@@ -14,6 +14,15 @@ namespace BankDirectConnection.Domain.BOC.Message
     /// </summary>
     public class Header
     {
+        public Header() { }
+        public Header(string TransType)
+        {
+            this.Cusopr = "";
+            this.Custid = "";
+            this.Termid = "";
+            this.Trnid = DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.Trncod = TransType;
+        }
         /// <summary>
         /// 企业前置机
         /// </summary>

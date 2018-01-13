@@ -50,6 +50,7 @@
     <Compile Include="BOCService\Deserialization.cs" />
     <Compile Include="BOCService\Service\PaymentsToPublicService.cs" />
     <Compile Include="BOCService\Serialization.cs" />
+    <Compile Include="BOCService\Service\SignService.cs" />
     <Compile Include="BOCService\Service\TransactionInquiryService.cs" />
     <Compile Include="BOCService\Service\TransactionStatusInquiryService.cs" />
     <Compile Include="BOCService\Service\WageAndReimbursementService.cs" />

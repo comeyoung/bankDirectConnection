@@ -18,7 +18,7 @@ namespace BankDirectConnection.Domain.BOC
         
         public WageAndReimbursementMsg()
         {
-            this.HeaderMessage = new Header();
+            this.HeaderMessage = new Header("b2e0078");
             this.Trans = new WageAndReimbursementTrans();
         }
 
@@ -49,12 +49,12 @@ namespace BankDirectConnection.Domain.BOC
             WageAndReimbursementMsg msg = new WageAndReimbursementMsg();
             //一笔交易只能一个付款方
             // WageAndReimbursementTrans trans = new WageAndReimbursementTrans();
-            msg.Trans.Insid = Instruction.NewInsSid(Transcation.TransWay);
+            msg.Trans.Insid = Transcation.ClientId;
             msg.Trans.Pybcur = Transcation.PaymentCur;
             msg.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
             msg.Trans.FractnMessage.Actacn = Transcation.FromAcct.AcctId;
             msg.Trans.FractnMessage.Actnam = Transcation.FromAcct.AcctName;
-            // trans.Pybamt
+            // trans.Pybamt = Transcation.TransDetail.ForEach(c=>sum(c.TransAmount));
             msg.Trans.Pybnum = Transcation.TransDetail.Count;
             msg.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
             msg.Trans.Furinfo = Transcation.Purpose;

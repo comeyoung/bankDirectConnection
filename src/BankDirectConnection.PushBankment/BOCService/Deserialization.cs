@@ -10,6 +10,12 @@ namespace BankDirectConnection.PushBankment.BOCService
 	===============================================================================================================================*/
     public class Deserialization
     {
+        /// <summary>
+        /// 反序列话接口回传的xml
+        /// </summary>
+        /// <param name="ResponseMsg">调用接口回传的xml</param>
+        /// <param name="BussinessType">业务类型</param>
+        /// <returns></returns>
         public static ResponseMsg ParseResponseMsg(string ResponseMsg,string BussinessType)
         {
             ResponseMsg res = new ResponseMsg();
