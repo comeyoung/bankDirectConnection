@@ -40,7 +40,7 @@ namespace BankDirectConnection.Domain.BOC
         public PaymentsToPublicMsg Create(ITranscations Transcations)
         {
             if (null == Transcations)
-                throw new BusinessException("the value of transcation is null") { Code = "2002002" };
+                throw new BusinessException("the value of transcation is null") { Code = "1012002" };
             PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
             foreach (var Transcation in Transcations.Transcations)
             {

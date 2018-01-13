@@ -16,6 +16,11 @@ namespace BankDirectConnection.BaseApplication.ExceptionMsg
 
         }
 
+        public BusinessException(string code,string message) : base(message)
+        {
+            this.Code = code;
+        }
+
         public string Code
         {
             get;

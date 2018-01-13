@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 namespace BankDirectConnection.BaseApplication.BaseTranscation
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/12 14:21:35
+	*	Create by Fancy at 2018/1/13 12:37:46
 	===============================================================================================================================*/
-    public interface IBaseTranscation:ICheckAble
+    public interface ICheckAble
     {
-        /// <summary>
-        /// 付款账号信息
-        /// </summary>
-        IAccount FromAcct { get; set; }
+        bool Check();
     }
 }

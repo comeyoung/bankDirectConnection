@@ -40,7 +40,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             base.Check();
             if (string.IsNullOrEmpty(this.Trans.Furinfo))
-                throw new BusinessException("the purpose of trans can't be null if choosed the convient transfer") { Code = "1001010" };
+                throw new BusinessException("the purpose of trans can't be null if choosed the convient transfer") { Code = "1011010" };
             return true;
         }
 

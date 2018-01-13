@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.TransferBO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +15,19 @@ namespace BankDirectConnection.Domain.SGB
     /// <summary>
     /// 人名币付款账单
     /// </summary>
-    public class RMBPaymentMsg
+    public class RMBPaymentMsg: AbstractSGBTranscation
     {
-        /// <summary>
-        /// 付款账号
-        /// </summary>
-        public string DbAccNo { get; set; }
+        public RMBPaymentMsg()
+        {
+            this.Head = new CommonHeader();
+        }
+
+        public RMBPaymentMsg(ITranscations Transcations)
+        {
+            this.Create(Transcations);
+            this.Check();
+        }
+    
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -28,10 +38,7 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string DbCur { get; set; }
 
-        /// <summary>
-        /// 收款账号
-        /// </summary>
-        public string CrAccNo { get; set; }
+       
         /// <summary>
         /// 收款人账户名
         /// </summary>
@@ -61,7 +68,7 @@ namespace BankDirectConnection.Domain.SGB
         /// <summary>
         /// 交易金额
         /// </summary>
-        public string TransAmt { get; set; }
+        public decimal TransAmt { get; set; }
 
         /// <summary>
         /// 用途
@@ -91,5 +98,47 @@ namespace BankDirectConnection.Domain.SGB
         /// 开始日期
         /// </summary>
         public string StartDate { get; set; }
+
+       
+        public override bool Check()
+        {
+            return base.Check();
+        }
+
+        public RMBPaymentMsg Create(ITranscations Transcations)
+        {
+            if (Transcations.Transcations.Count != 1)
+                throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
+            if (Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
+                throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
+            RMBPaymentMsg msg = new RMBPaymentMsg();
+            foreach (var item in Transcations.Transcations)
+            {
+                msg.Head.CCTransCode = "SGT002";
+                msg.Head.ReqSeqNo = item.ClientId;
+                msg.Head.ReqDate = item.TransDate;
+                //msg.Head.CorpNo = "";
+                //msg.Head.OpNo = "";
+                //msg.Head.PassWord = "";
+                msg.DbAccNo = item.FromAcct.AcctId;
+                msg.DbAccName = item.FromAcct.AcctName;
+                msg.DbCur = item.PaymentCur;
+                foreach (var line in item.TransDetail)
+                {
+                    msg.CrAccNo = line.ToAcct.AcctId;
+                    msg.CrAccName = line.ToAcct.AcctName;
+                    msg.CrCifType = line.ToAcct.AcctType;
+                    msg.TranType = "0";//实时
+                    msg.ForeignPayee = line.ReceipterType;
+                    msg.CrBankName = line.ToAcct.BankName;
+                    msg.UnionDeptId = line.ToAcct.BankId;
+                    msg.Priority = item.Priority;
+                    msg.WhyUse = item.Purpose;
+                    msg.CrCur = line.TransCur;
+                    msg.TransAmt = line.TransAmount;
+                }
+            }
+            return msg;
+        }
     }
 }

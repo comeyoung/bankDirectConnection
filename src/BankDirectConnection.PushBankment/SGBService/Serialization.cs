@@ -20,7 +20,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// <returns></returns>
         public static string BuildXMLForRMBPayment(List<RMBPaymentMsg> RMBPaymentMsgs)
         {
-            XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT001"),
+            XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT002"),
                 from item in RMBPaymentMsgs
                 select new XElement("Cmp", new XElement("DbAccNo", item.DbAccNo),
                                            new XElement("DbAccName", item.DbAccName),
@@ -49,7 +49,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// <returns></returns>
         public static string BuildXMLForFreignCurryPayment(List<ForeignCurryPaymentMsg> ForeignCurryPaymentMsgs)
         {
-            XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT001"),
+            XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT003"),
                 from item in ForeignCurryPaymentMsgs
                 select new XElement("Cmp", new XElement("DbAccNo", item.DbAccNo),
                                            new XElement("DbCur", item.DbCur),

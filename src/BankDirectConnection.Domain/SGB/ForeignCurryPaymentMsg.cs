@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.Domain.TransferBO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +16,13 @@ namespace BankDirectConnection.Domain.SGB
     /// <summary>
     /// 外币付款信息
     /// </summary>
-    public class ForeignCurryPaymentMsg
+    public class ForeignCurryPaymentMsg: AbstractSGBTranscation
     {
-        /// <summary>
-        /// 付款账号
-        /// </summary>
-        public string DbAccNo { get; set; }
+        public ForeignCurryPaymentMsg()
+        {
+            this.Head = new CommonHeader();
+        }
+        
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -28,10 +33,6 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string DbCur { get; set; }
 
-        /// <summary>
-        /// 收款账号
-        /// </summary>
-        public string CrAccNo { get; set; }
         /// <summary>
         /// 收款人账户名
         /// </summary>
@@ -70,7 +71,7 @@ namespace BankDirectConnection.Domain.SGB
         /// <summary>
         /// 交易金额
         /// </summary>
-        public string TransAmt { get; set; }
+        public decimal TransAmt { get; set; }
 
         /// <summary>
         /// 用途
@@ -95,5 +96,48 @@ namespace BankDirectConnection.Domain.SGB
         /// 开始日期
         /// </summary>
         public string StartDate { get; set; }
+
+        public override bool Check()
+        {
+            base.Check();
+            if (String.IsNullOrEmpty(this.Fees))
+                throw new BusinessException("the value of feetype is null") { Code = "1021004" };
+            return true;
+        }
+
+        public ForeignCurryPaymentMsg Create(ITranscations Transcations)
+        {
+            if (Transcations.Transcations.Count != 1)
+                throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
+            if(Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
+                throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
+            ForeignCurryPaymentMsg msg = new ForeignCurryPaymentMsg();
+            foreach(var item in Transcations.Transcations)
+            {
+                msg.Head.CCTransCode = "SGT003";
+                msg.Head.ReqSeqNo = item.ClientId;
+                msg.Head.ReqDate = item.TransDate;
+                //msg.Head.CorpNo = "";
+                //msg.Head.OpNo = "";
+                //msg.Head.PassWord = "";
+                msg.DbAccNo = item.FromAcct.AcctId;
+                msg.DbCur = item.PaymentCur;
+                foreach (var line in item.TransDetail)
+                {
+                    msg.CrAccNo = line.ToAcct.AcctId;
+                    msg.CrAccName = line.ToAcct.AcctName;
+                    msg.CrCifType = line.ToAcct.AcctType;
+                    msg.ForeignPayee = line.ReceipterType;
+                    msg.BeneSwifCode = line.SWIFTCode;
+                    msg.CrBankName = line.ToAcct.BankName;
+                    msg.Fees = item.FeeType;
+                    msg.Rate = line.Rate;
+                    msg.CrCur = line.TransCur;
+                    msg.WhyUse = item.Purpose;
+                    msg.TransAmt = line.TransAmount;
+                }
+            }
+            return msg;
+        }
     }
 }
