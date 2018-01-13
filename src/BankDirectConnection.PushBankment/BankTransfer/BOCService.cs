@@ -17,8 +17,23 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     {
     
 
-        public void PaymentTransfer(ITranscations Transcation)
+        public IResResult PaymentTransfer(ITranscations Transcations)
         {
+            // 分析走转账还是代发业务
+            if (Transcations.BusinessType == "01")
+            {
+                //获取代发业务
+
+            }
+            else
+            {
+                //获取转账业务
+
+            }
+            //请求报文转换为BOC请求报文
+
+            //请求结果转换为对外结果
+            
             throw new NotImplementedException();
         }
 

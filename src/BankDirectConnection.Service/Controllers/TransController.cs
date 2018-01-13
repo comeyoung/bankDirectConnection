@@ -16,7 +16,7 @@ namespace BankDirectConnection.Service.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult PaymentTransfer([FromBody]Transcation Transcation)
+        public IHttpActionResult PaymentTransfer([FromBody]Transcations Transcations)
         {
             return Json(new { code = 0 });
         }

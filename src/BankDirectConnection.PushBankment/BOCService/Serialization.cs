@@ -56,20 +56,24 @@ namespace BankDirectConnection.PushBankment.BOCService
                            new XElement("furinfo", WageAndReimbursementMsg.Trans.Furinfo),
                            new XElement("useinf", WageAndReimbursementMsg.Trans.Useinf),
                            new XElement("trfdate", WageAndReimbursementMsg.Trans.Trfdate),
-                           new XElement("detail", new XElement("toibkn", WageAndReimbursementMsg.Trans.DetailMessage.Toibkn),
-                                                  new XElement("tobank", WageAndReimbursementMsg.Trans.DetailMessage.Tobank),
-                                                  new XElement("toactn", WageAndReimbursementMsg.Trans.DetailMessage.Toactn),
-                                                  new XElement("pydcur", WageAndReimbursementMsg.Trans.DetailMessage.Pydcur),
-                                                  new XElement("pydamt", WageAndReimbursementMsg.Trans.DetailMessage.Pydamt),
-                                                  new XElement("toname", WageAndReimbursementMsg.Trans.DetailMessage.Toidet),
-                                                  new XElement("toidtp", WageAndReimbursementMsg.Trans.DetailMessage.Toidtp),
-                                                  new XElement("toidet", WageAndReimbursementMsg.Trans.DetailMessage.Toidet),
-                                                  new XElement("furinfo", WageAndReimbursementMsg.Trans.DetailMessage.Furinfo),
-                                                  new XElement("purpose", WageAndReimbursementMsg.Trans.DetailMessage.Purpose),
-                                                  new XElement("reserve1", WageAndReimbursementMsg.Trans.DetailMessage.Reserve1),
-                                                  new XElement("reserve2", WageAndReimbursementMsg.Trans.DetailMessage.Reserve2),
-                                                  new XElement("reserve3", WageAndReimbursementMsg.Trans.DetailMessage.Reserve3),
-                                                  new XElement("reserve4", WageAndReimbursementMsg.Trans.DetailMessage.Reserve4)),
+                           
+                           from item in WageAndReimbursementMsg.Trans.DetailMessage
+                           select
+                           new XElement("detail",
+                           new XElement("toibkn", item.Toibkn),
+                                                  new XElement("tobank", item.Tobank),
+                                                  new XElement("toactn", item.Toactn),
+                                                  new XElement("pydcur", item.Pydcur),
+                                                  new XElement("pydamt", item.Pydamt),
+                                                  new XElement("toname", item.Toidet),
+                                                  new XElement("toidtp", item.Toidtp),
+                                                  new XElement("toidet", item.Toidet),
+                                                  new XElement("furinfo", item.Furinfo),
+                                                  new XElement("purpose", item.Purpose),
+                                                  new XElement("reserve1", item.Reserve1),
+                                                  new XElement("reserve2", item.Reserve2),
+                                                  new XElement("reserve3", item.Reserve3),
+                                                  new XElement("reserve4", item.Reserve4)),
                           BuildFractnElement(WageAndReimbursementMsg.Trans.FractnMessage))))));
             return xdocment.Declaration + xdocment.ToString();
         }

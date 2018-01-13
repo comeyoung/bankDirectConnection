@@ -10,7 +10,7 @@ namespace BankDirectConnection.Application.Transfer
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:05:22
 	===============================================================================================================================*/
-    public interface IBankService<T,C,D,In,Out>: ITransferService<T,C>, IQueryService<D,In,Out> 
+    public interface IBankService<T,C,D,In,Out>: ITransferService<T,C,Out>, IQueryService<D,In,Out> 
         where C: IBaseTranscation
         where T: IBaseTranscations<C>
         where D: IBaseQueryData

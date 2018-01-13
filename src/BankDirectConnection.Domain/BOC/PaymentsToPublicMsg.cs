@@ -1,8 +1,10 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.Abstract;
 using BankDirectConnection.Domain.BOC.Message;
+using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BankDirectConnection.Domain.BOC
 {
@@ -20,16 +22,10 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans = new List<PaymentsToPublicTrans>();
         }
 
-        public static PaymentsToPublicMsg Create(ITranscation Transcation)
+        public PaymentsToPublicMsg(ITranscations Transcations)
         {
-            if (null == Transcation)
-                throw new BusinessException("the value of transcation is null") { Code = "2002002" };
-            PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
-
-            PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
-
-            //msg.Trans.Add()
-            return msg;
+            this.Create(Transcations);
+            this.Check();
         }
 
         public Header HeaderMessage { get; set; }
@@ -39,6 +35,38 @@ namespace BankDirectConnection.Domain.BOC
         public override bool Check()
         {
             return base.Check();
+        }
+
+        public PaymentsToPublicMsg Create(ITranscations Transcations)
+        {
+            if (null == Transcations)
+                throw new BusinessException("the value of transcation is null") { Code = "2002002" };
+            PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
+            foreach (var Transcation in Transcations.Transcations)
+            {
+                //以交易明细确定交易笔数
+                foreach (var item in Transcation.TransDetail)
+                {
+                    PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
+                    trans.Insid = Instruction.NewInsSid(Transcations.TransWay);
+                    trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
+                    trans.Fractn.Actacn = Transcation.FromAcct.AcctId;
+                    trans.Fractn.Actnam = Transcation.FromAcct.AcctName;
+                    trans.Toactn.ToiBkn = item.ToAcct.BankId;
+                    trans.Toactn.Actacn = item.ToAcct.AcctId;
+                    trans.Toactn.Tobknm = item.ToAcct.BankName;
+                    trans.Toactn.Toname = item.ToAcct.AcctName;
+                    trans.Trnamt = item.TransAmount;
+                    trans.Trncur = item.TransCur;
+                    trans.Priolv = Transcation.Priority;
+                    trans.Furinfo = Transcation.Purpose;
+                    trans.TrfDate = Transcation.TransDate;
+                    trans.Comacn = Transcation.FeeAcct;
+                    msg.Trans.Add(trans);
+                }
+            }
+
+            return msg;
         }
     }
     public class PaymentsToPublicTrans
@@ -60,7 +88,7 @@ namespace BankDirectConnection.Domain.BOC
         /// <summary>
         /// 转账金额
         /// </summary>
-        public string Trnamt { get; set; }
+        public decimal Trnamt { get; set; }
         /// <summary>
         /// 转账货币 只支持001或者CNY
         /// </summary>

@@ -16,7 +16,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     {
       
 
-        public void PaymentTransfer(ITranscations Transcation)
+        public IResResult PaymentTransfer(ITranscations Transcation)
         {
             // 
             throw new NotImplementedException();

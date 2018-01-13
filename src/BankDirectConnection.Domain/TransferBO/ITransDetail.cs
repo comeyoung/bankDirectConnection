@@ -29,7 +29,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// 收款金额
         /// </summary>
-        string TransAmount { get; set; }
+        decimal TransAmount { get; set; }
         /// <summary>
         /// 收款币种
         /// </summary>

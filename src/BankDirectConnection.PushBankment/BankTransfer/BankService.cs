@@ -21,17 +21,17 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// </summary>
     public class BankService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
-        public void PaymentTransfer(ITranscations Transcation)
+        public IResResult PaymentTransfer(ITranscations Transcation)
         {
             //检查transcation消息
             try
             {
                 //Transcation.Check();
-                //string insId = Instruction.NewInsSid(Transcation.TransWay);
+                string insId = Instruction.NewInsSid(Transcation.TransWay);
                 ////获取银行信息，调用具体银行的服务
-                //var bankService = BankFactory.CreateBank(Instruction.ParseInsId(insId));
-                //bankService.PaymentTransfer(Transcation);
-                throw new NotImplementedException();
+                var bankService = BankFactory.CreateBank(Transcation.TransWay);
+                return bankService.PaymentTransfer(Transcation);
+                // throw new NotImplementedException();
             }
             catch (BusinessException ex)
             {
@@ -52,7 +52,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 
                 //var bank = Instruction.ParseInsId(Transcation.InsId);
                 ////获取银行信息，调用具体银行的服务
-                //IBankService<ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService = BankFactory.CreateBank(bank);
+                //IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService = BankFactory.CreateBank(bank);
                 //return bankService.QueryTransStatus(Transcation);
                 throw new NotImplementedException();
             }
