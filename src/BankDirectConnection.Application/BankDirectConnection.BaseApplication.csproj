@@ -52,6 +52,7 @@
     <Compile Include="BaseTranscation\IBaseTranscations.cs" />
     <Compile Include="BaseTranscation\ICheckAble.cs" />
     <Compile Include="ExceptionMsg\BusinessException.cs" />
+    <Compile Include="ExceptionMsg\InnerException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transfer\IBankService.cs" />
     <Compile Include="Transfer\IQueryService.cs" />

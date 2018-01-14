@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.PushBankment.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,20 +18,25 @@ namespace BankDirectConnection.PushBankment.BOCService
         //T4测试环境公网 http://180.168.146.79:81/B2EP/XmlServlet
         public static string BaseUrl = "http://180.168.146.79:81/B2EP/XmlServlet";
 
-        public  static string PostRequest(string RequestXML)
+        //public  static string PostRequest(string RequestXML)
+        //{
+        //    HttpContent httpContent = new StringContent(RequestXML, Encoding.UTF8, "application/xml");
+        //    var handler = new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip };
+        //    string result;
+        //    using (var http = new HttpClient(handler))
+        //    {
+        //        // http.BaseAddress = new Uri(@BaseUrl);
+        //        string url = BaseUrl;
+        //        var response = http.PostAsync(url, httpContent).Result;
+        //        response.EnsureSuccessStatusCode();
+        //        result = response.Content.ReadAsStringAsync().Result;
+        //    }
+        //    return result;
+        //}
+
+        public static string PostRequest(string RequestXML)
         {
-            HttpContent httpContent = new StringContent(RequestXML, Encoding.UTF8, "application/xml");
-            var handler = new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip };
-            string result;
-            using (var http = new HttpClient(handler))
-            {
-                // http.BaseAddress = new Uri(@BaseUrl);
-                string url = BaseUrl;
-                var response = http.PostAsync(url, httpContent).Result;
-                response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
-            }
-            return result;
+            return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
         }
     }
 }

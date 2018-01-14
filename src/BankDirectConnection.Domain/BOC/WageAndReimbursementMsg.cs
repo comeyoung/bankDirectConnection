@@ -25,6 +25,8 @@ namespace BankDirectConnection.Domain.BOC
 
         public WageAndReimbursementMsg(ITranscation Transcation)
         {
+            this.HeaderMessage = new Header("b2e0078");
+            this.Trans = new WageAndReimbursementTrans();
             this.Create(Transcation);
             this.Check();
         }
@@ -46,32 +48,33 @@ namespace BankDirectConnection.Domain.BOC
 
         private WageAndReimbursementMsg Create(ITranscation Transcation)
         {
-            WageAndReimbursementMsg msg = new WageAndReimbursementMsg();
             //一笔交易只能一个付款方
             // WageAndReimbursementTrans trans = new WageAndReimbursementTrans();
-            msg.Trans.Insid = Transcation.ClientId;
-            msg.Trans.Pybcur = Transcation.PaymentCur;
-            msg.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
-            msg.Trans.FractnMessage.Actacn = Transcation.FromAcct.AcctId;
-            msg.Trans.FractnMessage.Actnam = Transcation.FromAcct.AcctName;
-            // trans.Pybamt = Transcation.TransDetail.ForEach(c=>sum(c.TransAmount));
-            msg.Trans.Pybnum = Transcation.TransDetail.Count;
-            msg.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
-            msg.Trans.Furinfo = Transcation.Purpose;
-            msg.Trans.Trfdate = Transcation.TransDate;
+            this.Trans.Insid = Transcation.ClientId;
+            this.Trans.Pybcur = Transcation.PaymentCur;
+            this.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
+            this.Trans.FractnMessage.Actacn = Transcation.FromAcct.AcctId;
+            this.Trans.FractnMessage.Actnam = Transcation.FromAcct.AcctName;
+            //this.trans.Pybamt = Transcation.TransDetail.ForEach(c=>sum(c.TransAmount));
+            this.Trans.Pybnum = Transcation.TransDetail.Count;
+            this.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
+            this.Trans.Furinfo = Transcation.Purpose;
+            this.Trans.Trfdate = Transcation.TransDate;
             foreach (var item in Transcation.TransDetail)
             {
-                msg.Trans.DetailMessage.Add(new BOC.Detail
+                var line = new BOC.Detail
                 {
                     Toibkn = item.ToAcct.BankId,
                     Tobank = item.ToAcct.BankName,
                     Toactn = item.ToAcct.AcctId,
                     Pydcur = item.TransCur,
                     Pydamt = item.TransAmount,
-                    Toname = item.ToAcct.AcctName
-                });
+                    Toname = item.ToAcct.AcctName,
+                };
+                this.Trans.DetailMessage.Add(line);
+                this.Trans.Pybamt += item.TransAmount;
             }
-            return msg;
+            return this;
         }
 
         /// <summary>

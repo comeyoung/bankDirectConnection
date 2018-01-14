@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.BOC;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.BOC.Message;
 using System;
 using System.Linq;
@@ -85,6 +86,8 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static string BuildXMLForPaymentsToPublicByLinq(PaymentsToPublicMsg PaymentsToPublicMsg)
         {
+            if (null == PaymentsToPublicMsg)
+                throw new InnerException("", "");
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                new XAttribute("version", "100"),
                new XAttribute("security", "true"),
@@ -210,7 +213,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static XElement BuildHeadElement(Header Header)
         {
-            if (Header != null)
+            if (null == Header)
                 throw new Exception("头部消息为空");
             XElement xHeader = new XElement("head",
                 new XElement("termid", Header.Termid),
@@ -224,7 +227,7 @@ namespace BankDirectConnection.PushBankment.BOCService
 
         public static XElement BuildSignInHeadElement(Header Header)
         {
-            if (Header != null)
+            if (null == Header)
                 throw new Exception("头部消息为空");
             XElement xHeader = new XElement("head",
                 new XElement("termid", Header.Termid),
@@ -242,7 +245,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static XElement BuildFractnElement(Fractn FractnMsg)
         {
-            if (FractnMsg != null)
+            if (null == FractnMsg)
                 throw new Exception("付款人信息为空");
             XElement xFractn = new XElement("fractn", new XElement("fribkn", FractnMsg.Fribkn),
                                                  new XElement("actacn", FractnMsg.Actacn),
@@ -257,7 +260,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static XElement BuildToactnElement(Toactn ToactnMsg)
         {
-            if (ToactnMsg != null)
+            if (null == ToactnMsg)
                 throw new Exception("收款人信息为空");
             XElement xToactn = new XElement("toactn", new XElement("toibkn", ToactnMsg.ToiBkn),
                                                  new XElement("actacn", ToactnMsg.Actacn),

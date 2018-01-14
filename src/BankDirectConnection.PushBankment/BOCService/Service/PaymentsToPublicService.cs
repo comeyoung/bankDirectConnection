@@ -27,8 +27,12 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
             //获取对象
             var transBO = new PaymentsToPublicMsg(Transcation);
             transBO.HeaderMessage.Token = response.Token;
+            //序列化
+            var transXML = Serialization.BuildXMLForPaymentsToPublicByLinq(transBO);
             //调用对公转账接口
+            var res = BOCHttp.PostRequest(transXML);
             //处理结果
+            var rt = Deserialization.ParseResponseMsg(res, "b2e0009");
             return result;
         }
     }

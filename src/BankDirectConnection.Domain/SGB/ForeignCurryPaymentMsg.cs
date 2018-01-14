@@ -22,7 +22,12 @@ namespace BankDirectConnection.Domain.SGB
         {
             this.Head = new CommonHeader();
         }
-        
+        public ForeignCurryPaymentMsg(ITranscations Transcations)
+        {
+            this.Head = new CommonHeader();
+            Create(Transcations);
+            this.Check();
+        }
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -111,33 +116,32 @@ namespace BankDirectConnection.Domain.SGB
                 throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
             if(Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
-            ForeignCurryPaymentMsg msg = new ForeignCurryPaymentMsg();
             foreach(var item in Transcations.Transcations)
             {
-                msg.Head.CCTransCode = "SGT003";
-                msg.Head.ReqSeqNo = item.ClientId;
-                msg.Head.ReqDate = item.TransDate;
+                this.Head.CCTransCode = "SGT003";
+                this.Head.ReqSeqNo = item.ClientId;
+                this.Head.ReqDate = item.TransDate;
                 //msg.Head.CorpNo = "";
                 //msg.Head.OpNo = "";
                 //msg.Head.PassWord = "";
-                msg.DbAccNo = item.FromAcct.AcctId;
-                msg.DbCur = item.PaymentCur;
+                this.DbAccNo = item.FromAcct.AcctId;
+                this.DbCur = item.PaymentCur;
                 foreach (var line in item.TransDetail)
                 {
-                    msg.CrAccNo = line.ToAcct.AcctId;
-                    msg.CrAccName = line.ToAcct.AcctName;
-                    msg.CrCifType = line.ToAcct.AcctType;
-                    msg.ForeignPayee = line.ReceipterType;
-                    msg.BeneSwifCode = line.SWIFTCode;
-                    msg.CrBankName = line.ToAcct.BankName;
-                    msg.Fees = item.FeeType;
-                    msg.Rate = line.Rate;
-                    msg.CrCur = line.TransCur;
-                    msg.WhyUse = item.Purpose;
-                    msg.TransAmt = line.TransAmount;
+                    this.CrAccNo = line.ToAcct.AcctId;
+                    this.CrAccName = line.ToAcct.AcctName;
+                    this.CrCifType = line.ToAcct.AcctType;
+                    this.ForeignPayee = line.ReceipterType;
+                    this.BeneSwifCode = line.SWIFTCode;
+                    this.CrBankName = line.ToAcct.BankName;
+                    this.Fees = item.FeeType;
+                    this.Rate = line.Rate;
+                    this.CrCur = line.TransCur;
+                    this.WhyUse = item.Purpose;
+                    this.TransAmt = line.TransAmount;
                 }
             }
-            return msg;
+            return this;
         }
     }
 }

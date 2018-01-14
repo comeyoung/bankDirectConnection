@@ -70,6 +70,21 @@ namespace BankDirectConnection.PushBankment.Http
 
         #region 同步方法
 
+
+        public  static string PostRequest(string url,string RequestXML)
+        {
+            HttpContent httpContent = new StringContent(RequestXML, Encoding.UTF8, "application/xml");
+            var handler = new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip };
+            string result;
+            using (var http = new HttpClient(handler))
+            {
+                var response = http.PostAsync(url, httpContent).Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsStringAsync().Result;
+            }
+            return result;
+        }
+
         /// <summary>
         /// 签到
         /// </summary>
