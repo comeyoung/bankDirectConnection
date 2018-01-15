@@ -26,12 +26,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
-                //Transcation.Check();
-                string insId = Instruction.NewInsSid(Transcation.TransWay);
                 ////获取银行信息，调用具体银行的服务
                 var bankService = BankFactory.CreateBank(Transcation.TransWay);
                 return bankService.PaymentTransfer(Transcation);
-                // throw new NotImplementedException();
             }
             catch (BusinessException ex)
             {
@@ -41,14 +38,36 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 throw new BusinessException(ex.Message) { Code = "2002001" };
             }
-           
         }
 
         public IResResult QueryTransStatus(ITransferQueryDataList Transcation)
         {
             try
             {
+                //查询是根据客户端流水号和EDI流水号来查询，同一请求可能会涉及多个银行的交易查询
                 // 取出各个银行的数据
+                Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();
+                foreach(var item in Transcation.TransferQueryDatas)
+                {
+                    string key = item.InsId.Substring(0, 2);
+                    if (dicTransList.Keys.Contains(key))
+                    {
+                        ITransferQueryDataList query = dicTransList[key];
+                        query.TransferQueryDatas.Add(item);
+                    }
+                    else
+                    {
+                        ITransferQueryDataList queryList = new TransferQueryDataList();
+                        queryList.TransferQueryDatas.Add(item);
+                        dicTransList.Add(key, queryList);
+                    }
+                }
+
+                foreach (var item in dicTransList)
+                {
+
+                }
+                
 
                 //var bank = Instruction.ParseInsId(Transcation.InsId);
                 ////获取银行信息，调用具体银行的服务

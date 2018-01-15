@@ -52,4 +52,16 @@ namespace BankDirectConnection.Domain.DataHandle
         /// </summary>
         emUrgent
     }
+
+    public enum emBankNo
+    {
+        /// <summary>
+        /// 中国银行
+        /// </summary>
+        BOC=104,
+        /// <summary>
+        /// 兴业银行
+        /// </summary>
+        SG=309,
+    }
 }

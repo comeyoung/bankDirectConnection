@@ -29,6 +29,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             return bankService;
         }
 
+        /// <summary>
+        /// 根据转账方式（银行接口）创建银行服务
+        /// </summary>
+        /// <param name="TransWay"></param>
+        /// <returns></returns>
         public static IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(string TransWay)
         {
             IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService;

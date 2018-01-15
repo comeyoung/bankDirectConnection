@@ -24,18 +24,14 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 //获取代发业务
                 WageAndReimbursementService service = new WageAndReimbursementService();
-                service.PushWageOrReimbursementInfo(Transcations);
+                return service.PushWageOrReimbursementInfo(Transcations);
             }
             else
             {
                 //获取转账业务
-
+                PaymentsToPublicService service = new PaymentsToPublicService();
+                return service.PushPaymentsToPublic(Transcations);
             }
-            //请求报文转换为BOC请求报文
-
-            //请求结果转换为对外结果
-            
-            throw new NotImplementedException();
         }
 
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
