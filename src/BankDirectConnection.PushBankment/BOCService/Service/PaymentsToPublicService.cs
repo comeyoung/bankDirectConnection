@@ -17,23 +17,21 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class PaymentsToPublicService
     {
-        public IResResult PushPaymentsToPublic(ITranscations Transcation)
+       
+        /// <summary>
+        /// 推送对公转账
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <returns></returns>
+        public IResResult PushPaymentsToPublicInfo(PaymentsToPublicMsg Msg)
         {
-            IResResult result = new ResResult();
-            SignService signService = new SignService();
-            //获取token
-            var response = signService.PushSignIn();
-
-            //获取对象
-            var transBO = new PaymentsToPublicMsg(Transcation);
-            transBO.HeaderMessage.Token = response.Token;
             //序列化
-            var transXML = Serialization.BuildXMLForPaymentsToPublicByLinq(transBO);
+            var transXML = Serialization.BuildXMLForPaymentsToPublicByLinq(Msg);
             //调用对公转账接口
             var res = BOCHttp.PostRequest(transXML);
             //处理结果
             var rt = Deserialization.ParseResponseMsg(res, "b2e0009");
-            return result;
+            return ResResult.Create(rt,"01");
         }
     }
 }

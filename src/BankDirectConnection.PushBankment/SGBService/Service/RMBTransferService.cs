@@ -1,4 +1,7 @@
-﻿using BankDirectConnection.Domain.TransferBO;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.Service;
+using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +22,21 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         /// 调用法兴人民币付款接口
         /// </summary>
         /// <returns></returns>
-        public static string PushRMBTranscation(ITranscation Transcation)
+        public static IResResult PushRMBTranscation(RMBPaymentMsg Msg)
         {
+            if (null == Msg)
+                throw new InnerException("", "");
+            IResResult result = new ResResult();
 
-            return "";
+            //构建xml
+            var transXML = Serialization.BuildXMLForRMBPayment(Msg);
+            ////调用接口
+          
+        
+            
+
+
+            return result;
         }
             
     }

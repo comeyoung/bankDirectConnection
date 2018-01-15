@@ -1,4 +1,6 @@
-﻿using BankDirectConnection.Domain.Service;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC;
+using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -16,15 +18,21 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class WageAndReimbursementService
     {
-        public IResResult PushWageOrReimbursementInfo(ITranscations Transcations)
+        /// <summary>
+        /// 推送工资、报销代发
+        /// </summary>
+        /// <param name="Msg"></param>
+        /// <returns></returns>
+        public IResResult PushWageOrReimbursementInfo(WageAndReimbursementMsg Msg)
         {
-            IResResult result = new ResResult();
-            //获取token
-            //构建xml
-            //调用接口
-            //处理result
-            
-            return result;
+            if (null == Msg)
+                throw new InnerException("", "");
+            var transXML = Serialization.BuildXMLForWageAndReimbursementByLinq(Msg);
+            // 调用对公转账接口
+            var res = BOCHttp.PostRequest(transXML);
+            //处理结果
+            var rt = Deserialization.ParseResponseMsg(res, "b2e0078");
+            return ResResult.Create(rt, "01");
         }
     }
 }

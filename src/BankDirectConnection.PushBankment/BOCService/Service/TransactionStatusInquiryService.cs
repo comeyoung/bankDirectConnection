@@ -14,6 +14,6 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class TransactionStatusInquiryService
     {
-
+        // public 
     }
 }

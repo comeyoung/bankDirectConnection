@@ -28,6 +28,8 @@ namespace BankDirectConnection.Domain.SGB
             Create(Transcations);
             this.Check();
         }
+
+        #region property
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -53,6 +55,11 @@ namespace BankDirectConnection.Domain.SGB
 
         public string BeneSwifCode { get; set; }
 
+
+        /// <summary>
+        /// 收款人开户行行号
+        /// </summary>
+        public string UnionDeptId { get; set; }
         /// <summary>
         /// 收款人开户行名称
         /// </summary>
@@ -101,16 +108,24 @@ namespace BankDirectConnection.Domain.SGB
         /// 开始日期
         /// </summary>
         public string StartDate { get; set; }
+        #endregion
+
 
         public override bool Check()
         {
             base.Check();
             if (String.IsNullOrEmpty(this.Fees))
                 throw new BusinessException("the value of feetype is null") { Code = "1021004" };
+            // TODO 收款账号不为法兴 且收款币种不为人民币
+            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) == emBankNo.SG.ToString())
+                || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
+                throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
+            if (this.CrCur == "RMB")
+                throw new InnerException("2021008", "the value of transcur can'not be RMB");
             return true;
         }
 
-        public ForeignCurryPaymentMsg Create(ITranscations Transcations)
+        private ForeignCurryPaymentMsg Create(ITranscations Transcations)
         {
             if (Transcations.Transcations.Count != 1)
                 throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
@@ -133,6 +148,7 @@ namespace BankDirectConnection.Domain.SGB
                     this.CrCifType = line.ToAcct.AcctType;
                     this.ForeignPayee = line.ReceipterType;
                     this.BeneSwifCode = line.SWIFTCode;
+                    this.UnionDeptId = line.ToAcct.BankId;
                     this.CrBankName = line.ToAcct.BankName;
                     this.Fees = item.FeeType;
                     this.Rate = line.Rate;
@@ -142,6 +158,41 @@ namespace BankDirectConnection.Domain.SGB
                 }
             }
             return this;
+        }
+
+        public List<ForeignCurryPaymentMsg> CreatePayments(ITranscations Transcations)
+        {
+            List<ForeignCurryPaymentMsg> msgList = new List<ForeignCurryPaymentMsg>();
+            foreach (var item in Transcations.Transcations)
+            {
+                foreach (var line in item.TransDetail)
+                {
+                    ForeignCurryPaymentMsg msg = new ForeignCurryPaymentMsg();
+                    msg.Head.CCTransCode = "SGT003";
+                    msg.Head.ReqSeqNo = item.ClientId;
+                    msg.Head.ReqDate = item.TransDate;
+                    //msg.Head.CorpNo = "";
+                    //msg.Head.OpNo = "";
+                    //msg.Head.PassWord = "";
+                    msg.DbAccNo = item.FromAcct.AcctId;
+                    msg.DbCur = item.PaymentCur;
+                    msg.CrAccNo = line.ToAcct.AcctId;
+                    msg.CrAccName = line.ToAcct.AcctName;
+                    msg.CrCifType = line.ToAcct.AcctType;
+                    msg.ForeignPayee = line.ReceipterType;
+                    msg.BeneSwifCode = line.SWIFTCode;
+                    this.UnionDeptId = line.ToAcct.BankId;
+                    msg.CrBankName = line.ToAcct.BankName;
+                    msg.Fees = item.FeeType;
+                    msg.Rate = line.Rate;
+                    msg.CrCur = line.TransCur;
+                    msg.WhyUse = item.Purpose;
+                    msg.TransAmt = line.TransAmount;
+                    msg.Check();
+                    msgList.Add(msg);
+                }
+            }
+            return msgList;
         }
     }
 }

@@ -5,6 +5,7 @@ using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.PushBankment.BOCService.Service;
+using BankDirectConnection.Domain.BOC;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -19,23 +20,50 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     
         public IResResult PaymentTransfer(ITranscations Transcations)
         {
+            //签到 获取token
+            SignService signService = new SignService();
+            var response = signService.PushSignIn();
             // 分析走转账还是代发业务
             if (Transcations.BusinessType == "01")
             {
-                //获取代发业务
-                WageAndReimbursementService service = new WageAndReimbursementService();
-                return service.PushWageOrReimbursementInfo(Transcations);
+                IResResult result = new ResResult();
+                foreach (var item in Transcations.Transcations)
+                {
+                    var transBO = new WageAndReimbursementMsg(item);
+                    transBO.HeaderMessage.Token = response.Token;
+                    //获取代发业务
+                    WageAndReimbursementService service = new WageAndReimbursementService();
+                    var rt = service.PushWageOrReimbursementInfo(transBO);
+                    if(null == result)
+                    {
+                        result = rt;
+                    }
+                    else
+                    {
+                        result.MergeResResult(rt);
+                    }
+                }
+                return result;
+                
             }
             else
             {
+                var transBO = new PaymentsToPublicMsg(Transcations);
+                transBO.HeaderMessage.Token = response.Token;
                 //获取转账业务
                 PaymentsToPublicService service = new PaymentsToPublicService();
-                return service.PushPaymentsToPublic(Transcations);
+                return service.PushPaymentsToPublicInfo(transBO);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TransferQueryData"></param>
+        /// <returns></returns>
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
+            //EDI流水号都要以中行流水号开头
+            //
             throw new NotImplementedException();
         }
     }

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.Service;
+using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.TransferBO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +18,20 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// </summary>
     public class InnerTransferService
     {
+        /// <summary>
+        /// 调用法兴内部转账接口
+        /// </summary>
+        /// <returns></returns>
+        public IResResult PushInnerTranscationInfo(InnerTransferMsg Msg)
+        {
+            if (null == Msg)
+                throw new InnerException("", "");
+            IResResult result = new ResResult();
+
+            // TODO 调用法兴转账接口
+            // 处理返回结果
+
+            return result;
+        }
     }
 }

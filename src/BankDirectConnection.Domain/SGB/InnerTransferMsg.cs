@@ -1,5 +1,6 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace BankDirectConnection.Domain.SGB
             this.Create(Transcations);
             this.Check();
         }
-       
+
+        #region property
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -39,7 +41,17 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string DbCur { get; set; }
 
-       
+        /// <summary>
+        /// 收款人开户行行号
+        /// </summary>
+        public string UnionDeptId { get; set; }
+
+        /// <summary>
+        /// 收款人开户行名称
+        /// </summary>
+        public string CrBankName { get; set; }
+
+
         /// <summary>
         /// 收款人账户名
         /// </summary>
@@ -87,9 +99,15 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string StartDate { get; set; }
 
+        #endregion
+
         public override bool Check()
         {
-            return base.Check();
+            base.Check();
+            // TODO 收款人账号为兴业银行
+            if (this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) != emBankNo.SG.ToString())
+                throw new InnerException("2021003", "the bank number of receipter is bad.");
+            return true;
         }
 
         private InnerTransferMsg Create(ITranscations Transcations)
@@ -111,6 +129,8 @@ namespace BankDirectConnection.Domain.SGB
                this.DbCur = item.PaymentCur;
                 foreach (var line in item.TransDetail)
                 {
+                    this.UnionDeptId = line.ToAcct.BankId;
+                    this.CrBankName = line.ToAcct.BankName;
                     this.CrAccNo = line.ToAcct.AcctId;
                     this.CrAccName = line.ToAcct.AcctName;
                     this.CrCifType = line.ToAcct.AcctType;
@@ -121,6 +141,41 @@ namespace BankDirectConnection.Domain.SGB
                 }
             }
             return this;
+        }
+
+        public List<InnerTransferMsg> CreatePayments(ITranscations Transcations)
+        {
+            List<InnerTransferMsg> msgList = new List<InnerTransferMsg>();
+            foreach (var item in Transcations.Transcations)
+            {
+                
+                foreach (var line in item.TransDetail)
+                {
+                    InnerTransferMsg msg = new InnerTransferMsg();
+                    msg.Head.CCTransCode = "SGT003";
+                    msg.Head.ReqSeqNo = item.ClientId;
+                    msg.Head.ReqDate = item.TransDate;
+                    //msg.Head.CorpNo = "";
+                    //msg.Head.OpNo = "";
+                    //msg.Head.PassWord = "";
+                    
+                    msg.DbAccNo = item.FromAcct.AcctId;
+                    msg.DbAccName = item.FromAcct.AcctName;
+                    msg.DbCur = item.PaymentCur;
+                    msg.CrAccNo = line.ToAcct.AcctId;
+                    msg.CrAccName = line.ToAcct.AcctName;
+                    msg.UnionDeptId = line.ToAcct.BankId;
+                    msg.CrBankName = line.ToAcct.BankName;
+                    msg.CrCifType = line.ToAcct.AcctType;
+                    msg.TranType = "0";//实时
+                    msg.WhyUse = item.Purpose;
+                    msg.CrCur = line.TransCur;
+                    msg.TransAmt = line.TransAmount;
+                    msg.Check();
+                    msgList.Add(msg);
+                }
+            }
+            return msgList;
         }
     }
 }

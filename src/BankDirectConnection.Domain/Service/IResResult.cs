@@ -13,7 +13,9 @@ namespace BankDirectConnection.Domain.Service
     public interface IResResult: IBaseResult
     {
 
-         IList<IResponse> Response { get; set; }
+        IList<IResponse> Response { get; set; }
+
+        IResResult MergeResResult(IResResult Result);
     }
 
  

@@ -34,9 +34,14 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         /// </summary>
         /// <param name="TransWay"></param>
         /// <returns></returns>
-        public static IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(string TransWay)
+        public static IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> CreateBank(string TransWayOrInsId)
         {
             IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService;
+            string TransWay = "";
+            if (TransWayOrInsId.Length > 2)
+                TransWay = TransWayOrInsId.Substring(0, 2);
+            else
+                TransWay = TransWayOrInsId;
             switch (TransWay)
             {
                 case "01": bankService = new BOCService(); break;

@@ -62,22 +62,18 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                         dicTransList.Add(key, queryList);
                     }
                 }
-
+                //遍历不同银行服务的查询
+                IResResult result = new ResResult();
                 foreach (var item in dicTransList)
                 {
-
+                    var bankService = BankFactory.CreateBank(item.Key);
+                    var rt = bankService.QueryTransStatus(item.Value);
+                    if (null == result)
+                        result = rt;
+                    else
+                        result.MergeResResult(rt);
                 }
-                
-
-                //var bank = Instruction.ParseInsId(Transcation.InsId);
-                ////获取银行信息，调用具体银行的服务
-                //IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult> bankService = BankFactory.CreateBank(bank);
-                //return bankService.QueryTransStatus(Transcation);
-                throw new NotImplementedException();
-            }
-            catch(BusinessException ex)
-            {
-                throw ex;
+                return result;
             }
             catch(Exception ex)
             {

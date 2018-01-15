@@ -1,5 +1,6 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace BankDirectConnection.Domain.SGB
             this.Create(Transcations);
             this.Check();
         }
-    
+
+        #region property
+
         /// <summary>
         /// 付款方账户名
         /// </summary>
@@ -100,13 +103,21 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string StartDate { get; set; }
 
-       
+        #endregion
+
         public override bool Check()
         {
-            return base.Check();
+            base.Check();
+            // TODO 收款人账号不为兴业银行，并且收款币种为人民币
+            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) == emBankNo.SG.ToString())
+                || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
+                throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
+            if (this.CrCur != "RMB")
+                throw new InnerException("2021008", "the value of transcur can'not be RMB");
+            return true;
         }
 
-        public RMBPaymentMsg Create(ITranscations Transcations)
+        private RMBPaymentMsg Create(ITranscations Transcations)
         {
             if (Transcations.Transcations.Count != 1)
                 throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
@@ -139,6 +150,42 @@ namespace BankDirectConnection.Domain.SGB
                 }
             }
             return this;
+        }
+
+        public List<RMBPaymentMsg> CreatePayments(ITranscations Transcations)
+        {
+            List<RMBPaymentMsg> msgList = new List<RMBPaymentMsg>();
+            foreach (var item in Transcations.Transcations)
+            {
+                // 以明细为标准 转换为人民币付款
+                foreach (var line in item.TransDetail)
+                {
+                    RMBPaymentMsg msg = new RMBPaymentMsg();
+                    msg.Head.CCTransCode = "SGT002";
+                    msg.Head.ReqSeqNo = item.ClientId;
+                    msg.Head.ReqDate = item.TransDate;
+                    //msg.Head.CorpNo = "";
+                    //msg.Head.OpNo = "";
+                    //msg.Head.PassWord = "";
+                    msg.DbAccNo = item.FromAcct.AcctId;
+                    msg.DbAccName = item.FromAcct.AcctName;
+                    msg.DbCur = item.PaymentCur;
+                    msg.CrAccNo = line.ToAcct.AcctId;
+                    msg.CrAccName = line.ToAcct.AcctName;
+                    msg.CrCifType = line.ToAcct.AcctType;
+                    msg.TranType = "0";//实时
+                    msg.ForeignPayee = line.ReceipterType;
+                    msg.CrBankName = line.ToAcct.BankName;
+                    msg.UnionDeptId = line.ToAcct.BankId;
+                    msg.Priority = item.Priority;
+                    msg.WhyUse = item.Purpose;
+                    msg.CrCur = line.TransCur;
+                    msg.TransAmt = line.TransAmount;
+                    msg.Check();//数据校验成功
+                    msgList.Add(msg);
+                }
+            }
+            return msgList;
         }
     }
 }
