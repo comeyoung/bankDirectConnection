@@ -22,10 +22,10 @@ namespace BankDirectConnection.Domain.SGB
         {
             this.Head = new CommonHeader();
         }
-        public ForeignCurryPaymentMsg(ITranscations Transcations)
+        public ForeignCurryPaymentMsg(ITranscation Transcation)
         {
             this.Head = new CommonHeader();
-            Create(Transcations);
+            Create(Transcation);
             this.Check();
         }
 
@@ -110,14 +110,13 @@ namespace BankDirectConnection.Domain.SGB
         public string StartDate { get; set; }
         #endregion
 
-
         public override bool Check()
         {
             base.Check();
             if (String.IsNullOrEmpty(this.Fees))
                 throw new BusinessException("the value of feetype is null") { Code = "1021004" };
             // TODO 收款账号不为法兴 且收款币种不为人民币
-            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) == emBankNo.SG.ToString())
+            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
                 || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
             if (this.CrCur == "RMB")
@@ -125,37 +124,32 @@ namespace BankDirectConnection.Domain.SGB
             return true;
         }
 
-        private ForeignCurryPaymentMsg Create(ITranscations Transcations)
+        private ForeignCurryPaymentMsg Create(ITranscation Transcation)
         {
-            if (Transcations.Transcations.Count != 1)
-                throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
-            if(Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
+            if(Transcation.TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
-            foreach(var item in Transcations.Transcations)
+            this.Head.CCTransCode = "SGT003";
+            this.Head.ReqSeqNo = Transcation.ClientId;
+            this.Head.ReqDate = Transcation.TransDate;
+            this.WhyUse = Transcation.Purpose;
+            this.Fees = Transcation.FeeType;
+            //msg.Head.CorpNo = "";
+            //msg.Head.OpNo = "";
+            //msg.Head.PassWord = "";
+            this.DbAccNo = Transcation.FromAcct.AcctId;
+            this.DbCur = Transcation.PaymentCur;
+            foreach (var item in Transcation.TransDetail)
             {
-                this.Head.CCTransCode = "SGT003";
-                this.Head.ReqSeqNo = item.ClientId;
-                this.Head.ReqDate = item.TransDate;
-                //msg.Head.CorpNo = "";
-                //msg.Head.OpNo = "";
-                //msg.Head.PassWord = "";
-                this.DbAccNo = item.FromAcct.AcctId;
-                this.DbCur = item.PaymentCur;
-                foreach (var line in item.TransDetail)
-                {
-                    this.CrAccNo = line.ToAcct.AcctId;
-                    this.CrAccName = line.ToAcct.AcctName;
-                    this.CrCifType = line.ToAcct.AcctType;
-                    this.ForeignPayee = line.ReceipterType;
-                    this.BeneSwifCode = line.SWIFTCode;
-                    this.UnionDeptId = line.ToAcct.BankId;
-                    this.CrBankName = line.ToAcct.BankName;
-                    this.Fees = item.FeeType;
-                    this.Rate = line.Rate;
-                    this.CrCur = line.TransCur;
-                    this.WhyUse = item.Purpose;
-                    this.TransAmt = line.TransAmount;
-                }
+                this.CrAccNo = item.ToAcct.AcctId;
+                this.CrAccName = item.ToAcct.AcctName;
+                this.CrCifType = item.ToAcct.AcctType;
+                this.ForeignPayee = item.ReceipterType;
+                this.BeneSwifCode = item.SWIFTCode;
+                this.UnionDeptId = item.ToAcct.BankId;
+                this.CrBankName = item.ToAcct.BankName;
+                this.Rate = item.Rate;
+                this.CrCur = item.TransCur;
+                this.TransAmt = item.TransAmount;
             }
             return this;
         }

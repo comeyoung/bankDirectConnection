@@ -1,13 +1,15 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:34:34
 	===============================================================================================================================*/
-    public class Transcation: BaseTranscation,ITranscation
+    public class Transcation : BaseTranscation, ITranscation
     {
         /// <summary>
         /// 检查数据格式是否符合要求
@@ -27,6 +29,7 @@ namespace BankDirectConnection.Domain.TransferBO
             return true;
         }
 
+        #region property
         /// <summary>
         /// 客户端流水号
         /// </summary>
@@ -79,15 +82,35 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 备注/附言
         /// </summary>
         public string Comments { get; set; }
-        /// <summary>
-        /// FromAcct
-        /// </summary>
-        public IAccount FromAcct { get; set; }
+
         /// <summary>
         /// TransDetail
         /// </summary>
         public IList<ITransDetail> TransDetail { get; set; }
+        #endregion
 
-
+        /// <summary>
+        /// 返回收款账户银行
+        /// </summary>
+        /// <returns></returns>
+        public string GetBankByReceipter()
+        {
+            if (this.TransDetail.Count != 1)
+                return string.Empty;
+            var toAcct = this.TransDetail.FirstOrDefault().ToAcct;
+            if (!string.IsNullOrEmpty(toAcct.BankName) && toAcct.BankName.Contains("中国银行"))
+                return emBankNo.BOC.ToString();
+            else if ((!string.IsNullOrEmpty(toAcct.BankName) && toAcct.BankName.Contains("兴业")))
+                return emBankNo.SG.ToString();
+            if (!string.IsNullOrEmpty(toAcct.BankId) && toAcct.BankId.Length == 12)
+            {
+                string bankType = toAcct.BankId.Substring(0, 3);
+                if (bankType == emBankNo.BOC.ToString())
+                    return emBankNo.BOC.ToString();
+                if (bankType == emBankNo.SG.ToString())
+                    return emBankNo.SG.ToString();
+            }
+            return string.Empty;
+        }
     }
 }

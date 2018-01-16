@@ -25,17 +25,16 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         public static IResResult PushRMBTranscation(RMBPaymentMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
+                throw new InnerException("", "");//TODO
             IResResult result = new ResResult();
 
             //构建xml
             var transXML = Serialization.BuildXMLForRMBPayment(Msg);
             ////调用接口
-          
-        
+            var res = SGBHttp.PostRequest(transXML);
             
-
-
+            // 将法兴银行返回结果转换为EDI结果
+            //TODO
             return result;
         }
             

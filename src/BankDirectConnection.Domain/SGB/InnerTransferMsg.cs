@@ -23,7 +23,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head = new CommonHeader();
         }
 
-        public InnerTransferMsg(ITranscations Transcations)
+        public InnerTransferMsg(ITranscation Transcations)
         {
             this.Head = new CommonHeader();
             this.Create(Transcations);
@@ -105,40 +105,36 @@ namespace BankDirectConnection.Domain.SGB
         {
             base.Check();
             // TODO 收款人账号为兴业银行
-            if (this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) != emBankNo.SG.ToString())
+            if (this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) != emBankNo.SG.ToString())
                 throw new InnerException("2021003", "the bank number of receipter is bad.");
             return true;
         }
 
-        private InnerTransferMsg Create(ITranscations Transcations)
+        private InnerTransferMsg Create(ITranscation Transcation)
         {
-            if (Transcations.Transcations.Count != 1)
-                throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
-            if (Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
+            //保证交易明细中只有一笔
+            if (Transcation.TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
-            foreach (var item in Transcations.Transcations)
+            this.Head.CCTransCode = "SGT003";
+            this.Head.ReqSeqNo = Transcation.ClientId;
+            this.Head.ReqDate = Transcation.TransDate;
+            //msg.Head.CorpNo = "";
+            //msg.Head.OpNo = "";
+            //msg.Head.PassWord = "";
+            this.DbAccNo = Transcation.FromAcct.AcctId;
+            this.DbAccName = Transcation.FromAcct.AcctName;
+            this.DbCur = Transcation.PaymentCur;
+            foreach (var item in Transcation.TransDetail)
             {
-                this.Head.CCTransCode = "SGT003";
-                this.Head.ReqSeqNo = item.ClientId;
-                this.Head.ReqDate = item.TransDate;
-                //msg.Head.CorpNo = "";
-                //msg.Head.OpNo = "";
-                //msg.Head.PassWord = "";
-               this.DbAccNo = item.FromAcct.AcctId;
-               this.DbAccName = item.FromAcct.AcctName;
-               this.DbCur = item.PaymentCur;
-                foreach (var line in item.TransDetail)
-                {
-                    this.UnionDeptId = line.ToAcct.BankId;
-                    this.CrBankName = line.ToAcct.BankName;
-                    this.CrAccNo = line.ToAcct.AcctId;
-                    this.CrAccName = line.ToAcct.AcctName;
-                    this.CrCifType = line.ToAcct.AcctType;
-                    this.TranType = "0";//实时
-                    this.WhyUse = item.Purpose;
-                    this.CrCur = line.TransCur;
-                    this.TransAmt = line.TransAmount;
-                }
+                this.UnionDeptId = item.ToAcct.BankId;
+                this.CrBankName = item.ToAcct.BankName;
+                this.CrAccNo = item.ToAcct.AcctId;
+                this.CrAccName = item.ToAcct.AcctName;
+                this.CrCifType = item.ToAcct.AcctType;
+                this.TranType = "0";//实时
+                this.WhyUse = Transcation.Purpose;
+                this.CrCur = item.TransCur;
+                this.TransAmt = item.TransAmount;
             }
             return this;
         }

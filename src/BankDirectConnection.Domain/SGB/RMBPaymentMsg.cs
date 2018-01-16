@@ -23,10 +23,10 @@ namespace BankDirectConnection.Domain.SGB
             this.Head = new CommonHeader();
         }
 
-        public RMBPaymentMsg(ITranscations Transcations)
+        public RMBPaymentMsg(ITranscation Transcation)
         {
             this.Head = new CommonHeader();
-            this.Create(Transcations);
+            this.Create(Transcation);
             this.Check();
         }
 
@@ -109,7 +109,7 @@ namespace BankDirectConnection.Domain.SGB
         {
             base.Check();
             // TODO 收款人账号不为兴业银行，并且收款币种为人民币
-            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 2) == emBankNo.SG.ToString())
+            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
                 || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
             if (this.CrCur != "RMB")
@@ -117,37 +117,32 @@ namespace BankDirectConnection.Domain.SGB
             return true;
         }
 
-        private RMBPaymentMsg Create(ITranscations Transcations)
+        private RMBPaymentMsg Create(ITranscation Transcation)
         {
-            if (Transcations.Transcations.Count != 1)
-                throw new BusinessException("the lines of transfer info should be one") { Code = "1021011" };
-            if (Transcations.Transcations.FirstOrDefault().TransDetail.Count != 1)
+            if (Transcation.TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
-            foreach (var item in Transcations.Transcations)
+            this.Head.CCTransCode = "SGT002";
+            this.Head.ReqSeqNo = Transcation.ClientId;
+            this.Head.ReqDate = Transcation.TransDate;
+            this.Priority = Transcation.Priority;
+            this.WhyUse = Transcation.Purpose;
+            //msg.Head.CorpNo = "";
+            //msg.Head.OpNo = "";
+            //msg.Head.PassWord = "";
+            this.DbAccNo = Transcation.FromAcct.AcctId;
+            this.DbAccName = Transcation.FromAcct.AcctName;
+            this.DbCur = Transcation.PaymentCur;
+            foreach (var item in Transcation.TransDetail)
             {
-                this.Head.CCTransCode = "SGT002";
-                this.Head.ReqSeqNo = item.ClientId;
-                this.Head.ReqDate = item.TransDate;
-                //msg.Head.CorpNo = "";
-                //msg.Head.OpNo = "";
-                //msg.Head.PassWord = "";
-                this.DbAccNo = item.FromAcct.AcctId;
-                this.DbAccName = item.FromAcct.AcctName;
-                this.DbCur = item.PaymentCur;
-                foreach (var line in item.TransDetail)
-                {
-                    this.CrAccNo = line.ToAcct.AcctId;
-                    this.CrAccName = line.ToAcct.AcctName;
-                    this.CrCifType = line.ToAcct.AcctType;
-                    this.TranType = "0";//实时
-                    this.ForeignPayee = line.ReceipterType;
-                    this.CrBankName = line.ToAcct.BankName;
-                    this.UnionDeptId = line.ToAcct.BankId;
-                    this.Priority = item.Priority;
-                    this.WhyUse = item.Purpose;
-                    this.CrCur = line.TransCur;
-                    this.TransAmt = line.TransAmount;
-                }
+                this.CrAccNo = item.ToAcct.AcctId;
+                this.CrAccName = item.ToAcct.AcctName;
+                this.CrCifType = item.ToAcct.AcctType;
+                this.TranType = "0";//实时
+                this.ForeignPayee = item.ReceipterType;
+                this.CrBankName = item.ToAcct.BankName;
+                this.UnionDeptId = item.ToAcct.BankId;
+                this.CrCur = item.TransCur;
+                this.TransAmt = item.TransAmount;
             }
             return this;
         }

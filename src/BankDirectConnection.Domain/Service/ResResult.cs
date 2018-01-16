@@ -23,6 +23,12 @@ namespace BankDirectConnection.Domain.Service
             this.Response = new List<IResponse>();
         }
 
+        /// <summary>
+        /// 将中行接口结果转换为EDI结果
+        /// </summary>
+        /// <param name="msg">中行接口返回消息</param>
+        /// <param name="TransWay">接口方式（用作生成）</param>
+        /// <returns></returns>
         public static IResResult Create(ResponseMsg msg,string TransWay)
         {
             IResResult result = new ResResult();
