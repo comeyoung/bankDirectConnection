@@ -26,7 +26,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         {
             if (null == Msg)
                 throw new InnerException("2022002", "人民币交易信息不能为空");
-           
+
 
             //构建xml
             var transXML = Serialization.BuildXMLForRMBPayment(Msg);
@@ -35,13 +35,13 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var rt = Deserialization.ParseResonseMsg(res);
             //返回结果
             return ResResult.Create(rt);
-          
-        
-            
 
 
-            
+
+
+
+
         }
-            
+
     }
 }

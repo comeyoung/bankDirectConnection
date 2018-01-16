@@ -87,7 +87,7 @@ namespace BankDirectConnection.Domain.Service
 
     }
 
-   
+
 
     public class Response: IResponse
     {

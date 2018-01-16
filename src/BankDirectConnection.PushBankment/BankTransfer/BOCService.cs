@@ -29,6 +29,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 IResResult result = new ResResult();
                 foreach (var item in Transcations.Transcations)
                 {
+                    // 快捷支付业务一次只能走一笔
                     var transBO = new WageAndReimbursementMsg(item);
                     transBO.HeaderMessage.Token = response.Token;
                     //获取代发业务
