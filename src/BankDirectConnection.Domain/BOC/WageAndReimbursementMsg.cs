@@ -97,6 +97,11 @@ namespace BankDirectConnection.Domain.BOC
     }
     public class WageAndReimbursementTrans
     {
+        public WageAndReimbursementTrans()
+        {
+            this.DetailMessage = new List<Detail>();
+            this.FractnMessage = new Fractn();
+        }
         public string Ceitinfo { get; set; }
         public string Transtype { get; set; }
         public string Insid { get; set; }
