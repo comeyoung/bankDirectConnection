@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.Domain.SGB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BankDirectConnection.Domain.Service
             this.Response = new List<IResponse>();
         }
 
-        public static IResResult Create(ResponseMsg msg,string TransWay)
+        public static IResResult Create(ResponseMsg msg)
         {
             IResResult result = new ResResult();
             result.Status = msg.Status;
@@ -40,10 +41,26 @@ namespace BankDirectConnection.Domain.Service
                     //错误处理
                     // TODO
                 }
-                result.Response.Add(new Response() { Status = item.Status, ClientId = item.Insid, ObssId = item.Obssid, InsId = Instruction.NewInsSid(TransWay) });
+                result.Response.Add(new Response() { Status = item.Status, ClientId = item.Insid, ObssId = item.Obssid, InsId = Instruction.NewInsSid("01") });
             }
 
 
+            return result;
+        }
+
+        public static IResResult Create(CommonResponseMsg msg)
+        {
+            IResResult result = new ResResult();
+
+            if(null != msg.CmeMsgs && msg.CmeMsgs.Count > 0)
+            {
+                // 批量结果返回
+            }
+            else
+            {
+                //单笔结果返回
+                //if(msg.RespCode)
+            }
             return result;
         }
 

@@ -9,3 +9,14 @@ D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.DapperRepo
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.Domain.pdb
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\Dapper.xml
 D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.BaseApplication.pdb
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.DapperRepository.dll
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.DapperRepository.pdb
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.Domain.dll
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\Dapper.dll
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.BaseApplication.dll
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.Domain.pdb
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\Dapper.xml
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\bin\Debug\BankDirectConnection.BaseApplication.pdb
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\obj\Debug\BankDirectConnection.DapperRepository.csprojResolveAssemblyReference.cache
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\obj\Debug\BankDirectConnection.DapperRepository.dll
+C:\bankDirect\bankDirectConnection\src\BankDirectConnection.DapperRepository\obj\Debug\BankDirectConnection.DapperRepository.pdb
