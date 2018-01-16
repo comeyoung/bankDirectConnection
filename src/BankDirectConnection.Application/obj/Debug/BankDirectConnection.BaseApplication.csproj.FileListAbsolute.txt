@@ -1,9 +1,0 @@
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.BaseApplication.dll
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.BaseApplication.pdb
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.BaseApplication.dll
-D:\githubrep\projectrep\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.BaseApplication.pdb
-D:\githubrep\EDF\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.BaseApplication.dll
-D:\githubrep\EDF\bankDirectConnection\src\BankDirectConnection.Application\bin\Debug\BankDirectConnection.BaseApplication.pdb
-D:\githubrep\EDF\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.BaseApplication.dll
-D:\githubrep\EDF\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.BaseApplication.pdb
-D:\githubrep\EDF\bankDirectConnection\src\BankDirectConnection.Application\obj\Debug\BankDirectConnection.BaseApplication.csprojResolveAssemblyReference.cache
