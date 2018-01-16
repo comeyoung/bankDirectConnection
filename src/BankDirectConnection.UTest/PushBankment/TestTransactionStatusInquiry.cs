@@ -1,14 +1,35 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BankDirectConnection.PushBankment.BOCService;
+using BankDirectConnection.Domain.BOC;
 
 namespace BankDirectConnection.UTest.PushBankment
 {
     [TestClass]
     public class TestTransactionStatusInquiry
     {
-        [TestMethod]
-        public void TestMethod1()
+        public TransactionStatusInquiryMsg StatusSetIn()
         {
+            TransactionStatusInquiryMsg tsim = new TransactionStatusInquiryMsg();
+            tsim.HeaderMessage.Cusopr = "em123456";
+            tsim.HeaderMessage.Custid = "03";
+            tsim.HeaderMessage.Obssmsgid = "d123456";
+            tsim.HeaderMessage.Termid = "前置机";
+            tsim.HeaderMessage.Token = "qwe1366";
+            tsim.HeaderMessage.Trncod = "asdf1234";
+            tsim.HeaderMessage.Trnid = "qqq123456";
+            tsim.HeaderMessage.TrnTyp = "状态查询";
+            tsim.Trans.Insid = "cust123";
+            tsim.Trans.Obssid = "wa1316";
+            return tsim;
+        }
+        //中行交易状态查询请求报文
+        [TestMethod]
+        public void TestXMLForTransactionStatusInquiryByLinq()
+        {
+            var transXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(StatusSetIn());
+            Console.WriteLine(transXML);
+
         }
     }
 }
