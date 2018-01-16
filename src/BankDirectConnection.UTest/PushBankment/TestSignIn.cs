@@ -26,5 +26,6 @@ namespace BankDirectConnection.UTest.PushBankment
             string xmlStr = Serialization.BuildXMLStrForSignInByLinq(signInMsg);
             Console.WriteLine(xmlStr);
         }
+       
     }
 }

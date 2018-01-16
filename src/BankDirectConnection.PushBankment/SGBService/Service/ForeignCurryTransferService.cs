@@ -19,17 +19,21 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     public class ForeignCurryTransferService
     {
         /// <summary>
-        /// 调用法兴内部转账接口
+        /// 调用法兴外币转账接口
         /// </summary>
         /// <returns></returns>
         public IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
-            IResResult result = new ResResult();
+                throw new InnerException("2022002", "外币交易信息不能为空");
+           
             // TODO 调用法兴转账接口
+            var transXML = Serialization.BuildXMLForFreignCurryPayment(Msg);
+            var res = SGBHttp.PostRequest(transXML);
+            var rt = Deserialization.ParseResonseMsg(res);
+
             // 处理返回结果
-            return result;
+            return ResResult.Create(rt);
         }
     }
 }

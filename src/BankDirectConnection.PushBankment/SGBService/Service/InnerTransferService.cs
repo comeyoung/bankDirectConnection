@@ -25,13 +25,19 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         public IResResult PushInnerTranscationInfo(InnerTransferMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
-            IResResult result = new ResResult();
+                throw new InnerException("2022002", "内部交易信息不能为空");
+            
 
             // TODO 调用法兴转账接口
+            var transXML = Serialization.BuildXMLForInnerTransfer(Msg);
+            var res = SGBHttp.PostRequest(transXML);
+            var rt = Deserialization.ParseResonseMsg(res);
+
+
+
             // 处理返回结果
 
-            return result;
+            return ResResult.Create(rt);
         }
     }
 }

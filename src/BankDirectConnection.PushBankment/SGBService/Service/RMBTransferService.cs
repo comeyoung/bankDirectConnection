@@ -25,18 +25,22 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         public static IResResult PushRMBTranscation(RMBPaymentMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
-            IResResult result = new ResResult();
+                throw new InnerException("2022002", "人民币交易信息不能为空");
+           
 
             //构建xml
             var transXML = Serialization.BuildXMLForRMBPayment(Msg);
-            ////调用接口
+            //调用接口
+            var res = SGBHttp.PostRequest(transXML);
+            var rt = Deserialization.ParseResonseMsg(res);
+            //返回结果
+            return ResResult.Create(rt);
           
         
             
 
 
-            return result;
+            
         }
             
     }
