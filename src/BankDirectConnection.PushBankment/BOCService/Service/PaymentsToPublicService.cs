@@ -31,7 +31,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
             var res = BOCHttp.PostRequest(transXML);
             //处理结果
             var rt = Deserialization.ParseResponseMsg(res, "b2e0009");
-            return ResResult.Create(rt,"01");
+            return ResResult.Create(rt);
         }
     }
 }
