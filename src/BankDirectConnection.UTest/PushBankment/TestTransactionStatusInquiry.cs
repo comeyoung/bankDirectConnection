@@ -50,6 +50,9 @@ namespace BankDirectConnection.UTest.PushBankment
             BOCService service = new BOCService();
             var rt = service.SplitTransferData(testBO);
             Assert.AreEqual(4, rt.Count);
+            foreach (var item in rt) {
+                Console.WriteLine(item);
+            }
         }
     }
 }
