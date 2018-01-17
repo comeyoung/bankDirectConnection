@@ -1,10 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
-using BankDirectConnection.Domain.Abstract;
 using BankDirectConnection.Domain.BOC.Message;
-using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BankDirectConnection.Domain.BOC
 {
@@ -14,7 +11,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 对公转账
     /// </summary>
-    public class PaymentsToPublicMsg: AbastractTrans
+    public class PaymentsToPublicMsg: AbastractBOCTranscation
     {
         public PaymentsToPublicMsg()
         {

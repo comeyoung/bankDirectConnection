@@ -1,7 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
-using BankDirectConnection.Domain.Abstract;
 using BankDirectConnection.Domain.BOC.Message;
-using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
 
@@ -13,7 +11,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 代发工资、报销
     /// </summary>
-    public class WageAndReimbursementMsg : AbastractTrans
+    public class WageAndReimbursementMsg : AbastractBOCTranscation
     {
         
         public WageAndReimbursementMsg()

@@ -1,9 +1,7 @@
-﻿using BankDirectConnection.Domain.BOC.Message;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC.Message;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.BOC
 {
@@ -13,17 +11,28 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 交易状态查询
     /// </summary>
-    public class TransactionStatusInquiryMsg
+    public class TransactionStatusInquiryMsg: ICheckAble
     {
         public TransactionStatusInquiryMsg()
         {
             this.HeaderMessage = new Header();
             this.Trans = new TransactionStatusInquiry();
+            
         }
         public Header HeaderMessage { get; set; }
 
         public TransactionStatusInquiry Trans { get; set; }
+
+        public bool Check()
+        {
+            throw new NotImplementedException();
+        }
     }
+
+   
+
+
+
 
     public class TransactionStatusInquiry
     {
@@ -36,5 +45,21 @@ namespace BankDirectConnection.Domain.BOC
         /// 网银交易流水号
         /// </summary>
         public string Obssid { get; set; }
+
+        public TransactionStatusInquiry() {
+            this.Check();
+        }
+        public  bool Check()
+        {
+            if (string.IsNullOrEmpty(this.Obssid) && string.IsNullOrEmpty(this.Insid)) {
+                throw new BusinessException("the purpose of trans can't be null if choosed the convient transfer") { Code = "1011010" };
+            } else if (this.Obssid.Length > 19) {
+                throw new BusinessException("Online banking transaction serial number is not more than 19 ") { Code = "2011001" };
+            } else if (this.Insid.Length < 32) {
+                throw new BusinessException("The transfer instruction ID does not exceed 32") { Code = "2011001" };
+            }
+            return true;
+        }
+
     }
 }

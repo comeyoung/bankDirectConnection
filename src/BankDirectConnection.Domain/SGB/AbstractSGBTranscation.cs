@@ -27,12 +27,11 @@ namespace BankDirectConnection.Domain.SGB
         {
             get;set;
         }
-        /// <summary>
-        /// 公共包头
-        /// </summary>
+
         public CommonHeader Head
         {
-            get;set;
+            get;
+            set;
         }
 
         public virtual bool Check()

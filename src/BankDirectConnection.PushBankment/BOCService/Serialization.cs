@@ -165,6 +165,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static string BuildXMLForTransactionStatusInquiryByLinq(TransactionStatusInquiryMsg TransactionStatusInquiryMsg)
         {
+            
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                new XAttribute("version", "100"),
                new XAttribute("security", "true"),

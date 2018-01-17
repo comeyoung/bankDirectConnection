@@ -9,10 +9,8 @@ namespace BankDirectConnection.Domain.SGB
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/13 15:09:20
 	===============================================================================================================================*/
-    public interface IBaseSGBTranscation
+    public interface IBaseSGBTranscation: ISGBHeader
     {
-        CommonHeader Head { get; set; }
-
         string DbAccNo { get; set; }
 
         string CrAccNo { get; set; }
