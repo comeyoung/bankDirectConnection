@@ -48,11 +48,11 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string CrAccName { get; set; }
         /// <summary>
-        /// 收款人账户类型
+        /// 收款人账户类型 0公司 1个人
         /// </summary>
         public string CrCifType { get; set; }
         /// <summary>
-        /// 收款人类型
+        /// 收款人类型 0居民 1：非居民
         /// </summary>
         public string ForeignPayee { get; set; }
         /// <summary>

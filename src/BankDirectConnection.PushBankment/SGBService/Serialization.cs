@@ -93,15 +93,18 @@ namespace BankDirectConnection.PushBankment.SGBService
                                            new XElement("TranType", item.TranType),
                                            new XElement("StartTime", item.StartTime),
                                            new XElement("StartDate", item.StartDate)));
-
             return xdocment.ToString();
-
         }
 
-        //public static List<XElement> BuildXMLForCommonHeader()
-        //{
+        public static List<XElement> BuildXMLForCommonHeader(CommonHeader Head)
+        {
+            List<XElement> xElement = new List<XElement>();
+            xElement.Add(new XElement("ReqSeqNo", Head.ReqSeqNo));
+            xElement.Add(new XElement("ReqDate", Head.ReqDate));
+            xElement.Add(new XElement("ReqTime", Head.ReqTime));
+            return xElement;
 
-        //}
+        }
 
         /// <summary>
         /// 人民币付款
@@ -111,6 +114,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string BuildXMLForRMBPayment(RMBPaymentMsg RMBPaymentMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT002"),
+                BuildXMLForCommonHeader(RMBPaymentMsg.Head),
                 new XElement("Cmp", new XElement("DbAccNo", RMBPaymentMsg.DbAccNo),
                                            new XElement("DbAccName", RMBPaymentMsg.DbAccName),
                                            new XElement("DbCur", RMBPaymentMsg.DbCur),
@@ -139,6 +143,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string BuildXMLForFreignCurryPayment(ForeignCurryPaymentMsg ForeignCurryPaymentMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT003"),
+                BuildXMLForCommonHeader(ForeignCurryPaymentMsg.Head),
                 new XElement("Cmp", new XElement("DbAccNo", ForeignCurryPaymentMsg.DbAccNo),
                                            new XElement("DbCur", ForeignCurryPaymentMsg.DbCur),
                                            new XElement("CrAccNo", ForeignCurryPaymentMsg.CrAccNo),
@@ -166,6 +171,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string BuildXMLForInnerTransfer(InnerTransferMsg InnerTransferMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT001"),
+                BuildXMLForCommonHeader(InnerTransferMsg.Head),
                 new XElement("Cmp", new XElement("DbAccNo", InnerTransferMsg.DbAccNo),
                                            new XElement("DbAccName", InnerTransferMsg.DbAccName),
                                            new XElement("DbCur", InnerTransferMsg.DbCur),
