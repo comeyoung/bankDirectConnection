@@ -15,30 +15,32 @@ namespace BankDirectConnection.DapperRepository
     public class TranscationDapperRepository
     {
 
-        //public async Task<List<SalesOrder>> Fetch(QueryParam Param)
-        //{
-        //    List<SalesOrder> collection = null;
-        //    using (var conn = SqlConnectionFactory.CreateSqlConnection())
-        //    {
-        //        conn.Open();
+        public async Task<ITranscations> Fetch(string ClientId)
+        {
+            ITranscations collection = null;
+            using (var conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
 
-        //        string sql = $"SELECT  top {Param.limit} {Param.select} FROM T_SalesOrder t0 left JOIN T_SalesOrderItem t1 on t0.DocEntry = t1.DocEntry {Param.filter + " " + Param.orderby} ";
-        //        try
-        //        {
-        //            var coll = await conn.QueryParentChildAsync<SalesOrder, SalesOrderItem, int>(sql, p => p.DocEntry, p => p.SalesOrderItems, splitOn: "DocEntry");
-        //            collection = coll.ToList();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw ex;
-        //        }
-        //        finally
-        //        {
-        //            conn.Close();
-        //        }
-        //        return collection;
-        //    }
-        //}
+                //string sql = $"SELECT  top {Param.limit} {Param.select} FROM T_SalesOrder t0 left JOIN T_SalesOrderItem t1 on t0.DocEntry = t1.DocEntry {Param.filter + " " + Param.orderby} ";
+                string sql = @"select *";
+                try
+                {
+                    //var coll = await conn.QueryParentChildAsync<ITranscations, Transcations, int>(sql, p => p.DocEntry, p => p.SalesOrderItems, splitOn: "DocEntry");
+                    //collection = coll.ToList();
+                   
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return collection;
+            }
+        }
 
 
         public void Save(ITranscations Transcations)
