@@ -31,8 +31,7 @@ namespace BankDirectConnection.UTest.PushBankment
         public void TestQueryTransactionResponse() {
             string msg = "<ap><CCTransCode>SGQ010</CCTransCode><Cmp><CmeSeqNo>ddd123456</CmeSeqNo><JnlState>3102</JnlState><Postscript>附言(状态信息)</Postscript><RespSeqNo>ddd123456</RespSeqNo><HostSeqNo>原网银流水</HostSeqNo><CertSeqNo>原核心流水</CertSeqNo></Cmp></ap>";
             var rt = Deserialization.TransactionResultsParseResonseMsg(msg);
-           
-            Console.Write(rt.Trans.CertSeqNo);
+            Console.Write(rt);
         }
     }
 }

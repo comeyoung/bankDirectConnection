@@ -30,9 +30,6 @@ namespace BankDirectConnection.Domain.SGB
             public string HostSeqNo { get; set; }
             public string CertSeqNo { get; set; }
 
-
-
-
     
     }
 }

@@ -6,6 +6,7 @@ using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.PushBankment.BOCService.Service;
 using BankDirectConnection.Domain.BOC;
+using System.Collections.Generic;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -63,9 +64,50 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         /// <returns></returns>
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
-            //EDI流水号都要以中行流水号开头
-            //
+            //获取状态查询业务
+            TransactionStatusInquiryService service = new TransactionStatusInquiryService();
+
+            if (TransferQueryData.TransferQueryDatas.Count <= 100)
+            {
+                var tsim = new TransactionStatusInquiryMsg(TransferQueryData);
+                return service.PushTransactionStatusInquiry(tsim);
+            }
+            else
+            {
+                var queryDataList = this.SplitTransferData(TransferQueryData);
+                //
+            }
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 将第三方传递的查询数据明细分割为每笔明细100行
+        /// </summary>
+        /// <param name="TransferQueryData"></param>
+        /// <returns></returns>
+        public List<ITransferQueryDataList> SplitTransferData(ITransferQueryDataList TransferQueryData)
+        {
+            List<ITransferQueryDataList> transQueryList = new List<ITransferQueryDataList>();
+            TransferQueryDataList trans = null;
+            foreach (var item in TransferQueryData.TransferQueryDatas)
+            {
+                if (null != trans)
+                {
+                    if (trans.TransferQueryDatas.Count == 100)
+                    {
+                        transQueryList.Add(trans);
+                        trans = new TransferQueryDataList();
+                    }
+                    trans.TransferQueryDatas.Add(item);
+                }
+                else
+                {
+                    trans = new TransferQueryDataList();
+                    trans.TransferQueryDatas.Add(item);
+                }
+            }
+            transQueryList.Add(trans);
+            return transQueryList;
         }
     }
 }

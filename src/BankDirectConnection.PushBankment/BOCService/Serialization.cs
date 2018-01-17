@@ -171,11 +171,13 @@ namespace BankDirectConnection.PushBankment.BOCService
                new XAttribute("security", "true"),
                new XAttribute("lang", "chs"),
                BuildHeadElement(TransactionStatusInquiryMsg.HeaderMessage),
+               from item in TransactionStatusInquiryMsg.Trans
+               select 
                new XElement("trans",
                    new XElement("trn-b2e0007-rq",
                        new XElement("b2e0007-rq",
-                           new XElement("insid", TransactionStatusInquiryMsg.Trans.Insid),
-                           new XElement("obssid", TransactionStatusInquiryMsg.Trans.Obssid))))));
+                           new XElement("insid", item.Insid),
+                           new XElement("obssid", item.Obssid))))));
             return xdocment.Declaration + xdocment.ToString();
         }
 

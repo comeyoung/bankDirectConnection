@@ -60,6 +60,7 @@
     <Compile Include="SGBService\Serialization.cs" />
     <Compile Include="SGBService\Service\ForeignCurryTransferService.cs" />
     <Compile Include="SGBService\Service\InnerTransferService.cs" />
+    <Compile Include="SGBService\Service\QueryTranactionResultsService.cs" />
     <Compile Include="SGBService\Service\RMBTransferService.cs" />
     <Compile Include="SGBService\SGBHttp.cs" />
   </ItemGroup>

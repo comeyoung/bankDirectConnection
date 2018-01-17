@@ -24,6 +24,11 @@ namespace BankDirectConnection.Domain.Service
             this.Response = new List<IResponse>();
         }
 
+        public static IResResult Create(QueryTransactionResultsResponse rt)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IResResult Create(ResponseMsg msg)
         {
             IResResult result = new ResResult();

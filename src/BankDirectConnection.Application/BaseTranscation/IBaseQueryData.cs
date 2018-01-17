@@ -19,6 +19,6 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
     {
         string ClientId { get; set; }
 
-        string InsId { get; set; }
+        string EDIId { get; set; }
     }
 }

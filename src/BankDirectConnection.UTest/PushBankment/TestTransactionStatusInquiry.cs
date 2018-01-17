@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BankDirectConnection.PushBankment.BOCService;
 using BankDirectConnection.Domain.BOC;
+using BankDirectConnection.Domain.QueryBO;
+using BankDirectConnection.PushBankment.BankTransfer;
 
 namespace BankDirectConnection.UTest.PushBankment
 {
@@ -19,8 +21,8 @@ namespace BankDirectConnection.UTest.PushBankment
             tsim.HeaderMessage.Trncod = "asdf1234";
             tsim.HeaderMessage.Trnid = "qqq123456";
             tsim.HeaderMessage.TrnTyp = "状态查询";
-            tsim.Trans.Insid = "cust123";
-            tsim.Trans.Obssid = "wa1316";
+            tsim.Trans.Add(new TransactionStatusInquiry() { Insid = "cust123", Obssid = "wa1316" });
+
             return tsim;
         }
         //中行交易状态查询请求报文
@@ -30,6 +32,24 @@ namespace BankDirectConnection.UTest.PushBankment
             var transXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(StatusSetIn());
             Console.WriteLine(transXML);
 
+        }
+
+        [TestMethod]
+        public void TestSplitTransferQueryData()
+        {
+            var testBO = new TransferQueryDataList();
+            int i = 0;
+            do {
+                i++;
+                var data = new TransferQueryData();
+                data.ClientId = "i";
+                data.ObssId = i.ToString() + i;
+                testBO.TransferQueryDatas.Add(data);
+            }
+            while ( i < 400);
+            BOCService service = new BOCService();
+            var rt = service.SplitTransferData(testBO);
+            Assert.AreEqual(4, rt.Count);
         }
     }
 }
