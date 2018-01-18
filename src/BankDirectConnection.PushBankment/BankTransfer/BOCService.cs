@@ -109,6 +109,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 if (trans == null)
                 {
+
                     trans = new TransferQueryDataList();
                     trans.TransferQueryDatas.Add(item);
                 }
