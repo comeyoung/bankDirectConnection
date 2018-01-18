@@ -5,6 +5,8 @@ using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.PushBankment.SGBService.Service;
+using BankDirectConnection.Domain.SGB;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -61,7 +63,14 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
             IResResult result = new ResResult();
-            //
+            QueryTranactionStatusService service = new QueryTranactionStatusService();
+            TransactionResultsMsg msg;
+            foreach (var item in TransferQueryData.TransferQueryDatas)
+            {
+                msg = new TransactionResultsMsg(TransferQueryData);
+                var rt = service.PushQueryTranactionStatusService(msg);
+                result.MergeResResult(rt);
+            }
             return result;
         }
 
