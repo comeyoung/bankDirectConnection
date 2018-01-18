@@ -64,7 +64,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         /// <returns></returns>
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
-            
+            //签到 获取token
+            SignService signService = new SignService();
+            var response = signService.PushSignIn();
             IResResult result = new ResResult();
             //获取状态查询业务
             TransactionStatusInquiryService service = new TransactionStatusInquiryService();
@@ -73,6 +75,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             if (TransferQueryData.TransferQueryDatas.Count <= 100)
             {
                 msg = new TransactionStatusInquiryMsg(TransferQueryData);
+                msg.HeaderMessage.Token = response.Token;
                 result = service.PushTransactionStatusInquiry(msg);
             }
             else
@@ -81,6 +84,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 foreach (var item in queryDataList)
                 {
                     msg = new TransactionStatusInquiryMsg(item);
+                    msg.HeaderMessage.Token = response.Token;
                     var rt = service.PushTransactionStatusInquiry(msg);
                     result.MergeResResult(rt);
                 }
