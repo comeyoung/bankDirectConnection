@@ -22,7 +22,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         /// 调用法兴内部转账接口
         /// </summary>
         /// <returns></returns>
-        public IResResult PushInnerTranscationInfo(InnerTransferMsg Msg)
+        public static IResResult PushInnerTranscationInfo(InnerTransferMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("2022002", "Internal transaction information can not be empty ");
