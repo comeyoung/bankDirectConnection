@@ -18,7 +18,7 @@ namespace BankDirectConnection.PushBankment.SGBService
             CommonResponseMsg responseMsg = new CommonResponseMsg();
             XDocument xDoc = XDocument.Parse(ResponseMsg);
             var xElement = xDoc.Descendants("ap");
-            foreach(var item in xElement)
+            foreach (var item in xElement)
             {
                 responseMsg.CCTransCode = item.Element("CCTransCode").Value;
                 responseMsg.ReqSeqNo = item.Element("ReqSeqNo").Value;
@@ -33,9 +33,10 @@ namespace BankDirectConnection.PushBankment.SGBService
                 responseMsg.FileFlag = item.Element("FileFlag").Value;
             }
             var query = xElement.Descendants("Cme");
-            foreach(var item in query)
+            foreach (var item in query)
             {
-                responseMsg.CmeMsgs.Add(new CmeMsg() {
+                responseMsg.CmeMsgs.Add(new CmeMsg()
+                {
                     RecordNum = item.Element("RecordNum").Value,
                     FieldNum = item.Element("FieldNum").Value,
                     RespPrvData = item.Element("RespPrvData").Value,
@@ -88,7 +89,7 @@ namespace BankDirectConnection.PushBankment.SGBService
                 batchResponse.CmpMsg.RespSeqNo = item.Element("RespSeqNo").Value;
                 batchResponse.CmpMsg.HostSeqNo = item.Element("HostSeqNo").Value;
                 var cmpList = queryCmp.Descendants("List");
-                foreach(var listItem in cmpList)
+                foreach (var listItem in cmpList)
                 {
                     batchResponse.CmpMsg.ListMsg.Add(new ListMsg()
                     {
@@ -103,5 +104,34 @@ namespace BankDirectConnection.PushBankment.SGBService
             }
             return batchResponse;
         }
+
+
+
+        public static QueryTransactionResultsResponse TransactionResultsParseResonseMsg(string ResponseMsg)
+        {
+            QueryTransactionResultsResponse responseMsg = new QueryTransactionResultsResponse();
+            XDocument xDoc = XDocument.Parse(ResponseMsg);
+            var xElement = xDoc.Descendants("ap");
+            responseMsg.Head.AuthNo = GetElementValue(xElement.Elements("CCTransCode").FirstOrDefault());
+            var query = xElement.Descendants("Cmp");
+            responseMsg.Trans.CmeSeqNo = GetElementValue(query.FirstOrDefault().Element("CmeSeqNo"));
+            responseMsg.Trans.CertSeqNo = GetElementValue(query.FirstOrDefault().Element("CertSeqNo"));
+            responseMsg.Trans.HostSeqNo = GetElementValue(query.FirstOrDefault().Element("HostSeqNo"));
+            responseMsg.Trans.JnlState = GetElementValue(query.FirstOrDefault().Element("JnlState"));
+            responseMsg.Trans.Postscript = GetElementValue(query.FirstOrDefault().Element("Postscript"));
+            responseMsg.Trans.RespSeqNo = GetElementValue(query.FirstOrDefault().Element("RespSeqNo"));
+            return responseMsg;
+        }
+
+        public static string GetElementValue(XElement element)
+        {
+            if (null == element) return string.Empty;
+            return element.Value;
+        }
     }
+
 }
+
+
+
+

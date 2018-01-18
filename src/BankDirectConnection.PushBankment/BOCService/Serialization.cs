@@ -165,16 +165,19 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <returns></returns>
         public static string BuildXMLForTransactionStatusInquiryByLinq(TransactionStatusInquiryMsg TransactionStatusInquiryMsg)
         {
+            
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                new XAttribute("version", "100"),
                new XAttribute("security", "true"),
                new XAttribute("lang", "chs"),
                BuildHeadElement(TransactionStatusInquiryMsg.HeaderMessage),
+               from item in TransactionStatusInquiryMsg.Trans
+               select 
                new XElement("trans",
                    new XElement("trn-b2e0007-rq",
                        new XElement("b2e0007-rq",
-                           new XElement("insid", TransactionStatusInquiryMsg.Trans.Insid),
-                           new XElement("obssid", TransactionStatusInquiryMsg.Trans.Obssid))))));
+                           new XElement("insid", item.Insid),
+                           new XElement("obssid", item.Obssid))))));
             return xdocment.Declaration + xdocment.ToString();
         }
 

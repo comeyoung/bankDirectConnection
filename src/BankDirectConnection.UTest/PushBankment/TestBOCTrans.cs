@@ -106,8 +106,8 @@ namespace BankDirectConnection.UTest.PushBankment
             tsim.HeaderMessage.Trncod = "asdf1234";
             tsim.HeaderMessage.Trnid = "qqq123456";
             tsim.HeaderMessage.TrnTyp = "状态查询";
-            tsim.Trans.Insid = "cust123";
-            tsim.Trans.Obssid = "wa1316";
+            tsim.Trans.Add(new TransactionStatusInquiry() { Insid = "cust123", Obssid = "wa1316" });
+            tsim.Trans.Add(new TransactionStatusInquiry() { Insid = "cust124", Obssid = "wa131446" });
             return tsim;
         }
 

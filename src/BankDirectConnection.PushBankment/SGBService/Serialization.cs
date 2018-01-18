@@ -190,5 +190,26 @@ namespace BankDirectConnection.PushBankment.SGBService
             return xdocment.ToString();
 
         }
+
+        /// <summary>
+        /// 查询交易结果
+        /// </summary>
+        /// <returns></returns>
+        public static string BuildXMLForQueryTransactionResults(TransactionResultsMsg TransactionResultsMsg)
+        {
+            XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGQ010"),
+                new XElement(
+                    "Cmp", new XElement("CmeSeqNo", TransactionResultsMsg.Trans.CmeSeqNo),
+                          new XElement("StartDate", TransactionResultsMsg.Trans.StartDate)));
+            return xdocment.ToString();
+
+
+        }
+
+
     }
+
+
 }
+
+

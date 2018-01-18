@@ -49,7 +49,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();
                 foreach(var item in Transcation.TransferQueryDatas)
                 {
-                    string key = item.InsId.Substring(0, 2);
+                    string key = item.EDIId.Substring(0, 2);
                     if (dicTransList.Keys.Contains(key))
                     {
                         ITransferQueryDataList query = dicTransList[key];

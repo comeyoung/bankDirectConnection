@@ -17,7 +17,7 @@ namespace BankDirectConnection.UTest.PushBankment
             ITranscations trans = new Transcations();
             trans.TransWay = "01";
             trans.BusinessType = "02";
-            trans.Transcations.Add(new Transcation()
+            trans.Transcations.Add(new Transcation() 
             {
                 ClientId = Guid.NewGuid().ToString(),
                 FromAcct = new Account() { AcctId = "958245854235", AcctName = "EDF", BankId = "100052", BankName = "BOC" },

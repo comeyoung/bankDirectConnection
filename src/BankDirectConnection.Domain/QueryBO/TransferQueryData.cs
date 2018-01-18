@@ -31,7 +31,7 @@ namespace BankDirectConnection.Domain.QueryBO
             get;set;
         }
 
-        public string InsId
+        public string EDIId
         {
             get;set;
         }

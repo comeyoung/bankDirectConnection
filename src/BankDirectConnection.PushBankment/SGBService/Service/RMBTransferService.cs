@@ -25,7 +25,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         public static IResResult PushRMBTranscation(RMBPaymentMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("2022002", "人民币交易信息不能为空");
+                throw new InnerException("2022002", "RMB trading information can not be empty ");
 
 
             //构建xml

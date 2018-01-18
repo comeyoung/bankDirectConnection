@@ -25,7 +25,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         public IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("2022002", "外币交易信息不能为空");
+                throw new InnerException("2022002", "Foreign currency trading information can not be empty ");
            
             // TODO 调用法兴转账接口
             var transXML = Serialization.BuildXMLForFreignCurryPayment(Msg);

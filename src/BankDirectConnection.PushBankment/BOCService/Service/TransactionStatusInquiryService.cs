@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC;
+using BankDirectConnection.Domain.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +17,13 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class TransactionStatusInquiryService
     {
-        // public 
+        public IResResult PushTransactionStatusInquiry(TransactionStatusInquiryMsg Msg) {
+            if (null == Msg)
+                throw new InnerException("2022002", "Transaction status query information can not be empty ");
+            var tranxXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(Msg);
+            var res = BOCHttp.PostRequest(tranxXML);
+            var rt = Deserialization.ParseResponseMsg(res, "b2e0007");
+            return ResResult.Create(rt);
+        }
     }
 }
