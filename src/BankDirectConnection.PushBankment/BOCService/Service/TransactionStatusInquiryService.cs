@@ -17,11 +17,12 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class TransactionStatusInquiryService
     {
-        public IResResult PushTransactionStatusInquiry(TransactionStatusInquiryMsg Msg) {
+        public IResResult PushTransactionStatusInquiry(TransactionStatusInquiryMsg Msg)
+        {
             if (null == Msg)
-                throw new InnerException("2022002", "Transaction status query information can not be empty ");
-            var tranxXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(Msg);
-            var res = BOCHttp.PostRequest(tranxXML);
+                throw new InnerException("2022002", "the value of transfer inquiry is empty ");
+            var transXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(Msg);
+            var res = BOCHttp.PostRequest(transXML);
             var rt = Deserialization.ParseResponseMsg(res, "b2e0007");
             return ResResult.Create(rt);
         }
