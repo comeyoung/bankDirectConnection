@@ -149,9 +149,17 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
+      <Project>{1350D02A-99B2-44D5-AD91-73AB93362F41}</Project>
+      <Name>BankDirectConnection.BaseApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankDirectConnection.PushBankment\BankDirectConnection.PushBankment.csproj">
+      <Project>{99187084-1AB8-4253-A4BB-10D9FD2421EA}</Project>
+      <Name>BankDirectConnection.PushBankment</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

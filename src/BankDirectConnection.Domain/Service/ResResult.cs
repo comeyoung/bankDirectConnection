@@ -23,11 +23,21 @@ namespace BankDirectConnection.Domain.Service
             this.Status = new Status();
             this.Response = new List<IResponse>();
         }
+        public ResResult(string ErrorCode,string ErrorMsg)
+        {
+            this.Status = new Status();
+            this.Response = new List<IResponse>();
+            this.Status.RspCod = ErrorCode;
+            this.Status.RspMsg = ErrorMsg;
+        }
 
         public static IResResult Create(QueryTransactionResultsResponse rt)
         {
+            //TODO 合并SGB转账业务返回的信息
+
             throw new NotImplementedException();
         }
+        
 
         public static IResResult Create(ResponseMsg msg)
         {
