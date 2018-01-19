@@ -9,6 +9,8 @@ using BankDirectConnection.PushBankment.SGBService.Service;
 using BankDirectConnection.Domain.SGB;
 using BankDirectConnection.Domain.DataHandle;
 using System.Linq;
+using BankDirectConnection.IPushBankment.Service.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -18,15 +20,30 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// <summary>
     /// 法兴银行服务
     /// </summary>
-    public class SGBService : IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
+    public class SGBService: IBankService<ITranscations, ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
+        private readonly IForeignCurryPaymentService foreignCurryService;
+        private readonly IInnerPaymentService innerPaymentService;
+        private readonly IRMBPaymentService rmbPaymentServie;
+
+        public SGBService(IForeignCurryPaymentService ForeignCurryService,
+            IInnerPaymentService InnerPaymentService,
+            IRMBPaymentService RMBPaymentService)
+        {
+            this.foreignCurryService = ForeignCurryService;
+            this.innerPaymentService = InnerPaymentService;
+            this.rmbPaymentServie = RMBPaymentService;
+        }
+        public SGBService()
+        {
+
+        }
         public IResResult PaymentTransfer(ITranscations Transcation)
         {
             IResResult result = new ResResult();
             IResResult Sresult = new ResResult();
             IResponse rt;
-
-
+            
 
             foreach (var item in Transcation.Transcations)
             {
@@ -42,19 +59,19 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     if ((!string.IsNullOrEmpty(detail.ToAcct.BankId) && detail.ToAcct.BankId.Length == 12 && detail.ToAcct.BankId.Substring(0, 3) == emBankNo.SG.ToString())
                                   || (!string.IsNullOrEmpty(detail.ToAcct.BankName) && detail.ToAcct.BankName.Contains("兴业银行")))
                     {
-                        Sresult = InnerTransferService.PushInnerTranscationInfo(new InnerTransferMsg(item));
+                        Sresult = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));
                     }
                     else
                     {
                         // 如果收款人币种是人民币，走人民币付款
                         if (!string.IsNullOrEmpty(detail.TransCur) && (detail.TransCur.Equals("CNY") || detail.TransCur.Equals("RMB")))
                         {
-                            Sresult = RMBTransferService.PushRMBTranscation(new RMBPaymentMsg(item));
+                            Sresult = this.rmbPaymentServie.PushPaymentTranscationInfo(new RMBPaymentMsg(item));
                         }
                         // 如果收款人币种是外币，走外币付款
                         else
                         {
-                            Sresult = ForeignCurryTransferService.PushForeignCurryTranscationInfo(new ForeignCurryPaymentMsg(item));
+                            Sresult = this.foreignCurryService.PushPaymentTranscationInfo(new ForeignCurryPaymentMsg(item));
                         }
 
                     }

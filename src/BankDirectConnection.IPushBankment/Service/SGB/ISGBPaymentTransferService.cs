@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.IPushBankment.Service.SGB.Payment
+namespace BankDirectConnection.IPushBankment.Service.SGB
 {
-    public interface ISGBQueryTransferService<T> where T : IBaseSGBTranscation
+   public interface ISGBPaymentTransferService<T> where T : IBaseSGBTranscation
     {
-         IResResult PushQueryTranactionService(T Msg);
-      
+          IResResult PushPaymentTranscationInfo(T Msg);
+       
     }
 }

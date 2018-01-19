@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BankDirectConnection.IPushBankment</RootNamespace>
     <AssemblyName>BankDirectConnection.IPushBankment</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,15 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\SGB\Payment\ISGBPaymentTransferService.cs" />
-    <Compile Include="Service\SGB\Payment\ISGBQueryTransferService.cs" />
+    <Compile Include="Service\SGB\IForeignCurryPaymentService.cs" />
+    <Compile Include="Service\SGB\IInnerPaymentService.cs" />
+    <Compile Include="Service\SGB\IRMBPaymentService.cs" />
+    <Compile Include="Service\SGB\ISGBPaymentTransferService.cs" />
+    <Compile Include="Service\SGB\ISGBQueryTransferService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\BOC\Payment\" />
     <Folder Include="Service\BOC\Query\" />
-    <Folder Include="Service\SGB\Query\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
+      <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
+      <Name>BankDirectConnection.BaseApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>

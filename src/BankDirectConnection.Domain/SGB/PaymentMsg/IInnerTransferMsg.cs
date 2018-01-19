@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.SGB.PaymentMsg
 {
-    interface IInnerTransferMsg : IBaseSGBTranscation
+    public interface IInnerTransferMsg : IBaseSGBTranscation
     {
-    
-        
-
         #region property
         
         /// <summary>
@@ -22,8 +19,5 @@ namespace BankDirectConnection.Domain.SGB.PaymentMsg
 
 
         #endregion
-
-
-
     }
 }

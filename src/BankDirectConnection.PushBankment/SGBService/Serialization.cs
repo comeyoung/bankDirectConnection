@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// 行内转账
         /// </summary>
         /// <returns></returns>
-        public static string BuildXMLForInnerTransfer(List<InnerTransferMsg> InnerTransferMsgs)
+        public static string BuildXMLForInnerTransfer(List<IInnerTransferMsg> InnerTransferMsgs)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT001"),
                 from item in InnerTransferMsgs
@@ -111,7 +112,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// </summary>
         /// <param name="RMBPaymentMsgs"></param>
         /// <returns></returns>
-        public static string BuildXMLForRMBPayment(RMBPaymentMsg RMBPaymentMsg)
+        public static string BuildXMLForRMBPayment(IRMBPaymentMsg RMBPaymentMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT002"),
                 BuildXMLForCommonHeader(RMBPaymentMsg.Head),
@@ -140,7 +141,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// </summary>
         /// <param name="ForeignCurryPaymentMsgs"></param>
         /// <returns></returns>
-        public static string BuildXMLForFreignCurryPayment(ForeignCurryPaymentMsg ForeignCurryPaymentMsg)
+        public static string BuildXMLForFreignCurryPayment(IForeignCurryPaymentMsg ForeignCurryPaymentMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT003"),
                 BuildXMLForCommonHeader(ForeignCurryPaymentMsg.Head),
@@ -168,7 +169,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// 行内转账
         /// </summary>
         /// <returns></returns>
-        public static string BuildXMLForInnerTransfer(InnerTransferMsg InnerTransferMsg)
+        public static string BuildXMLForInnerTransfer(IInnerTransferMsg InnerTransferMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGT001"),
                 BuildXMLForCommonHeader(InnerTransferMsg.Head),
