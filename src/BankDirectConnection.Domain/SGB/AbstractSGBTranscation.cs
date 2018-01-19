@@ -13,13 +13,45 @@ namespace BankDirectConnection.Domain.SGB
 	===============================================================================================================================*/
     public abstract class AbstractSGBTranscation : IBaseSGBTranscation,ICheckAble
     {
+        public string CrAccName
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 收款账号
         /// </summary>
         public string CrAccNo
         {
-            get;set;
+            get;
+            set;
         }
+
+        public string CrBankName
+        {
+            get;
+            set;
+        }
+
+        public string CrCifType
+        {
+            get;
+            set;
+        }
+
+        public string CrCur
+        {
+            get;
+            set;
+        }
+
+        public string DbAccName
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 付款账号
         /// </summary>
@@ -28,7 +60,67 @@ namespace BankDirectConnection.Domain.SGB
             get;set;
         }
 
+        public string DbCur
+        {
+            get;
+            set;
+        }
+
+        public string Docket
+        {
+            get;
+            set;
+        }
+
+        public string Fees
+        {
+            get;
+            set;
+        }
+
+        public string ForeignPayee
+        {
+            get;
+            set;
+        }
+
         public CommonHeader Head
+        {
+            get;
+            set;
+        }
+
+        public string StartDate
+        {
+            get;
+            set;
+        }
+
+        public string StartTime
+        {
+            get;
+            set;
+        }
+
+        public decimal TransAmt
+        {
+            get;
+            set;
+        }
+
+        public string TranType
+        {
+            get;
+            set;
+        }
+
+        public string UnionDeptId
+        {
+            get;
+            set;
+        }
+
+        public string WhyUse
         {
             get;
             set;

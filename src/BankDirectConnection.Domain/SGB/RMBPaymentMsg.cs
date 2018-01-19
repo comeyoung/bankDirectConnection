@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace BankDirectConnection.Domain.SGB
     /// <summary>
     /// 人名币付款账单
     /// </summary>
-    public class RMBPaymentMsg: AbstractSGBTranscation
+    public class RMBPaymentMsg: AbstractSGBTranscation ,IRMBPaymentMsg
     {
         public RMBPaymentMsg()
         {
@@ -42,7 +43,7 @@ namespace BankDirectConnection.Domain.SGB
         /// </summary>
         public string DbCur { get; set; }
 
-       
+
         /// <summary>
         /// 收款人账户名
         /// </summary>
@@ -117,8 +118,9 @@ namespace BankDirectConnection.Domain.SGB
             return true;
         }
 
-        private RMBPaymentMsg Create(ITranscation Transcation)
+        public  RMBPaymentMsg Create(ITranscation Transcation)
         {
+
             if (Transcation.TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
             this.Head.CCTransCode = "SGT002";

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
-    public class QueryTranactionResultsService
+    public class QueryTranactionStatusService
     {
-        public IResResult PushQueryTranactionResultsService(TransactionResultsMsg Msg) {
+        public static IResResult PushQueryTranactionStatusService(TransactionResultsMsg Msg) {
             if (null == Msg)
                 throw new InnerException("2022002", "Transaction result information can not be empty ");
             var transXml = Serialization.BuildXMLForQueryTransactionResults(Msg);

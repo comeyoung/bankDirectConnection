@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace BankDirectConnection.Domain.SGB
     /// <summary>
     /// 行内转账
     /// </summary>
-    public class InnerTransferMsg: AbstractSGBTranscation
+    public class InnerTransferMsg: AbstractSGBTranscation,IInnerTransferMsg
     {
         public InnerTransferMsg()
         {

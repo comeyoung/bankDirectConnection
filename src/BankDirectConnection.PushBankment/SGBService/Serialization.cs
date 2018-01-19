@@ -198,6 +198,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string BuildXMLForQueryTransactionResults(TransactionResultsMsg TransactionResultsMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGQ010"),
+                BuildXMLForCommonHeader(TransactionResultsMsg.Head),
                 new XElement(
                     "Cmp", new XElement("CmeSeqNo", TransactionResultsMsg.Trans.CmeSeqNo),
                           new XElement("StartDate", TransactionResultsMsg.Trans.StartDate)));

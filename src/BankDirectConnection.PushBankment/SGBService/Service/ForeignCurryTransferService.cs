@@ -22,7 +22,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         /// 调用法兴外币转账接口
         /// </summary>
         /// <returns></returns>
-        public IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
+        public static IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("2022002", "Foreign currency trading information can not be empty ");

@@ -114,17 +114,18 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 if (trans == null)
                 {
+
                     trans = new TransferQueryDataList();
                     trans.TransferQueryDatas.Add(item);
                 }
                 else
-                {
-                    trans.TransferQueryDatas.Add(item);
+                {       
                     if (trans.TransferQueryDatas.Count == 100)
                     {
                         transQueryList.Add(trans);
                         trans = new TransferQueryDataList();
                     }
+                    trans.TransferQueryDatas.Add(item);
                 }
             }
             transQueryList.Add(trans); 

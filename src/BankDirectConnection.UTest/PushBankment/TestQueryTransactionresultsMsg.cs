@@ -15,6 +15,7 @@ namespace BankDirectConnection.UTest.PushBankment
 
         public TransactionResultsMsg transactionResultsMsg() {
             TransactionResultsMsg trm = new TransactionResultsMsg();
+            
             trm.Trans.CmeSeqNo = "20134569";
             trm.Trans.StartDate = "20170809";
             return trm;

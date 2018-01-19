@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
     /*===============================================================================================================================
@@ -16,7 +17,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// <summary>
     /// 人民币付款  收款账户是人民币且不是法兴银行
     /// </summary>
-    public class RMBTransferService
+    public class RMBTransferService 
     {
         /// <summary>
         /// 调用法兴人民币付款接口
