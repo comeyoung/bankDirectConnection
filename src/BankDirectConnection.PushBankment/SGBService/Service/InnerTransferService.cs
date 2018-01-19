@@ -16,7 +16,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// <summary>
     /// 内部转账
     /// </summary>
-    public class InnerTransferService
+    public class InnerTransferService 
     {
         /// <summary>
         /// 调用法兴内部转账接口
