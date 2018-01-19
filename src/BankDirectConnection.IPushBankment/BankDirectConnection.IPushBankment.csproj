@@ -49,8 +49,7 @@
     <Compile Include="Service\SGB\ISGBQueryTransferService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\BOC\Payment\" />
-    <Folder Include="Service\BOC\Query\" />
+    <Folder Include="Service\BOC\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
