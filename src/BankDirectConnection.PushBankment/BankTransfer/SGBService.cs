@@ -104,7 +104,8 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             foreach (var item in TransferQueryData.TransferQueryDatas)
             {
                 msg = new TransactionResultsMsg(TransferQueryData);
-                var rt = QueryTranactionStatusService.PushQueryTranactionStatusService(msg);
+                QueryTranactionStatusService service = new QueryTranactionStatusService();
+                var rt = service.PushQueryTranactionService(msg);
                 result.MergeResResult(rt);
             }
             return result;

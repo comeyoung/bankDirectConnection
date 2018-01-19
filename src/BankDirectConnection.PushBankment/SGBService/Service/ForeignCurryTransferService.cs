@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BankDirectConnection.Domain.SGB.PaymentMsg;
+
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
@@ -19,7 +19,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// <summary>
     /// 外币转账 收款账户不是人民币且不是法兴银行
     /// </summary>
-    public class ForeignCurryTransferService: ISGBPaymentTransferService<IForeignCurryPaymentMsg>
+    public class ForeignCurryTransferService: IForeignCurryPaymentService
     {
        
         /// <summary>

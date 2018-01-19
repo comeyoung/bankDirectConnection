@@ -10,7 +10,7 @@ namespace BankDirectConnection.IPushBankment.Service.SGB
     /// <summary>
     /// 查询交易状态接口
     /// </summary>
-    public interface IQueryTranactionStatusService : ISGBQueryTransferService<TransactionResultsMsg>
+    public interface IQueryTranactionStatusService : ISGBQueryTransferService
     {
     }
 }
