@@ -44,13 +44,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\SGB\IForeignCurryPaymentService.cs" />
     <Compile Include="Service\SGB\IInnerPaymentService.cs" />
+    <Compile Include="Service\SGB\IQueryTranactionStatusService.cs" />
     <Compile Include="Service\SGB\IRMBPaymentService.cs" />
     <Compile Include="Service\SGB\ISGBPaymentTransferService.cs" />
     <Compile Include="Service\SGB\ISGBQueryTransferService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\BOC\Payment\" />
-    <Folder Include="Service\BOC\Query\" />
+    <Folder Include="Service\BOC\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">

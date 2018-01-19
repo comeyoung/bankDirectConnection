@@ -25,7 +25,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         private readonly IForeignCurryPaymentService foreignCurryService;
         private readonly IInnerPaymentService innerPaymentService;
         private readonly IRMBPaymentService rmbPaymentServie;
-
+       // private readonly IQueryTranactionStatusService queryTranactionStatusService;
         public SGBService(IForeignCurryPaymentService ForeignCurryService,
             IInnerPaymentService InnerPaymentService,
             IRMBPaymentService RMBPaymentService)

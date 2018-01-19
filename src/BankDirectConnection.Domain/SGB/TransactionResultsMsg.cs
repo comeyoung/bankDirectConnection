@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.Domain.QueryBO;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BankDirectConnection.Domain.SGB
     /// <summary>
     /// 交易结果查询
     /// </summary>
-    public class TransactionResultsMsg : ISGBHeader
+    public class TransactionResultsMsg : ITransactionResultsMsg
     {
         public TransactionResultsMsg()
         {
@@ -32,6 +33,12 @@ namespace BankDirectConnection.Domain.SGB
         }
        
         public TransactionResults Trans { get; set; }
+
+        public bool Check()
+        {
+            throw new NotImplementedException();
+        }
+
         private TransactionResultsMsg Create(ITransferQueryDataList TransferQueryData)
         {
             foreach (var item in TransferQueryData.TransferQueryDatas) {

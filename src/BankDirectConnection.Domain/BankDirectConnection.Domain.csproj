@@ -75,6 +75,7 @@
     <Compile Include="SGB\PaymentMsg\IForeignCurryPaymentMsg.cs" />
     <Compile Include="SGB\PaymentMsg\IInnerTransferMsg.cs" />
     <Compile Include="SGB\PaymentMsg\IRMBPaymentMsg.cs" />
+    <Compile Include="SGB\PaymentMsg\ITransactionResultsMsg.cs" />
     <Compile Include="SGB\QueryTransactionResultsResponse.cs" />
     <Compile Include="SGB\RMBPaymentMsg.cs" />
     <Compile Include="SGB\TransactionResultsMsg.cs" />

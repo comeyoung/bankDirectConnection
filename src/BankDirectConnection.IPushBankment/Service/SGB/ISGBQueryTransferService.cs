@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.IPushBankment.Service.SGB
 {
-    public interface ISGBQueryTransferService<T> where T : IBaseSGBTranscation
+    public interface ISGBQueryTransferService<T> where T : TransactionResultsMsg
     {
          IResResult PushQueryTranactionService(T Msg);
       

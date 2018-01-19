@@ -2,11 +2,13 @@
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.SGB;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.IPushBankment.Service.SGB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
@@ -22,7 +24,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         /// 调用法兴外币转账接口
         /// </summary>
         /// <returns></returns>
-        public static IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
+        public static IResResult PushPaymentTranscationInfo(ForeignCurryPaymentMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("2022002", "Foreign currency trading information can not be empty ");
@@ -35,5 +37,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             // 处理返回结果
             return ResResult.Create(rt);
         }
+
+      
     }
 }
