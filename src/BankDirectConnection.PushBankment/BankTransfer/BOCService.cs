@@ -64,24 +64,29 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         /// <returns></returns>
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
-            
+            //签到 获取token
+            SignService signService = new SignService();
+            var response = signService.PushSignIn();
             IResResult result = new ResResult();
             //获取状态查询业务
             TransactionStatusInquiryService service = new TransactionStatusInquiryService();
             //交易状态查询信息
-            TransactionStatusInquiryMsg tsim = null;
+            TransactionStatusInquiryMsg msg = null;
             if (TransferQueryData.TransferQueryDatas.Count <= 100)
             {
-                tsim = new TransactionStatusInquiryMsg(TransferQueryData);
-                result = service.PushTransactionStatusInquiry(tsim);
+                msg = new TransactionStatusInquiryMsg(TransferQueryData);
+                msg.HeaderMessage.Token = response.Token;
+                result = service.PushTransactionStatusInquiry(msg);
             }
             else
             {
                 var queryDataList = this.SplitTransferData(TransferQueryData);
-                foreach (var item in queryDataList) {
-                 tsim = new TransactionStatusInquiryMsg(item);
-                 var rt = service.PushTransactionStatusInquiry(tsim);
-                 result.MergeResResult(rt);
+                foreach (var item in queryDataList)
+                {
+                    msg = new TransactionStatusInquiryMsg(item);
+                    msg.HeaderMessage.Token = response.Token;
+                    var rt = service.PushTransactionStatusInquiry(msg);
+                    result.MergeResResult(rt);
                 }
             }
             return result;
