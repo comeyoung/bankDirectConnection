@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{99187084-1AB8-4253-A4BB-10D9FD2421EA}</ProjectGuid>
+    <ProjectGuid>{E3BD3626-0F61-459A-BA0C-BED1FF9C78D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankDirectConnection.PushBankment</RootNamespace>
-    <AssemblyName>BankDirectConnection.PushBankment</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>BankDirectConnection.IPushBankment</RootNamespace>
+    <AssemblyName>BankDirectConnection.IPushBankment</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,41 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankTransfer\BankFactory.cs" />
-    <Compile Include="BankTransfer\BankService.cs" />
-    <Compile Include="BankTransfer\BOCService.cs" />
-    <Compile Include="BankTransfer\ServiceFactory.cs" />
-    <Compile Include="BankTransfer\SGBService.cs" />
-    <Compile Include="BOCService\Service\BalanceInquiryService.cs" />
-    <Compile Include="BOCService\BOCHttp.cs" />
-    <Compile Include="BOCService\Deserialization.cs" />
-    <Compile Include="BOCService\Service\PaymentsToPublicService.cs" />
-    <Compile Include="BOCService\Serialization.cs" />
-    <Compile Include="BOCService\Service\SignService.cs" />
-    <Compile Include="BOCService\Service\TransactionInquiryService.cs" />
-    <Compile Include="BOCService\Service\TransactionStatusInquiryService.cs" />
-    <Compile Include="BOCService\Service\WageAndReimbursementService.cs" />
-    <Compile Include="Http\BaseHttpClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SGBService\Deserialization.cs" />
-    <Compile Include="SGBService\Serialization.cs" />
-    <Compile Include="SGBService\Service\ForeignCurryTransferService.cs" />
-    <Compile Include="SGBService\Service\InnerTransferService.cs" />
-    <Compile Include="SGBService\Service\QueryTranactionStatusService.cs" />
-    <Compile Include="SGBService\Service\RMBTransferService.cs" />
-    <Compile Include="SGBService\SGBHttp.cs" />
+    <Compile Include="Service\SGB\Payment\ISGBPaymentTransferService.cs" />
+    <Compile Include="Service\SGB\Payment\ISGBQueryTransferService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
-      <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
-      <Name>BankDirectConnection.BaseApplication</Name>
-    </ProjectReference>
+    <Folder Include="Service\BOC\Payment\" />
+    <Folder Include="Service\BOC\Query\" />
+    <Folder Include="Service\SGB\Query\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
