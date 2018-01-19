@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="BOC\AbastractBOCTranscation.cs" />
     <Compile Include="BOC\BalanceInquiryMsg.cs" />
+    <Compile Include="BOC\IBaseBOCTranscation.cs" />
+    <Compile Include="BOC\IPaymentsToPublicMsg.cs" />
+    <Compile Include="BOC\IWageAndReimbursementMsg.cs" />
     <Compile Include="BOC\ResponseMsg.cs" />
     <Compile Include="Common\BankServiceConfig.cs" />
     <Compile Include="DataHandle\DataConvert.cs" />

@@ -11,7 +11,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 对公转账
     /// </summary>
-    public class PaymentsToPublicMsg: AbastractBOCTranscation
+    public class PaymentsToPublicMsg: AbastractBOCTranscation, IPaymentsToPublicMsg
     {
         public PaymentsToPublicMsg()
         {
@@ -26,8 +26,6 @@ namespace BankDirectConnection.Domain.BOC
             Create(Transcations);
             this.Check();
         }
-
-        public Header HeaderMessage { get; set; }
 
         public List<PaymentsToPublicTrans> Trans { get; set; }
 
