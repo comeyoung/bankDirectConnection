@@ -11,7 +11,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 代发工资、报销
     /// </summary>
-    public class WageAndReimbursementMsg : AbastractBOCTranscation
+    public class WageAndReimbursementMsg : AbastractBOCTranscation, IWageAndReimbursementMsg
     {
         
         public WageAndReimbursementMsg()
@@ -28,7 +28,6 @@ namespace BankDirectConnection.Domain.BOC
             this.Create(Transcation);
             this.Check();
         }
-        public Header HeaderMessage { get; set; }
 
         public WageAndReimbursementTrans Trans { get; set; }
 

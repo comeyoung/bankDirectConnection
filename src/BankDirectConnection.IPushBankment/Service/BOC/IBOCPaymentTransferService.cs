@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.IPushBankment.Service.BOC
 {
-    public interface IBOCPaymentTransferService {
-         IResResult PushPaymentTransferInfo(WageAndReimbursementMsg Msg);
- }       
-  
+    public interface IBOCPaymentTransferService<T> where T: IBaseBOCTranscation
+    {
+        IResResult PushPaymentTransferInfo(T Msg);
+    }
+
 }
