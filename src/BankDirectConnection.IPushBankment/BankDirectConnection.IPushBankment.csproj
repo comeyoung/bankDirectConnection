@@ -42,16 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BOC\IBalanceInquiryService.cs" />
+    <Compile Include="Service\BOC\IBOCPaymentTransferService.cs" />
+    <Compile Include="Service\BOC\IBOCQueryTransferService.cs" />
+    <Compile Include="Service\BOC\IPaymentsToPublicService.cs" />
+    <Compile Include="Service\BOC\ITransactionInquiryService.cs" />
+    <Compile Include="Service\BOC\ITransactionStatusInquiryService.cs" />
+    <Compile Include="Service\BOC\IWageAndReimbursementService.cs" />
     <Compile Include="Service\SGB\IForeignCurryPaymentService.cs" />
     <Compile Include="Service\SGB\IInnerPaymentService.cs" />
+    <Compile Include="Service\SGB\IQueryTranactionStatusService.cs" />
     <Compile Include="Service\SGB\IRMBPaymentService.cs" />
     <Compile Include="Service\SGB\ISGBPaymentTransferService.cs" />
     <Compile Include="Service\SGB\ISGBQueryTransferService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\BOC\Payment\" />
-    <Folder Include="Service\BOC\Query\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
       <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>

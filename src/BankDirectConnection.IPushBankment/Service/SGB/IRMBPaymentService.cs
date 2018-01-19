@@ -11,6 +11,9 @@ namespace BankDirectConnection.IPushBankment.Service.SGB
 		Create by Fancy in 2018/1/19 14:06:50
 	===============================================================================================================================*/
 
+    /// <summary>
+    /// 人民币付款接口
+    /// </summary>
     public interface IRMBPaymentService:ISGBPaymentTransferService<IRMBPaymentMsg>
     {
     }

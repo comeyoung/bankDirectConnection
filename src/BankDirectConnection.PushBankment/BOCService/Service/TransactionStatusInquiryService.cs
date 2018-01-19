@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
+using BankDirectConnection.IPushBankment.Service.BOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// <summary>
     /// 交易状态查询业务
     /// </summary>
-    public class TransactionStatusInquiryService
+    public class TransactionStatusInquiryService : ITransactionStatusInquiryService
     {
         public IResResult PushTransactionStatusInquiry(TransactionStatusInquiryMsg Msg)
         {
