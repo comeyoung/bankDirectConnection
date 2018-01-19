@@ -60,16 +60,16 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         ClientId = "2018012000112321",
                         TransDetail = new List<ITransDetail>()
                         {
-                            //行内转账
-                            new TransDetail()
-                            {
+                            ////行内转账
+                            //new TransDetail()
+                            //{
 
-                            },
-                            //人名币付款
-                            new TransDetail()
-                            {
+                            //},
+                            ////人名币付款
+                            //new TransDetail()
+                            //{
 
-                            },
+                            //},
                             //外币付款
                             new TransDetail()
                             {
@@ -109,7 +109,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
 
             var rt = SGBService.PaymentTransfer(GetSGBTrans());
             Assert.IsNotNull(rt);
-            Assert.AreEqual(0, rt.Status.RspCod);
+            Assert.AreEqual(100, rt.Status.RspCod);
             
         }
     }
