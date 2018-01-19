@@ -11,13 +11,25 @@ namespace BankDirectConnection.Service.Controllers
 {
     public class TransController : ApiController
     {
+        public TransController()
+        {
+
+        }
         /// <summary>
         /// 转账付款
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult PaymentTransfer([FromBody]Transcations Transcations)
+        public IHttpActionResult PaymentTransfer([FromBody]ITranscations Transcations)
         {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Json(new { code = 0 });
         }
 
@@ -26,8 +38,16 @@ namespace BankDirectConnection.Service.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult QueryTransStatus([FromBody]TransferQueryDataList TransferQueryData)
+        public IHttpActionResult QueryTransStatus([FromBody]ITransferQueryDataList TransferQueryData)
         {
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+
+            }
             return Json(new { code = 0 });
         }
     }
