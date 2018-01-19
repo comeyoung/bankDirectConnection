@@ -65,6 +65,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="API\TestAPIService.cs" />
     <Compile Include="PaseResponse\TestParseCommonResponseMsg.cs" />
     <Compile Include="PaseResponse\TestParseResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

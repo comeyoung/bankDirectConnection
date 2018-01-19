@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\AbastractTrans.cs" />
+    <Compile Include="BOC\AbastractBOCTranscation.cs" />
     <Compile Include="BOC\BalanceInquiryMsg.cs" />
     <Compile Include="BOC\ResponseMsg.cs" />
+    <Compile Include="Common\BankServiceConfig.cs" />
     <Compile Include="DataHandle\DataConvert.cs" />
     <Compile Include="DataHandle\Enum.cs" />
     <Compile Include="BOC\Fractn.cs" />
@@ -70,7 +71,10 @@
     <Compile Include="SGB\ForeignCurryPaymentMsg.cs" />
     <Compile Include="SGB\IBaseSGBTranscation.cs" />
     <Compile Include="SGB\InnerTransferMsg.cs" />
+    <Compile Include="SGB\ISGBHeader.cs" />
+    <Compile Include="SGB\QueryTransactionResultsResponse.cs" />
     <Compile Include="SGB\RMBPaymentMsg.cs" />
+    <Compile Include="SGB\TransactionResultsMsg.cs" />
     <Compile Include="TransferBO\ITranscation.cs" />
     <Compile Include="TransferBO\ITranscations.cs" />
     <Compile Include="TransferBO\ITransDetail.cs" />
@@ -83,6 +87,9 @@
       <Project>{1350D02A-99B2-44D5-AD91-73AB93362F41}</Project>
       <Name>BankDirectConnection.BaseApplication</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
