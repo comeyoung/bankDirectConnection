@@ -1,12 +1,8 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.SGB;
-using BankDirectConnection.Domain.TransferBO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
+using BankDirectConnection.IPushBankment.Service.SGB;
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
@@ -16,7 +12,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// <summary>
     /// 内部转账
     /// </summary>
-    public class InnerTransferService 
+    public class InnerTransferService: ISGBPaymentTransferService<IInnerTransferMsg>
     {
         /// <summary>
         /// 调用法兴内部转账接口
@@ -32,11 +28,19 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var transXML = Serialization.BuildXMLForInnerTransfer(Msg);
             var res = SGBHttp.PostRequest(transXML);
             var rt = Deserialization.ParseResonseMsg(res);
-
-
-
             // 处理返回结果
+            return ResResult.Create(rt);
+        }
 
+        public IResResult PushPaymentTranscationInfo(IInnerTransferMsg Msg)
+        {
+            if (null == Msg)
+                throw new InnerException("2022002", "Internal transaction information can not be empty ");
+            // TODO 调用法兴转账接口
+            var transXML = Serialization.BuildXMLForInnerTransfer(Msg);
+            var res = SGBHttp.PostRequest(transXML);
+            var rt = Deserialization.ParseResonseMsg(res);
+            // 处理返回结果
             return ResResult.Create(rt);
         }
     }

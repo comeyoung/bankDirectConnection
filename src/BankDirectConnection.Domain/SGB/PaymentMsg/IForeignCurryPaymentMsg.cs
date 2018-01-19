@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.SGB.PaymentMsg
 {
-    interface IForeignCurryPaymentMsg: IBaseSGBTranscation
+    public interface IForeignCurryPaymentMsg: IBaseSGBTranscation
     {
-       
-        
-
         #region property
         /// <summary>
         /// 国际银行编码
@@ -25,7 +22,5 @@ namespace BankDirectConnection.Domain.SGB.PaymentMsg
          string Rate { get; set; }
         
         #endregion
-
-      
     }
 }

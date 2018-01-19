@@ -70,8 +70,12 @@
       <Name>BankDirectConnection.BaseApplication</Name>
     </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
-      <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
+      <Project>{7e32d0da-c741-49c5-9d47-8a8915e8e6cd}</Project>
       <Name>BankDirectConnection.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankDirectConnection.IPushBankment\BankDirectConnection.IPushBankment.csproj">
+      <Project>{e3bd3626-0f61-459a-ba0c-bed1ff9c78d7}</Project>
+      <Name>BankDirectConnection.IPushBankment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
