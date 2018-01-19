@@ -17,21 +17,8 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         /// <summary>
         /// 调用法兴内部转账接口
         /// </summary>
+        /// <param name="Msg"></param>
         /// <returns></returns>
-        public static IResResult PushInnerTranscationInfo(InnerTransferMsg Msg)
-        {
-            if (null == Msg)
-                throw new InnerException("2022002", "Internal transaction information can not be empty ");
-            
-
-            // TODO 调用法兴转账接口
-            var transXML = Serialization.BuildXMLForInnerTransfer(Msg);
-            var res = SGBHttp.PostRequest(transXML);
-            var rt = Deserialization.ParseResonseMsg(res);
-            // 处理返回结果
-            return ResResult.Create(rt);
-        }
-
         public IResResult PushPaymentTranscationInfo(IInnerTransferMsg Msg)
         {
             if (null == Msg)

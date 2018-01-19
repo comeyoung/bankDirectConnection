@@ -69,6 +69,7 @@
     <Compile Include="PaseResponse\TestParseCommonResponseMsg.cs" />
     <Compile Include="PaseResponse\TestParseResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushBankment\SGB\TestPaymentService.cs" />
     <Compile Include="PushBankment\TestSignIn.cs" />
     <Compile Include="PushBankment\TestSignOut.cs" />
     <Compile Include="PushBankment\TestBalanceInquiry.cs" />
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7E32D0DA-C741-49C5-9D47-8A8915E8E6CD}</Project>
       <Name>BankDirectConnection.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankDirectConnection.IPushBankment\BankDirectConnection.IPushBankment.csproj">
+      <Project>{e3bd3626-0f61-459a-ba0c-bed1ff9c78d7}</Project>
+      <Name>BankDirectConnection.IPushBankment</Name>
     </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.PushBankment\BankDirectConnection.PushBankment.csproj">
       <Project>{99187084-1AB8-4253-A4BB-10D9FD2421EA}</Project>
