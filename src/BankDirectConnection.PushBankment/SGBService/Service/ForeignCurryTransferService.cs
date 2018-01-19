@@ -1,7 +1,9 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.IPushBankment.Service.SGB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +18,19 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// <summary>
     /// 外币转账 收款账户不是人民币且不是法兴银行
     /// </summary>
-    public class ForeignCurryTransferService
+    public class ForeignCurryTransferService: ISGBPaymentTransferService<IForeignCurryPaymentMsg>
     {
+       
         /// <summary>
         /// 调用法兴外币转账接口
         /// </summary>
+        /// <param name="Msg"></param>
         /// <returns></returns>
-        public static IResResult PushForeignCurryTranscationInfo(ForeignCurryPaymentMsg Msg)
+        public IResResult PushPaymentTranscationInfo(IForeignCurryPaymentMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("2022002", "Foreign currency trading information can not be empty ");
-           
+
             // TODO 调用法兴转账接口
             var transXML = Serialization.BuildXMLForFreignCurryPayment(Msg);
             var res = SGBHttp.PostRequest(transXML);
