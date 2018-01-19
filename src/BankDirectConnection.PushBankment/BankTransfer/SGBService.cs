@@ -25,7 +25,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         private readonly IForeignCurryPaymentService foreignCurryService;
         private readonly IInnerPaymentService innerPaymentService;
         private readonly IRMBPaymentService rmbPaymentServie;
-
+       // private readonly IQueryTranactionStatusService queryTranactionStatusService;
         public SGBService(IForeignCurryPaymentService ForeignCurryService,
             IInnerPaymentService InnerPaymentService,
             IRMBPaymentService RMBPaymentService)
@@ -104,7 +104,8 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             foreach (var item in TransferQueryData.TransferQueryDatas)
             {
                 msg = new TransactionResultsMsg(TransferQueryData);
-                var rt = QueryTranactionStatusService.PushQueryTranactionStatusService(msg);
+                QueryTranactionStatusService service = new QueryTranactionStatusService();
+                var rt = service.PushQueryTranactionService(msg);
                 result.MergeResResult(rt);
             }
             return result;
