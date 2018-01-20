@@ -38,7 +38,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="WageAndReimbursementMsg"></param>
         /// <returns></returns>
-        public static string BuildXMLForWageAndReimbursementByLinq(WageAndReimbursementMsg WageAndReimbursementMsg)
+        public static string BuildXMLForWageAndReimbursementByLinq(IWageAndReimbursementMsg WageAndReimbursementMsg)
         {
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                new XAttribute("version", "100"),
@@ -84,7 +84,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="PaymentsToPublicMsg"></param>
         /// <returns></returns>
-        public static string BuildXMLForPaymentsToPublicByLinq(PaymentsToPublicMsg PaymentsToPublicMsg)
+        public static string BuildXMLForPaymentsToPublicByLinq(IPaymentsToPublicMsg PaymentsToPublicMsg)
         {
             if (null == PaymentsToPublicMsg)
                 throw new InnerException("", "");

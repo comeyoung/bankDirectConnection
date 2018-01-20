@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.IPushBankment.Service.BOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// <summary>
     /// 对公转账业务
     /// </summary>
-    public class PaymentsToPublicService
+    public class PaymentsToPublicService : IPaymentsToPublicService
     {
        
         /// <summary>
@@ -23,7 +24,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
         /// </summary>
         /// <param name="Msg"></param>
         /// <returns></returns>
-        public IResResult PushPaymentsToPublicInfo(PaymentsToPublicMsg Msg)
+        public IResResult PushPaymentTransferInfo(IPaymentsToPublicMsg Msg)
         {
             //序列化
             var transXML = Serialization.BuildXMLForPaymentsToPublicByLinq(Msg);

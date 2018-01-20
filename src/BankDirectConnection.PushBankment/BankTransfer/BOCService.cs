@@ -35,7 +35,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     transBO.HeaderMessage.Token = response.Token;
                     //获取代发业务
                     WageAndReimbursementService service = new WageAndReimbursementService();
-                    var rt = service.PushWageOrReimbursementInfo(transBO);
+                    var rt = service.PushPaymentTransferInfo(transBO);
                     if(null == result)
                     {
                         result = rt;
@@ -54,7 +54,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 transBO.HeaderMessage.Token = response.Token;
                 //获取转账业务
                 PaymentsToPublicService service = new PaymentsToPublicService();
-                return service.PushPaymentsToPublicInfo(transBO);
+                return service.PushPaymentTransferInfo(transBO);
             }
         }
         /// <summary>

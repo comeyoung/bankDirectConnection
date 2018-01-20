@@ -66,7 +66,7 @@ namespace BankDirectConnection.Domain.BOC
             return this;
         }
     }
-    public class PaymentsToPublicTrans
+    public class PaymentsToPublicTrans : IPaymentsToPublicTrans
     {
         public PaymentsToPublicTrans()
         {
@@ -127,7 +127,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 收款人账户信息
     /// </summary>
-    public class Toactn
+    public class Toactn : IToactn
     {
         /// <summary>
         /// 收款行联行号

@@ -9,5 +9,6 @@ namespace BankDirectConnection.IPushBankment.Service.BOC
 {
     public interface IWageAndReimbursementService : IBOCPaymentTransferService<IWageAndReimbursementMsg>
     {
+        
     }
 }
