@@ -18,7 +18,23 @@ namespace BankDirectConnection.PushBankment.BankTransfer
     /// </summary>
     public class BOCService : IBankService<ITranscations,ITranscation, ITransferQueryData, ITransferQueryDataList, IResResult>
     {
-    
+
+        private readonly WageAndReimbursementService wageAndReimbursementService;
+        private readonly PaymentsToPublicService paymentsToPublicService;
+        private readonly TransactionStatusInquiryService transactionStatusInquiryService;
+
+
+        public BOCService()
+        {
+
+        }
+        public BOCService(WageAndReimbursementService WageAndReimbursementService, 
+                          PaymentsToPublicService PaymentsToPublicService, 
+                          TransactionStatusInquiryService TransactionStatusInquiryService){
+            this.wageAndReimbursementService = WageAndReimbursementService;
+            this.paymentsToPublicService = PaymentsToPublicService;
+            this.transactionStatusInquiryService = TransactionStatusInquiryService;
+        }
         public IResResult PaymentTransfer(ITranscations Transcations)
         {
             //签到 获取token
@@ -33,9 +49,8 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     // 快捷支付业务一次只能走一笔
                     var transBO = new WageAndReimbursementMsg(item);
                     transBO.HeaderMessage.Token = response.Token;
-                    //获取代发业务
-                    WageAndReimbursementService service = new WageAndReimbursementService();
-                    var rt = service.PushWageOrReimbursementInfo(transBO);
+                    //获取代发业务                  
+                    var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
                     if(null == result)
                     {
                         result = rt;
@@ -53,12 +68,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 var transBO = new PaymentsToPublicMsg(Transcations);
                 transBO.HeaderMessage.Token = response.Token;
                 //获取转账业务
-                PaymentsToPublicService service = new PaymentsToPublicService();
-                return service.PushPaymentsToPublicInfo(transBO);
+                return this.paymentsToPublicService.PushPaymentTransferInfo(transBO);
             }
         }
         /// <summary>
-        /// 
+        /// 查询交易状态
         /// </summary>
         /// <param name="TransferQueryData"></param>
         /// <returns></returns>
@@ -68,15 +82,13 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             SignService signService = new SignService();
             var response = signService.PushSignIn();
             IResResult result = new ResResult();
-            //获取状态查询业务
-            TransactionStatusInquiryService service = new TransactionStatusInquiryService();
             //交易状态查询信息
             TransactionStatusInquiryMsg msg = null;
             if (TransferQueryData.TransferQueryDatas.Count <= 100)
             {
                 msg = new TransactionStatusInquiryMsg(TransferQueryData);
                 msg.HeaderMessage.Token = response.Token;
-                result = service.PushTransactionStatusInquiry(msg);
+                result = this.transactionStatusInquiryService.PushTransactionStatusInquiry(msg);
             }
             else
             {
@@ -85,7 +97,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 {
                     msg = new TransactionStatusInquiryMsg(item);
                     msg.HeaderMessage.Token = response.Token;
-                    var rt = service.PushTransactionStatusInquiry(msg);
+                    var rt = this.transactionStatusInquiryService.PushTransactionStatusInquiry(msg);
                     result.MergeResResult(rt);
                 }
             }

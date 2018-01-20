@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.IPushBankment.Service.BOC
 {
-    public interface IBalanceInquiryService: IBOCQueryTransferService
-    {
+    public interface IBalanceInquiryService { 
     }
 }

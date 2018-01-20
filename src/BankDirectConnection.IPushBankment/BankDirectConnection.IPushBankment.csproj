@@ -44,7 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BOC\IBalanceInquiryService.cs" />
     <Compile Include="Service\BOC\IBOCPaymentTransferService.cs" />
-    <Compile Include="Service\BOC\IBOCQueryTransferService.cs" />
     <Compile Include="Service\BOC\IPaymentsToPublicService.cs" />
     <Compile Include="Service\BOC\ITransactionInquiryService.cs" />
     <Compile Include="Service\BOC\ITransactionStatusInquiryService.cs" />
