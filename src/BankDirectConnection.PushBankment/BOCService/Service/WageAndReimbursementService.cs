@@ -2,7 +2,6 @@
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
-using BankDirectConnection.IPushBankment.Service.BOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +16,14 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// <summary>
     /// 工资、报销代发快捷支付业务
     /// </summary>
-    public class WageAndReimbursementService : IWageAndReimbursementService
+    public class WageAndReimbursementService
     {
         /// <summary>
         /// 推送工资、报销代发
         /// </summary>
         /// <param name="Msg"></param>
         /// <returns></returns>
-        public IResResult PushPaymentTransferInfo(IWageAndReimbursementMsg Msg)
+        public IResResult PushWageOrReimbursementInfo(WageAndReimbursementMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("", "");

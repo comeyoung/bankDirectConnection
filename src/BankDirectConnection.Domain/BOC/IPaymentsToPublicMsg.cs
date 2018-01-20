@@ -12,15 +12,5 @@ namespace BankDirectConnection.Domain.BOC
 
     public interface IPaymentsToPublicMsg: IBaseBOCTranscation
     {
-
-        
-
-       
-
-        List<PaymentsToPublicTrans> Trans { get; set; }
-
-        
-
-  
     }
 }
