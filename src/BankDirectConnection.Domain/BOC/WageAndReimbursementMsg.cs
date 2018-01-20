@@ -92,11 +92,11 @@ namespace BankDirectConnection.Domain.BOC
         }
 
     }
-    public class WageAndReimbursementTrans
+    public class WageAndReimbursementTrans : IWageAndReimbursementTrans
     {
         public WageAndReimbursementTrans()
         {
-            this.DetailMessage = new List<Detail>();
+            this.DetailMessage = new List<IDetail>();
             this.FractnMessage = new Fractn();
         }
         public string Ceitinfo { get; set; }
@@ -140,11 +140,11 @@ namespace BankDirectConnection.Domain.BOC
 
         public Fractn FractnMessage { get; set; }
 
-        public List<Detail> DetailMessage { get; set; }
+        public List<IDetail> DetailMessage { get; set; }
     }
 
 
-    public class Detail
+    public class Detail:IDetail
     {
         /// <summary>
         /// 收款行人行行号/收款省行标识

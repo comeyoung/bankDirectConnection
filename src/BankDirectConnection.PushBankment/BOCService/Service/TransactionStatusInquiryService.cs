@@ -18,7 +18,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// </summary>
     public class TransactionStatusInquiryService : ITransactionStatusInquiryService
     {
-        public IResResult PushTransactionStatusInquiry(TransactionStatusInquiryMsg Msg)
+        public IResResult PushTransactionStatusInquiry(ITransactionStatusInquiryMsg Msg)
         {
             if (null == Msg)
                 throw new InnerException("2022002", "the value of transfer inquiry is empty ");
