@@ -60,15 +60,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans.Trfdate = Transcation.TransDate;
             foreach (var item in Transcation.TransDetail)
             {
-                var line = new BOC.Detail
-                {
-                    Toibkn = item.ToAcct.BankId,
-                    Tobank = item.ToAcct.BankName,
-                    Toactn = item.ToAcct.AcctId,
-                    Pydcur = item.TransCur,
-                    Pydamt = item.TransAmount,
-                    Toname = item.ToAcct.AcctName,
-                };
+                var line = new Detail(item.ToAcct.BankId, item.ToAcct.BankName, item.ToAcct.AcctId, item.TransCur, item.TransAmount, item.ToAcct.AcctName);                               
                 this.Trans.DetailMessage.Add(line);
                 this.Trans.Pybamt += item.TransAmount;
             }
@@ -148,6 +140,21 @@ namespace BankDirectConnection.Domain.BOC
 
     public class Detail:AbastractBOCTranscation,IDetail
     {
+
+        public Detail()
+        {
+        }
+        public Detail(string Toibkn, string Tobank, string Toactn, string Pydcur, decimal Pydamt, string Toname)
+        {
+            this.Toibkn = Toibkn;
+            this.Tobank = Tobank;
+            this.Toactn = Toactn;
+            this.Pydcur = Pydcur;
+            this.Pydamt = Pydamt;
+            this.Toname = Toname;
+            this.Check();
+
+        }
         /// <summary>
         /// 收款行人行行号/收款省行标识
         /// </summary>
