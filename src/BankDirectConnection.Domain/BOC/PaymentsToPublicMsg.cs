@@ -31,6 +31,7 @@ namespace BankDirectConnection.Domain.BOC
 
         public override bool Check()
         {
+            this.Trans.ForEach(c => c.Check());
             return base.Check();
         }
 
@@ -73,6 +74,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Fractn = new Fractn();
             this.Toactn = new Toactn();
         }
+       
         /// <summary>
         /// 指令ID，一 条转账指令  ,在客户端的唯一标识，建议企业按时间顺序生成且不超过12位
         /// </summary>
@@ -121,6 +123,16 @@ namespace BankDirectConnection.Domain.BOC
         /// 收款人信息
         /// </summary>
         public Toactn Toactn { get; set; }
+
+        /// <summary>
+        /// 检查对象
+        /// </summary>
+        /// <returns></returns>
+        public bool Check()
+        {
+            this.Toactn.Check();
+            return true;
+        }
     }
 
    
@@ -152,5 +164,12 @@ namespace BankDirectConnection.Domain.BOC
         /// 收款人开户行名称
         /// </summary>
         public string Tobknm { get; set; }
+
+        public bool Check()
+        {
+            if (string.IsNullOrEmpty(this.Tobknm))
+                throw new BusinessException("1011016", "the name of receipter's bank is empty.");
+            return true;
+        }
     }
 }
