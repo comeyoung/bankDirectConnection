@@ -27,6 +27,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans = new WageAndReimbursementTrans();
             this.Create(Transcation);
             this.Check();
+            Transcation.Check();
         }
 
         public WageAndReimbursementTrans Trans { get; set; }
@@ -98,6 +99,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             this.DetailMessage = new List<IDetail>();
             this.FractnMessage = new Fractn();
+            
         }
         public string Ceitinfo { get; set; }
         public string Transtype { get; set; }
@@ -144,7 +146,7 @@ namespace BankDirectConnection.Domain.BOC
     }
 
 
-    public class Detail:IDetail
+    public class Detail:AbastractBOCTranscation,IDetail
     {
         /// <summary>
         /// 收款行人行行号/收款省行标识
@@ -152,7 +154,13 @@ namespace BankDirectConnection.Domain.BOC
         public string Toibkn { get; set; }
 
         public string Tobank { get; set; }
-
+        public override bool Check()
+        {
+            base.Check();
+            if (string.IsNullOrEmpty(this.Tobank))
+                throw new BusinessException("the Tobank can not be null") { Code = "2012005" };
+            return true;
+        }
         /// <summary>
         /// 收款账号
         /// </summary>
