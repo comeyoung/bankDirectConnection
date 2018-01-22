@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.BOC;
+﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.IPushBankment.Service.BOC;
@@ -26,6 +27,8 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
         /// <returns></returns>
         public IResResult PushPaymentTransferInfo(IPaymentsToPublicMsg Msg)
         {
+            if (null == Msg)
+                throw new InnerException("2022002", "the value of transfer inquiry is empty");
             //序列化
             var transXML = Serialization.BuildXMLForPaymentsToPublicByLinq(Msg);
             //调用对公转账接口

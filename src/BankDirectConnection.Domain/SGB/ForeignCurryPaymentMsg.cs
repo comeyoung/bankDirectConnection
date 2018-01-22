@@ -71,7 +71,13 @@ namespace BankDirectConnection.Domain.SGB
             //msg.Head.CorpNo = "";
             //msg.Head.OpNo = "";
             //msg.Head.PassWord = "";
-            this.DbAccNo = Transcation.FromAcct.AcctId;
+            if (Transcation.FromAcct.AcctId != null)
+            {
+                this.DbAccNo = Transcation.FromAcct.AcctId;
+            }
+            else {
+                throw new InnerException("2022002", "Foreign currency trading information can not be empty ");
+            }
             this.DbCur = Transcation.PaymentCur;
             foreach (var item in Transcation.TransDetail)
             {

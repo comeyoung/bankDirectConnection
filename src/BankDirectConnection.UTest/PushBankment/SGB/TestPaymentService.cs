@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using BankDirectConnection.PushBankment.BankTransfer;
 using BankDirectConnection.IPushBankment.Service.SGB;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.Domain.SGB;
 
 namespace BankDirectConnection.UTest.PushBankment.SGB
 {
@@ -48,7 +50,32 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             };
         }
 
-        private ITranscations GetSGBTrans()
+       private IAccount GetToAccout()
+        {
+            return  new Account()
+            {
+                BankId = "qwe123456",
+                BankName = "某某某某支行",
+                AcctId = "309123123123",
+                AcctName = "小黑",
+                AcctType = "1"
+            };
+        }
+
+        private IAccount GetForeignAccount()
+        {
+            return new Account()
+            {
+                BankId = "qwe123456",
+                BankName = "某某某某支行",
+                AcctId = "12345678987654321",
+                AcctName = "小黑",
+                AcctType = "1"
+            };
+        }
+
+
+        private ITranscations GetForeignSGBTrans()
         {
             return new Transcations()
             {
@@ -58,25 +85,55 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "USD",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetForeignAccount(),
                         TransDetail = new List<ITransDetail>()
                         {
-                            ////行内转账
-                            //new TransDetail()
-                            //{
-
-                            //},
-                            ////人名币付款
-                            //new TransDetail()
-                            //{
-
-                            //},
                             //外币付款
+                            //new TransDetail()
+                            //{
+                            //    ToAcct= GetToAccout(),
+                            //    ReciepterIdType = "0",
+                            //    ReciepterIdCode = "111222333666555",
+                            //    ReceipterType = "1",
+                            //    TransAmount = 10000,
+                            //    TransCur = "USD",
+                            //    SWIFTCode = "qwe123456",
+                            //    Rate = "1"
+                            //}
+
+                            //行内转账
+                            //new TransDetail()
+                            //{
+
+                            //}
+                            ////人名币付款
                             new TransDetail()
                             {
-
+                                ToAcct= GetToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 10000,
+                                TransCur = "RMB",
+                                SWIFTCode = "qwe123456",
+                                Rate = "1"
                             }
+
                         }
-                    }
+
+                     }
 
                 }
             };
@@ -85,7 +142,10 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         [TestMethod]
         public void TestMethod1()
         {
+
         }
+
+       
 
         [TestMethod]
         public void TestForeignCurryPayment()
@@ -93,7 +153,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             //mock外币转账服务
             var mockForeignService = new Mock<IForeignCurryPaymentService>();
             // mock外币转账服务的结果
-            mockForeignService.Setup(x => x.PushPaymentTranscationInfo(null)).Returns(GetFailedResResult());
+            mockForeignService.Setup(x => x.PushPaymentTranscationInfo(null)).Returns(GetSuccessfulResResult());
 
             //mock人民币转账服务
             var mockRMBService = new Mock<IRMBPaymentService>();
@@ -106,10 +166,13 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             mockInnerService.Setup(x => x.PushPaymentTranscationInfo(null)).Returns(GetSuccessfulResResult());
 
             var SGBService = new SGBService(mockForeignService.Object, mockInnerService.Object, mockRMBService.Object);
+        
 
-            var rt = SGBService.PaymentTransfer(GetSGBTrans());
+            var rt = SGBService.PaymentTransfer(GetForeignSGBTrans());
             Assert.IsNotNull(rt);
+           
             Assert.AreEqual(100, rt.Status.RspCod);
+           
             
         }
     }

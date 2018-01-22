@@ -85,9 +85,10 @@ namespace BankDirectConnection.Domain.Service
             {
                 this.Status.RspCod = "0";
             }
-            else
+            else if(ResResult.Status.RspCod !="0")
             {
-                this.Status.RspCod = "2";
+                this.Status.RspCod = ResResult.Status.RspCod;
+                this.Status.RspMsg = ResResult.Status.RspMsg;
             }
             foreach (var item in ResResult.Response)
             {
