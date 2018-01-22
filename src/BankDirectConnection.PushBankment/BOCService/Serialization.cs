@@ -38,7 +38,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="WageAndReimbursementMsg"></param>
         /// <returns></returns>
-        public static string BuildXMLForWageAndReimbursementByLinq(WageAndReimbursementMsg WageAndReimbursementMsg)
+        public static string BuildXMLForWageAndReimbursementByLinq(IWageAndReimbursementMsg WageAndReimbursementMsg)
         {
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                new XAttribute("version", "100"),
@@ -48,8 +48,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                new XElement("trans",
                    new XElement("trn-b2e0078-rq",
                        new XElement("b2e0078-rq",
-                           new XElement("insid", WageAndReimbursementMsg.Trans.Insid),
-                           new XElement("telephone", WageAndReimbursementMsg.Trans.Telephone),
+                           new XElement("insid", WageAndReimbursementMsg.Trans.Insid),                
                            new XElement("pybcur", WageAndReimbursementMsg.Trans.Pybcur),
                            new XElement("pybamt", WageAndReimbursementMsg.Trans.Pybamt),
                            new XElement("pybnum", WageAndReimbursementMsg.Trans.Pybnum),
@@ -84,7 +83,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="PaymentsToPublicMsg"></param>
         /// <returns></returns>
-        public static string BuildXMLForPaymentsToPublicByLinq(PaymentsToPublicMsg PaymentsToPublicMsg)
+        public static string BuildXMLForPaymentsToPublicByLinq(IPaymentsToPublicMsg PaymentsToPublicMsg)
         {
             if (null == PaymentsToPublicMsg)
                 throw new InnerException("", "");
@@ -163,7 +162,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="TransactionStatusInquiryMsg"></param>
         /// <returns></returns>
-        public static string BuildXMLForTransactionStatusInquiryByLinq(TransactionStatusInquiryMsg TransactionStatusInquiryMsg)
+        public static string BuildXMLForTransactionStatusInquiryByLinq(ITransactionStatusInquiryMsg TransactionStatusInquiryMsg)
         {
             
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",

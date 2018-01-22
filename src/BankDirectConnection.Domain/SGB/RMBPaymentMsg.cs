@@ -53,8 +53,8 @@ namespace BankDirectConnection.Domain.SGB
             if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
                 || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
-            if (this.CrCur != "RMB")
-                throw new InnerException("2021008", "the value of transcur can'not be RMB");
+            if ( this.CrCur != "RMB")
+                throw new InnerException("2021008", "the value of transcur can not be right");
             return true;
         }
 

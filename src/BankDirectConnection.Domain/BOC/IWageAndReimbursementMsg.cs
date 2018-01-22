@@ -12,5 +12,6 @@ namespace BankDirectConnection.Domain.BOC
 
     public interface IWageAndReimbursementMsg: IBaseBOCTranscation
     {
+         WageAndReimbursementTrans Trans { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace BankDirectConnection.Domain.BOC
         /// <summary>
         /// 付款人账户
         /// </summary>
-        public class Fractn
-        {
+        public class Fractn: IFractn
+    {
             /// <summary>
             /// 联行号
             /// </summary>

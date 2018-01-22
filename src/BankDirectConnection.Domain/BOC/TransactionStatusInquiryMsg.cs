@@ -13,25 +13,25 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 交易状态查询
     /// </summary>
-    public class TransactionStatusInquiryMsg: ICheckAble
+    public class TransactionStatusInquiryMsg: ITransactionStatusInquiryMsg,ICheckAble
     {
         public TransactionStatusInquiryMsg()
         {
             this.HeaderMessage = new Header();
-            this.Trans = new List<TransactionStatusInquiry>();
+            this.Trans = new List<ITransactionStatusInquiry>();
             
         }
 
         public TransactionStatusInquiryMsg(ITransferQueryDataList TransferQueryDataList)
         {
             this.HeaderMessage = new Header();
-            this.Trans = new List<TransactionStatusInquiry>();
+            this.Trans = new List<ITransactionStatusInquiry>();
             this.Create(TransferQueryDataList);
             this.Check();
         }
         public Header HeaderMessage { get; set; }
 
-        public List<TransactionStatusInquiry> Trans { get; set; }
+        public List<ITransactionStatusInquiry> Trans { get; set; }
 
         public bool Check()
         {
@@ -54,7 +54,7 @@ namespace BankDirectConnection.Domain.BOC
 
 
 
-    public class TransactionStatusInquiry
+    public class TransactionStatusInquiry: ITransactionStatusInquiry
     {
         /// <summary>
         ///  转账指令

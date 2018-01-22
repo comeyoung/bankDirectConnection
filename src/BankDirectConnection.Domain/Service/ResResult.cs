@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.SGB;
@@ -55,6 +56,8 @@ namespace BankDirectConnection.Domain.Service
                 {
                     //错误处理
                     // TODO
+                    result.Status.RspCod = "100";
+                    result.Status.RspMsg = item.Status.RspMsg;
                 }
                 result.Response.Add(new Response() { Status = item.Status, ClientId = item.Insid, ObssId = item.Obssid, InsId = Instruction.NewInsSid("01") });
             }
@@ -67,14 +70,16 @@ namespace BankDirectConnection.Domain.Service
         {
             IResResult result = new ResResult();
 
-            if(null != msg.CmeMsgs && msg.CmeMsgs.Count > 0)
+            if(null == msg.RespCode)
+                throw new InnerException("2022002", "Transaction information can not be empty ");
+            if (msg.RespCode == "0000" || msg.RespCode == "0005" || msg.RespCode == "0006")
             {
-                // 批量结果返回
+                result.Status.RspCod = "0";
+                result.Status.RspMsg = msg.RespInfo;
             }
-            else
-            {
-                //单笔结果返回
-                //if(msg.RespCode)
+            else {
+                result.Status.RspCod = "100";
+                result.Status.RspMsg = "error";
             }
             return result;
         }
@@ -85,9 +90,10 @@ namespace BankDirectConnection.Domain.Service
             {
                 this.Status.RspCod = "0";
             }
-            else
+            else if(ResResult.Status.RspCod !="0")
             {
-                this.Status.RspCod = "2";
+                this.Status.RspCod = ResResult.Status.RspCod;
+                this.Status.RspMsg = ResResult.Status.RspMsg;
             }
             foreach (var item in ResResult.Response)
             {

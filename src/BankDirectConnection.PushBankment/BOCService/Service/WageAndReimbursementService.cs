@@ -2,6 +2,7 @@
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
+using BankDirectConnection.IPushBankment.Service.BOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,17 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
     /// <summary>
     /// 工资、报销代发快捷支付业务
     /// </summary>
-    public class WageAndReimbursementService
+    public class WageAndReimbursementService: IWageAndReimbursementService
     {
         /// <summary>
         /// 推送工资、报销代发
         /// </summary>
         /// <param name="Msg"></param>
         /// <returns></returns>
-        public IResResult PushWageOrReimbursementInfo(WageAndReimbursementMsg Msg)
+        public IResResult PushPaymentTransferInfo(IWageAndReimbursementMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
+                throw new InnerException("2022002", "the value of transfer inquiry is empty");
             var transXML = Serialization.BuildXMLForWageAndReimbursementByLinq(Msg);
             // 调用对公转账接口
             var res = BOCHttp.PostRequest(transXML);

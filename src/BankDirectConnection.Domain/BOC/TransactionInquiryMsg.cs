@@ -13,7 +13,7 @@ namespace BankDirectConnection.Domain.BOC
     /// <summary>
     /// 交易查询
     /// </summary>
-    public class TransactionInquiryMsg
+    public class TransactionInquiryMsg : ITransactionInquiryMsg
     {
         public TransactionInquiryMsg()
         {
@@ -24,7 +24,7 @@ namespace BankDirectConnection.Domain.BOC
         public TransactionInquiryTrans Trans { get; set; }
     }
 
-    public  class TransactionInquiryTrans
+    public  class TransactionInquiryTrans: ITransactionInquiryTrans
     {
         public string Ibknum { get; set; }
 
@@ -49,17 +49,19 @@ namespace BankDirectConnection.Domain.BOC
         }
     }
 
-    public class DateScope
+    public class DateScope: IDateScope
     {
         public string From { get; set; }
 
         public string To { get; set; }
     }
 
-    public class AmountScope
+    public class AmountScope : IAmountScope
     {
         public string From { get; set; }
 
         public string To { get; set; }
     }
+
+    
 }

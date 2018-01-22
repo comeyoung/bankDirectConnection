@@ -40,14 +40,15 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         }
         public IResResult PaymentTransfer(ITranscations Transcation)
         {
-            IResResult result = new ResResult();
-            IResResult Sresult = new ResResult();
+            IResResult result = null;
+            IResResult Sresult = null;
             IResponse rt;
             
 
             foreach (var item in Transcation.Transcations)
             {
                 rt = new Response();
+                Sresult = new ResResult();
                 try
                 {
                     // 明细只能一行
@@ -77,14 +78,15 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     }
 
                     // 处理结果
-                    if (null == result)
+                    if (result == null)
                     {
                         result = Sresult;
                     }
                     else
                     {
-                        result.MergeResResult(result);
+                        result.MergeResResult(Sresult);
                     }
+
                 }
                 catch (BusinessException ex)
                 {

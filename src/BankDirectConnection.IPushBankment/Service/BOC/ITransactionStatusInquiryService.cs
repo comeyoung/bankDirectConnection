@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.BOC;
+using BankDirectConnection.Domain.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.IPushBankment.Service.BOC
 {
-    public interface ITransactionStatusInquiryService : IBOCQueryTransferService
+    public interface ITransactionStatusInquiryService
     {
+        IResResult PushTransactionStatusInquiry(ITransactionStatusInquiryMsg Msg);
     }
 }
