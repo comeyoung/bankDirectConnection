@@ -27,7 +27,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
         public IResResult PushPaymentTransferInfo(IWageAndReimbursementMsg Msg)
         {
             if (null == Msg)
-                throw new InnerException("", "");
+                throw new InnerException("2022002", "the value of transfer inquiry is empty");
             var transXML = Serialization.BuildXMLForWageAndReimbursementByLinq(Msg);
             // 调用对公转账接口
             var res = BOCHttp.PostRequest(transXML);

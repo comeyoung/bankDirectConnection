@@ -25,7 +25,8 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
                 throw new InnerException("2022002", "Internal transaction information can not be empty ");
             // TODO 调用法兴转账接口
             var transXML = Serialization.BuildXMLForInnerTransfer(Msg);
-            var res = SGBHttp.PostRequest(transXML);
+            //var res = SGBHttp.PostRequest(transXML);
+            var res = SGBHttp.PostRequest(null);
             var rt = Deserialization.ParseResonseMsg(res);
             // 处理返回结果
             return ResResult.Create(rt);

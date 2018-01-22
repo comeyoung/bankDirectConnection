@@ -32,9 +32,24 @@ namespace BankDirectConnection.PushBankment.SGBService
         //    return result;
         //}
 
+        private static string GetTestForeignResult()
+        {
+            return "<ap><CCTransCode>SGT001</CCTransCode><ReqSeqNo>2b35cb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075325</RespSeqNo><HostSeqNo>364232</HostSeqNo><RespDate>20180118</RespDate><RespTime>142825876</RespTime><RespCode>0005</RespCode><RespInfo>交易待审核</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag></FileFlag><Cme><RecordNum></RecordNum><FieldNum></FieldNum><RespPrvData></RespPrvData><BatchFileName></BatchFileName></Cme></ap>";
+        }
+
+        private static string GetTestInnerResult()
+        {
+            return "<ap><CCTransCode>SGT001</CCTransCode><ReqSeqNo>2b35cb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075325</RespSeqNo><HostSeqNo>364232</HostSeqNo><RespDate>20180118</RespDate><RespTime>142825876</RespTime><RespCode>0005</RespCode><RespInfo>交易待审核</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag></FileFlag><Cme><RecordNum></RecordNum><FieldNum></FieldNum><RespPrvData></RespPrvData><BatchFileName></BatchFileName></Cme></ap>";
+        }
+        private static string GetTestRMBResult()
+        {
+            return "<ap><CCTransCode>SGT002</CCTransCode><ReqSeqNo>2b54fcb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075328</RespSeqNo><HostSeqNo>364233</HostSeqNo><RespDate>20180118</RespDate><RespTime>144015134</RespTime><RespCode>0005</RespCode><RespInfo>交易成功</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag/><Cme><RecordNum/><FieldNum/><RespPrvData/><BatchFileName/></Cme></ap>";
+        }
+
         public static string PostRequest(string RequestXML)
         {
-            return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            return GetTestForeignResult();
+           // return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
         }
     }
 }
