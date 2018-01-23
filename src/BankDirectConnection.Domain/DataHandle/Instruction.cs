@@ -12,6 +12,12 @@ namespace BankDirectConnection.Domain.DataHandle
     public class Instruction
     {
         /// <summary>
+        /// 截取时间戳位数
+        /// </summary>
+       private const int  TIMESTAMP = 8;
+
+
+        /// <summary>
         /// 生成EDI指令单
         /// </summary>
         /// <returns></returns>
@@ -19,12 +25,22 @@ namespace BankDirectConnection.Domain.DataHandle
         {
             if (string.IsNullOrEmpty(TransWay))
                 throw new BusinessException("the value of transway is null") { Code= "1001006" };
+            Random rd = new Random();
             switch (TransWay)
             {
-                case "01": return "01" + Guid.NewGuid().ToString().Trim('-');
-                case "02": return "02"+ Guid.NewGuid().ToString().Trim('-');
+                // 日期 银行接口 接口类型 时间戳  随机数
+                //180123    01     1     15166819  254
+                case "01": return DateTime.Now.ToString("yyMMdd") + "01" + GetTimestamp() + DateTime.Now.Millisecond.ToString();
+                case "02": return DateTime.Now.ToString("yyMMdd") + "02" + GetTimestamp() + DateTime.Now.Millisecond.ToString();
                 default:throw new BusinessException("the value of transway is bad") { Code= "1001006" };
             }
+        }
+
+        public static string GetTimestamp()
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); 
+            long timeStamp = (long)(DateTime.Now - startTime).TotalSeconds; 
+            return timeStamp.ToString().Substring(timeStamp.ToString().Length - TIMESTAMP);
         }
 
         /// <summary>
@@ -36,7 +52,7 @@ namespace BankDirectConnection.Domain.DataHandle
         {
             if (string.IsNullOrEmpty(InsId))
                 throw new BusinessException("the value of insid is null") { Code= "1001009" };
-            string bankCode = InsId.Substring(0, 2);
+            string bankCode = InsId.Substring(5, 2);
             switch (bankCode)
             {
                 case "01":return emBankService.emBOCService;

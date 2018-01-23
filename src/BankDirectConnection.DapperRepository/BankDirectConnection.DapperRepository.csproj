@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DapperConnExten.cs" />
+    <Compile Include="SeqNumber.cs" />
     <Compile Include="SerialNumberDapperRepository.cs" />
     <Compile Include="SqlConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

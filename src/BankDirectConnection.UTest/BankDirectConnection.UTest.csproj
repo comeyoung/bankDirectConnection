@@ -66,6 +66,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="API\TestAPIService.cs" />
+    <Compile Include="Domain\UnitTest1.cs" />
     <Compile Include="PaseResponse\TestParseCommonResponseMsg.cs" />
     <Compile Include="PaseResponse\TestParseResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +125,9 @@
     <Content Include="..\BankDirectConnection.PushBankment\BOCService\BuildXML\XMLTemplate\WageAndReimbursement.xml">
       <Link>XMLTemplate\WageAndReimbursement.xml</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PushBankment\NewFolder1\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
