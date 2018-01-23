@@ -30,7 +30,7 @@ namespace BankDirectConnection.Application.BaseTranscation
         /// </summary>
         public string AcctName { get; set; }
         /// <summary>
-        /// 账户类型
+        /// 账户类型 0公司；1个人
         /// </summary>
         public string AcctType { get; set; }
         public bool Check()

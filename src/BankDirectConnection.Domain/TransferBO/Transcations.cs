@@ -13,9 +13,7 @@ namespace BankDirectConnection.Domain.TransferBO
     public class Transcations : BaseTranscations<ITranscation>, ITranscations
     {
 
-        public Transcations()
-        {
-            this.Transcations = new List<ITranscation>();
-        }
     }
+
+   
 }

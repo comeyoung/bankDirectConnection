@@ -1,14 +1,9 @@
 ﻿using BankDirectConnection.Application.Transfer;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
-using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
