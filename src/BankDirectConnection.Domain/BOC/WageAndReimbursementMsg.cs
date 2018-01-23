@@ -2,6 +2,8 @@
 using BankDirectConnection.Domain.BOC.Message;
 using BankDirectConnection.Domain.TransferBO;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace BankDirectConnection.Domain.BOC
 {
@@ -60,17 +62,17 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans.Trfdate = Transcation.TransDate;
             foreach (var item in Transcation.TransDetail)
             {
-                var line = new BOC.Detail
-                {
+                var line = new Detail() {
                     Toibkn = item.ToAcct.BankId,
                     Tobank = item.ToAcct.BankName,
                     Toactn = item.ToAcct.AcctId,
                     Pydcur = item.TransCur,
                     Pydamt = item.TransAmount,
-                    Toname = item.ToAcct.AcctName,
+                    Toname = item.ToAcct.AcctName
                 };
                 this.Trans.DetailMessage.Add(line);
                 this.Trans.Pybamt += item.TransAmount;
+
             }
             return this;
         }
@@ -83,7 +85,7 @@ namespace BankDirectConnection.Domain.BOC
         private string GetCrdtyp(string PaymentType)
         {
             if (string.IsNullOrEmpty(PaymentType))
-                throw new BusinessException("") { Code = "" };
+                throw new BusinessException("Transaction information can not be empty") { Code = "2012002" };
             switch (PaymentType)
             {
                 case "01": return "5";
@@ -143,20 +145,30 @@ namespace BankDirectConnection.Domain.BOC
         public Fractn FractnMessage { get; set; }
 
         public List<IDetail> DetailMessage { get; set; }
+
+        public bool Check()
+        {
+           this.DetailMessage.ToList().ForEach(c => c.Check());
+            return true;
+        }
     }
 
 
-    public class Detail:AbastractBOCTranscation,IDetail
+    public class Detail:IDetail
     {
+
+        public Detail()
+        {
+        }
+       
         /// <summary>
         /// 收款行人行行号/收款省行标识
         /// </summary>
         public string Toibkn { get; set; }
 
         public string Tobank { get; set; }
-        public override bool Check()
+        public bool Check()
         {
-            base.Check();
             if (string.IsNullOrEmpty(this.Tobank))
                 throw new BusinessException("the Tobank can not be null") { Code = "2012005" };
             return true;

@@ -45,6 +45,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             IResResult result = null;
             IResResult Sresult = null;
             IResponse rt;
+            Transcation.Check();
             foreach (var item in Transcation.Transcations)
             {
                 rt = new Response();
@@ -92,7 +93,18 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 {
                     rt.Status.RspCod = ex.Code;
                     rt.Status.RspMsg = ex.Message;
-                    result.Response.Add(rt);
+                    result.MergeResResult(rt);
+                }
+                catch (NullReferenceException ex) {
+                    rt.Status.RspCod = "2022002";
+                    rt.Status.RspMsg = ex.Message;
+                    result.MergeResResult(rt);
+                }
+                catch (Exception ex)
+                {
+                    rt.Status.RspCod = "2022006";
+                    rt.Status.RspMsg = ex.Message;
+                    result.MergeResResult(rt);
                 }
             }
             return result;

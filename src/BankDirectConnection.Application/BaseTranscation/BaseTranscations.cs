@@ -34,6 +34,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
                 throw new BusinessException("the value of transferway is null") { Code = "1001006" };
             if (string.IsNullOrEmpty(this.BusinessType))
                 throw new BusinessException("the value of businesstype is null") { Code = "1001007" };
+            this.Transcations.ToList().ForEach(c => c.Check());
             return true;
         }
     }

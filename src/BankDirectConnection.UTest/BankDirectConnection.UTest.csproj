@@ -69,6 +69,7 @@
     <Compile Include="PaseResponse\TestParseCommonResponseMsg.cs" />
     <Compile Include="PaseResponse\TestParseResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushBankment\BOC\TestPaymentService.cs" />
     <Compile Include="PushBankment\SGB\TestPaymentService.cs" />
     <Compile Include="PushBankment\TestSignIn.cs" />
     <Compile Include="PushBankment\TestSignOut.cs" />

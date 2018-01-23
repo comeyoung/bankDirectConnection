@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +14,33 @@ namespace BankDirectConnection.Application.BaseTranscation
     public class Account : IAccount
     {
         /// <summary>
-        /// 收款行联行号
+        /// 行联行号
         /// </summary>
         public string BankId { get; set; }
         /// <summary>
-        /// 收款行名称
+        /// 行名称
         /// </summary>
         public string BankName { get; set; }
         /// <summary>
-        /// 收款方账户号
+        /// 账户号
         /// </summary>
         public string AcctId { get; set; }
         /// <summary>
-        /// 收款方账户名称
+        /// 账户名称
         /// </summary>
         public string AcctName { get; set; }
         /// <summary>
-        /// 收款人账户类型
+        /// 账户类型
         /// </summary>
         public string AcctType { get; set; }
+        public bool Check()
+        {
+            if (string.IsNullOrEmpty(this.BankId))
+                throw new BusinessException("2022002", "Transaction information of BankId can not be empty");
+            if (string.IsNullOrEmpty(this.AcctId))
+                throw new BusinessException("2022002", "Transaction information of AcctId can not be empty");
+            return true;
+        }
+
     }
 }

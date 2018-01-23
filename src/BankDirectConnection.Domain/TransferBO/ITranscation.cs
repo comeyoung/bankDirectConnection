@@ -17,7 +17,7 @@ namespace BankDirectConnection.Domain.TransferBO
         string ClientId { get; set; }
 
         /// <summary>
-        /// 转账接口银行
+        /// 转账方式
         /// </summary>
         string TransWay { get; set; }
         

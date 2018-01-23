@@ -16,6 +16,8 @@ namespace BankDirectConnection.Domain.Service
         IList<IResponse> Response { get; set; }
 
         IResResult MergeResResult(IResResult Result);
+
+        IResResult MergeResResult(IResponse Result);
     }
 
  

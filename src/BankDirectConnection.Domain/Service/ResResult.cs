@@ -102,6 +102,17 @@ namespace BankDirectConnection.Domain.Service
             return this;
         }
 
+        public IResResult MergeResResult(IResponse Result)
+        {
+            if("B001" != Result.Status.RspCod)
+            {
+                this.Status.RspCod = Result.Status.RspCod;
+                this.Status.RspMsg = Result.Status.RspMsg;
+            }
+            this.Response.Add(Result);
+            return this;
+        }
+
         public IStatus Status { get; set; }
 
         public IList<IResponse> Response { get; set; }
@@ -112,6 +123,9 @@ namespace BankDirectConnection.Domain.Service
 
     public class Response: IResponse
     {
+        public Response() {
+            this.Status = new Status();
+        }
         public Status Status { get; set; }
 
         /// <summary>

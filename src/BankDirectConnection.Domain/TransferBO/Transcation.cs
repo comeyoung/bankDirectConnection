@@ -26,6 +26,7 @@ namespace BankDirectConnection.Domain.TransferBO
                 throw new BusinessException("the value of businesstype is null.") { Code = "1001007" };
             if (string.IsNullOrEmpty(this.PaymentCur))
                 throw new BusinessException("the value of paymentcur is null.") { Code = "1001008" };
+            this.TransDetail.ToList().ForEach(c => c.Check());
             return true;
         }
 
