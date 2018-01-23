@@ -1,7 +1,7 @@
 # bankDirectConnection
 ***
 
-you can convenient to transfer by use api service,and now it support BOC and SG,we will support more Bank next time.
+you can convenient to transfer by calling EDI service,and now it support BOC and SG,we will support more Bank next time.
 ___
 
 

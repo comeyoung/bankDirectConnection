@@ -58,6 +58,7 @@
     <Compile Include="BOC\IWageAndReimbursementTrans.cs" />
     <Compile Include="BOC\ResponseMsg.cs" />
     <Compile Include="Common\BankServiceConfig.cs" />
+    <Compile Include="Common\SerialNumber.cs" />
     <Compile Include="DataHandle\DataConvert.cs" />
     <Compile Include="DataHandle\Enum.cs" />
     <Compile Include="BOC\Fractn.cs" />

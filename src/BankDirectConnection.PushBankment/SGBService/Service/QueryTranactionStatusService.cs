@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
-    public class QueryTranactionStatusService : IQueryTranactionStatusService
+    public class QueryTranactionStatusService : ISGBQueryTransferService
     {
         public IResResult PushQueryTranactionService(TransactionResultsMsg Msg) {
             if (null == Msg)

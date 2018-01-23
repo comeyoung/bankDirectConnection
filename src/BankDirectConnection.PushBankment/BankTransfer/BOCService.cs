@@ -104,15 +104,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             return result;
         }
 
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// 将第三方传递的查询数据明细分割为每笔明细100行
         /// </summary>
