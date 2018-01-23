@@ -11,6 +11,7 @@ namespace BankDirectConnection.Domain.TransferBO
 	===============================================================================================================================*/
     public class Transcation : BaseTranscation, ITranscation
     {
+
         /// <summary>
         /// 检查数据格式是否符合要求
         /// </summary>
@@ -35,6 +36,11 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 客户端流水号
         /// </summary>
         public string ClientId { get; set; }
+
+        /// <summary>
+        /// 平台生成的流水号
+        /// </summary>
+        public string EDIId { get; set; }
         /// <summary>
         /// 转账方式
         /// </summary>
