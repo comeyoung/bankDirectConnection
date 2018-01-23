@@ -303,6 +303,225 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                 }
             };
         }
+
+        /// <summary>
+        /// 批量付款交易信息
+        /// </summary>
+        private ITranscations GetBatchPaymentSGBTrans()
+        {
+            return new Transcations()
+            {
+                TransWay = "02",
+                BusinessType = "02",
+                Transcations = new List<ITranscation>()
+                {
+                    new Transcation(){
+                        ClientId = "2018012000112321",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "CNY",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetOnlyForeignAccount(),
+                        TransDetail = new List<ITransDetail>()
+                        {
+                            
+                            //行内转账
+                            new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            }
+
+                        }
+
+                     },new Transcation(){
+                        ClientId = "2018012000116661",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "CNY",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetOnlyForeignAccount(),
+                        TransDetail = new List<ITransDetail>()
+                        {
+                            
+                            //行内转账
+                            new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            }
+
+                        }
+
+                }, new Transcation(){
+                        ClientId = "2018012000112321",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "CNY",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetOnlyForeignAccount(),
+                        TransDetail = new List<ITransDetail>()
+                        {
+                            
+                            //行内转账
+                            new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            }
+
+                        }
+
+                     }
+            }
+
+            };
+        }
+
+        /// <summary>
+        /// 批量付款,明细交易信息
+        /// </summary>
+        private ITranscations GetBatchPaymentAndDetailSGBTrans()
+        {
+            return new Transcations()
+            {
+                TransWay = "02",
+                BusinessType = "02",
+                Transcations = new List<ITranscation>()
+                {
+                    new Transcation(){
+                        ClientId = "2018012000112321",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "CNY",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetOnlyForeignAccount(),
+                        TransDetail = new List<ITransDetail>()
+                        {
+                            
+                            //行内转账
+                            new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            },new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            }
+
+                        }
+
+                     },new Transcation(){
+                        ClientId = "2018012000116661",
+                        TransWay = "1",
+                        BusinessType = "0",
+                        PaymentCur = "CNY",
+                        PaymentType = "1",
+                        Purpose = "转账",
+                        Priority = "是",
+                        TransDate = "20160708",
+                        TransTime = "162323",
+                        FeeType = "1",
+                        FeeAcct = "13696858585",
+                        AgentSign = "b1362",
+                        Comments = "转账",
+                        FromAcct = GetOnlyForeignAccount(),
+                        TransDetail = new List<ITransDetail>()
+                        {
+                            
+                            //行内转账
+                            new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            },new TransDetail()
+                            {
+                                ToAcct= GetInnerToAccout(),
+                                ReciepterIdType = "0",
+                                ReciepterIdCode = "111222333666555",
+                                ReceipterType = "1",
+                                TransAmount = 5000,
+                                TransCur = "RMB",
+                                SWIFTCode = "SGCLCNBJ",
+                                Rate = "1"
+                            }
+
+                        }
+
+                }
+            }
+
+            };
+        }
         #endregion
         #endregion
         #region 分类测试用例
@@ -362,7 +581,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         /// 批量明细，行内转账（TransDetail）
         /// 多个收款人，由于交易明细只能一行，因此会出现空指针异常
         /// </summary>
-        public void TestBatchPayment()
+        public void TestBatchDetail()
         {
             IInnerPaymentService service = new InnerTransferService();
             var SGBService = new SGBService(null, service, null);
@@ -373,7 +592,37 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
 
         }
 
+        [TestMethod]
+        /// <summary>
+        /// 批量付款，行内转账（Transcation）
+        /// 多个付款人，一个收款人，测试通过
+        /// </summary>
+        public void TestBatchPayment()
+        {
+            IInnerPaymentService service = new InnerTransferService();
+            var SGBService = new SGBService(null, service, null);
+            var rt = SGBService.PaymentTransfer(GetBatchPaymentSGBTrans());
+            Assert.IsNotNull(rt);
+            Console.WriteLine(rt.Status.RspMsg);
+            Assert.AreEqual("0", rt.Status.RspCod);
 
+        }
+
+        [TestMethod]
+        /// <summary>
+        /// 批量付款，批量明细，行内转账（Transcation）
+        /// 多个付款人，多个收款人
+        /// </summary>
+        public void TestBatchPaymentAndDetail()
+        {
+            IInnerPaymentService service = new InnerTransferService();
+            var SGBService = new SGBService(null, service, null);
+            var rt = SGBService.PaymentTransfer(GetBatchPaymentSGBTrans());
+            Assert.IsNotNull(rt);
+            Console.WriteLine(rt.Status.RspMsg);
+            Assert.AreEqual("0", rt.Status.RspCod);
+
+        }
         #endregion
     }
 }
