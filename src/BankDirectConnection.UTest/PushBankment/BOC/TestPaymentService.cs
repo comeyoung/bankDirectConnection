@@ -20,6 +20,14 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             ITranscation Transcation = new Transcation();
             IAccount FromAcct = new Account();
             ITransDetail TransDetail = new TransDetail();
+            TransDetail.ReceipterType = "";
+            TransDetail.ReciepterIdCode = "";
+            TransDetail.ReciepterIdType = "";
+            TransDetail.SWIFTCode = "";
+            TransDetail.ToAcct = null;
+            TransDetail.TransAmount = 10000;
+            TransDetail.TransCur = "RMB";
+
             FromAcct.AcctId = "6212236969989366658";
             FromAcct.AcctName = "张三";
             FromAcct.AcctType = "0";
@@ -29,28 +37,28 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             Transcations.TransWay = "网银";
             Transcation.AgentSign = "qqq";
             Transcation.ClientId = "136137138139";
-            Transcation.Comments = "";
+            Transcation.Comments = "薪水";
             Transcation.FeeAcct = "6212236969989366658";
             Transcation.FeeType = "1";
             Transcation.FromAcct.AcctId = "8936665872122369699";
-            Transcation.FromAcct.AcctName = "";
-            Transcation.FromAcct.AcctType = "";
-            Transcation.FromAcct.BankId = "";
-            Transcation.FromAcct.BankName = "";
-            Transcation.PaymentCur = "";
-            Transcation.PaymentType = "";
-            Transcation.Priority = "";
-            Transcation.Purpose = "";
-            Transcation.TransDate = "";
+            Transcation.FromAcct.AcctName = "李四";
+            Transcation.FromAcct.AcctType = "0";
+            Transcation.FromAcct.BankId = "02060000";
+            Transcation.FromAcct.BankName = "中国建设银行某某支行";
+            Transcation.PaymentCur = "RMB";
+            Transcation.PaymentType = "1";
+            Transcation.Priority = "是";
+            Transcation.Purpose = "薪水";
+            Transcation.TransDate = "20160708";
             Transcation.TransDetail = null;
-            Transcation.TransTime = "";
-            Transcation.TransWay= "";
+            Transcation.TransTime = "142020";
+            Transcation.TransWay= "网银";
 
 
 
 
 
-            //Transcations.Transcations.Add();           
+            Transcations.Transcations.Add();           
             return Transcations;
         }
         #endregion
