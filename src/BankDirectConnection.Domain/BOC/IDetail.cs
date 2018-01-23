@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.BOC
 {
-   public interface IDetail
+   public interface IDetail:ICheckAble
     {
          string Toibkn { get; set; }
 

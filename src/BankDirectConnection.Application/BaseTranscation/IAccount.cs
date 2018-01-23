@@ -12,7 +12,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
     /// <summary>
     /// 账户信息
     /// </summary>
-    public interface IAccount
+    public interface IAccount:ICheckAble
     {
         /// <summary>
         /// 银行号

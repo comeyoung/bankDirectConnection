@@ -1,4 +1,7 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+﻿using System;
+using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
@@ -7,6 +10,10 @@ namespace BankDirectConnection.Domain.TransferBO
 	===============================================================================================================================*/
     public class TransDetail : ITransDetail
     {
+        public TransDetail()
+        {
+            this.ToAcct = new Account();
+        }
         /// <summary>
         /// ToAcct
         /// </summary>
@@ -39,5 +46,13 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 参考汇率
         /// </summary>
         public string Rate { get; set; }
+
+        public bool Check()
+        {
+            if (null == this.ToAcct)
+                throw new BusinessException("2022002", "Transaction information  of ToAcct can not be empty ");
+            this.ToAcct.Check();
+            return true;
+        }
     }
 }

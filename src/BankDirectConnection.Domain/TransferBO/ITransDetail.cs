@@ -8,7 +8,7 @@ namespace BankDirectConnection.Domain.TransferBO
     /// <summary>
     /// 交易明细
     /// </summary>
-    public interface ITransDetail
+    public interface ITransDetail:ICheckAble
     {
         /// <summary>
         /// 收款账户信息

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using BankDirectConnection.Application.Transfer;
 using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Domain.QueryBO;
