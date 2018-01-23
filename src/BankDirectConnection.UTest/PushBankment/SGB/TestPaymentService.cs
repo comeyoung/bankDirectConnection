@@ -317,7 +317,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         {
             //外币付款正确响应
             IForeignCurryPaymentService service = new ForeignCurryTransferService();           
-            var SGBService = new SGBService(service, null, null);
+            var SGBService = new SGBService(service, null, null,null);
             var rt = SGBService.PaymentTransfer(GetForeignSGBTrans());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);
@@ -333,7 +333,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         public void TestRMBPayment()
         {
             IRMBPaymentService service = new RMBTransferService();
-            var SGBService = new SGBService(null, null, service);
+            var SGBService = new SGBService(null, null, service,null);
             var rt = SGBService.PaymentTransfer(GetRMBSGBTrans());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);
@@ -349,7 +349,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         public void TestInnerPayment()
         {
             IInnerPaymentService service = new InnerTransferService();         
-            var SGBService = new SGBService(null,service, null);
+            var SGBService = new SGBService(null,service, null,null);
             var rt = SGBService.PaymentTransfer(GetInnerSGBTrans());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);
@@ -365,7 +365,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         public void TestBatchPayment()
         {
             IInnerPaymentService service = new InnerTransferService();
-            var SGBService = new SGBService(null, service, null);
+            var SGBService = new SGBService(null, service, null,null);
             var rt = SGBService.PaymentTransfer(GetBatchSGBTrans());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);
