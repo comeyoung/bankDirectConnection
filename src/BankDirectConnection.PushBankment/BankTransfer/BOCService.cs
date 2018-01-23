@@ -8,6 +8,8 @@ using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.PushBankment.BOCService.Service;
 using BankDirectConnection.Domain.BOC;
 using System.Collections.Generic;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -45,21 +47,38 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             if (Transcations.BusinessType == "01")
             {
                 IResResult result = new ResResult();
+                IResponse res = new Response();
                 foreach (var item in Transcations.Transcations)
                 {
-                    // 快捷支付业务一次只能走一笔
-                    var transBO = new WageAndReimbursementMsg(item);
-                    transBO.HeaderMessage.Token = response.Token;
-                    //获取代发业务                  
-                    var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
-                    if(null == result)
+                    try
                     {
-                        result = rt;
-                    }
-                    else
-                    {
+                        // 快捷支付业务一次只能走一笔
+                        var transBO = new WageAndReimbursementMsg(item);
+                        transBO.HeaderMessage.Token = response.Token;
+                        //获取代发业务                  
+                        var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
                         result.MergeResResult(rt);
                     }
+                    catch (BusinessException ex)
+                    {
+                        res.Status.RspCod = ex.Code;
+                        res.Status.RspMsg = ex.Message;
+                        result.MergeResResult(res);
+                    }
+                    catch (InnerException ex)
+                    {
+                        res.Status.RspCod = ex.Code;
+                        res.Status.RspMsg = ex.Message;
+                        result.MergeResResult(res);
+                    }
+                    catch (Exception ex)
+                    {
+                        res.Status.RspCod = "";
+                        res.Status.RspMsg = ex.Message;
+                        result.MergeResResult(res);
+                    }
+
+
                 }
                 return result;
                 
@@ -85,7 +104,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             IResResult result = new ResResult();
             //交易状态查询信息
             TransactionStatusInquiryMsg msg = null;
-            if (TransferQueryData.TransferQueryDatas.Count <= 100)
+            if (TransferQueryData.TransferQueryDatas.Count <= Data.MAX_LINENUM_OF_BOC_QUERY_TRANSFERSTATUS)
             {
                 msg = new TransactionStatusInquiryMsg(TransferQueryData);
                 msg.HeaderMessage.Token = response.Token;
@@ -124,7 +143,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 }
                 else
                 {       
-                    if (trans.TransferQueryDatas.Count == 100)
+                    if (trans.TransferQueryDatas.Count == Data.MAX_LINENUM_OF_BOC_QUERY_TRANSFERSTATUS)
                     {
                         transQueryList.Add(trans);
                         trans = new TransferQueryDataList();

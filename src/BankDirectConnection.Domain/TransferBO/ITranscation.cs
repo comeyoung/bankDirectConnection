@@ -11,16 +11,7 @@ namespace BankDirectConnection.Domain.TransferBO
     /// </summary>
     public interface ITranscation:IBaseTranscation
     {
-        /// <summary>
-        /// 客户端流水号
-        /// </summary>
-        string ClientId { get; set; }
-
-        /// <summary>
-        /// 转账方式
-        /// </summary>
-        string TransWay { get; set; }
-        
+       
         /// <summary>
         /// 付款币种
         /// </summary>

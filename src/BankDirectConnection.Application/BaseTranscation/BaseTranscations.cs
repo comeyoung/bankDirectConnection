@@ -12,7 +12,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
 	===============================================================================================================================*/
     public abstract class BaseTranscations<T> : IBaseTranscations<T> where T : IBaseTranscation
     {
-        public BaseTranscations() { }
+        public BaseTranscations() { this.Transcations = new List<T>(); }
         public string BusinessType
         {
             get;set;

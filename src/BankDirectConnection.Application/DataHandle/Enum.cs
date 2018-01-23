@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.DataHandle
+namespace BankDirectConnection.BaseApplication.DataHandle
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2017/12/24 17:55:10
+		Create by Fancy in 2018/1/23 17:36:57
 	===============================================================================================================================*/
     /// <summary>
     /// 
@@ -58,10 +58,10 @@ namespace BankDirectConnection.Domain.DataHandle
         /// <summary>
         /// 中国银行
         /// </summary>
-        BOC=104,
+        BOC = 104,
         /// <summary>
         /// 兴业银行
         /// </summary>
-        SG=309,
+        SG = 309,
     }
 }
