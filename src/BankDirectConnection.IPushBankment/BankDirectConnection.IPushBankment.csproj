@@ -50,7 +50,6 @@
     <Compile Include="Service\BOC\IWageAndReimbursementService.cs" />
     <Compile Include="Service\SGB\IForeignCurryPaymentService.cs" />
     <Compile Include="Service\SGB\IInnerPaymentService.cs" />
-    <Compile Include="Service\SGB\IQueryTranactionStatusService.cs" />
     <Compile Include="Service\SGB\IRMBPaymentService.cs" />
     <Compile Include="Service\SGB\ISGBPaymentTransferService.cs" />
     <Compile Include="Service\SGB\ISGBQueryTransferService.cs" />

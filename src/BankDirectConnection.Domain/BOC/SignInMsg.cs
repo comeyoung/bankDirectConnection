@@ -33,5 +33,7 @@ namespace BankDirectConnection.Domain.BOC
         public string Oprpwd { get; set; }
 
         public string Ceitinfo { get; set; }
+
+        public string UsbKey { get; set; }
     }
 }

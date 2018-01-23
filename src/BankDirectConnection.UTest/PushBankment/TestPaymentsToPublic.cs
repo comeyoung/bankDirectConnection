@@ -20,13 +20,13 @@ namespace BankDirectConnection.UTest.PushBankment
             trans.Transcations.Add(new Transcation() 
             {
                 ClientId = Guid.NewGuid().ToString(),
-                FromAcct = new Account() { AcctId = "958245854235", AcctName = "EDF", BankId = "100052", BankName = "BOC" },
+                FromAcct = new Account() { AcctId = "327256085181", AcctName = "EDF", BankId = "40142", BankName = "BOC" },
                 PaymentCur = "CNY",
                 Purpose = "01",
                 Priority = "0",
                 TransDate = "20180115",
                 TransDetail = new List<ITransDetail>() {
-                    new TransDetail() { TransCur = "CNY",TransAmount = 100000.00M ,ToAcct = new Account() { AcctId = "158245854235", AcctName = "FX", BankId = "100052", BankName = "BOC" }},
+                    new TransDetail() { TransCur = "CNY",TransAmount = 100000.00M ,ToAcct = new Account() { AcctId = "342856085028", AcctName = "FX", BankId = "100052", BankName = "BOC" }},
                     new TransDetail() { TransCur = "CNY",TransAmount = 600000.00M,ToAcct = new Account() { AcctId = "258245854235", AcctName = "Fancy", BankId = "100052", BankName = "BOC" }}
                 }
 
@@ -34,7 +34,7 @@ namespace BankDirectConnection.UTest.PushBankment
             trans.Transcations.Add(new Transcation()
             {
                 ClientId = Guid.NewGuid().ToString(),
-                FromAcct = new Account() { AcctId = "658245854235", AcctName = "EDF", BankId = "100052", BankName = "BOC" },
+                FromAcct = new Account() { AcctId = "658245854235", AcctName = "EDF", BankId = "40142", BankName = "BOC" },
                 PaymentCur = "CNY",
                 Purpose = "01",
                 Priority = "0",
