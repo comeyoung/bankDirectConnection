@@ -37,5 +37,12 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
             this.Transcations.ToList().ForEach(c => c.Check());
             return true;
         }
+
+        public void InitData()
+        {
+            if (null == this.Transcations)
+                throw new InnerException("", "");
+            this.Transcations.ToList().ForEach(c => { c.TransWay = this.TransWay; c.BusinessType = this.BusinessType; });
+        }
     }
 }

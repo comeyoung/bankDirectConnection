@@ -9,7 +9,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/12 17:56:27
 	===============================================================================================================================*/
-    public interface IBaseTranscations<T> where T:IBaseTranscation
+    public interface IBaseTranscations<T>:ICheckAble where T:IBaseTranscation
     {
         /// <summary>
         /// 转账方式 银行接口类型
@@ -22,6 +22,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
 
         IList<T> Transcations { get; set; }
 
-        bool Check();
+
+        void InitData();
     }
 }

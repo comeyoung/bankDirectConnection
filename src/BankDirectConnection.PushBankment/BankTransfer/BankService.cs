@@ -23,6 +23,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
+                Transcation.InitData();
                 Transcation.Check();
                 Transcation.Transcations.ToList().ForEach(c => c.NewEDIId());
                 ////获取银行信息，调用具体银行的服务
