@@ -35,21 +35,24 @@ namespace BankDirectConnection.PushBankment.BOCService
         //}
         private static string GetPaymentsToPublicResult()
         {
-            return "<?xml version='1.0' encoding='UTF - 8'?><bocb2e version='120' locale='zh_CN'> <head> <termid>E163083136140</termid>  <custid>133812368</custid>  <cusopr>136140253</cusopr>  <trncod>b2e0001</trncod>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </head>  <trans> <trn-b2e0001-rs> <status> <rspcod>B001</rspcod>  <rspmsg>ok</rspmsg> </status>  <serverdt>20180122164146</serverdt>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </trn-b2e0001-rs> </trans> </bocb2e>";
+            return "<?xml version='1.0' encoding='UTF - 8'?><bocb2e version='120' locale='zh_CN'> <head> <termid>E163083136140</termid>  <custid>133812368</custid>  <cusopr>136140253</cusopr>  <trncod>b2e0009</trncod>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </head>  <trans> <trn-b2e0009-rs> <status> <rspcod>B001</rspcod>  <rspmsg>ok</rspmsg> </status>  <serverdt>20180122164146</serverdt>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </trn-b2e0009-rs> </trans> </bocb2e>";
         }
 
         private static string GetWageAndReimbursementResult()
         {
-            return "<?xml version='1.0' encoding='utf - 8'?><bocb2e version='100' security='true' lang='chs'><head><termid>E163083136140</termid><trnid/><custid>133812368</custid><cusopr>136140253</cusopr><trncod>b2e0078</trncod><token>qgG6qc_GkLT8MSklp0krC_k</token></head><trans><trn-b2e0078-rq><b2e0078-rq><insid>0120180122165802001</insid><fractn><fribkn>40142</fribkn><actacn>327256085181</actacn><actnam/></fractn><pybcur>CNY</pybcur><pybamt>5000.00</pybamt><pybnum>1</pybnum><crdtyp>7</crdtyp><furinfo>EC</furinfo><useinf>EC</useinf><trfdate>20180122</trfdate><detail><toibkn>10</toibkn><tobank></tobank><toactn>327256085181</toactn><pydcur>CNY</pydcur><pydamt>5000.00</pydamt><toname>BOC</toname><toidtp></toidtp><toidet></toidet><furinfo></furinfo><purpose></purpose><reserve1></reserve1><reserve2></reserve2><reserve3></reserve3><reserve4></reserve4></detail></b2e0078-rq></trn-b2e0078-rq></trans></bocb2e>";
+            //return "<?xml version='1.0' encoding='UTF - 8'?><bocb2e version='120' locale='zh_CN'> <head> <termid>E163083136140</termid>  <custid>133812368</custid>  <cusopr>136140253</cusopr>  <trncod>b2e0078</trncod>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </head>  <trans> <trn-b2e0078-rs> <status> <rspcod>B001</rspcod>  <rspmsg>ok</rspmsg> </status>  <serverdt>20180122164146</serverdt>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </trn-b2e0078-rs> </trans> </bocb2e>";
+            return "<?xml version='1.0' encoding='UTF - 8'?><bocb2e version='120' locale='zh_CN'> <trn-b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><insid>CD111666</insid><obssid>95961qwerd8494d1asdsd</obssid></b2e0078-rs></trn-b2e0078-rs></bocb2e>";
         }
-        private static string GetTransactionStatusInquiryResult()
-        {
-            return "<ap><CCTransCode>SGT002</CCTransCode><ReqSeqNo>2b54fcb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075328</RespSeqNo><HostSeqNo>364233</HostSeqNo><RespDate>20180118</RespDate><RespTime>144015134</RespTime><RespCode>0005</RespCode><RespInfo>交易成功</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag/><Cme><RecordNum/><FieldNum/><RespPrvData/><BatchFileName/></Cme></ap>";
-        }
+        //private static string GetTransactionStatusInquiryResult()
+        //{
+        //    return "<ap><CCTransCode>SGT002</CCTransCode><ReqSeqNo>2b54fcb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075328</RespSeqNo><HostSeqNo>364233</HostSeqNo><RespDate>20180118</RespDate><RespTime>144015134</RespTime><RespCode>0005</RespCode><RespInfo>交易成功</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag/><Cme><RecordNum/><FieldNum/><RespPrvData/><BatchFileName/></Cme></ap>";
+        //}
         public static string PostRequest(string RequestXML)
         {
             //return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            return GetPaymentsToPublicResult();
+             return GetPaymentsToPublicResult();//对公转账
+           //return GetWageAndReimbursementResult();//工资代发
         }
+        
     }
 }

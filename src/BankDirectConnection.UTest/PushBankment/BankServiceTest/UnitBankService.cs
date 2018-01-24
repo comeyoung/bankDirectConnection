@@ -94,7 +94,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         [TestMethod]
         public void TestBankServicePay()
         {
-            //
+            
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
             var trans =  GetTrans();
@@ -102,7 +102,9 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             trans.Check();
             trans.Transcations.ToList().ForEach(c => c.NewEDIId());
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            //bankService.PaymentTransfer(GetTrans());
+            bankService.PaymentTransfer(GetTrans());
         }
+
+
     }
 }

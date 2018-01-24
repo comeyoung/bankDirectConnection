@@ -13,6 +13,9 @@ namespace BankDirectConnection.Domain.SGB
 	===============================================================================================================================*/
     public interface IBaseSGBTranscation: ISGBHeader,ICheckAble
     {
+
+        string ClientId { get; set; }
+        string EDIId { get; set; }
         /// <summary>
         /// 
         /// </summary>

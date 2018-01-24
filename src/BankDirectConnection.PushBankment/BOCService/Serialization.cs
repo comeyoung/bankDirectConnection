@@ -48,7 +48,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                new XElement("trans",
                    new XElement("trn-b2e0078-rq",
                        new XElement("b2e0078-rq",
-                           new XElement("insid", WageAndReimbursementMsg.Trans.Insid),                
+                           new XElement("insid", WageAndReimbursementMsg.Trans.EDIId),                
                            new XElement("pybcur", WageAndReimbursementMsg.Trans.Pybcur),
                            new XElement("pybamt", WageAndReimbursementMsg.Trans.Pybamt),
                            new XElement("pybnum", WageAndReimbursementMsg.Trans.Pybnum),
@@ -99,7 +99,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                   new XElement("b2e0009-rq",
                            BuildFractnElement(item.Fractn),
                            BuildToactnElement(item.Toactn),
-                           new XElement("insid", item.Insid),
+                           new XElement("insid", item.EDIId),
                            new XElement("obssid", item.Obssid),
                            new XElement("trnamt", item.Trnamt),
                            new XElement("trncur", item.Trncur),
@@ -175,7 +175,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                new XElement("trans",
                    new XElement("trn-b2e0007-rq",
                        new XElement("b2e0007-rq",
-                           new XElement("insid", item.Insid),
+                           new XElement("insid", item.EDIId),
                            new XElement("obssid", item.Obssid))))));
             return xdocment.Declaration + xdocment.ToString();
         }
@@ -213,7 +213,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// </summary>
         /// <param name="Header"></param>
         /// <returns></returns>
-        public static XElement BuildHeadElement(Header Header)
+        public static XElement BuildHeadElement(IHeader Header)
         {
             if (null == Header)
                 throw new Exception("头部消息为空");

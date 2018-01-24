@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.BOC
 {
-    public interface ITransactionStatusInquiryMsg
+    public interface ITransactionStatusInquiryMsg: IBaseBOCTranscation
     {
-        Header HeaderMessage { get; set; }
+        
         List<ITransactionStatusInquiry> Trans { get; set; }
     }
 }

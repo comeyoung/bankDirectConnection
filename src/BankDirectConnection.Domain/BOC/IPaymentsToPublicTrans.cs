@@ -8,11 +8,7 @@ namespace BankDirectConnection.Domain.BOC
 {
     public interface IPaymentsToPublicTrans
     {
-        /// <summary>
-        /// 指令ID，一 条转账指令  ,在客户端的唯一标识，建议企业按时间顺序生成且不超过12位
-        /// </summary>
-         string Insid { get; set; }
-
+       
         /// <summary>
         /// 网银交易流水号
         /// </summary>

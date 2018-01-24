@@ -11,7 +11,7 @@ namespace BankDirectConnection.Domain.BOC
     {
          string Ceitinfo { get; set; }
          string Transtype { get; set; }
-         string Insid { get; set; }
+         
         /// <summary>
         /// 付款人手机号
         /// </summary>

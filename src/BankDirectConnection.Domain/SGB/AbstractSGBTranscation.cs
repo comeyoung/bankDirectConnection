@@ -13,6 +13,17 @@ namespace BankDirectConnection.Domain.SGB
 	===============================================================================================================================*/
     public abstract class AbstractSGBTranscation : IBaseSGBTranscation,ICheckAble
     {
+        public string ClientId
+        {
+            get;
+            set;
+                               
+        }
+        public string EDIId
+        {
+            get;
+            set;
+        }
         public string CrAccName
         {
             get;
@@ -71,6 +82,8 @@ namespace BankDirectConnection.Domain.SGB
             get;
             set;
         }
+
+       
 
         public string Fees
         {
