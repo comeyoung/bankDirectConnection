@@ -72,8 +72,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     ClientId = "332de889949",
                     PaymentCur = "USD",
                     PaymentType = "1",
-                    TransWay = "01",
-                    BusinessType = "01",
+                    //TransWay = "01",
+                    //BusinessType = "01",
                     Purpose = "转账",
                     Priority = "是",
                     TransDate = "20160708",
@@ -98,10 +98,11 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
             var trans =  GetTrans();
+            trans.InitData();
             trans.Check();
             trans.Transcations.ToList().ForEach(c => c.NewEDIId());
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            bankService.PaymentTransfer(GetTrans());
+            //bankService.PaymentTransfer(GetTrans());
         }
     }
 }
