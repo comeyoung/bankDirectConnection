@@ -29,7 +29,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var res = SGBHttp.PostRequest(null);
             var rt = Deserialization.ParseResonseMsg(res);
             // 处理返回结果
-            return ResResult.Create(rt);
+            return ResResult.SGBCreate<IInnerTransferMsg>(Msg,rt);
         }
     }
 }

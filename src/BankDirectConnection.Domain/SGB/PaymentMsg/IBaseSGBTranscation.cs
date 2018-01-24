@@ -15,6 +15,7 @@ namespace BankDirectConnection.Domain.SGB
     {
 
         string ClientId { get; set; }
+
         string EDIId { get; set; }
         /// <summary>
         /// 

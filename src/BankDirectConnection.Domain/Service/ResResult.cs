@@ -4,6 +4,7 @@ using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -162,7 +163,63 @@ namespace BankDirectConnection.Domain.Service
             }
             return result;
         }
+        public static IResResult SGBCreate<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
+        {
+            IResResult result = new ResResult();
+            result.Status.RspCod = "0";
+            result.Status.RspMsg = "OK";
+            IResponse res;
+            if (typeof(T) == typeof(IForeignCurryPaymentMsg))
+            {               
+                    res = new Response();
+                    res.InsId = Msg.HostSeqNo;
+                    res.ClientId = TransMsg.ClientId;
+              if (Msg.RespCode == "0000"|| Msg.RespCode == "0005" || Msg.RespCode == "0006") {
+                    res.Status.RspCod = "0";
+                    res.Status.RspMsg = "OK";
+                }
+                else
+                {
+                    result.Status.RspMsg = Msg.RespInfo;
+                }
+                result.Response.Add(res);
 
+
+            }
+            else if (typeof(T) == typeof(IInnerTransferMsg))
+            {
+                res = new Response();
+                res.InsId = Msg.HostSeqNo;
+                res.ClientId = TransMsg.ClientId;
+                if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
+                {
+                    res.Status.RspCod = "0";
+                    res.Status.RspMsg = "OK";
+                }
+                else
+                {
+                    result.Status.RspMsg = Msg.RespInfo;
+                }
+                result.Response.Add(res);
+            }
+            else if (typeof(T) == typeof(IRMBPaymentMsg))
+            {
+                res = new Response();
+                res.InsId = Msg.HostSeqNo;
+                res.ClientId = TransMsg.ClientId;
+                if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
+                {
+                    res.Status.RspCod = "0";
+                    res.Status.RspMsg = "OK";
+                }
+                else
+                {
+                    result.Status.RspMsg = Msg.RespInfo;
+                }
+                result.Response.Add(res);
+            }
+            return result;
+        }
         public IResResult MergeResResult(IResResult ResResult)
         {
             if (string.IsNullOrEmpty(this.Status.RspCod)) {
@@ -201,7 +258,7 @@ namespace BankDirectConnection.Domain.Service
 
     }
 
-
+   
 
     public class Response: IResponse
     {
