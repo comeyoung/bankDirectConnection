@@ -13,6 +13,7 @@ namespace BankDirectConnection.Domain.TransferBO
     public class Transcations : BaseTranscations<ITranscation>, ITranscations
     {
 
+<<<<<<< HEAD
         public Transcations()
         {
             this.Transcations = new List<ITranscation>();
@@ -21,5 +22,9 @@ namespace BankDirectConnection.Domain.TransferBO
      
 
         public IList<ITranscation> Transcation { get; set; }
+=======
+>>>>>>> edi/master
     }
+
+   
 }

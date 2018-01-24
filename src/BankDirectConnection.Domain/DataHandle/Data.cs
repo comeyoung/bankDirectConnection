@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.BaseApplication.BaseTranscation
+namespace BankDirectConnection.Domain.DataHandle
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/12 17:56:27
+		Create by Fancy in 2018/1/23 18:02:27
 	===============================================================================================================================*/
-    public interface IBaseTranscations<T> where T:IBaseTranscation
+    public class Data
     {
         /// <summary>
-        /// 转账方式 银行接口类型
+        /// 银行代码
         /// </summary>
-        string TransWay { get; set; }
+        public const int BANKCODE = 3;
         /// <summary>
-        /// 转账业务类型  工资/报销/转账
+        /// 中行对公转账业务最大明细行
         /// </summary>
-        string BusinessType { get; set; }
-
-        IList<T> Transcations { get; set; }
-
-        bool Check();
+        public const int MAX_LINENUM_OF_BOC_TRANSFER = 1000;
+        /// <summary>
+        /// 中行交易状态查询业务最多明细行
+        /// </summary>
+        public const int MAX_LINENUM_OF_BOC_QUERY_TRANSFERSTATUS = 100;
     }
 }

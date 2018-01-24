@@ -1,15 +1,12 @@
 ﻿using BankDirectConnection.Application.Transfer;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
-using BankDirectConnection.Domain.DataHandle;
-using BankDirectConnection.Domain.ExceptionMsg;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -26,6 +23,8 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
+                Transcation.Check();
+                Transcation.Transcations.ToList().ForEach(c => c.NewEDIId());
                 ////获取银行信息，调用具体银行的服务
                 var bankService = BankFactory.CreateBank(Transcation.TransWay);
                 return bankService.PaymentTransfer(Transcation);
@@ -49,7 +48,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();
                 foreach(var item in Transcation.TransferQueryDatas)
                 {
-                    string key = item.EDIId.Substring(0, 2);
+                    string key = Instruction.GetBankService(item.EDIId);
                     if (dicTransList.Keys.Contains(key))
                     {
                         ITransferQueryDataList query = dicTransList[key];

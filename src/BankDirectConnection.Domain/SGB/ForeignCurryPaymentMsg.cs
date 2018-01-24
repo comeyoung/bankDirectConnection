@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.SGB.PaymentMsg;

@@ -59,8 +59,8 @@
     <Compile Include="BOC\ResponseMsg.cs" />
     <Compile Include="Common\BankServiceConfig.cs" />
     <Compile Include="Common\SerialNumber.cs" />
+    <Compile Include="DataHandle\Data.cs" />
     <Compile Include="DataHandle\DataConvert.cs" />
-    <Compile Include="DataHandle\Enum.cs" />
     <Compile Include="BOC\Fractn.cs" />
     <Compile Include="BOC\Message\Header.cs" />
     <Compile Include="BOC\Message\Trans.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="BOC\TransferResponseMsg.cs" />
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
-    <Compile Include="DataHandle\Instruction.cs" />
     <Compile Include="ExceptionMsg\ErrorResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBO\ITransferQueryData.cs" />

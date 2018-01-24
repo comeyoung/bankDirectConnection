@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BankDirectConnection.Domain.DataHandle;
+using BankDirectConnection.BaseApplication.DataHandle;
 
 namespace BankDirectConnection.UTest.Domain
 {

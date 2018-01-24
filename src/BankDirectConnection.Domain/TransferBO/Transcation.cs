@@ -1,16 +1,31 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+﻿using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using BankDirectConnection.BaseApplication.DataHandle;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/10 11:34:34
 	===============================================================================================================================*/
-    public class Transcation : BaseTranscation, ITranscation
+    public class Transcation : BaseTranscation<ITranscations, ITranscation>, ITranscation
     {
+        public Transcation()
+        {
+            this.FromAcct = new Account();
+            this.TransDetail = new List<ITransDetail>();
+        }
+        public Transcation(Transcations Parent): base(Parent)
+        {
+            this.FromAcct = new Account();
+            this.TransDetail = new List<ITransDetail>();
+            this.TransWay =  Parent.TransWay;
+            this.BusinessType = Parent.BusinessType;
+        }
 
         /// <summary>
         /// 检查数据格式是否符合要求
@@ -21,10 +36,10 @@ namespace BankDirectConnection.Domain.TransferBO
             base.Check();
             if (string.IsNullOrEmpty(this.ClientId))
                 throw new BusinessException("the value of clientid is null.") { Code = "1001005" };
-            if (string.IsNullOrEmpty(this.TransWay))
-                throw new BusinessException("the value of transway is null.") { Code = "1001006" };
-            if (string.IsNullOrEmpty(this.BusinessType))
-                throw new BusinessException("the value of businesstype is null.") { Code = "1001007" };
+            //if (string.IsNullOrEmpty(this.TransWay))
+            //    throw new BusinessException("the value of transway is null.") { Code = "1001006" };
+            //if (string.IsNullOrEmpty(this.BusinessType))
+            //    throw new BusinessException("the value of businesstype is null.") { Code = "1001007" };
             if (string.IsNullOrEmpty(this.PaymentCur))
                 throw new BusinessException("the value of paymentcur is null.") { Code = "1001008" };
             this.TransDetail.ToList().ForEach(c => c.Check());
@@ -32,23 +47,8 @@ namespace BankDirectConnection.Domain.TransferBO
         }
 
         #region property
-        /// <summary>
-        /// 客户端流水号
-        /// </summary>
-        public string ClientId { get; set; }
-
-        /// <summary>
-        /// 平台生成的流水号
-        /// </summary>
-        public string EDIId { get; set; }
-        /// <summary>
-        /// 转账方式
-        /// </summary>
-        public string TransWay { get; set; }
-        /// <summary>
-        /// 转账业务类型
-        /// </summary>
-        public string BusinessType { get; set; }
+        
+       
         /// <summary>
         /// 付款币种
         /// </summary>
@@ -119,5 +119,6 @@ namespace BankDirectConnection.Domain.TransferBO
             }
             return string.Empty;
         }
+
     }
 }

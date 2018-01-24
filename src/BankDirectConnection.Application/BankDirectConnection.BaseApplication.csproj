@@ -51,6 +51,8 @@
     <Compile Include="BaseTranscation\IBaseTranscation.cs" />
     <Compile Include="BaseTranscation\IBaseTranscations.cs" />
     <Compile Include="BaseTranscation\ICheckAble.cs" />
+    <Compile Include="DataHandle\Enum.cs" />
+    <Compile Include="DataHandle\Instruction.cs" />
     <Compile Include="ExceptionMsg\BusinessException.cs" />
     <Compile Include="ExceptionMsg\InnerException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
