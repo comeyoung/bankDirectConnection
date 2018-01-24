@@ -79,8 +79,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                         res.Status.RspMsg = ex.Message;
                         result.MergeResResult(res);
                     }
-
-
                 }
                 return result;
                 
