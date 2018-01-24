@@ -46,7 +46,8 @@ namespace BankDirectConnection.Domain.BOC
                 foreach (var item in Transcation.TransDetail)
                 {
                     PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
-                    trans.Insid = Transcation.ClientId;
+                    trans.EDIId = Transcation.EDIId;
+                    trans.ClientId = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
                     trans.Fractn.Actacn = Transcation.FromAcct.AcctId;
                     trans.Fractn.Actnam = Transcation.FromAcct.AcctName;
@@ -67,7 +68,7 @@ namespace BankDirectConnection.Domain.BOC
             return this;
         }
     }
-    public class PaymentsToPublicTrans: IPaymentsToPublicTrans
+    public class PaymentsToPublicTrans: AbastractBOCTranscation, IPaymentsToPublicTrans
     {
         public PaymentsToPublicTrans()
         {
@@ -75,10 +76,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Toactn = new Toactn();
         }
        
-        /// <summary>
-        /// 指令ID，一 条转账指令  ,在客户端的唯一标识，建议企业按时间顺序生成且不超过12位
-        /// </summary>
-        public string Insid { get; set; }
+        
 
         /// <summary>
         /// 网银交易流水号

@@ -13,6 +13,9 @@ namespace BankDirectConnection.Domain.BOC
 
     public interface IBaseBOCTranscation
     {
-         Header HeaderMessage { get; set; }
+         string ClientId { get; set; }
+         string EDIId { get; set; }
+
+        IHeader HeaderMessage { get; set; }
     }
 }

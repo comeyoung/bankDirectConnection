@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC.Message;
+using BankDirectConnection.Domain.DataHandle;
 using BankDirectConnection.Domain.QueryBO;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             this.HeaderMessage = new Header();
             this.Trans = new List<ITransactionStatusInquiry>();
-            
+
         }
 
         public TransactionStatusInquiryMsg(ITransferQueryDataList TransferQueryDataList)
@@ -29,7 +30,18 @@ namespace BankDirectConnection.Domain.BOC
             this.Create(TransferQueryDataList);
             this.Check();
         }
-        public Header HeaderMessage { get; set; }
+
+        public string ClientId
+        {
+            get;set;
+        }
+
+        public string EDIId
+        {
+            get;set;
+        }
+
+        public IHeader HeaderMessage { get; set; }
 
         public List<ITransactionStatusInquiry> Trans { get; set; }
 
@@ -54,29 +66,34 @@ namespace BankDirectConnection.Domain.BOC
         /// <summary>
         ///  转账指令
         /// </summary>
-        public string Insid { get; set; }
+        public string EDIId { get; set; }
 
         /// <summary>
         /// 网银交易流水号
         /// </summary>
         public string Obssid { get; set; }
 
+        public string ClientId
+        {
+            get;set;
+        }
+
+
+
         public TransactionStatusInquiry() {
         }
         public TransactionStatusInquiry(ITransferQueryData Data)
         {
-            this.Insid = Data.ClientId;
+            this.EDIId = Data.ClientId;
             this.Obssid = Data.ObssId;
             this.Check();
         }
         public  bool Check()
         {
-            if (string.IsNullOrEmpty(this.Obssid) && string.IsNullOrEmpty(this.Insid)) {
+            if (string.IsNullOrEmpty(this.Obssid) && string.IsNullOrEmpty(this.EDIId)) {
                 throw new BusinessException("the purpose of trans can't be null if choosed the convient transfer") { Code = "1011010" };
-            } else if (this.Obssid.Length > 19) {
+            } else if (this.Obssid.Length > Data.MAX_LENGTH_OF_OBSSID) {
                 throw new BusinessException("Online banking transaction serial number is not more than 19 ") { Code = "2011001" };
-            } else if (this.Insid.Length < 32) {
-                throw new BusinessException("The transfer instruction ID does not exceed 32") { Code = "2011001" };
             }
             return true;
         }

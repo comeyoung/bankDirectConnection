@@ -25,7 +25,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
             var transXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(Msg);
             var res = BOCHttp.PostRequest(transXML);
             var rt = Deserialization.ParseResponseMsg(res, "b2e0007");
-            return ResResult.Create(rt);
+            return ResResult.Create<ITransactionStatusInquiryMsg>(Msg, rt);
         }
     }
 }

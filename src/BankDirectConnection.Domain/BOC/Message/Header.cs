@@ -12,7 +12,7 @@ namespace BankDirectConnection.Domain.BOC.Message
     /// <summary>
     /// 消息头
     /// </summary>
-    public class Header
+    public class Header:IHeader
     {
         public Header() { }
         public Header(string TransType)

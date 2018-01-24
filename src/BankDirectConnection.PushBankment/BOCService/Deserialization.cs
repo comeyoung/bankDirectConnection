@@ -27,7 +27,7 @@ namespace BankDirectConnection.PushBankment.BOCService
             var xElement = xDoc.Descendants("trn-"+ BussinessType + "-rs");
             foreach(var item in xElement)
             {
-                res.Token = GetElementValue(item.Element("token"));
+                res.Token = GetElementValue(item.Element("token"));             
                 res.Serverdt = GetElementValue(item.Element("serverdt"));
             }
 

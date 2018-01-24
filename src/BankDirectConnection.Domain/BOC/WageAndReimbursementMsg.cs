@@ -23,7 +23,7 @@ namespace BankDirectConnection.Domain.BOC
         }
 
 
-        public WageAndReimbursementMsg(ITranscation Transcation)
+        public WageAndReimbursementMsg(ITranscation Transcation):base(Transcation)
         {
             this.HeaderMessage = new Header("b2e0078");
             this.Trans = new WageAndReimbursementTrans();
@@ -50,7 +50,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             //一笔交易只能一个付款方
             // WageAndReimbursementTrans trans = new WageAndReimbursementTrans();
-            this.Trans.Insid = Transcation.ClientId;
+            this.Trans.EDIId = Transcation.ClientId;
             this.Trans.Pybcur = Transcation.PaymentCur;
             this.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
             this.Trans.FractnMessage.Actacn = Transcation.FromAcct.AcctId;
@@ -60,6 +60,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
             this.Trans.Furinfo = Transcation.Purpose;
             this.Trans.Trfdate = Transcation.TransDate;
+            
             foreach (var item in Transcation.TransDetail)
             {
                 var line = new Detail() {
@@ -95,7 +96,7 @@ namespace BankDirectConnection.Domain.BOC
         }
 
     }
-    public class WageAndReimbursementTrans : IWageAndReimbursementTrans
+    public class WageAndReimbursementTrans : AbastractBOCTranscation,IWageAndReimbursementTrans
     {
         public WageAndReimbursementTrans()
         {
@@ -105,7 +106,9 @@ namespace BankDirectConnection.Domain.BOC
         }
         public string Ceitinfo { get; set; }
         public string Transtype { get; set; }
-        public string Insid { get; set; }
+        
+
+        public string ClientId { get; set; }
         /// <summary>
         /// 付款人手机号
         /// </summary>

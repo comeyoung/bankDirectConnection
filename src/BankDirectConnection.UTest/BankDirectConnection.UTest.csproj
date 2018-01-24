@@ -142,9 +142,7 @@
       <Link>XMLTemplate\WageAndReimbursement.xml</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PushBankment\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
