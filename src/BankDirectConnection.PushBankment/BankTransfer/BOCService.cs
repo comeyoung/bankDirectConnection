@@ -44,12 +44,13 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             // 分析走转账还是代发业务
             if (Transcations.BusinessType == "01")
             {
-                IResResult result = new ResResult();
+                IResResult result = null;
                 foreach (var item in Transcations.Transcations)
                 {
                     // 快捷支付业务一次只能走一笔
                     var transBO = new WageAndReimbursementMsg(item);
-                    transBO.HeaderMessage.Token = response.Token;
+                    //transBO.HeaderMessage.Token = response.Token;
+                    response.Token  = transBO.HeaderMessage.Token;
                     //获取代发业务                  
                     var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
                     if(null == result)

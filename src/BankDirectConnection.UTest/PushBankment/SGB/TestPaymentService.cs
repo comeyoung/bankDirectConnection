@@ -718,8 +718,8 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         /// </summary>
         public void TestRMBPayment()
         {
-            IRMBPaymentService service = new RMBTransferService();
-            var SGBService = new SGBService(null, null, service,null);
+            RMBTransferService service = new RMBTransferService();
+            var SGBService = new SGBService(null, null, service, null);
             var rt = SGBService.PaymentTransfer(GetRMBSGBTrans());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);

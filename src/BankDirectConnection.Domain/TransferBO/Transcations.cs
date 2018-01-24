@@ -17,5 +17,9 @@ namespace BankDirectConnection.Domain.TransferBO
         {
             this.Transcations = new List<ITranscation>();
         }
+
+     
+
+        public IList<ITranscation> Transcation { get; set; }
     }
 }
