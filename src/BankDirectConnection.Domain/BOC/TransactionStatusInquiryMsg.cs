@@ -44,15 +44,10 @@ namespace BankDirectConnection.Domain.BOC
         {
             foreach (var item in TransferQueryDataList.TransferQueryDatas)
             {
-                this.Trans.Add(new TransactionStatusInquiry() { Insid = item.ClientId, Obssid = item.ObssId });
+                this.Trans.Add(new TransactionStatusInquiry(item));
             }
         }
     }
-
-   
-
-
-
 
     public class TransactionStatusInquiry: ITransactionStatusInquiry
     {
@@ -67,6 +62,11 @@ namespace BankDirectConnection.Domain.BOC
         public string Obssid { get; set; }
 
         public TransactionStatusInquiry() {
+        }
+        public TransactionStatusInquiry(ITransferQueryData Data)
+        {
+            this.Insid = Data.ClientId;
+            this.Obssid = Data.ObssId;
             this.Check();
         }
         public  bool Check()
