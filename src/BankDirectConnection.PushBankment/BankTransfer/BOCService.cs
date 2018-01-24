@@ -29,7 +29,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 
         public BOCService()
         {
-
+            this.wageAndReimbursementService = new WageAndReimbursementService();
+            this.paymentsToPublicService = new PaymentsToPublicService();
+            this.transactionStatusInquiryService = new TransactionStatusInquiryService();
         }
         public BOCService(WageAndReimbursementService WageAndReimbursementService, 
                           PaymentsToPublicService PaymentsToPublicService, 
