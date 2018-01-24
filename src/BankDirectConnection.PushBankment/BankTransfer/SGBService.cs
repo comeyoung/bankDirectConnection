@@ -8,6 +8,7 @@ using BankDirectConnection.Domain.SGB;
 using System.Linq;
 using BankDirectConnection.IPushBankment.Service.SGB;
 using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.PushBankment.SGBService.Service;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -35,7 +36,10 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         }
         public SGBService()
         {
-
+            this.foreignCurryService = new ForeignCurryTransferService();
+            this.innerPaymentService = new InnerTransferService();
+            this.rmbPaymentServie = new RMBTransferService();
+            this.queryTranactionService = new QueryTranactionStatusService();
         }
         public IResResult PaymentTransfer(ITranscations Transcation)
         {
@@ -72,7 +76,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                              rt = this.foreignCurryService.PushPaymentTranscationInfo(new ForeignCurryPaymentMsg(item));
                         }
                     }
-
                     // 处理结果
                     result.MergeResResult(rt);
                 }
