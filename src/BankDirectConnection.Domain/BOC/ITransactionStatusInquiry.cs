@@ -8,13 +8,13 @@ namespace BankDirectConnection.Domain.BOC
 {
     public interface ITransactionStatusInquiry
     {
-         string Insid { get; set; }
+         string EDIId { get; set; }
 
         /// <summary>
         /// 网银交易流水号
         /// </summary>
          string Obssid { get; set; }
 
-         
+         string ClientId { get; set; }
     }
 }

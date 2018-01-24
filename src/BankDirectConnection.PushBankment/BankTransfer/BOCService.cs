@@ -46,24 +46,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             // 分析走转账还是代发业务
             if (Transcations.BusinessType == "01")
             {
-<<<<<<< HEAD
-                IResResult result = null;
-                foreach (var item in Transcations.Transcations)
-                {
-                    // 快捷支付业务一次只能走一笔
-                    var transBO = new WageAndReimbursementMsg(item);
-                    //transBO.HeaderMessage.Token = response.Token;
-                    response.Token  = transBO.HeaderMessage.Token;
-                    //获取代发业务                  
-                    var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
-                    if(null == result)
-=======
                 IResResult result = new ResResult();
                 IResponse res = new Response();
                 foreach (var item in Transcations.Transcations)
                 {
                     try
->>>>>>> edi/master
                     {
                         // 快捷支付业务一次只能走一笔
                         var transBO = new WageAndReimbursementMsg(item);

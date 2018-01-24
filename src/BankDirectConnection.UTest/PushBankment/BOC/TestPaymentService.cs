@@ -40,6 +40,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             {
                 AgentSign = "qqq",
                 ClientId = "136137138139",
+                EDIId = "18012466667777888899",
                 Comments = "薪水",
                 FeeAcct = "6212236969989366658",
                 FeeType = "1",
@@ -110,7 +111,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             var rt = BOCservice.PaymentTransfer(PublicTranscations());
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspMsg);
-            Assert.AreEqual("ok", rt.Status.RspCod);
+            Assert.AreEqual("0", rt.Status.RspCod);
 
         }
 
@@ -120,12 +121,13 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
         [TestMethod]      
         public void TestWageAndReimbursementService()
         {
+
             WageAndReimbursementService service = new WageAndReimbursementService();
             BOCService BOCservice = new BOCService(service, null, null);
             var rt = BOCservice.PaymentTransfer(WageAndReimbursementTranscations());
             Assert.IsNotNull(rt);
-            Console.WriteLine(rt.Status.RspMsg);
-            Assert.AreEqual("ok", rt.Status.RspCod);
+            Console.WriteLine(rt.Status.RspCod);
+            Assert.AreEqual("0", rt.Status.RspCod);
 
         }
 

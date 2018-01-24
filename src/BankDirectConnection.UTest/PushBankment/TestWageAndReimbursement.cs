@@ -43,7 +43,7 @@ namespace BankDirectConnection.UTest.PushBankment
             warm.Trans.FractnMessage.Fribkn = "40142";
 
             warm.Trans.Furinfo = "EC";
-            warm.Trans.Insid = "0120180122165802001";
+            warm.Trans.EDIId = "0120180122165802001";
             warm.Trans.Pybamt = 5000.03M;
             warm.Trans.Pybcur = "CNY";
             warm.Trans.Pybnum = 1;

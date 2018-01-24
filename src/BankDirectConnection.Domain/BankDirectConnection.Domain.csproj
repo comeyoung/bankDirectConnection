@@ -47,6 +47,7 @@
     <Compile Include="BOC\IDateScope.cs" />
     <Compile Include="BOC\IDetail.cs" />
     <Compile Include="BOC\IFractn.cs" />
+    <Compile Include="BOC\IHeader.cs" />
     <Compile Include="BOC\IPaymentsToPublicMsg.cs" />
     <Compile Include="BOC\IPaymentsToPublicTrans.cs" />
     <Compile Include="BOC\IToactn.cs" />

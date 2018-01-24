@@ -6,12 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using BankDirectConnection.Domain.BOC.Message;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.TransferBO;
 
 namespace BankDirectConnection.Domain.BOC
 {
     public abstract class AbastractBOCTranscation : IBaseBOCTranscation, ICheckAble
     {
-        public Header HeaderMessage { get; set; }
+        public AbastractBOCTranscation() { }
+        public AbastractBOCTranscation(ITranscation Transcation)
+        {
+            this.ClientId = Transcation.ClientId;
+            this.EDIId = Transcation.EDIId;
+        }
+        public string EDIId
+        {
+            get;set;
+        }
+
+        public IHeader HeaderMessage { get; set; }
+
+        public string ClientId
+        {
+            get;set;
+        }
+
 
         public virtual bool Check()
         {

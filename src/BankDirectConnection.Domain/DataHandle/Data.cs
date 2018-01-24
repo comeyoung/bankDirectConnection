@@ -23,5 +23,9 @@ namespace BankDirectConnection.Domain.DataHandle
         /// 中行交易状态查询业务最多明细行
         /// </summary>
         public const int MAX_LINENUM_OF_BOC_QUERY_TRANSFERSTATUS = 100;
+        /// <summary>
+        /// 中行网银交易流水最大长度
+        /// </summary>
+        public const int MAX_LENGTH_OF_OBSSID = 19;
     }
 }
