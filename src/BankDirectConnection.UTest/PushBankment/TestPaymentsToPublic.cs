@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using BankDirectConnection.PushBankment.BOCService.Service;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.PushBankment.BOCService;
+using BankDirectConnection.BaseApplication.DataHandle;
 
 namespace BankDirectConnection.UTest.PushBankment
 {
@@ -23,7 +24,7 @@ namespace BankDirectConnection.UTest.PushBankment
                 FromAcct = new Account() { AcctId = "327256085181", AcctName = "EDF", BankId = "40142", BankName = "BOC" },
                 PaymentCur = "CNY",
                 Purpose = "01",
-                Priority = "0",
+                Priority = emPriolv.Urgent,
                 TransDate = "20180115",
                 TransDetail = new List<ITransDetail>() {
                     new TransDetail() { TransCur = "CNY",TransAmount = 100000.00M ,ToAcct = new Account() { AcctId = "342856085028", AcctName = "FX", BankId = "100052", BankName = "BOC" }},
@@ -37,7 +38,7 @@ namespace BankDirectConnection.UTest.PushBankment
                 FromAcct = new Account() { AcctId = "658245854235", AcctName = "EDF", BankId = "40142", BankName = "BOC" },
                 PaymentCur = "CNY",
                 Purpose = "01",
-                Priority = "0",
+                Priority = emPriolv.Urgent,
                 TransDate = "20180115",
                 TransDetail = new List<ITransDetail>() {
                     new TransDetail() { TransCur = "CNY",TransAmount = 100000.00M ,ToAcct = new Account() { AcctId = "158245854235", AcctName = "FX", BankId = "100052", BankName = "BOC" }},

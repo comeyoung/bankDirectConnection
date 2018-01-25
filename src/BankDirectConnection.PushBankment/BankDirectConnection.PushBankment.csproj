@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MagicBox.Log">
+      <HintPath>..\BankDirectConnection.Service\Dll\MagicBox.Log.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +73,10 @@
       <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
       <Name>BankDirectConnection.BaseApplication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankDirectConnection.DapperRepository\BankDirectConnection.DapperRepository.csproj">
+      <Project>{e8176a14-dc37-44fa-b945-6b4c0685e1f6}</Project>
+      <Name>BankDirectConnection.DapperRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankDirectConnection.Domain\BankDirectConnection.Domain.csproj">
       <Project>{7e32d0da-c741-49c5-9d47-8a8915e8e6cd}</Project>
       <Name>BankDirectConnection.Domain</Name>
@@ -78,7 +86,9 @@
       <Name>BankDirectConnection.IPushBankment</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

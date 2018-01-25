@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using System.Collections.Generic;
 
 namespace BankDirectConnection.Domain.TransferBO
@@ -27,7 +28,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// 是否加急
         /// </summary>
-        string Priority { get; set; }
+        emPriolv Priority { get; set; }
         /// <summary>
         /// 交易日期
         /// </summary>
@@ -57,5 +58,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// 交易明细
         /// </summary>
         IList<ITransDetail> TransDetail { get; set; }
+
+      
     }
 }

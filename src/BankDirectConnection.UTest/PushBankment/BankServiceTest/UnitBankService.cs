@@ -6,7 +6,11 @@ using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Application.BaseTranscation;
 using System.Collections.Generic;
 using System.Linq;
+<<<<<<< HEAD
 using BankDirectConnection.Domain.QueryBO;
+=======
+using BankDirectConnection.BaseApplication.DataHandle;
+>>>>>>> edi/master
 
 namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 {
@@ -102,8 +106,13 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 ReceipterType = "1",
                 TransAmount = 10000.35M,
                 TransCur = "USD",
+<<<<<<< HEAD
                 SWIFTCode = "DHFGTNBJ",
                 Rate = "1"
+=======
+                SWIFTCode = "qwe123456",
+                Rate = 1
+>>>>>>> edi/master
             };
             for (int i = 0; i < 10; i++)
             {
@@ -117,7 +126,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     TransWay = "02",
                     BusinessType = "02",
                     Purpose = "转账",
-                    Priority = "是",
+                    Priority = emPriolv.Urgent,
                     TransDate = "20160708",
                     TransTime = "162323236",
                     FeeType = "1",
@@ -154,14 +163,17 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 
         [TestMethod]
         public void TestBankServicePay()
+<<<<<<< HEAD
         {          
+=======
+        {
+>>>>>>> edi/master
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
             var trans =  GetTrans();
-            trans.InitData();
-            trans.Check();
-            trans.Transcations.ToList().ForEach(c => c.NewEDIId());
+            bankService.PaymentTransfer(trans);
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
+<<<<<<< HEAD
             bankService.PaymentTransfer(GetTrans());
            
         }
@@ -179,6 +191,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
             // bankService.PaymentTransfer(GetTrans());
             bankService.QueryTransStatus(GetQueryTrans());
+=======
+>>>>>>> edi/master
         }
 
 

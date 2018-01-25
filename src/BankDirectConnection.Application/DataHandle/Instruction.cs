@@ -32,8 +32,8 @@ namespace BankDirectConnection.BaseApplication.DataHandle
             {
                 // 日期 银行接口 接口类型 时间戳  随机数
                 //180123    01     1     15166819  254
-                case "01": return DateTime.Now.ToString("yyMMdd") + "01" + GetTimestamp() + DateTime.Now.Millisecond.ToString();
-                case "02": return DateTime.Now.ToString("yyMMdd") + "02" + GetTimestamp() + DateTime.Now.Millisecond.ToString();
+                case "01": return DateTime.Now.ToString("yyMMdd") + "01" + GetTimestamp();
+                case "02": return DateTime.Now.ToString("yyMMdd") + "02" + GetTimestamp();
                 default: throw new BusinessException("the value of transway is bad") { Code = "1001006" };
             }
         }

@@ -1,6 +1,8 @@
 ﻿using BankDirectConnection.Application.Transfer;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.DapperRepository;
+using BankDirectConnection.Domain.Model;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.TransferBO;
@@ -25,10 +27,17 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 Transcation.InitData();
                 Transcation.Check();
-                Transcation.Transcations.ToList().ForEach(c => c.NewEDIId());
+                SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
+                Transcation.Transcations.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
+                var trans = TransModel.Create(Transcation);
+                TranscationDapperRepository repository = new TranscationDapperRepository();
+                repository.SaveTransList(trans);
                 ////获取银行信息，调用具体银行的服务
                 var bankService = BankFactory.CreateBank(Transcation.TransWay);
-                return bankService.PaymentTransfer(Transcation);
+                var rt = bankService.PaymentTransfer(Transcation);
+
+                repository.UpdateTransList(rt);
+                return rt;
             }
             catch (BusinessException ex)
             {

@@ -20,7 +20,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             this.HeaderMessage = new Header();
             this.Trans = new List<ITransactionStatusInquiry>();
-            
+
         }
 
         public TransactionStatusInquiryMsg(ITransferQueryDataList TransferQueryDataList)
@@ -56,15 +56,10 @@ namespace BankDirectConnection.Domain.BOC
         {
             foreach (var item in TransferQueryDataList.TransferQueryDatas)
             {
-                this.Trans.Add(new TransactionStatusInquiry() { EDIId = item.ClientId, Obssid = item.ObssId });
+                this.Trans.Add(new TransactionStatusInquiry(item));
             }
         }
     }
-
-   
-
-
-
 
     public class TransactionStatusInquiry: ITransactionStatusInquiry
     {
@@ -83,9 +78,14 @@ namespace BankDirectConnection.Domain.BOC
             get;set;
         }
 
-     
+
 
         public TransactionStatusInquiry() {
+        }
+        public TransactionStatusInquiry(ITransferQueryData Data)
+        {
+            this.EDIId = Data.ClientId;
+            this.Obssid = Data.ObssId;
             this.Check();
         }
         public  bool Check()
@@ -94,7 +94,7 @@ namespace BankDirectConnection.Domain.BOC
                 throw new BusinessException("the purpose of trans can't be null if choosed the convient transfer") { Code = "1011010" };
             } else if (this.Obssid.Length > Data.MAX_LENGTH_OF_OBSSID) {
                 throw new BusinessException("Online banking transaction serial number is not more than 19 ") { Code = "2011001" };
-            } 
+            }
             return true;
         }
 

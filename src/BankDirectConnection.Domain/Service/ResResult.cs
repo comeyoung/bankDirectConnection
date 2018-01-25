@@ -86,8 +86,6 @@ namespace BankDirectConnection.Domain.Service
                 }
                 result.Response.Add(new Response() { Status = status, ClientId = item.Insid, ObssId = item.Obssid, InsId = Instruction.NewInsSid("01") });
             }
-
-
             return result;
         }
 

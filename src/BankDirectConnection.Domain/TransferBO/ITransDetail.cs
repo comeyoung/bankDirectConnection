@@ -41,6 +41,6 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// 参考汇率
         /// </summary>
-        string Rate { get; set; }
+        decimal Rate { get; set; }
     }
 }

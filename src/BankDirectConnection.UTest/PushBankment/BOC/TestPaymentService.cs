@@ -1,6 +1,7 @@
 ﻿
 using BankDirectConnection.Application.BaseTranscation;
 using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.PushBankment.BankTransfer;
 using BankDirectConnection.PushBankment.BOCService.Service;
@@ -48,7 +49,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
                 PaymentCur = "RMB",
                 BusinessType = "02",
                 PaymentType = "1",
-                Priority = "是",
+                Priority = emPriolv.Urgent,
                 Purpose = "薪水",
                 TransDate = "20160708",
                 TransTime = "142020",
@@ -98,7 +99,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
                     },
                     TransAmount = 10000.00M,
                     TransCur = "RMB",
-                    Rate = "1"
+                    Rate = 1
                 }
 
         }
@@ -159,9 +160,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             Assert.IsNotNull(rt);
             Console.WriteLine(rt.Status.RspCod);
             Assert.AreEqual("0", rt.Status.RspCod);
-
         }
-
         #endregion
     }
 }
