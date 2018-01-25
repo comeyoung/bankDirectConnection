@@ -48,6 +48,7 @@ x64/
 *.tmp
 *.log
 *.dll
+*.suo
 *.vspscc
 *.vssscc
 .builds
@@ -127,3 +128,5 @@ src/.vs/config/applicationhost.config
 !GitLink.exe
 !nuget.exe
 !SQLite.Interop.dll
+.vs/bankDirectConnection/v14/.suo
+.vs/bankDirectConnection/v14/.suo
