@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+﻿using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
@@ -51,10 +52,9 @@ namespace BankDirectConnection.Domain.SGB
         {
             base.Check();
             // TODO 收款人账号不为兴业银行，并且收款币种为人民币
-            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
-                || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
+            if (Account.IsSG(this.UnionDeptId))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
-            if ( this.CrCur != "CNY")
+            if ( this.CrCur != "CNY" && this.CrCur != "RMB")
                 throw new InnerException("2021008", "the value of transcur can not be right");
             return true;
         }
