@@ -67,7 +67,37 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
                         BankId = "01020000",
                         BankName = "中国银行",
                     },
-                    TransAmount = 10000,
+                    TransAmount = 10000.00M,
+                    TransCur = "RMB",
+                    Rate = "1"
+                }, new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "王六",
+                        AcctType = "0",
+                        BankId = "01020000",
+                        BankName = "中国银行",
+                    },
+                    TransAmount = 10000.00M,
+                    TransCur = "RMB",
+                    Rate = "1"
+                }, new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "王六",
+                        AcctType = "0",
+                        BankId = "01020000",
+                        BankName = "中国银行",
+                    },
+                    TransAmount = 10000.00M,
                     TransCur = "RMB",
                     Rate = 1
                 }
@@ -78,10 +108,11 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
         private ITranscations PublicTranscations() {
             //交易信息集合
             return new Transcations()
-            {
-                BusinessType = "02",
-                TransWay = "网银",
+            {          
+                TransWay = "01",
+                BusinessType = "02",               
                 Transcations = new List<ITranscation>() {
+                getTranscation(),
                 getTranscation()
             }
             };                   

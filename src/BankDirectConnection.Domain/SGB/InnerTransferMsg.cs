@@ -61,6 +61,8 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT003";
             this.Head.ReqSeqNo = Transcation.ClientId;
             this.Head.ReqDate = Transcation.TransDate;
+            this.ClientId = Transcation.ClientId;
+            this.EDIId = Transcation.EDIId;
             //msg.Head.CorpNo = "";
             //msg.Head.OpNo = "";
             //msg.Head.PassWord = "";

@@ -69,6 +69,8 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.ReqDate = Transcation.TransDate;
             this.Priority = Transcation.Priority;
             this.WhyUse = Transcation.Purpose;
+            this.ClientId = Transcation.ClientId;
+            this.EDIId = Transcation.EDIId;
             //msg.Head.CorpNo = "";
             //msg.Head.OpNo = "";
             //msg.Head.PassWord = "";

@@ -51,7 +51,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             
             var trans = new Transcations()
             {
-                TransWay = "01",
+                TransWay = "02",
                 BusinessType = "01",
             };
             var item = new TransDetail()
@@ -65,7 +65,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 SWIFTCode = "qwe123456",
                 Rate = 1
             };
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 //外币付款
                 var transcations = new Transcation()
@@ -73,8 +73,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     ClientId = "332de889949",
                     PaymentCur = "USD",
                     PaymentType = "1",
-                    //TransWay = "01",
-                    //BusinessType = "01",
+                    TransWay = "02",
+                    BusinessType = "01",
                     Purpose = "转账",
                     Priority = emPriolv.Urgent,
                     TransDate = "20160708",

@@ -13,5 +13,7 @@ namespace BankDirectConnection.Domain.TransferBO
     public interface ITranscations : IBaseTranscations<ITranscation>
     {
          //IList<ITranscation> Transcation { get; set; }
+
+
     }
 }
