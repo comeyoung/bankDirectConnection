@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,21 @@ namespace BankDirectConnection.Application.BaseTranscation
             if (string.IsNullOrEmpty(this.AcctId))
                 throw new BusinessException("2022002", "Transaction information of AcctId can not be empty");
             return true;
+        }
+
+        /// <summary>
+        /// 根据银行行号判断是否为法兴银行
+        /// </summary>
+        /// <param name="AccountNo"></param>
+        /// <returns></returns>
+        public static bool IsSG(string BankId)
+        {
+            var SGBankNo = (emBankNo)Enum.Parse(typeof(emBankNo), emBankNo.SG.ToString());
+            // TODO 收款人账号为兴业银行
+            if (BankId.Length == 12 && BankId.Substring(0, 3) == SGBankNo.GetHashCode().ToString())
+                return true;
+            else
+                return false;
         }
 
     }

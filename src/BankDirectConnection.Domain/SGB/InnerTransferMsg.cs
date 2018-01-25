@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+﻿using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
@@ -48,7 +49,7 @@ namespace BankDirectConnection.Domain.SGB
         {
             base.Check();
             // TODO 收款人账号为兴业银行
-            if (this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
+            if (!Account.IsSG(this.UnionDeptId))
                 throw new InnerException("2021003", "the bank number of receipter is bad.");
             return true;
         }
