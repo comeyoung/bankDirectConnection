@@ -40,7 +40,7 @@ namespace BankDirectConnection.Domain.SGB
         public string RespSeqNo { get; set; }
 
         /// <summary>
-        /// 网银流水号
+        /// 网银流水号  ObssId
         /// </summary>
         public string HostSeqNo { get; set; }
         
