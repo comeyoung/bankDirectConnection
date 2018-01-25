@@ -17,7 +17,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
                 throw new InnerException("2022002", "Transaction result information can not be empty ");
             var transXml = Serialization.BuildXMLForQueryTransactionResults(Msg);
             var res = SGBHttp.PostRequest(transXml);
-            var rt = Deserialization.TransactionResultsParseResonseMsg(res);
+            var rt = Deserialization.ParseResonseMsg(res);
             return ResResult.Create(rt);
         }
     }

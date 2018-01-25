@@ -84,7 +84,11 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
                     },
                     TransAmount = 10000.00M,
                     TransCur = "RMB",
+<<<<<<< HEAD
                     Rate =1
+=======
+                    Rate = 1
+>>>>>>> edi/master
                 }, new TransDetail(){
                     ReceipterType = "1",
                     ReciepterIdCode = "130666996689890306",

@@ -53,6 +53,9 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         emUrgent
     }
 
+    /// <summary>
+    /// 银行号
+    /// </summary>
     public enum emBankNo
     {
         /// <summary>

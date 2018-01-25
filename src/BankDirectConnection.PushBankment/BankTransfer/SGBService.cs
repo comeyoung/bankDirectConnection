@@ -9,6 +9,7 @@ using System.Linq;
 using BankDirectConnection.IPushBankment.Service.SGB;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.PushBankment.SGBService.Service;
+using BankDirectConnection.Application.BaseTranscation;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -58,9 +59,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     #region 处理接口调用
                     var detail = item.TransDetail.FirstOrDefault();
                     // 如果收款人账号是我行（法兴）走行内转账
-                    if ((!string.IsNullOrEmpty(detail.ToAcct.BankId) && detail.ToAcct.BankId.Length == 12 && detail.ToAcct.BankId.Substring(0, 3) == emBankNo.SG.ToString())
-                                  || (!string.IsNullOrEmpty(detail.ToAcct.BankName) && detail.ToAcct.BankName.Contains("兴业银行")))
-
+                    if (Account.IsSG(detail.ToAcct.BankId))
                     {
                         rt = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));
                     }

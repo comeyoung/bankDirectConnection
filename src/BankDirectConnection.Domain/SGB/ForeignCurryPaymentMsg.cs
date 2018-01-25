@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+﻿using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
@@ -52,10 +53,9 @@ namespace BankDirectConnection.Domain.SGB
             if (String.IsNullOrEmpty(this.Fees))
                 throw new BusinessException("the value of feetype is null") { Code = "1021004" };
             // TODO 收款账号不为法兴 且收款币种不为人民币
-            if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
-                || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
+            if (Account.IsSG(this.UnionDeptId))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
-            if (this.CrCur == "RMB")
+            if (this.CrCur == "RMB" || this.CrCur == "CNY")
                 throw new InnerException("2021008", "the value of transcur can'not be RMB");
             return true;
         }
