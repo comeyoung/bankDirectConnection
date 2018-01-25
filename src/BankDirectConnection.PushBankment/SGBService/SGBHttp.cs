@@ -18,7 +18,7 @@ namespace BankDirectConnection.PushBankment.SGBService
 
         private static string GetTestForeignResult()
         {
-            return "<ap><CCTransCode>SGT001</CCTransCode><ReqSeqNo>2b35cb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075325</RespSeqNo><HostSeqNo>364232</HostSeqNo><RespDate>20180118</RespDate><RespTime>142825876</RespTime><RespCode>0005</RespCode><RespInfo>交易待审核</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag></FileFlag><Cme><RecordNum></RecordNum><FieldNum></FieldNum><RespPrvData></RespPrvData><BatchFileName></BatchFileName></Cme></ap>";
+            return "<ap><CCTransCode>SGT003</CCTransCode><ReqSeqNo>2b35cb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075325</RespSeqNo><HostSeqNo>364232</HostSeqNo><RespDate>20180118</RespDate><RespTime>142825876</RespTime><RespCode>0005</RespCode><RespInfo>交易待审核</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag></FileFlag><Cme><RecordNum></RecordNum><FieldNum></FieldNum><RespPrvData></RespPrvData><BatchFileName></BatchFileName></Cme></ap>";
         }
 
         private static string GetTestInnerResult()
@@ -35,11 +35,11 @@ namespace BankDirectConnection.PushBankment.SGBService
         }
         public static string PostRequest(string RequestXML)
         {
-            Logger.Writer("push to BOC:" + RequestXML);
+            //Logger.Writer("push to BOC:" + RequestXML);
             //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            var rt = GetTestForeignResult();
-            Logger.Writer("receip from BOC:" + rt);
-            return rt;
+            //var rt = GetTestForeignResult();
+           // Logger.Writer("receip from BOC:" + rt);
+            return GetTestForeignResult();
             // return GetTestForeignResult();
            // return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
         }

@@ -6,11 +6,8 @@ using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Application.BaseTranscation;
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
-using BankDirectConnection.Domain.QueryBO;
-=======
 using BankDirectConnection.BaseApplication.DataHandle;
->>>>>>> edi/master
+using BankDirectConnection.Domain.QueryBO;
 
 namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 {
@@ -22,9 +19,9 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             return new Account()
             {
                 BankId = "40142568949556",
-                BankName = "中国某某支行",
+                BankName = "中国银行股份有限公司北京崇文门支行",
                 AcctId = "327256085181",
-                AcctName = "李四",
+                AcctName = "李明",
                 AcctType = "1"
             };
         }
@@ -33,7 +30,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             return new Account()
             {
                 BankId = "309691581000",
-                BankName = "法国兴业银行某某支行",
+                BankName = "法国兴业银行支行",
                 AcctId = "126364369963123",
                 AcctName = "Jerry",
                 AcctType = "1"
@@ -46,7 +43,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             return new Account()
             {
                 BankId = "309691581000",
-                BankName = "法兴银行某某支行",
+                BankName = "法国兴业银行支行",
                 AcctId = "7759261010870017",
                 AcctName = "Jack",
                 AcctType = "0"
@@ -58,8 +55,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         {
             return new Account()
             {
-                BankId = "265691581000",
-                BankName = "中国银行某某支行",
+                BankId = "104100004048",
+                BankName = "中国银行股份有限公司北京崇文门支行",
                 AcctId = "6610108700592617 ",
                 AcctName = "李白",
                 AcctType = "0"
@@ -71,7 +68,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             return new Account()
             {
                 BankId = "309691581000",
-                BankName = "美国银行某某支行",
+                BankName = "美国银行支行",
                 AcctId = "6610111800612227",
                 AcctName = "Lucy",
                 AcctType = "0"
@@ -82,15 +79,15 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         {
             return new Account()
             {
-                BankId = "104112341234",
-                BankName = "中国银行某某支行",
+                BankId = "104100004048",
+                BankName = "中国银行股份有限公司北京崇文门支行",
                 AcctId = "6326630322660823633",
-                AcctName = "张三",
+                AcctName = "张思思",
                 AcctType = "1"
                 
             };
         }
-        private ITranscations GetTrans()
+        private ITranscations GetForerignTrans()
         {
             
             var trans = new Transcations()
@@ -104,17 +101,12 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 ReciepterIdType = "0",
                 ReciepterIdCode = "111222333666555",
                 ReceipterType = "1",
-                TransAmount = 10000.35M,
+                TransAmount = 0.35M,
                 TransCur = "USD",
-<<<<<<< HEAD
-                SWIFTCode = "DHFGTNBJ",
-                Rate = "1"
-=======
-                SWIFTCode = "qwe123456",
+                SWIFTCode = "GDJDKFKS",
                 Rate = 1
->>>>>>> edi/master
             };
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
                
                 
@@ -142,15 +134,160 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             return trans;
         }
 
+        private ITranscations GetTrans()
+        {
+
+            var trans = new Transcations()
+            {
+                TransWay = "02",
+                BusinessType = "02",
+            };
+            var item = new TransDetail()
+            {
+                ToAcct = GetForAccoutBOC(),
+                ReciepterIdType = "0",
+                ReciepterIdCode = "111222333666555",
+                ReceipterType = "1",
+                TransAmount = 0.35M,
+                TransCur = "USD",
+                SWIFTCode = "GDJDKFKS",
+                Rate = 1
+            };
+            for (int i = 0; i < 2; i++)
+            {
+
+
+                var transcations = new Transcation()
+                {
+                    ClientId = "332de889949",
+                    PaymentCur = "USD",
+                    PaymentType = "1",
+                    TransWay = "02",
+                    BusinessType = "02",
+                    Purpose = "转账",
+                    Priority = emPriolv.Urgent,
+                    TransDate = "20160708",
+                    TransTime = "16230",
+                    FeeType = "1",
+                    FeeAcct = "13696858585",
+                    AgentSign = "b1362",
+                    Comments = "转",
+                    FromAcct = GetForAccountFromUSD(),
+                };
+                transcations.TransDetail.Add(item);
+                trans.Transcations.Add(transcations);
+            }
+
+            return trans;
+        }
+
+        private ITranscations GetRMBTrans()
+        {
+            
+            var trans = new Transcations()
+            {
+                TransWay = "02",
+                BusinessType = "02",
+            };
+            var item = new TransDetail()
+            {
+                ToAcct = GetForAccoutBOC(),
+                ReciepterIdType = "0",
+                ReciepterIdCode = "111222333666555",
+                ReceipterType = "1",
+                TransAmount = 0.35M,
+                TransCur = "CNY",
+                SWIFTCode = "GDJDKFKS",
+                Rate = 1
+            };
+            for (int i = 0; i < 2; i++)
+            {
+               
+                
+                var transcations = new Transcation()
+                {
+                    ClientId = "332de889949",
+                    PaymentCur = "CNY",                   
+                    PaymentType = "1",
+                    TransWay = "02",
+                    BusinessType = "02",
+                    Purpose = "转账",
+                    Priority = emPriolv.Urgent,
+                    TransDate = "20160708",
+                    TransTime = "162323236",
+                    FeeType = "1",
+                    FeeAcct = "13696858585",
+                    AgentSign = "b1362",
+                    Comments = "转",
+                    FromAcct = GetForAccountFromCNY(),
+                };
+                transcations.TransDetail.Add(item);
+                trans.Transcations.Add(transcations);
+            }
+           
+            return trans;
+        }
+
+        private ITranscations GetInnerTrans()
+        {
+
+            var trans = new Transcations()
+            {
+                TransWay = "02",
+                BusinessType = "02",
+            };
+            var item = new TransDetail()
+            {
+                ToAcct = GetForAccountSGB(),
+                ReciepterIdType = "0",
+                ReciepterIdCode = "111222333666555",
+                ReceipterType = "1",
+                TransAmount = 0.35M,
+                TransCur = "USD",
+                SWIFTCode = "GDJDKFKS",
+                Rate = 1
+            };
+            for (int i = 0; i < 2; i++)
+            {
+
+
+                var transcations = new Transcation()
+                {
+                    ClientId = "332de889949",
+                    PaymentCur = "USD",
+                    PaymentType = "1",
+                    TransWay = "02",
+                    BusinessType = "02",
+                    Purpose = "转账",
+                    Priority = emPriolv.Urgent,
+                    TransDate = "20160708",
+                    TransTime = "162323236",
+                    FeeType = "1",
+                    FeeAcct = "13696858585",
+                    AgentSign = "b1362",
+                    Comments = "转",
+                    FromAcct = GetForAccountFromSGB(),
+                };
+                transcations.TransDetail.Add(item);
+                trans.Transcations.Add(transcations);
+            }
+
+            return trans;
+        }
+
         private ITransferQueryData QueryData() {
             return new TransferQueryData(){
                 ClientId = "161fsdf4sf984f98df",
                 EDIId = "320320163363339897",
                 ObssId = "2016336333",
                 StartDate = "20180607",
-                StartTime = "16243666"
+                StartTime = "36200"
             };
         }
+        /// <summary>
+        /// 交易查询信息
+        /// </summary>
+        /// <returns></returns>
         private ITransferQueryDataList GetQueryTrans() {
             return new TransferQueryDataList() {
                 TransferQueryDatas = new List<ITransferQueryData>() {
@@ -163,75 +300,79 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 
         [TestMethod]
         public void TestBankServicePay()
-<<<<<<< HEAD
-        {          
-=======
         {
->>>>>>> edi/master
             BankService bankService = new BankService();
-            //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
-            var trans =  GetTrans();
-            bankService.PaymentTransfer(trans);
-            trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-<<<<<<< HEAD
-            bankService.PaymentTransfer(GetTrans());
+             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
+             // var trans =  GetTrans();
+             //bankService.PaymentTransfer(trans);
+            // trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
+            //bankService.PaymentTransfer(GetTrans());
            
         }
 
+        /// <summary>
+        /// 交易信息查询
+        /// </summary>
         [TestMethod]
         public void TestBankServiceQuery()
         {
-            SGBService bankService = new SGBService();
-            //BankService bankService = new BankService();
+           //SGBService bankService = new SGBService();
+            BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
-            var trans = GetTrans();
-            trans.InitData();
-            trans.Check();
-            trans.Transcations.ToList().ForEach(c => c.NewEDIId());
-            trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            // bankService.PaymentTransfer(GetTrans());
+            //var trans = GetTrans();
+            //trans.InitData();
+            //trans.Check();
+            //trans.Transcations.ToList().ForEach(c => c.NewEDIId());
+            //trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
             bankService.QueryTransStatus(GetQueryTrans());
-=======
->>>>>>> edi/master
         }
 
 
+        /// <summary>
+        /// 测试外币转账
+        /// </summary>
         [TestMethod]
         public void TestBankServiceForerignPay()
         {
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
-            var trans = GetTrans();
+            var trans = GetForerignTrans();
             trans.InitData();
             trans.Check();
             trans.Transcations.ToList().ForEach(c => c.NewEDIId());
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            bankService.PaymentTransfer(GetTrans());
+            bankService.PaymentTransfer(trans);
 
         }
+        /// <summary>
+        /// 人民币转账
+        /// </summary>
         [TestMethod]
         public void TestBankServiceRMBPay()
         {
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
-            var trans = GetTrans();
+            var trans = GetRMBTrans();
             trans.InitData();
             trans.Check();
             trans.Transcations.ToList().ForEach(c => c.NewEDIId());
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            bankService.PaymentTransfer(GetTrans());
+            bankService.PaymentTransfer(trans);
         }
+        /// <summary>
+        /// 行内转账
+        /// </summary>
             [TestMethod]
         public void TestBankServiceInnerPay()
         {
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
-            var trans = GetTrans();
+            var trans = GetInnerTrans();
             trans.InitData();
             trans.Check();
             trans.Transcations.ToList().ForEach(c => c.NewEDIId());
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            bankService.PaymentTransfer(GetTrans());
+            bankService.PaymentTransfer(trans);
 
         }
     }
