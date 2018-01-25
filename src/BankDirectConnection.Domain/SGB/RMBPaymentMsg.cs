@@ -41,7 +41,7 @@ namespace BankDirectConnection.Domain.SGB
         /// <summary>
         /// 加急标志
         /// </summary>
-        public string Priority { get; set; }
+        public emPriolv Priority { get; set; }
 
         
 

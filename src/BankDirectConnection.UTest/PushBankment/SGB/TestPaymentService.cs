@@ -12,6 +12,7 @@ using BankDirectConnection.Application.BaseTranscation;
 using BankDirectConnection.Domain.SGB;
 using BankDirectConnection.PushBankment.SGBService;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.BaseApplication.DataHandle;
 
 namespace BankDirectConnection.UTest.PushBankment.SGB
 {
@@ -101,7 +102,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "USD",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -121,7 +122,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 10000,
                                 TransCur = "USD",
                                 SWIFTCode = "qwe123456",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -150,7 +151,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -171,7 +172,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 10000,
                                 TransCur = "RMB",
                                 SWIFTCode = "qwe123456",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -201,7 +202,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -222,7 +223,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 10000,
                                 TransCur = "RMB",
                                 SWIFTCode = "qwe123456",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -251,7 +252,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -272,7 +273,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             },
                             new TransDetail()
                             {
@@ -283,7 +284,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 9000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             },
                             new TransDetail()
                             {
@@ -294,7 +295,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 10000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -323,7 +324,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -344,7 +345,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -356,7 +357,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -377,7 +378,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -389,7 +390,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -410,7 +411,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -439,7 +440,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -460,7 +461,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             },new TransDetail()
                             {
                                 ToAcct= GetInnerToAccout(),
@@ -470,7 +471,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -482,7 +483,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -503,7 +504,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             },new TransDetail()
                             {
                                 ToAcct= GetInnerToAccout(),
@@ -513,7 +514,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -542,7 +543,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -563,7 +564,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -575,7 +576,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -596,7 +597,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -625,7 +626,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -646,7 +647,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }
@@ -658,7 +659,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                         PaymentCur = "CNY",
                         PaymentType = "1",
                         Purpose = "转账",
-                        Priority = "是",
+                        Priority = emPriolv.Urgent,
                         TransDate = "20160708",
                         TransTime = "162323",
                         FeeType = "1",
@@ -679,7 +680,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
                                 TransAmount = 5000,
                                 TransCur = "RMB",
                                 SWIFTCode = "SGCLCNBJ",
-                                Rate = "1"
+                                Rate = 1
                             }
 
                         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace BankDirectConnection.Domain.BOC
         /// <summary>
         /// 银行处理优先级(0-普通；1-加急)
         /// </summary>
-         string Priolv { get; set; }
+        emPriolv Priolv { get; set; }
         /// <summary>
         /// 用途
         /// </summary>

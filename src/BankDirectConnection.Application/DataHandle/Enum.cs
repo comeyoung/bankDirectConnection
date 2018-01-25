@@ -64,4 +64,16 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         /// </summary>
         SG = 309,
     }
+
+    public enum emPriolv
+    {
+        /// <summary>
+        /// 普通
+        /// </summary>
+        Normal = 0,
+        /// <summary>
+        /// 加急
+        /// </summary>
+        Urgent = 1
+    }
 }

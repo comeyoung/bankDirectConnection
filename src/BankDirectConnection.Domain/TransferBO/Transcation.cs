@@ -64,7 +64,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// 是否加急
         /// </summary>
-        public string Priority { get; set; }
+        public emPriolv Priority { get; set; }
         /// <summary>
         /// 交易日期
         /// </summary>
