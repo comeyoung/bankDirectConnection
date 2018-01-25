@@ -45,7 +45,10 @@ namespace BankDirectConnection.PushBankment.SGBService
         {
             return "<ap><CCTransCode>SGT002</CCTransCode><ReqSeqNo>2b54fcb176aed4b4fabf332de889949d1</ReqSeqNo><RespSource>ERP</RespSource><RespSeqNo>ERP40075328</RespSeqNo><HostSeqNo>364233</HostSeqNo><RespDate>20180118</RespDate><RespTime>144015134</RespTime><RespCode>0005</RespCode><RespInfo>交易成功</RespInfo><RxtInfo>交易待审核</RxtInfo><FileFlag/><Cme><RecordNum/><FieldNum/><RespPrvData/><BatchFileName/></Cme></ap>";
         }
-
+        private static string GetTestQueryStatusResult()
+        {
+            return "<ap><CCTransCode>SGQ010</CCTransCode><Cmp><CmeSeqNo>3120dsff3dgdfdg2d566f15f6d</CmeSeqNo><JnlState>0000</JnlState><Postscript>成功</Postscript><RespSeqNo>3102</RespSeqNo><HostSeqNo>3021302166667777</HostSeqNo><CertSeqNo>7111377021677</CertSeqNo></Cmp></ap>";
+        }
         public static string PostRequest(string RequestXML)
         {
             return GetTestForeignResult();
