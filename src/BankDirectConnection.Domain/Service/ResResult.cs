@@ -172,7 +172,7 @@ namespace BankDirectConnection.Domain.Service
             if (typeof(T) == typeof(IForeignCurryPaymentMsg))
             {               
                     res = new Response();
-                    res.InsId = Msg.HostSeqNo;
+                    res.ObssId = Msg.HostSeqNo;
                     res.ClientId = TransMsg.ClientId;
               if (Msg.RespCode == "0000"|| Msg.RespCode == "0005" || Msg.RespCode == "0006") {
                     res.Status.RspCod = "0";
@@ -189,7 +189,7 @@ namespace BankDirectConnection.Domain.Service
             else if (typeof(T) == typeof(IInnerTransferMsg))
             {
                 res = new Response();
-                res.InsId = Msg.HostSeqNo;
+                res.ObssId = Msg.HostSeqNo;
                 res.ClientId = TransMsg.ClientId;
                 if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
                 {
@@ -205,7 +205,7 @@ namespace BankDirectConnection.Domain.Service
             else if (typeof(T) == typeof(IRMBPaymentMsg))
             {
                 res = new Response();
-                res.InsId = Msg.HostSeqNo;
+                res.ObssId = Msg.HostSeqNo;
                 res.ClientId = TransMsg.ClientId;
                 if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
                 {
