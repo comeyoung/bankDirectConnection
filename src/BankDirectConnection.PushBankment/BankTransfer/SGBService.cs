@@ -60,8 +60,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     // 如果收款人账号是我行（法兴）走行内转账
                     if ((!string.IsNullOrEmpty(detail.ToAcct.BankId) && detail.ToAcct.BankId.Length == 12 && detail.ToAcct.BankId.Substring(0, 3) == emBankNo.SG.ToString())
                                   || (!string.IsNullOrEmpty(detail.ToAcct.BankName) && detail.ToAcct.BankName.Contains("兴业银行")))
+
                     {
-                         rt = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));
+                        rt = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));
                     }
                     else
                     {
@@ -104,7 +105,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         public IResResult QueryTransStatus(ITransferQueryDataList TransferQueryData)
         {
             IResResult result = new ResResult();
-
             TransactionResultsMsg msg;
             foreach (var item in TransferQueryData.TransferQueryDatas)
             {

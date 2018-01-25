@@ -45,5 +45,11 @@ namespace BankDirectConnection.Domain.QueryBO
         {
             get;set;
         }
+        
+
+        public string StartTime
+        {
+            get; set;
+        }
     }
 }
