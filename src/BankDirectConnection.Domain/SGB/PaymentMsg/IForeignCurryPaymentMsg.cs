@@ -19,7 +19,7 @@ namespace BankDirectConnection.Domain.SGB.PaymentMsg
         /// <summary>
         /// 参考汇率
         /// </summary>
-         string Rate { get; set; }
+         decimal Rate { get; set; }
         
         #endregion
     }

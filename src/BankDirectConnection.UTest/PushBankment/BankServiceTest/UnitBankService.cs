@@ -6,6 +6,7 @@ using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.Application.BaseTranscation;
 using System.Collections.Generic;
 using System.Linq;
+using BankDirectConnection.BaseApplication.DataHandle;
 
 namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 {
@@ -62,7 +63,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 TransAmount = 10000,
                 TransCur = "USD",
                 SWIFTCode = "qwe123456",
-                Rate = "1"
+                Rate = 1
             };
             for (int i = 0; i < 10; i++)
             {
@@ -75,7 +76,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     TransWay = "02",
                     BusinessType = "01",
                     Purpose = "转账",
-                    Priority = "是",
+                    Priority = emPriolv.Urgent,
                     TransDate = "20160708",
                     TransTime = "162323",
                     FeeType = "1",
@@ -94,15 +95,11 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         [TestMethod]
         public void TestBankServicePay()
         {
-            
             BankService bankService = new BankService();
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(GetTrans()));
             var trans =  GetTrans();
-            trans.InitData();
-            trans.Check();
-            trans.Transcations.ToList().ForEach(c => c.NewEDIId());
+            bankService.PaymentTransfer(trans);
             trans.Transcations.ToList().ForEach(c => { Console.WriteLine(c.EDIId); });
-            bankService.PaymentTransfer(GetTrans());
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.Domain.TransferBO;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,11 @@ namespace BankDirectConnection.Domain.SGB.PaymentMsg
     public interface IRMBPaymentMsg: IBaseSGBTranscation
     {
         #region property
-        
+
         /// <summary>
         /// 加急标志
         /// </summary>
-        string Priority { get; set; }
+        emPriolv Priority { get; set; }
         #endregion
       
     }

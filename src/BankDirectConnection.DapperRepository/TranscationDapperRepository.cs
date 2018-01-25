@@ -1,4 +1,6 @@
-﻿using BankDirectConnection.Domain.TransferBO;
+﻿using BankDirectConnection.Domain.Model;
+using BankDirectConnection.Domain.Service;
+using BankDirectConnection.Domain.TransferBO;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,6 @@ namespace BankDirectConnection.DapperRepository
                 {
                     //var coll = await conn.QueryParentChildAsync<ITranscations, Transcations, int>(sql, p => p.DocEntry, p => p.SalesOrderItems, splitOn: "DocEntry");
                     //collection = coll.ToList();
-                   
                 }
                 catch (Exception ex)
                 {
@@ -43,7 +44,21 @@ namespace BankDirectConnection.DapperRepository
         }
 
 
-        public void Save(ITranscations Transcations)
+        public void SaveTransList(List<TransModel> Trans)
+        {
+            foreach (var item in Trans)
+            {
+                this.SaveTranscation(item);
+            }
+        }
+        public async Task SaveTransListAsync(List<TransModel> Trans)
+        {
+            foreach (var item in Trans)
+            {
+                await this.SaveTranscationAsync(item);
+            }
+        }
+        public void SaveTranscation(TransModel TransModel)
         {
             using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
             {
@@ -51,33 +66,35 @@ namespace BankDirectConnection.DapperRepository
                 IDbTransaction dbTransaction = conn.BeginTransaction();
                 try
                 {
-                    string insertSql = @"insert into T_SalesOrder(OMSDocEntry,OMSDocDate,DocType,BusinessType,PlatformCode,CardCode,OrderPaied,Freight,PayMethod,Comments,CreateDate,UpdateDate) 
-                                    values(@OMSDocEntry,@OMSDocDate,@DocType,@BusinessType,@PlatfromCode,@CardCode,@OrderPaied,@Freight,@Paymenthod,@Comments,@CreateDate,@UpdateDate)select SCOPE_IDENTITY();";
-                    //string insertItemSql = @"insert into T_SalesOrderItem(DocEntry,LineNum,OMSDocEntry,OMSLineNum,ItemCode,Quantity,Price,ItemPaied) 
-                    //                           values(@DocEntry,@LineNum,@OMSDocEntry,@OMSLineNum,@ItemCode,@Quantity,@Price,@ItemPaied)";
-
-                    object DocEntry =  conn.ExecuteScalar(insertSql,
+                    string insertSql = @"INSERT INTO T_EDF_Trans (EDIId ,ClientId ,TransWay ,BusinessType ,PaymentCur ,PaymentType ,Purpose ,Priority ,TransDate ,TransTime ,FeeType ,FeeAcct ,Comments ,BankId ,BankName ,AcctId ,AcctName ,TransCode ,TransAmount) 
+                                            VALUES (@EDIId ,@ClientId ,@TransWay ,@BusinessType ,@PaymentCur ,@PaymentType ,@Purpose ,@Priority ,@TransDate ,@TransTime ,@FeeType ,@FeeAcct ,@Comments ,@BankId ,@BankName ,@AcctId ,@AcctName ,@TransCode ,@TransAmount)";
+                    string insertItemSql = @"INSERT INTO T_EDF_TransDetail (EDIId ,ClientId ,LineId ,BankId ,BankName ,AcctId ,AcctName ,ReciepterIdType ,ReciepterIdCode ,AcctType ,ReceipterType ,TransAmount ,TransCur ,SWIFTCode ,Rate) 
+                                            VALUES (@EDIId ,@ClientId ,@LineId ,@BankId ,@BankName ,@AcctId ,@AcctName ,@ReciepterIdType ,@ReciepterIdCode ,@AcctType ,@ReceipterType ,@TransAmount ,@TransCur ,@SWIFTCode ,@Rate)";
+                   conn.ExecuteScalar(insertSql,
                         new
                         {
-                            //OMSDocEntry = SalesOrder.OMSDocEntry,
-                            //OMSDocDate = SalesOrder.OMSDocDate,
-
-                            //DocType = SalesOrder.DocType,
-                            //BusinessType = SalesOrder.BusinessType,
-                            //PlatfromCode = SalesOrder.PlatformCode,
-                            //CardCode = SalesOrder.CardCode,
-                            //OrderPaied = SalesOrder.OrderPaied,
-                            //Freight = SalesOrder.Freight,
-                            //Paymenthod = SalesOrder.PayMethod,
-                            //Comments = SalesOrder.Comments,
-                            //CreateDate = DateTime.Now,
-                            //UpdateDate = SalesOrder.UpdateDate
+                            EDIId = TransModel.EDIId,
+                            ClientId = TransModel.ClientId,
+                            TransWay = TransModel.TransWay,
+                            BusinessType = TransModel.BusinessType,
+                            PaymentCur = TransModel.PaymentCur,
+                            PaymentType = TransModel.PaymentType,
+                            Purpose = TransModel.Purpose,
+                            Priority = TransModel.Priority,
+                            TransDate = TransModel.TransDate,
+                            TransTime = TransModel.TransTime,
+                            FeeType = TransModel.FeeType,
+                            FeeAcct = TransModel.FeeAcct,
+                            Comments = TransModel.Comments,
+                            BankId = TransModel.BankId,
+                            BankName = TransModel.BankName,
+                            AcctId = TransModel.AcctId,
+                            AcctName = TransModel.AcctName,
+                            TransCode = TransModel.TransCode,
+                            TransAmount = TransModel.TransAmount
                         }, dbTransaction);
-                    // saveRlt.ReturnUniqueKey = DocEntry.ToString();//回传保存订单的主键
-                    // await conn.ExecuteAsync(insertItemSql, DocumentItemHandle<SalesOrderItem>.GetDocumentItems(SalesOrder.SalesOrderItems, Convert.ToInt32(DocEntry)), dbTransaction);
-
+                      conn.Execute(insertItemSql,TransModel.TransDetails, dbTransaction);
                     dbTransaction.Commit();
-                    //saveRlt.Code = 0;
                 }
                 catch (Exception ex)
                 {
@@ -88,7 +105,186 @@ namespace BankDirectConnection.DapperRepository
                 {
                     conn.Close();
                 }
+            }
+        }
 
+        public async Task SaveTranscationAsync(TransModel TransModel)
+        {
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    string insertSql = @"INSERT INTO T_EDF_Trans (EDIId ,ClientId ,TransWay ,BusinessType ,PaymentCur ,PaymentType ,Purpose ,Priority ,TransDate ,TransTime ,FeeType ,FeeAcct ,Comments ,BankId ,BankName ,AcctId ,AcctName ,TransCode ,TransAmount) 
+                                            VALUES (@EDIId ,@ClientId ,@TransWay ,@BusinessType ,@PaymentCur ,@PaymentType ,@Purpose ,@Priority ,@TransDate ,@TransTime ,@FeeType ,@FeeAcct ,@Comments ,@BankId ,@BankName ,@AcctId ,@AcctName ,@TransCode ,@TransAmount)";
+                    string insertItemSql = @"INSERT INTO T_EDF_TransDetail (EDIId ,ClientId ,LineId ,BankId ,BankName ,AcctId ,AcctName ,ReciepterIdType ,ReciepterIdCode ,AcctType ,ReceipterType ,TransAmount ,TransCur ,SWIFTCode ,Rate) 
+                                            VALUES (@EDIId ,@ClientId ,@LineId ,@BankId ,@BankName ,@AcctId ,@AcctName ,@ReciepterIdType ,@ReciepterIdCode ,@AcctType ,@ReceipterType ,@TransAmount ,@TransCur ,@SWIFTCode ,@Rate)";
+                    await conn.ExecuteScalarAsync(insertSql,
+                         new
+                         {
+                             EDIId = TransModel.EDIId,
+                             ClientId = TransModel.ClientId,
+                             TransWay = TransModel.TransWay,
+                             BusinessType = TransModel.BusinessType,
+                             PaymentCur = TransModel.PaymentCur,
+                             PaymentType = TransModel.PaymentType,
+                             Purpose = TransModel.Purpose,
+                             Priority = TransModel.Priority,
+                             TransDate = TransModel.TransDate,
+                             TransTime = TransModel.TransTime,
+                             FeeType = TransModel.FeeType,
+                             FeeAcct = TransModel.FeeAcct,
+                             Comments = TransModel.Comments,
+                             BankId = TransModel.BankId,
+                             BankName = TransModel.BankName,
+                             AcctId = TransModel.AcctId,
+                             AcctName = TransModel.AcctName,
+                             TransCode = TransModel.TransCode,
+                             TransAmount = TransModel.TransAmount
+                         }, dbTransaction);
+                    await conn.ExecuteAsync(insertItemSql, TransModel.TransDetails, dbTransaction);
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void UpdateTransCode(string EDIId,string ClientId,string TransCode)
+        {
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
+                    conn.ExecuteScalar(updateSql,
+                         new
+                         {
+                             TransCode = TransCode,
+                             EDIId = EDIId,
+                             ClientId = ClientId
+                         }, dbTransaction);
+                    conn.Execute(updateSql, dbTransaction);
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public async Task UpdateTransCodeAsync(string EDIId, string ClientId, string TransCode)
+        {
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
+                    conn.ExecuteScalar(updateSql,
+                         new
+                         {
+                             TransCode = TransCode,
+                             EDIId = EDIId,
+                             ClientId = ClientId
+                         }, dbTransaction);
+                    await conn.ExecuteAsync(updateSql, dbTransaction);
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public async Task UpdateTransListAsync(IResResult ResResult)
+        {
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
+                    foreach (var item in ResResult.Response)
+                    {
+                        conn.ExecuteScalar(updateSql,
+                         new
+                         {
+                             TransCode = item.Status.RspCod,
+                             EDIId = item.InsId,
+                             ClientId = item.ClientId
+                         }, dbTransaction);
+                        await conn.ExecuteAsync(updateSql, dbTransaction);
+                    }
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void UpdateTransList(IResResult ResResult)
+        {
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
+                    foreach (var item in ResResult.Response)
+                    {
+                        conn.ExecuteScalar(updateSql,
+                         new
+                         {
+                             TransCode = item.Status.RspCod,
+                             EDIId = item.InsId,
+                             ClientId = item.ClientId
+                         }, dbTransaction);
+                        conn.Execute(updateSql, dbTransaction);
+                    }
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
     }

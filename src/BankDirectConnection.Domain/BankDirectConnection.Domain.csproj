@@ -74,6 +74,8 @@
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
     <Compile Include="ExceptionMsg\ErrorResult.cs" />
+    <Compile Include="Model\TransDetailModel.cs" />
+    <Compile Include="Model\TransModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBO\ITransferQueryData.cs" />
     <Compile Include="QueryBO\TransferQueryData.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,6 @@ namespace BankDirectConnection.DapperRepository
 	===============================================================================================================================*/
     public class SeqNumber
     {
-        /// <summary>
-        /// 获取序列号
-        /// </summary>
-        /// <returns></returns>
-        public string GetSeqNumber()
-        {
-
-            return "";
-        }
+        
     }
 }
