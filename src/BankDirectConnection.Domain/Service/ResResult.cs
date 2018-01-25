@@ -36,9 +36,20 @@ namespace BankDirectConnection.Domain.Service
 
         public static IResResult Create(QueryTransactionResultsResponse rt)
         {
-            //TODO 合并SGB转账业务返回的信息
-
-            throw new NotImplementedException();
+            IResResult result = new ResResult();
+            if (null == rt)
+                throw new InnerException("2022007", "Response information can not be empty ");
+                result.Status.RspCod = rt.Trans.JnlState;
+                result.Status.RspMsg = rt.Trans.Postscript;
+            if (result.Status.RspCod == "0000" || result.Status.RspCod == "0005" || result.Status.RspCod == "0006")
+            {
+                result.Status.RspCod = "0";
+                result.Status.RspMsg = "ok";
+            } 
+                //item.ClientId = rt.Trans.CertSeqNo;
+                //item.ObssId = rt.Trans.HostSeqNo;
+                result.Response.Add(new Response() { ClientId = rt.Trans.CertSeqNo, ObssId = rt.Trans.HostSeqNo, InsId = Instruction.NewInsSid("02") });                           
+            return result;
         }
         
         /// <summary>

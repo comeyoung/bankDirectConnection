@@ -41,9 +41,17 @@ namespace BankDirectConnection.Domain.SGB
 
         private TransactionResultsMsg Create(ITransferQueryDataList TransferQueryData)
         {
-            foreach (var item in TransferQueryData.TransferQueryDatas) {
+            //< CCTransCode > SGT002 </ CCTransCode >
+            //< ReqSeqNo > 02201801221014590002 </ ReqSeqNo >
+            //< ReqDate > 20180117 </ ReqDate >
+            //< ReqTime > 请求时间（到毫秒）</ ReqTime >
+            //< ProductID > ID </ ProductID > 
+            //< ChannelType > ERP </ ChannelType >
+            foreach (var item in TransferQueryData.TransferQueryDatas) {                                     
                 this.Trans.CmeSeqNo = item.ClientId;
                 this.Trans.StartDate = item.StartDate;
+                this.Head.ReqDate = item.StartDate;
+                this.Head.ReqTime = item.StartTime;
             }
             return this;
         }

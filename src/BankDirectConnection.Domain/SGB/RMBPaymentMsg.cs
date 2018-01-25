@@ -54,7 +54,7 @@ namespace BankDirectConnection.Domain.SGB
             if ((!string.IsNullOrEmpty(this.UnionDeptId) && this.UnionDeptId.Length == 12 && this.UnionDeptId.Substring(0, 3) == emBankNo.SG.ToString())
                 || (!string.IsNullOrEmpty(this.CrBankName) && this.CrBankName.Contains("兴业银行")))
                 throw new InnerException("2021003", "the bank number or bank name of receipter is bad.");
-            if ( this.CrCur != "RMB")
+            if ( this.CrCur != "CNY")
                 throw new InnerException("2021008", "the value of transcur can not be right");
             return true;
         }
@@ -67,6 +67,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT002";
             this.Head.ReqSeqNo = Transcation.ClientId;
             this.Head.ReqDate = Transcation.TransDate;
+            this.Head.ReqTime = Transcation.TransTime;           
             this.Priority = Transcation.Priority;
             this.WhyUse = Transcation.Purpose;
             this.ClientId = Transcation.ClientId;
@@ -75,6 +76,7 @@ namespace BankDirectConnection.Domain.SGB
             //msg.Head.OpNo = "";
             //msg.Head.PassWord = "";
             this.DbAccNo = Transcation.FromAcct.AcctId;
+            
             this.DbAccName = Transcation.FromAcct.AcctName;
             this.DbCur = Transcation.PaymentCur;
             foreach (var item in Transcation.TransDetail)
@@ -86,8 +88,10 @@ namespace BankDirectConnection.Domain.SGB
                 this.ForeignPayee = item.ReceipterType;
                 this.CrBankName = item.ToAcct.BankName;
                 this.UnionDeptId = item.ToAcct.BankId;
-                this.CrCur = item.TransCur;
+                this.CrCur = item.TransCur;           
                 this.TransAmt = item.TransAmount;
+                //this.StartDate = Transcation.TransDate;
+                //this.StartTime = Transcation.TransTime;
             }
             return this;
         }

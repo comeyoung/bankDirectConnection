@@ -67,6 +67,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT003";
             this.Head.ReqSeqNo = Transcation.ClientId;
             this.Head.ReqDate = Transcation.TransDate;
+            this.Head.ReqTime = Transcation.TransTime;
             this.WhyUse = Transcation.Purpose;
             this.Fees = Transcation.FeeType;
             this.ClientId = Transcation.ClientId;

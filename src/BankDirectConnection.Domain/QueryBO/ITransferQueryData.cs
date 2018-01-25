@@ -24,5 +24,7 @@ namespace BankDirectConnection.Domain.QueryBO
         string ObssId { get; set; }
 
         string StartDate { get; set; }
+
+        string StartTime { get; set; }
     }
 }

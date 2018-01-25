@@ -20,5 +20,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         string ClientId { get; set; }
 
         string EDIId { get; set; }
+
+       
     }
 }

@@ -61,6 +61,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT003";
             this.Head.ReqSeqNo = Transcation.ClientId;
             this.Head.ReqDate = Transcation.TransDate;
+            this.Head.ReqTime = Transcation.TransTime;
             this.ClientId = Transcation.ClientId;
             this.EDIId = Transcation.EDIId;
             //msg.Head.CorpNo = "";
@@ -93,9 +94,10 @@ namespace BankDirectConnection.Domain.SGB
                 foreach (var line in item.TransDetail)
                 {
                     InnerTransferMsg msg = new InnerTransferMsg();
-                    msg.Head.CCTransCode = "SGT003";
+                    msg.Head.CCTransCode = "SGT001";
                     msg.Head.ReqSeqNo = item.ClientId;
                     msg.Head.ReqDate = item.TransDate;
+                    msg.Head.ReqTime = item.TransTime;
                     //msg.Head.CorpNo = "";
                     //msg.Head.OpNo = "";
                     //msg.Head.PassWord = "";
