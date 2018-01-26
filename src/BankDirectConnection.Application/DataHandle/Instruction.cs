@@ -27,7 +27,6 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         {
             if (string.IsNullOrEmpty(TransWay))
                 throw new BusinessException("the value of transway is null") { Code = "1001006" };
-            Random rd = new Random();
             switch (TransWay)
             {
                 // 日期 银行接口 接口类型 时间戳  随机数
@@ -52,13 +51,11 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         /// <summary>
         /// 解析EDI指令单，获取调用银行接口
         /// </summary>
-        /// <param name="InsSid"></param>
+        /// <param name="EDIId"></param>
         /// <returns></returns>
-        public static emBankService ParseInsId(string InsId)
+        public static emBankService ParseInsId(string EDIId)
         {
-            if (string.IsNullOrEmpty(InsId))
-                throw new BusinessException("the value of insid is null") { Code = "1001009" };
-            string bankCode = InsId.Substring(5, 2);
+            string bankCode = GetBankService(EDIId);
             switch (bankCode)
             {
                 case "01": return emBankService.emBOCService;
@@ -67,12 +64,16 @@ namespace BankDirectConnection.BaseApplication.DataHandle
             }
         }
 
-
+        /// <summary>
+        /// 获取请求的银行接口
+        /// </summary>
+        /// <param name="EDIId"></param>
+        /// <returns></returns>
         public static string GetBankService(string EDIId)
         {
             if (string.IsNullOrEmpty(EDIId))
                 throw new InnerException("1001009", "the value of EDIId is empty");
-            return EDIId.Substring(DATETIME - 1, 2);
+            return EDIId.Substring(5, 2);
         }
     }
 }

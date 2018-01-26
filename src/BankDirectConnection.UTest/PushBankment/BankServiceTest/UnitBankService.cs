@@ -550,7 +550,6 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
                 //JsonConverter[] converters = { new TranscationConverter() };
                 //var tranObject = JsonConvert.DeserializeObject<Transcations>(tranJson, new JsonSerializerSettings() { Converters = converters });
-
                 var testTransObject = JsonConvert.DeserializeObject<Transcations>(tranJson);
                 Console.WriteLine(tranJson);
             }
@@ -604,7 +603,9 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         public void TestSGBQueryBankService()
         {
             SGBService bankService = new SGBService();
-            bankService.QueryTransStatus(GetSGBQueryInfos());
+            var trans = GetSGBQueryInfos();
+            Console.WriteLine(JsonConvert.SerializeObject(trans));
+            //bankService.QueryTransStatus(GetSGBQueryInfos());
 
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.DataHandle;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,7 @@ namespace BankDirectConnection.Domain.QueryBO
         {
             this.TransferQueryDatas = new List<ITransferQueryData>();
         }
+        [JsonConverter(typeof(TransConverter<TransferQueryData, ITransferQueryData>))]
         public IList<ITransferQueryData> TransferQueryDatas
         {
             get;set;
