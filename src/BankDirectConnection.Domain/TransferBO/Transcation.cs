@@ -94,6 +94,8 @@ namespace BankDirectConnection.Domain.TransferBO
         /// TransDetail
         /// </summary>
         public IList<ITransDetail> TransDetail { get; set; }
+
+       
         #endregion
 
         /// <summary>
@@ -120,5 +122,7 @@ namespace BankDirectConnection.Domain.TransferBO
             return string.Empty;
         }
 
+       
     }
+
 }
