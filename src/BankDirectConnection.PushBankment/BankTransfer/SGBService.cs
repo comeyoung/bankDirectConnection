@@ -105,9 +105,11 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         {
             IResResult result = new ResResult();
             TransactionResultsMsg msg;
+            SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
             foreach (var item in TransferQueryData.TransferQueryDatas)
             {
                 msg = new TransactionResultsMsg(item);
+                msg.Head.ReqSeqNo = msg.Head.ReqSeqNo + serialrepository.GetSeqNumber();
                 var rt = this.queryTranactionService.PushQueryTranactionService(msg);
                 result.MergeResResult(rt);
             }

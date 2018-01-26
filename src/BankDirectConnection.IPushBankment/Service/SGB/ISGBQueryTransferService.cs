@@ -1,5 +1,6 @@
 ﻿using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace BankDirectConnection.IPushBankment.Service.SGB
 {
     public interface ISGBQueryTransferService
     {
-         IResResult PushQueryTranactionService(TransactionResultsMsg Msg);
+         IResResult PushQueryTranactionService(ITransactionResultsMsg Msg);
       
     }
 }
