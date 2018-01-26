@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.Domain.SGB;
+using BankDirectConnection.Domain.SGB.PaymentMsg;
 using BankDirectConnection.IPushBankment.Service.SGB;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
     /// </summary>
     public class QueryTranactionStatusService : ISGBQueryTransferService
     {
-        public IResResult PushQueryTranactionService(TransactionResultsMsg Msg) {
+        public IResResult PushQueryTranactionService(ITransactionResultsMsg Msg) {
             if (null == Msg)
                 throw new InnerException("2022002", "Transaction result information can not be empty ");
             var transXml = Serialization.BuildXMLForQueryTransactionResults(Msg);

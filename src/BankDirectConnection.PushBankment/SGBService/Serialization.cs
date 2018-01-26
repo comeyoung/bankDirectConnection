@@ -198,7 +198,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// 查询交易结果
         /// </summary>
         /// <returns></returns>
-        public static string BuildXMLForQueryTransactionResults(TransactionResultsMsg TransactionResultsMsg)
+        public static string BuildXMLForQueryTransactionResults(ITransactionResultsMsg TransactionResultsMsg)
         {
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGQ010"),
                 BuildXMLForCommonHeader(TransactionResultsMsg.Head),
