@@ -36,5 +36,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         /// 账户类型
         /// </summary>
         string AcctType { get; set; }
+
+        string Province { get; set; }
     }
 }

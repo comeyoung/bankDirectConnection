@@ -37,6 +37,8 @@ namespace BankDirectConnection.Domain.TransferBO
             base.Check();
             if (string.IsNullOrEmpty(this.ClientId))
                 throw new BusinessException("the value of clientid is null.") { Code = "1001005" };
+            if (!string.IsNullOrEmpty(this.EDIId))
+                throw new BusinessException("the value of EDIId should be empty.") { Code = "1001009" };
             //if (string.IsNullOrEmpty(this.TransWay))
             //    throw new BusinessException("the value of transway is null.") { Code = "1001006" };
             //if (string.IsNullOrEmpty(this.BusinessType))
