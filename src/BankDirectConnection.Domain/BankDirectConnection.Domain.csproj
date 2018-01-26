@@ -93,6 +93,7 @@
     <Compile Include="SGB\ForeignCurryPaymentMsg.cs" />
     <Compile Include="SGB\InnerTransferMsg.cs" />
     <Compile Include="SGB\ISGBHeader.cs" />
+    <Compile Include="SGB\ISGBTranscation.cs" />
     <Compile Include="SGB\PaymentMsg\IBaseSGBTranscation.cs" />
     <Compile Include="SGB\PaymentMsg\IForeignCurryPaymentMsg.cs" />
     <Compile Include="SGB\PaymentMsg\IInnerTransferMsg.cs" />

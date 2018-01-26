@@ -35,7 +35,7 @@ namespace BankDirectConnection.Domain.Service
         /// <summary>
         /// 转账指令ID 中间件生成
         /// </summary>
-         string InsId { get; set; }
+         string EDIId { get; set; }
 
         /// <summary>
         /// 网银交易流水号

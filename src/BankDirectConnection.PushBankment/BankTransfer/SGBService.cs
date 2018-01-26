@@ -107,7 +107,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             TransactionResultsMsg msg;
             foreach (var item in TransferQueryData.TransferQueryDatas)
             {
-                msg = new TransactionResultsMsg(TransferQueryData);
+                msg = new TransactionResultsMsg(item);
                 var rt = this.queryTranactionService.PushQueryTranactionService(msg);
                 result.MergeResResult(rt);
             }

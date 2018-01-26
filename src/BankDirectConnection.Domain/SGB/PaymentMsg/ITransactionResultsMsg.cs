@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.SGB.PaymentMsg
 {
-    interface ITransactionResultsMsg : ISGBHeader,ICheckAble
+    public interface ITransactionResultsMsg : IBaseSGBTranscation, ISGBHeader, ICheckAble
     {
-        TransactionResults Trans { get; set; }
+        ITransactionResults Trans { get; set; }
         
     }
     
+    public interface ITransactionResults
+    {
+         string CmeSeqNo { get; set; }
+         string StartDate { get; set; }
+    }
 }
 

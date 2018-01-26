@@ -105,9 +105,7 @@ namespace BankDirectConnection.PushBankment.SGBService
             return batchResponse;
         }
 
-
-
-        public static QueryTransactionResultsResponse TransactionResultsParseResonseMsg(string ResponseMsg)
+        public static QueryTransactionResultsResponse ParseTransactionResultsResonseMsg(string ResponseMsg)
         {
             QueryTransactionResultsResponse responseMsg = new QueryTransactionResultsResponse();
             XDocument xDoc = XDocument.Parse(ResponseMsg);
