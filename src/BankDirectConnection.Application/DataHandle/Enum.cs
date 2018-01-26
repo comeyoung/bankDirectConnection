@@ -34,7 +34,7 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         /// </summary>
         emBOCService,
         /// <summary>
-        /// 法兴银行借款
+        /// 法兴银行接口
         /// </summary>
         emSGBService
     }

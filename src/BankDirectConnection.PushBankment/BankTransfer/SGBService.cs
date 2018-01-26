@@ -66,7 +66,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     else
                     {
                         // 如果收款人币种是人民币，走人民币付款
-                        if (!string.IsNullOrEmpty(detail.TransCur) && (detail.TransCur.Equals("CNY") || detail.TransCur.Equals("RMB")))
+                        if (!string.IsNullOrEmpty(detail.TransCur) && (detail.TransCur.Equals("CNY")))
                         {
                             rt = this.rmbPaymentServie.PushPaymentTranscationInfo(new RMBPaymentMsg(item));
                         }

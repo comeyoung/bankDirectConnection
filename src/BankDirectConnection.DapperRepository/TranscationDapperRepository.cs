@@ -93,7 +93,7 @@ namespace BankDirectConnection.DapperRepository
                             TransCode = TransModel.TransCode,
                             TransAmount = TransModel.TransAmount
                         }, dbTransaction);
-                      conn.Execute(insertItemSql,TransModel.TransDetails, dbTransaction);
+                    conn.Execute(insertItemSql,TransModel.TransDetails, dbTransaction);                                      
                     dbTransaction.Commit();
                 }
                 catch (Exception ex)
@@ -231,14 +231,13 @@ namespace BankDirectConnection.DapperRepository
                     string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
                     foreach (var item in ResResult.Response)
                     {
-                        conn.ExecuteScalar(updateSql,
+                        await conn.ExecuteScalarAsync(updateSql,
                          new
                          {
                              TransCode = item.Status.RspCod,
                              EDIId = item.InsId,
                              ClientId = item.ClientId
                          }, dbTransaction);
-                        await conn.ExecuteAsync(updateSql, dbTransaction);
                     }
                     dbTransaction.Commit();
                 }
@@ -262,7 +261,7 @@ namespace BankDirectConnection.DapperRepository
                 IDbTransaction dbTransaction = conn.BeginTransaction();
                 try
                 {
-                    string updateSql = @"update T_EDF_Trans set TransCode = '@TransCode' where EDIId = '@EDIId' and ClientId = '@ClientId'";
+                    string updateSql = @"update T_EDF_Trans set TransCode = @TransCode where EDIId = @EDIId and ClientId = @ClientId";
                     foreach (var item in ResResult.Response)
                     {
                         conn.ExecuteScalar(updateSql,
@@ -272,7 +271,6 @@ namespace BankDirectConnection.DapperRepository
                              EDIId = item.InsId,
                              ClientId = item.ClientId
                          }, dbTransaction);
-                        conn.Execute(updateSql, dbTransaction);
                     }
                     dbTransaction.Commit();
                 }
