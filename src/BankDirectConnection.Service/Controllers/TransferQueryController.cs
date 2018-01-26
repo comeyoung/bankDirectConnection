@@ -2,6 +2,7 @@
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
 using BankDirectConnection.PushBankment.BankTransfer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,15 @@ namespace BankDirectConnection.Service.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult QueryTransStatus([FromBody]ITransferQueryDataList TransferQueryData)
+        public IHttpActionResult QueryTransStatus()
         {
             try
             {
-                if (null == TransferQueryData)
+                HttpContent requestContent = Request.Content;
+                string tranQueryJson = requestContent.ReadAsStringAsync().Result;
+                if (null == tranQueryJson)
                     throw new InnerException("2002003", "the format of trans info is bad.");
+                var TransferQueryData = JsonConvert.DeserializeObject<TransferQueryDataList>(tranQueryJson);
                 BankService bankService = new BankService();
                 var rt = bankService.QueryTransStatus(TransferQueryData);
                 return Json(rt);

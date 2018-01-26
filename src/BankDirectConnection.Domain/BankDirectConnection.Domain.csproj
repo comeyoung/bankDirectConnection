@@ -77,7 +77,7 @@
     <Compile Include="BOC\TransferResponseMsg.cs" />
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
-    <Compile Include="DataHandle\TranscationConverter.cs" />
+    <Compile Include="DataHandle\TransConverter.cs" />
     <Compile Include="ExceptionMsg\ErrorResult.cs" />
     <Compile Include="Model\TransDetailModel.cs" />
     <Compile Include="Model\TransModel.cs" />
