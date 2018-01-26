@@ -443,7 +443,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>() {
+                TranscationItems = new List<ITranscation>() {
                 getTranscation(),
 
             }
@@ -457,7 +457,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "01",
-                Transcations = new List<ITranscation>() {
+                TranscationItems = new List<ITranscation>() {
                 getTranscation(),
 
             }

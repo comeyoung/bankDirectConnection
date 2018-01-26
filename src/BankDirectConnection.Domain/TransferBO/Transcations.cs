@@ -24,7 +24,7 @@ namespace BankDirectConnection.Domain.TransferBO
         {
             get;set;
         }
-        [JsonConverter(typeof(InterfaceConverter<ITranscation, Transcation>))]
+
         public IList<ITranscation> TranscationItems
         {
             get;set;
