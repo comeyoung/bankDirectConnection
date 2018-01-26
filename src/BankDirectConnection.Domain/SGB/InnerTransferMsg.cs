@@ -89,7 +89,7 @@ namespace BankDirectConnection.Domain.SGB
         public List<InnerTransferMsg> CreatePayments(ITranscations Transcations)
         {
             List<InnerTransferMsg> msgList = new List<InnerTransferMsg>();
-            foreach (var item in Transcations.Transcations)
+            foreach (var item in Transcations.TranscationItems)
             {
                 
                 foreach (var line in item.TransDetail)

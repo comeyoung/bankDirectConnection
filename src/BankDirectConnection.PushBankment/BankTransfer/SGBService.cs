@@ -47,7 +47,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             IResResult result = new ResResult();
             IResResult rt;
             IResponse res;
-            foreach (var item in Transcation.Transcations)
+            foreach (var item in Transcation.TranscationItems)
             {
                 rt = new ResResult();
                 res = new Response();

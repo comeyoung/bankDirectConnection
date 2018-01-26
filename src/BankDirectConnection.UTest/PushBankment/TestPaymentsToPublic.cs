@@ -18,7 +18,7 @@ namespace BankDirectConnection.UTest.PushBankment
             ITranscations trans = new Transcations();
             trans.TransWay = "01";
             trans.BusinessType = "02";
-            trans.Transcations.Add(new Transcation() 
+            trans.TranscationItems.Add(new Transcation() 
             {
                 ClientId = Guid.NewGuid().ToString(),
                 FromAcct = new Account() { AcctId = "327256085181", AcctName = "EDF", BankId = "40142", BankName = "BOC" },
@@ -32,7 +32,7 @@ namespace BankDirectConnection.UTest.PushBankment
                 }
 
             });
-            trans.Transcations.Add(new Transcation()
+            trans.TranscationItems.Add(new Transcation()
             {
                 ClientId = Guid.NewGuid().ToString(),
                 FromAcct = new Account() { AcctId = "658245854235", AcctName = "EDF", BankId = "40142", BankName = "BOC" },

@@ -9,6 +9,8 @@ using System.Linq;
 
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.BaseApplication.DataHandle;
+using Newtonsoft.Json;
+using BankDirectConnection.Domain.DataHandle;
 
 
 namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
@@ -67,7 +69,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         }
 
         #endregion
-      
+
         private IAccount GetForAccountFromSGB()
         {
             return new Account()
@@ -156,7 +158,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetForeignAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -236,7 +238,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -279,7 +281,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -323,7 +325,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -347,7 +349,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 
         private ITransferQueryDataList GetSGBQueryInfos()
         {
-            
+
             var queryList = new TransferQueryDataList();
             queryList.TransferQueryDatas.Add(GetSGBQueryInfo());
             return queryList;
@@ -428,7 +430,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 }
                 }
 
-            };           
+            };
 }
         private ITranscation getPublicTranscation()
         {
@@ -498,13 +500,19 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "02",
+<<<<<<< HEAD
                 Transcations = new List<ITranscation>() {
                 getPublicTranscation()
                
+=======
+                TranscationItems = new List<ITranscation>() {
+                getTranscation(),
+
+>>>>>>> edi/master
             }
             };
         }
-       
+
             private ITranscations GetBOCWagePaymentTrans()
         {
             //交易信息集合
@@ -512,8 +520,13 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "01",
+<<<<<<< HEAD
                 Transcations = new List<ITranscation>() {
                 getWageTranscation()
+=======
+                TranscationItems = new List<ITranscation>() {
+                getTranscation(),
+>>>>>>> edi/master
 
             }
             };
@@ -537,10 +550,23 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         [TestMethod]
         public void TestSGBRMBPayBankService()
         {
-            BankService bankService = new BankService();
+            try
+            {
+                BankService bankService = new BankService();
+                var trans = this.GetSGBRMBTrans();
+                var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
+                //JsonConverter[] converters = { new TranscationConverter() };
+                //var tranObject = JsonConvert.DeserializeObject<Transcations>(tranJson, new JsonSerializerSettings() { Converters = converters });
 
-            var trans = this.GetSGBRMBTrans();
-            bankService.PaymentTransfer(trans);
+                var testTransObject = JsonConvert.DeserializeObject<Transcations>(tranJson);
+                Console.WriteLine(tranJson);
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            //bankService.PaymentTransfer(trans);
         }
         /// <summary>
         /// 测试法兴行内转账
@@ -564,7 +590,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             bankService.PaymentTransfer(trans);
             //BOCService service = new BOCService();
             //service.PaymentTransfer(trans);
-          
+
         }
 
         /// <summary>

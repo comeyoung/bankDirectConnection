@@ -28,7 +28,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 Transcation.InitData();
                 Transcation.Check();
                 SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
-                Transcation.Transcations.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
+                Transcation.TranscationItems.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
                 var trans = TransModel.Create(Transcation);
                 TranscationDapperRepository repository = new TranscationDapperRepository();
                 repository.SaveTransList(trans);

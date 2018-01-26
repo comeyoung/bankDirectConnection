@@ -102,7 +102,7 @@ namespace BankDirectConnection.Domain.SGB
         public List<ForeignCurryPaymentMsg> CreatePayments(ITranscations Transcations)
         {
             List<ForeignCurryPaymentMsg> msgList = new List<ForeignCurryPaymentMsg>();
-            foreach (var item in Transcations.Transcations)
+            foreach (var item in Transcations.TranscationItems)
             {
                 foreach (var line in item.TransDetail)
                 {

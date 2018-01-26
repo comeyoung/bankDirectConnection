@@ -1,7 +1,6 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.Service;
-using BankDirectConnection.Domain.TransferBO;
 using BankDirectConnection.PushBankment.BankTransfer;
 using System;
 using System.Collections.Generic;
@@ -12,10 +11,8 @@ using System.Web.Http;
 
 namespace BankDirectConnection.Service.Controllers
 {
-    public class TransController : ApiController
+    public class TransferQueryController : ApiController
     {
-       
-
         /// <summary>
         /// 转账付款
         /// </summary>

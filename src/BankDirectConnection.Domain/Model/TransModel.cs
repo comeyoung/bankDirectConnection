@@ -25,7 +25,7 @@ namespace BankDirectConnection.Domain.Model
         {
             List<TransModel> transModels = new List<TransModel>();
             TransModel trans;
-            foreach (var item in Trans.Transcations)
+            foreach (var item in Trans.TranscationItems)
             {
                 #region head
                 trans = new TransModel();
