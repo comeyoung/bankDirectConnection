@@ -94,7 +94,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// TransDetail
         /// </summary>
-        [JsonConverter(typeof(InterfaceConverter<ITransDetail, TransDetail>))]
+        [JsonConverter(typeof(TransConverter<TransDetail, ITransDetail>))]
         public IList<ITransDetail> TransDetail { get; set; }
 
        

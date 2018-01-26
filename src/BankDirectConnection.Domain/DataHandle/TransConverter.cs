@@ -12,7 +12,7 @@ namespace BankDirectConnection.Domain.DataHandle
     /*===============================================================================================================================
 	*	Create by Fancy at 2018/1/26 11:20:01
 	===============================================================================================================================*/
-    public class TranscationConverter : JsonConverter
+    public class TransConverter<TConcrete, TInterface> : JsonConverter where TConcrete: TInterface
     {
         public override bool CanConvert(Type objectType)
         {
@@ -21,23 +21,17 @@ namespace BankDirectConnection.Domain.DataHandle
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            try
+            List<TConcrete> data = serializer.Deserialize<List<TConcrete>>(reader);
+            
+            List<TInterface> result = new List<TInterface>();
+            foreach (TInterface d in data)
             {
-                List<Transcation> data = serializer.Deserialize<List<Transcation>>(reader);
-                
-                List<ITranscation> result = new List<ITranscation>();
-                foreach (var d in data)
-                {
-                    result.Add(d);
-                }
-                return result;
+                result.Add(d);
             }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-           
+            return result;
         }
+
+    
 
         public override bool CanWrite
         {
@@ -45,7 +39,7 @@ namespace BankDirectConnection.Domain.DataHandle
         }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            serializer.Serialize(writer, value);
         }
     }
 }
