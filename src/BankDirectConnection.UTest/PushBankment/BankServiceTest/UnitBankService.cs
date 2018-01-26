@@ -500,15 +500,11 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "02",
-<<<<<<< HEAD
-                Transcations = new List<ITranscation>() {
-                getPublicTranscation()
-               
-=======
-                TranscationItems = new List<ITranscation>() {
-                getTranscation(),
 
->>>>>>> edi/master
+                TranscationItems = new List<ITranscation>() {
+                getPublicTranscation()
+
+
             }
             };
         }
@@ -520,13 +516,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 TransWay = "01",
                 BusinessType = "01",
-<<<<<<< HEAD
-                Transcations = new List<ITranscation>() {
-                getWageTranscation()
-=======
+
                 TranscationItems = new List<ITranscation>() {
-                getTranscation(),
->>>>>>> edi/master
+                getWageTranscation()
+
 
             }
             };
