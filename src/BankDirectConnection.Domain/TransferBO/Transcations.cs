@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
 using Newtonsoft.Json;
@@ -15,11 +16,15 @@ namespace BankDirectConnection.Domain.TransferBO
 	===============================================================================================================================*/ 
     public class Transcations : IBaseTranscations<ITranscation>, ITranscations
     {
+        public Transcations()
+        {
+            this.TranscationItems = new List<ITranscation>();
+        }
         public string BusinessType
         {
             get;set;
         }
-
+        [JsonConverter(typeof(InterfaceConverter<ITranscation, Transcation>))]
         public IList<ITranscation> TranscationItems
         {
             get;set;
