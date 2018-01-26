@@ -112,8 +112,8 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             return new Transcations()
             {          
                 TransWay = "01",
-                BusinessType = "02",               
-                Transcations = new List<ITranscation>() {
+                BusinessType = "02",
+                TranscationItems = new List<ITranscation>() {
                 getTranscation(),
                 getTranscation()
             }
@@ -126,7 +126,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
             {
                 BusinessType = "01",
                 TransWay = "网银",
-                Transcations = new List<ITranscation>() {
+                TranscationItems = new List<ITranscation>() {
                 getTranscation()
             }
             };

@@ -41,7 +41,7 @@ namespace BankDirectConnection.Domain.BOC
             if (null == Transcations)
                 throw new BusinessException("the value of transcation is null") { Code = "1012002" };
             // PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
-            foreach (var Transcation in Transcations.Transcations)
+            foreach (var Transcation in Transcations.TranscationItems)
             {
                 //以交易明细确定交易笔数
                 foreach (var item in Transcation.TransDetail)

@@ -20,7 +20,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         /// </summary>
         string BusinessType { get; set; }
 
-        IList<T> Transcations { get; set; }
+        IList<T> TranscationItems { get; set; }
 
 
         void InitData();
