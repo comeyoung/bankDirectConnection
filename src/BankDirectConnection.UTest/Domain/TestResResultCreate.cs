@@ -1,4 +1,5 @@
 ﻿using BankDirectConnection.Application.BaseTranscation;
+using BankDirectConnection.BaseApplication.BaseTranscation;
 using BankDirectConnection.BaseApplication.DataHandle;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.Service;
@@ -102,12 +103,7 @@ namespace BankDirectConnection.UTest.Domain
             };
         }
         private ResponseMsg resMsg() {
-            ResponseMsg msg = new ResponseMsg;
-            
-                
-             
-                
-                
+                          
             return new ResponseMsg() {
                 Serverdt = "jiah1234",
                 Token = "dsfd5f5d4f6ds",
@@ -136,7 +132,7 @@ namespace BankDirectConnection.UTest.Domain
         /// </summary>
         [TestMethod]
         public void TestBOCreate() {
-            ResResult.Create(WageAndReimbursementTranscations(),);
+         
             
         }
 

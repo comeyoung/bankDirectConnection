@@ -67,11 +67,12 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT002";
             this.Head.ReqSeqNo = Transcation.ClientId;
             this.Head.ReqDate = Transcation.TransDate;
-            this.Head.ReqTime = Transcation.TransTime;           
+            this.Head.ReqTime = Transcation.TransTime;       
             this.Priority = Transcation.Priority;
             this.WhyUse = Transcation.Purpose;
             this.ClientId = Transcation.ClientId;
             this.EDIId = Transcation.EDIId;
+            
             //msg.Head.CorpNo = "";
             //msg.Head.OpNo = "";
             //msg.Head.PassWord = "";
@@ -90,6 +91,7 @@ namespace BankDirectConnection.Domain.SGB
                 this.UnionDeptId = item.ToAcct.BankId;
                 this.CrCur = item.TransCur;           
                 this.TransAmt = item.TransAmount;
+                
                 //this.StartDate = Transcation.TransDate;
                 //this.StartTime = Transcation.TransTime;
             }

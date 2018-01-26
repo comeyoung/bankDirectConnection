@@ -116,11 +116,11 @@ namespace BankDirectConnection.Domain.Service
             }
             else if(typeof(T) == typeof(IPaymentsToPublicMsg))
             {
-                foreach (var item in Msg.DetailResponses)
+                foreach (var item in Msg.DetailResponses)//赋值错误，为空，bochttp返回报文问题，已解决
                 {
                     res = new Response();
                     res.InsId = item.Insid;
-                    res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;
+                   // res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;//捕捉到异常
                     if (item.Status.RspCod != "B001")
                         result.Status = item.Status;
                     else
@@ -201,6 +201,7 @@ namespace BankDirectConnection.Domain.Service
                 res = new Response();
                 res.ObssId = Msg.HostSeqNo;
                 res.ClientId = TransMsg.ClientId;
+                res.InsId = TransMsg.EDIId;
                 if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
                 {
                     res.Status.RspCod = "0";
@@ -217,6 +218,7 @@ namespace BankDirectConnection.Domain.Service
                 res = new Response();
                 res.ObssId = Msg.HostSeqNo;
                 res.ClientId = TransMsg.ClientId;
+                res.InsId = TransMsg.EDIId;
                 if (Msg.RespCode == "0000" || Msg.RespCode == "0005" || Msg.RespCode == "0006")
                 {
                     res.Status.RspCod = "0";
