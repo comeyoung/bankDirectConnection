@@ -18,53 +18,66 @@ namespace BankDirectConnection.Domain.SGB
             this.Head = new CommonHeader();
             this.Trans = new TransactionResults();
         }
-
-
-        public TransactionResultsMsg(ITransferQueryDataList TransferQueryData)
+        
+        public TransactionResultsMsg(ITransferQueryData TransferQueryData)
         {
             this.Head = new CommonHeader();
             this.Trans = new TransactionResults();
             this.Create(TransferQueryData);
         }
+
+        #region property
+        /// <summary>
+        /// 客户端流水号
+        /// </summary>
+        public string ClientId
+        {
+            get; set;
+        }
+        /// <summary>
+        /// EDI平台Id
+        /// </summary>
+        public string EDIId
+        {
+            get; set;
+        }
+
         public CommonHeader Head
         {
             get;
             set;
         }
-       
-        public TransactionResults Trans { get; set; }
+
+        public ITransactionResults Trans { get; set; }
+        #endregion
+
 
         public bool Check()
         {
             throw new NotImplementedException();
         }
 
-        private TransactionResultsMsg Create(ITransferQueryDataList TransferQueryData)
+        private TransactionResultsMsg Create(ITransferQueryData TransferQueryData)
         {
-            //< CCTransCode > SGT002 </ CCTransCode >
-            //< ReqSeqNo > 02201801221014590002 </ ReqSeqNo >
-            //< ReqDate > 20180117 </ ReqDate >
-            //< ReqTime > 请求时间（到毫秒）</ ReqTime >
-            //< ProductID > ID </ ProductID > 
-            //< ChannelType > ERP </ ChannelType >
-            foreach (var item in TransferQueryData.TransferQueryDatas) {                                     
-                this.Trans.CmeSeqNo = item.ClientId;
-                this.Trans.StartDate = item.StartDate;
-                this.Head.ReqDate = item.StartDate;
-                this.Head.ReqTime = item.StartTime;
-            }
+            this.Trans.CmeSeqNo = TransferQueryData.ClientId;
+            this.Trans.StartDate = TransferQueryData.StartDate;
+            this.Head.ReqDate = TransferQueryData.StartDate;
+            this.Head.ReqTime = TransferQueryData.StartTime;
+            this.ClientId = TransferQueryData.ClientId;
+            this.EDIId = TransferQueryData.EDIId;
             return this;
         }
     }
-    public class TransactionResults{
-
-       
-
+    public class TransactionResults: ITransactionResults
+    {
+        /// <summary>
+        /// 客户端请求流水
+        /// </summary>
         public string CmeSeqNo { get; set; }
+        /// <summary>
+        /// 起始时间
+        /// </summary>
         public string StartDate { get; set; }
-
-    
-
-
+        
     }
 }

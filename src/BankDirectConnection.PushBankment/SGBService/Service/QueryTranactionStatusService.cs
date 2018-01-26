@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.PushBankment.SGBService.Service
 {
+    /// <summary>
+    /// 查询交易状态（结果）
+    /// </summary>
     public class QueryTranactionStatusService : ISGBQueryTransferService
     {
         public IResResult PushQueryTranactionService(TransactionResultsMsg Msg) {
@@ -17,7 +20,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
                 throw new InnerException("2022002", "Transaction result information can not be empty ");
             var transXml = Serialization.BuildXMLForQueryTransactionResults(Msg);
             var res = SGBHttp.PostRequest(transXml);
-            var rt = Deserialization.ParseResonseMsg(res);
+            var rt = Deserialization.ParseTransactionResultsResonseMsg(res);
             return ResResult.Create(rt);
         }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankDirectConnection.Domain.SGB.PaymentMsg
 {
-    public interface IRMBPaymentMsg: IBaseSGBTranscation
+    public interface IRMBPaymentMsg: IBaseSGBTranscation, ISGBTranscation
     {
         #region property
 

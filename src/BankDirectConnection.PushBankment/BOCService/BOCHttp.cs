@@ -34,15 +34,13 @@ namespace BankDirectConnection.PushBankment.BOCService
         //}
         public static string PostRequest(string RequestXML)
         {
-           // Logger.Writer("push to SG:" + RequestXML);
-            //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            //var rt = GetPaymentsToPublicResult();
-            //Logger.Writer("receipt from SG:" + rt);
-            //return rt;
-            //return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            //return GetPaymentsToPublicResult();//对公转账
-           return GetWageAndReimbursementResult();//工资代发
+            /*===================================生产环境=======================================*/
+            Logger.Writer("push to SG:" + RequestXML);
+            var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            Logger.Writer("receipt from SG:" + rt);
+            return rt;
+            /*===================================生产环境=======================================*/
         }
-        
+
     }
 }

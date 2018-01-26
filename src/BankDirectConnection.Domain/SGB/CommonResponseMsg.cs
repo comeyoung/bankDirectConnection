@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDirectConnection.Domain.SGB.PaymentMsg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,6 +76,24 @@ namespace BankDirectConnection.Domain.SGB
 
 
         public List<CmeMsg> CmeMsgs { get; set; }
+        /// <summary>
+        /// 请求是否成功
+        /// </summary>
+        /// <returns>成功：true;失败：false</returns>
+        public bool IsSuccess()
+        {
+            switch (this.RespCode)
+            {
+                case "0000":
+                case "0005":
+                case "0006":
+                    return true;
+                default:
+                    return false;
+
+            }
+        }
+
     }
 
     public class CmeMsg

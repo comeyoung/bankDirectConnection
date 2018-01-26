@@ -23,5 +23,26 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         public string RspCod { get; set; }
 
         public string RspMsg { get; set; }
+
+        /// <summary>
+        /// 请求是否成功
+        /// </summary>
+        /// <returns>成功：true;失败：false</returns>
+        public bool IsSuccess()
+        {
+            switch (this.RspCod)
+            {
+                case "B001":
+                case "B002":
+                case "B054":
+                case "B059":
+                case "B149":
+                case "B150":
+                    return true;
+                default:
+                    return false;
+
+            }
+        }
     }
 }

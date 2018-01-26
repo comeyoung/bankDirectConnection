@@ -35,13 +35,12 @@ namespace BankDirectConnection.PushBankment.SGBService
         }
         public static string PostRequest(string RequestXML)
         {
-            //Logger.Writer("push to BOC:" + RequestXML);
-            //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            //var rt = GetTestForeignResult();
-           // Logger.Writer("receip from BOC:" + rt);
-            return GetTestForeignResult();
-            // return GetTestForeignResult();
-           // return BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            /*===================================生产环境=======================================*/
+            Logger.Writer("push to BOC:" + RequestXML);
+            var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            Logger.Writer("receip from BOC:" + rt);
+            return rt;
+            /*===================================生产环境=======================================*/
         }
     }
 }
