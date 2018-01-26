@@ -96,6 +96,8 @@ namespace BankDirectConnection.Domain.TransferBO
         /// </summary>
         [JsonConverter(typeof(InterfaceConverter<ITransDetail, TransDetail>))]
         public IList<ITransDetail> TransDetail { get; set; }
+
+       
         #endregion
 
         /// <summary>
@@ -122,5 +124,7 @@ namespace BankDirectConnection.Domain.TransferBO
             return string.Empty;
         }
 
+       
     }
+
 }

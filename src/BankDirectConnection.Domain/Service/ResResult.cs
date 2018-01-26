@@ -183,6 +183,7 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.ObssId = Msg.HostSeqNo;
                     res.ClientId = TransMsg.ClientId;
+                    res.InsId = TransMsg.EDIId;
               if (Msg.RespCode == "0000"|| Msg.RespCode == "0005" || Msg.RespCode == "0006") {
                     res.Status.RspCod = "0";
                     res.Status.RspMsg = "OK";
