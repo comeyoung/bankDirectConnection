@@ -362,7 +362,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         {
             IAccount FromAcct = new Account();
             FromAcct.AcctId = "6212236969989366658";
-            FromAcct.AcctName = "张三";
+            FromAcct.AcctName = "李飞";
             FromAcct.AcctType = "0";
             FromAcct.BankId = "104100000004";
             FromAcct.BankName = "中国银行总行";
@@ -373,7 +373,64 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         /// 获取中行对公转账明细
         /// </summary>
         /// <returns></returns>
-        private ITranscation getTranscation()
+        private ITranscation getWageTranscation()
+        {
+            SerialNumberDapperRepository repository = new SerialNumberDapperRepository();
+            return new Transcation()
+            {
+                AgentSign = "Y",
+                ClientId = DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.Millisecond + "001",
+                EDIId = Instruction.NewInsSid("01") + repository.GetSeqNumber(),
+                Comments = "薪水",
+                FeeAcct = "6212236969989366658",
+                FeeType = "1",
+                FromAcct = getFromAcct(),
+                PaymentCur = "RMB",
+                BusinessType = "01",
+                PaymentType = "1",
+                Priority = emPriolv.Urgent,
+                Purpose = "薪水",
+                TransDate = DateTime.Now.ToString("yyyyMMdd"),
+                TransTime = DateTime.Now.ToString("HHmmss") + DateTime.Now.Millisecond,
+                TransWay = "01",
+                TransDetail = new List<ITransDetail>() {
+                new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                }, new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "李雷",
+                        AcctType = "1",
+                        BankId = "104100001849",
+                        BankName = "中国银行股份有限公司北京朝阳北路支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+
+                }
+                }
+
+            };           
+}
+        private ITranscation getPublicTranscation()
         {
             SerialNumberDapperRepository repository = new SerialNumberDapperRepository();
             return new Transcation()
@@ -428,8 +485,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 }
                 }
 
-            };           
-}
+            };
+        }
         /// <summary>
         /// 获取中行接口对公转账
         /// </summary>
@@ -442,7 +499,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 TransWay = "01",
                 BusinessType = "02",
                 Transcations = new List<ITranscation>() {
-                getTranscation(),
+                getPublicTranscation()
                
             }
             };
@@ -456,7 +513,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 TransWay = "01",
                 BusinessType = "01",
                 Transcations = new List<ITranscation>() {
-                getTranscation(),
+                getWageTranscation()
 
             }
             };
