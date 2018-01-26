@@ -13,12 +13,12 @@ namespace BankDirectConnection.Domain.QueryBO
     /// <summary>
     /// 交易查询数据接口
     /// </summary>
-    public interface ITransferQueryDataList: IBaseQueryDatas<ITransferQueryData>
+    public interface ITransferQueryDataList: IBaseQueryDatas<ITransferQueryData>, ICheckAble
     {
         
     }
 
-    public interface ITransferQueryData: IBaseQueryData
+    public interface ITransferQueryData: IBaseQueryData, ICheckAble
     {
 
         string ObssId { get; set; }

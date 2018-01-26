@@ -60,7 +60,7 @@ namespace BankDirectConnection.Domain.SGB
             if (Transcation.TransDetail.Count != 1)
                 throw new BusinessException("the lines of transfer detail info should be one") { Code = "1021011" };
             this.Head.CCTransCode = "SGT003";
-            this.Head.ReqSeqNo = Transcation.ClientId;
+            this.Head.ReqSeqNo = Transcation.EDIId;
             this.Head.ReqDate = Transcation.TransDate;
             this.Head.ReqTime = Transcation.TransTime;
             this.ClientId = Transcation.ClientId;
@@ -96,7 +96,7 @@ namespace BankDirectConnection.Domain.SGB
                 {
                     InnerTransferMsg msg = new InnerTransferMsg();
                     msg.Head.CCTransCode = "SGT001";
-                    msg.Head.ReqSeqNo = item.ClientId;
+                    msg.Head.ReqSeqNo = item.EDIId;
                     msg.Head.ReqDate = item.TransDate;
                     msg.Head.ReqTime = item.TransTime;
                     //msg.Head.CorpNo = "";

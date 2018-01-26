@@ -1,4 +1,6 @@
-﻿using BankDirectConnection.Domain.DataHandle;
+﻿using BankDirectConnection.BaseApplication.BaseTranscation;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.DataHandle;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,12 @@ namespace BankDirectConnection.Domain.QueryBO
         public IList<ITransferQueryData> TransferQueryDatas
         {
             get;set;
+        }
+
+        public bool Check()
+        {
+            this.TransferQueryDatas.ToList().ForEach(c => c.Check());
+            return true;
         }
     }
 
@@ -53,6 +61,15 @@ namespace BankDirectConnection.Domain.QueryBO
         public string StartTime
         {
             get; set;
+        }
+
+        public bool Check()
+        {
+            if (string.IsNullOrEmpty(this.ClientId))
+                throw new BusinessException("the value of clientid is null.") { Code = "1001005" };
+            if (!string.IsNullOrEmpty(this.EDIId))
+                throw new BusinessException("the value of EDIId should be empty.") { Code = "1001009" };
+            return true;
         }
     }
 }
