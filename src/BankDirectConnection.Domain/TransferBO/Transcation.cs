@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using BankDirectConnection.BaseApplication.DataHandle;
+using Newtonsoft.Json;
 
 namespace BankDirectConnection.Domain.TransferBO
 {
@@ -93,6 +94,7 @@ namespace BankDirectConnection.Domain.TransferBO
         /// <summary>
         /// TransDetail
         /// </summary>
+        [JsonConverter(typeof(InterfaceConverter<ITransDetail, TransDetail>))]
         public IList<ITransDetail> TransDetail { get; set; }
         #endregion
 

@@ -1,4 +1,6 @@
-﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +14,13 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
 	===============================================================================================================================*/
     public abstract class BaseTranscations<T> : IBaseTranscations<T> where T : IBaseTranscation
     {
-        public BaseTranscations() { this.Transcations = new List<T>(); }
+        public BaseTranscations() { this.TranscationItems = new List<T>(); }
         public string BusinessType
         {
             get;set;
         }
 
-        public IList<T> Transcations
+        public IList<T> TranscationItems
         {
             get;set;
         }
@@ -34,15 +36,15 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
                 throw new BusinessException("the value of transferway is null") { Code = "1001006" };
             if (string.IsNullOrEmpty(this.BusinessType))
                 throw new BusinessException("the value of businesstype is null") { Code = "1001007" };
-            this.Transcations.ToList().ForEach(c => c.Check());
+            this.TranscationItems.ToList().ForEach(c => c.Check());
             return true;
         }
 
         public void InitData()
         {
-            if (null == this.Transcations)
+            if (null == this.TranscationItems)
                 throw new InnerException("", "");
-            this.Transcations.ToList().ForEach(c => { c.TransWay = this.TransWay; c.BusinessType = this.BusinessType; });
+            this.TranscationItems.ToList().ForEach(c => { c.TransWay = this.TransWay; c.BusinessType = this.BusinessType; });
         }
     }
 }

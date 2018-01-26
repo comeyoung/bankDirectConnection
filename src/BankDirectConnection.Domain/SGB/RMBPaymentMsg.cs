@@ -99,7 +99,7 @@ namespace BankDirectConnection.Domain.SGB
         public List<RMBPaymentMsg> CreatePayments(ITranscations Transcations)
         {
             List<RMBPaymentMsg> msgList = new List<RMBPaymentMsg>();
-            foreach (var item in Transcations.Transcations)
+            foreach (var item in Transcations.TranscationItems)
             {
                 // 以明细为标准 转换为人民币付款
                 foreach (var line in item.TransDetail)

@@ -93,7 +93,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "01",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "332de889949",
@@ -142,7 +142,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -193,7 +193,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -243,7 +243,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -315,7 +315,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -431,7 +431,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -534,7 +534,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",
@@ -617,7 +617,7 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
             {
                 TransWay = "02",
                 BusinessType = "02",
-                Transcations = new List<ITranscation>()
+                TranscationItems = new List<ITranscation>()
                 {
                     new Transcation(){
                         ClientId = "2018012000112321",

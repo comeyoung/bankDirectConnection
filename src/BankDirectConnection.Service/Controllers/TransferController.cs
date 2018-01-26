@@ -9,26 +9,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 namespace BankDirectConnection.Service.Controllers
 {
-    public class TransController : ApiController
+    public class TransferController : ApiController
     {
-       
-
         /// <summary>
         /// 转账付款
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult QueryTransStatus([FromBody]ITransferQueryDataList TransferQueryData)
-        {
+        public IHttpActionResult PaymentTransfer([FromBody]Transcations Transcations)
+        { 
             try
             {
-                if (null == TransferQueryData)
+                //var Transcations = Newtonsoft.Json.JsonConvert.DeserializeObject<Transcations>(Trans);
+                if (null == Transcations)
                     throw new InnerException("2002003", "the format of trans info is bad.");
                 BankService bankService = new BankService();
-                var rt = bankService.QueryTransStatus(TransferQueryData);
+                var rt = bankService.PaymentTransfer(Transcations);
                 return Json(rt);
             }
             catch (BusinessException ex)

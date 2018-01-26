@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.BaseApplication.DataHandle;
+using Newtonsoft.Json;
+using BankDirectConnection.Domain.DataHandle;
 
 namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 {
@@ -150,7 +152,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetForeignAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -224,7 +226,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -267,7 +269,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -311,7 +313,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     FromAcct = GetRMBAccountSGB(),
                 };
                 transcations.TransDetail.Add(item);
-                trans.Transcations.Add(transcations);
+                trans.TranscationItems.Add(transcations);
             }
             return trans;
         }
@@ -359,9 +361,23 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         [TestMethod]
         public void TestSGBRMBPayBankService()
         {
-            BankService bankService = new BankService();
-            var trans = this.GetSGBRMBTrans();
-            bankService.PaymentTransfer(trans);
+            try
+            {
+                BankService bankService = new BankService();
+                var trans = this.GetSGBRMBTrans();
+                var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
+                //JsonConverter[] converters = { new TranscationConverter() };
+                //var tranObject = JsonConvert.DeserializeObject<Transcations>(tranJson, new JsonSerializerSettings() { Converters = converters });
+
+                var testTransObject = JsonConvert.DeserializeObject<Transcations>(tranJson);
+                Console.WriteLine(tranJson);
+            }
+            catch(Exception ex)
+            {
+
+            }
+           
+            //bankService.PaymentTransfer(trans);
         }
         /// <summary>
         /// 测试法兴行内转账
