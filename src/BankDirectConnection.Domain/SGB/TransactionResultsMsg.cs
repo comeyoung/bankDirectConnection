@@ -1,4 +1,6 @@
-﻿using BankDirectConnection.Domain.QueryBO;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
+using BankDirectConnection.Domain.QueryBO;
 using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,9 @@ namespace BankDirectConnection.Domain.SGB
         {
             this.Head = new CommonHeader();
             this.Trans = new TransactionResults();
+            this.NewEDIId();
             this.Create(TransferQueryData);
+            this.Check();
         }
 
         #region property
@@ -54,18 +58,28 @@ namespace BankDirectConnection.Domain.SGB
 
         public bool Check()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(this.Head.ReqSeqNo))
+                throw new InnerException("", "");
+            if (string.IsNullOrEmpty(this.Trans.CmeSeqNo))
+                throw new BusinessException("1021009", "the value of EDIId is empty");
+            return true;
         }
 
         private TransactionResultsMsg Create(ITransferQueryData TransferQueryData)
         {
-            this.Trans.CmeSeqNo = TransferQueryData.ClientId;
+            this.Head.CCTransCode = "SGQ010";
+            this.Head.ReqDate = DateTime.Now.ToString("yyyyMMdd");
+            this.Head.ReqTime = DateTime.Now.ToString("HHmmss")+DateTime.Now.Millisecond.ToString("000");
+            this.Trans.CmeSeqNo = TransferQueryData.EDIId;
             this.Trans.StartDate = TransferQueryData.StartDate;
-            this.Head.ReqDate = TransferQueryData.StartDate;
-            this.Head.ReqTime = TransferQueryData.StartTime;
             this.ClientId = TransferQueryData.ClientId;
             this.EDIId = TransferQueryData.EDIId;
             return this;
+        }
+
+        public void NewEDIId()
+        {
+             this.Head.ReqSeqNo = Instruction.NewInsSid("02");
         }
     }
     public class TransactionResults: ITransactionResults
