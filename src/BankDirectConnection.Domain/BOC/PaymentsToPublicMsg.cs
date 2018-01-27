@@ -24,7 +24,7 @@ namespace BankDirectConnection.Domain.BOC
         {
             this.HeaderMessage = new Header("b2e0009");
             this.Trans = new List<PaymentsToPublicTrans>();
-            Create(Transcations);
+            this.Create(Transcations);
             this.Check();
         }
 
@@ -40,13 +40,14 @@ namespace BankDirectConnection.Domain.BOC
         {
             if (null == Transcations)
                 throw new BusinessException("the value of transcation is null") { Code = "1012002" };
-            // PaymentsToPublicMsg msg = new PaymentsToPublicMsg();
+            
+            PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
             foreach (var Transcation in Transcations.TranscationItems)
             {
                 //以交易明细确定交易笔数
                 foreach (var item in Transcation.TransDetail)
                 {
-                    PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
+                   
                     trans.EDIId = Transcation.EDIId;
                     trans.ClientId = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;

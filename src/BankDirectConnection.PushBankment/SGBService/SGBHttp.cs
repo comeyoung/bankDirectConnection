@@ -36,9 +36,9 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string PostRequest(string RequestXML)
         {
             /*===================================生产环境=======================================*/
-            Logger.Writer("push to BOC:" + RequestXML);
+            Logger.Writer("push to SG:" + RequestXML);
             var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            Logger.Writer("receip from BOC:" + rt);
+            Logger.Writer("receip from SG:" + rt);
             return rt;
             /*===================================生产环境=======================================*/
         }
