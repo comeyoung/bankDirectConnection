@@ -58,7 +58,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                         throw new BusinessException("2021001", "the transaction will not be more than one");
                     #region 处理接口调用
                     var detail = item.TransDetail.FirstOrDefault();
-                    // 如果收款人账号是我行（法兴）走行内转账
+                    // 如果收款人账号是我行（法兴）走行内转账.
                     if (Account.IsSG(detail.ToAcct.BankId))
                     {
                         rt = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));

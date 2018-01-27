@@ -36,10 +36,11 @@ namespace BankDirectConnection.PushBankment.BOCService
         public static string PostRequest(string RequestXML)
         {
             /*===================================生产环境=======================================*/
-            Logger.Writer("push to SG:" + RequestXML);
-            var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            Logger.Writer("receipt from SG:" + rt);
-            return rt;
+            //Logger.Writer("push to BOC:" + RequestXML);
+            //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            //Logger.Writer("receipt from BOC:" + rt);
+            //return rt;
+            return GetPaymentsToPublicResult();
             /*===================================生产环境=======================================*/
         }
 

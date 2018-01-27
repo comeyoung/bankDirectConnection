@@ -467,10 +467,100 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     TransAmount = 0.01M,
                     TransCur = "RMB",
                     Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
+                },new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "7621223967989366658",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "104100001697",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "RMB",
+                    Rate = 1
                 }
 
                 }
-                
+
 
             };
         }
@@ -487,6 +577,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 BusinessType = "02",
 
                 TranscationItems = new List<ITranscation>() {
+                getPublicTranscation(),
+                getPublicTranscation(),
                 getPublicTranscation()
 
 
@@ -503,7 +595,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 BusinessType = "01",
 
                 TranscationItems = new List<ITranscation>() {
+                getWageTranscation(),
+                getWageTranscation(),
                 getWageTranscation()
+
 
 
             }
