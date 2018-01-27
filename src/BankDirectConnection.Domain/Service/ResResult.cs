@@ -49,7 +49,6 @@ namespace BankDirectConnection.Domain.Service
             {
                 foreach (var item in Msg.DetailResponses)
                 {
-                    
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((IWageAndReimbursementMsg)TransMsg).Trans.ClientId;
@@ -60,7 +59,6 @@ namespace BankDirectConnection.Domain.Service
                         res.Status.RspCod = "0";
                         res.Status.RspMsg = "OK";
                     }
-
                     result.Response.Add(res);
                 }
             }
