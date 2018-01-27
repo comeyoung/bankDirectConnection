@@ -19,5 +19,11 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         string RspCod { get; set; }
 
         string RspMsg { get; set; }
+
+        /// <summary>
+        /// 请求是否成功
+        /// </summary>
+        /// <returns></returns>
+        bool IsSuccess();
     }
 }

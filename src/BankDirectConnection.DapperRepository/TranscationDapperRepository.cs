@@ -235,7 +235,7 @@ namespace BankDirectConnection.DapperRepository
                          new
                          {
                              TransCode = item.Status.RspCod,
-                             EDIId = item.InsId,
+                             EDIId = item.EDIId,
                              ClientId = item.ClientId
                          }, dbTransaction);
                     }
@@ -268,7 +268,7 @@ namespace BankDirectConnection.DapperRepository
                          new
                          {
                              TransCode = item.Status.RspCod,
-                             EDIId = item.InsId,
+                             EDIId = item.EDIId,
                              ClientId = item.ClientId
                          }, dbTransaction);
                     }

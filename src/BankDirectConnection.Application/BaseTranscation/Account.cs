@@ -34,6 +34,15 @@ namespace BankDirectConnection.Application.BaseTranscation
         /// 账户类型 0公司；1个人
         /// </summary>
         public string AcctType { get; set; }
+
+        /// <summary>
+        /// 省市代码
+        /// </summary>
+        public string Province
+        {
+            get;set;
+        }
+
         public bool Check()
         {
             if (string.IsNullOrEmpty(this.BankId))

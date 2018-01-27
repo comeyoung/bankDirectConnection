@@ -825,5 +825,15 @@ namespace BankDirectConnection.UTest.PushBankment.SGB
         }
 
         #endregion
+
+        /// <summary>
+        /// 测试反序列化交易查询结果
+        /// </summary>
+        [TestMethod]
+        public void TestParseTransactionResultsResonseMsg()
+        {
+            string xmlReponse = @"<ap><CCTransCode>SGQ010</CCTransCode><Cmp><CmeSeqNo>1</CmeSeqNo><JnlState>2</JnlState><Postscript>3</Postscript><RespSeqNo>4</RespSeqNo><HostSeqNo>5</HostSeqNo><CertSeqNo>6</CertSeqNo></Cmp></ap>";
+            var rt = Deserialization.ParseTransactionResultsResonseMsg(xmlReponse);
+        }
     }
 }

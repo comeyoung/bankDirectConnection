@@ -30,14 +30,13 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
         {
             if (null == Msg)
                 throw new InnerException("2022002", "RMB trading information can not be empty ");
-
             //构建xml
             var transXML = Serialization.BuildXMLForRMBPayment(Msg);
             //调用接口
             var res = SGBHttp.PostRequest(transXML);
             var rt = Deserialization.ParseResonseMsg(res);
             //返回结果
-            return ResResult.SGBCreate<IRMBPaymentMsg>(Msg, rt);
+            return ResResult.Create<IRMBPaymentMsg>(Msg, rt);
         }
     }
 }

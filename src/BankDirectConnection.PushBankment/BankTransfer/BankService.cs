@@ -53,6 +53,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         {
             try
             {
+                Transcation.Check();
                 //查询是根据客户端流水号和EDI流水号来查询，同一请求可能会涉及多个银行的交易查询
                 // 取出各个银行的数据
                 Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();

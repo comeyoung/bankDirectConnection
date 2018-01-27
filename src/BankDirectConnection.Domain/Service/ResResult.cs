@@ -120,7 +120,7 @@ namespace BankDirectConnection.Domain.Service
                 {
                     res = new Response();
                     res.InsId = item.Insid;
-                   // res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;//捕捉到异常
+                    res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;//捕捉到异常
                     if (item.Status.RspCod != "B001")
                         result.Status = item.Status;
                     else
@@ -293,5 +293,8 @@ namespace BankDirectConnection.Domain.Service
         /// 网银交易流水号
         /// </summary>
         public string ObssId { get; set; }
+
+        public string EDIId { get; set; }
+
     }
 }
