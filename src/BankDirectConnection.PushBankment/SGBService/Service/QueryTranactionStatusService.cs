@@ -22,7 +22,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var transXml = Serialization.BuildXMLForQueryTransactionResults(Msg);
             var res = SGBHttp.PostRequest(transXml);
             var rt = Deserialization.ParseTransactionResultsResonseMsg(res);
-            return ResResult.Create(rt);
+            return ResResult.Create(rt,Msg);
         }
     }
 }

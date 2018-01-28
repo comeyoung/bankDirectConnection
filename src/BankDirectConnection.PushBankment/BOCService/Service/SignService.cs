@@ -19,12 +19,13 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
         public ResponseMsg PushSignIn()
         {
             SignInMsg msg = new SignInMsg();
-            msg.HeaderMessage.Cusopr = "EDF";
-            msg.HeaderMessage.Custid = "";
-            msg.HeaderMessage.Trncod = "";
+            msg.HeaderMessage.Cusopr = "136140253";
+            msg.HeaderMessage.Custid = "133812368";
+            msg.HeaderMessage.Trncod = "b2e0001";
             msg.HeaderMessage.Trnid = "";
+            msg.HeaderMessage.Termid = "E163083136140";
             msg.Trans.Custdt = DateTime.Now.ToString("yyyyMMddHHddss");
-            msg.Trans.Oprpwd = "";
+            msg.Trans.Oprpwd = "4u7hc9Dy";
             string transXML = Serialization.BuildXMLStrForSignInByLinq(msg);
             var rt = BOCHttp.PostRequest(transXML);
             return Deserialization.ParseResponseMsg(rt, "b2e0001");

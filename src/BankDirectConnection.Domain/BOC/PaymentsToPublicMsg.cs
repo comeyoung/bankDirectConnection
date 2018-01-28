@@ -130,6 +130,14 @@ namespace BankDirectConnection.Domain.BOC
         /// <returns></returns>
         public bool Check()
         {
+            if (string.IsNullOrEmpty(this.Trncur))
+            {
+                throw new BusinessException("1011008", "the value of Trncur is empty.");
+            }
+            if (this.Trncur == "RMB")
+            {
+                this.Trncur = "CNY";
+            }
             this.Toactn.Check();
             return true;
         }
