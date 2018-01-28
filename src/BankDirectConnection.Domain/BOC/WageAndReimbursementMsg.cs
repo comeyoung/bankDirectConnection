@@ -29,7 +29,7 @@ namespace BankDirectConnection.Domain.BOC
             this.Trans = new WageAndReimbursementTrans();
             this.Create(Transcation);
             this.Check();
-            Transcation.Check();
+            this.Trans.Check();
         }
 
         public WageAndReimbursementTrans Trans { get; set; }
@@ -151,7 +151,15 @@ namespace BankDirectConnection.Domain.BOC
 
         public bool Check()
         {
-           this.DetailMessage.ToList().ForEach(c => c.Check());
+            this.DetailMessage.ToList().ForEach(c => c.Check());
+            if (string.IsNullOrEmpty(this.Pybcur))
+            {
+                throw new BusinessException("1011008", "the value of Pybcur is empty.");
+            }
+            if (this.Pybcur == "RMB")
+            {
+                this.Pybcur = "CNY";
+            }
             return true;
         }
     }

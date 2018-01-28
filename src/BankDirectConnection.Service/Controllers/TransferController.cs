@@ -34,6 +34,7 @@ namespace BankDirectConnection.Service.Controllers
             }
             catch (BusinessException ex)
             {
+
                 return Json(new ResResult(ex.Code, ex.Message));
             }
             catch (InnerException ex)

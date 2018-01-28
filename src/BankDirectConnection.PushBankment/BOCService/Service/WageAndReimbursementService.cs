@@ -29,7 +29,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
             if (null == Msg)
                 throw new InnerException("2022002", "the value of transfer inquiry is empty");
             var transXML = Serialization.BuildXMLForWageAndReimbursementByLinq(Msg);
-            // 调用对公转账接口
+            // 调用代发接口
             var res = BOCHttp.PostRequest(transXML);
             //处理结果
             var rt = Deserialization.ParseResponseMsg(res, "b2e0078");

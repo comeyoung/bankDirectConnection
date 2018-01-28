@@ -53,12 +53,13 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         {
             try
             {
-                Transcation.Check();
+                // Transcation.Check();
                 //查询是根据客户端流水号和EDI流水号来查询，同一请求可能会涉及多个银行的交易查询
                 // 取出各个银行的数据
                 Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();
                 foreach(var item in Transcation.TransferQueryDatas)
                 {
+                    //选择调用哪个银行的查询服务
                     string key = Instruction.GetBankService(item.EDIId);
                     if (dicTransList.Keys.Contains(key))
                     {
@@ -78,7 +79,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 foreach (var item in dicTransList)
                 {
                     var bankService = BankFactory.CreateBank(item.Key);
-                    var rt = bankService.QueryTransStatus(item.Value);
+                    var rt = bankService.QueryTransStatus(item.Value);//item.value==测试类构建交易事物
                     if (null == result)
                         result = rt;
                     else
