@@ -119,7 +119,7 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((ITransactionStatusInquiryMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
-                    res.ObssId = item.Obssid;
+                //    res.ObssId = item.Obssid;
                     if (!item.Status.IsSuccess())
                     {
                         result.Status = item.Status;
