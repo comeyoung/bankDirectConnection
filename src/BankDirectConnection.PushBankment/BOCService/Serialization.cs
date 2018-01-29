@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.BOC.Message;
 using System;
@@ -103,7 +104,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                            new XElement("obssid", item.Obssid),
                            new XElement("trnamt", item.Trnamt),
                            new XElement("trncur", item.Trncur),
-                           new XElement("priolv", item.Priolv),
+                           new XElement("priolv", EnumHelper.GetValue(item.Priolv)),
                            new XElement("furinfo", item.Furinfo),
                            new XElement("trfdate", item.TrfDate),
                            new XElement("trftime", item.TrfTime),

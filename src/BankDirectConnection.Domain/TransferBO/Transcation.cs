@@ -20,11 +20,11 @@ namespace BankDirectConnection.Domain.TransferBO
             this.FromAcct = new Account();
             this.TransDetail = new List<ITransDetail>();
         }
-        public Transcation(Transcations Parent): base(Parent)
+        public Transcation(Transcations Parent) : base(Parent)
         {
             this.FromAcct = new Account();
             this.TransDetail = new List<ITransDetail>();
-            this.TransWay =  Parent.TransWay;
+            this.TransWay = Parent.TransWay;
             this.BusinessType = Parent.BusinessType;
         }
 
@@ -35,6 +35,8 @@ namespace BankDirectConnection.Domain.TransferBO
         public override bool Check()
         {
             base.Check();
+            if (this.BusinessType == "02" && this.TransDetail.Count > 1)
+                throw new BusinessException("Transfer transactions can not have multiple lines of detail") { Code = "2022009" };
             if (string.IsNullOrEmpty(this.ClientId))
                 throw new BusinessException("the value of clientid is null.") { Code = "1001005" };
             if (!string.IsNullOrEmpty(this.EDIId))
@@ -50,8 +52,8 @@ namespace BankDirectConnection.Domain.TransferBO
         }
 
         #region property
-        
-       
+
+
         /// <summary>
         /// 付款币种
         /// </summary>
@@ -99,7 +101,7 @@ namespace BankDirectConnection.Domain.TransferBO
         [JsonConverter(typeof(TransConverter<TransDetail, ITransDetail>))]
         public IList<ITransDetail> TransDetail { get; set; }
 
-       
+
         #endregion
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace BankDirectConnection.Domain.TransferBO
             return string.Empty;
         }
 
-       
+
     }
 
 }

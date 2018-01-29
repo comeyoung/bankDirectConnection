@@ -44,10 +44,10 @@ namespace BankDirectConnection.Domain.BOC
             PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
             foreach (var Transcation in Transcations.TranscationItems)
             {
+              
                 //以交易明细确定交易笔数
                 foreach (var item in Transcation.TransDetail)
                 {
-                   
                     trans.EDIId = Transcation.EDIId;
                     trans.ClientId = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;

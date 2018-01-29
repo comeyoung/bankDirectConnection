@@ -27,7 +27,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         private static string GetWageAndReimbursementResult()
         {
             //return "<?xml version='1.0' encoding='UTF - 8'?><bocb2e version='120' locale='zh_CN'> <head> <termid>E163083136140</termid>  <custid>133812368</custid>  <cusopr>136140253</cusopr>  <trncod>b2e0078</trncod>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </head>  <trans> <trn-b2e0078-rs> <status> <rspcod>B001</rspcod>  <rspmsg>ok</rspmsg> </status>  <serverdt>20180122164146</serverdt>  <token>1Yk532BscUL1HJB-vhG_yv3</token> </trn-b2e0078-rs> </trans> </bocb2e>";
-            return "<bocb2e version='120' locale='zh_CN'> <trn-b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><insid>CD111666</insid><obssid>95961qwerd8494d1asdsd</obssid></b2e0078-rs></trn-b2e0078-rs></bocb2e>";
+            return "<bocb2e version='120' locale='zh_CN'> <trn-b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><b2e0078-rs><status><rspcod>B001</rspcod><rspmsg>交易成功</rspmsg></status><insid></insid><obssid>95961qwerd8494d1asdsd</obssid></b2e0078-rs></trn-b2e0078-rs></bocb2e>";
         }
         private static string GetTransactionStatusInquiryResult()
         {
@@ -36,11 +36,11 @@ namespace BankDirectConnection.PushBankment.BOCService
         public static string PostRequest(string RequestXML)
         {
             /*===================================生产环境=======================================*/
-            //Logger.Writer("push to BOC:" + RequestXML);
-            //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            //Logger.Writer("receipt from BOC:" + rt);
-            //return rt;
-            return GetWageAndReimbursementResult();
+            Logger.Writer("push to BOC:" + RequestXML);
+            var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            Logger.Writer("receipt from BOC:" + rt);
+            return rt;
+            //return GetWageAndReimbursementResult();
             /*===================================生产环境=======================================*/
         }
 
