@@ -24,7 +24,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
                 throw new InnerException("2022002", "the value of transfer inquiry is empty ");
             var transXML = Serialization.BuildXMLForTransactionStatusInquiryByLinq(Msg);
             var res = BOCHttp.PostRequest(transXML);
-            var rt = Deserialization.ParseResponseMsg(res, "b2e0007");//调试到这一步，明细状态为空
+            var rt = Deserialization.ParseResponseMsg(res, "b2e0007");
             return ResResult.Create<ITransactionStatusInquiryMsg>(Msg, rt);
         }
     }

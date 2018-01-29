@@ -78,6 +78,7 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((IWageAndReimbursementMsg)TransMsg).Trans.ClientId;
+                    res.ObssId = item.Obssid;
                     if (!item.Status.IsSuccess())
                     {
                         res.Status = item.Status;
@@ -98,6 +99,7 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;
+                    res.ObssId = item.Obssid;
                     if (!item.Status.IsSuccess())
                     {
                         res.Status = item.Status;
@@ -117,6 +119,7 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((ITransactionStatusInquiryMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
+                //    res.ObssId = item.Obssid;
                     if (!item.Status.IsSuccess())
                     {
                         result.Status = item.Status;
@@ -136,6 +139,7 @@ namespace BankDirectConnection.Domain.Service
         
         public static IResResult Create<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
         {
+          
             IResResult result = new ResResult();
             result.Status.RspCod = "0";
             result.Status.RspMsg = "OK";

@@ -130,3 +130,7 @@ src/.vs/config/applicationhost.config
 !SQLite.Interop.dll
 .vs/bankDirectConnection/v14/.suo
 .vs/bankDirectConnection/v14/.suo
+src/BankDirectConnection.Service/Web.config
+.vs/bankDirectConnection/v14/.suo
+.vs/bankDirectConnection/v14/.suo
+src/BankDirectConnection.Service/Web.config

@@ -49,15 +49,10 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         }
 
 
-        public static int GetValue(this Enum value,object enumValue)
+        public static int GetValue(object enumValue)
         {
-            //Type enumType = value.GetType();
-            //var rt = Enum.GetValues(enumType);
-            //if((value.GetType())rt == enumValue)
-            //{
-
-            //}
-            return 0;
+            var SGBankNo = (emPriolv)Enum.Parse(typeof(emPriolv), enumValue.ToString());
+            return SGBankNo.GetHashCode();
         }
     }
 }
