@@ -49,6 +49,10 @@ namespace BankDirectConnection.Domain.TransferBO
 
         public bool Check()
         {
+            if (this.TransCur == "RMB")
+            {
+                this.TransCur = "CNY";
+            }
             if (null == this.ToAcct)
                 throw new BusinessException("2022002", "Transaction information  of ToAcct can not be empty ");
             this.ToAcct.Check();

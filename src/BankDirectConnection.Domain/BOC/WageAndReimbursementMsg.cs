@@ -160,10 +160,7 @@ namespace BankDirectConnection.Domain.BOC
             {
                 throw new BusinessException("1011008", "the value of Pybcur is empty.");
             }
-            if (this.Pybcur == "RMB")
-            {
-                this.Pybcur = "CNY";
-            }
+           
             return true;
         }
     }

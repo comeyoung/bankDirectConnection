@@ -36,11 +36,11 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static string PostRequest(string RequestXML)
         {
             /*===================================生产环境=======================================*/
-            Logger.Writer("push to SG:" + RequestXML);
-            var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
-            Logger.Writer("receip from SG:" + rt);
-            return rt;
-            //return GetTestQueryStatusResult();
+            //Logger.Writer("push to SG:" + RequestXML);
+            //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
+            //Logger.Writer("receip from SG:" + rt);
+            //return rt;
+            return GetTestQueryStatusResult();
             /*===================================生产环境=======================================*/
         }
     }

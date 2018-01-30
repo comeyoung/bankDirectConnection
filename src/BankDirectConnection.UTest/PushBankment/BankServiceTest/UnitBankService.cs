@@ -27,7 +27,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         {
             return new Account()
             {
-                BankId = "40142568949556",
+                BankId = "403751300104",
                 BankName = "中国银行股份有限公司北京崇文门支行",
                 AcctId = "327256085181",
                 AcctName = "李明",
@@ -233,7 +233,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 TransCur = "USD",
                 SWIFTCode = "CHFGTYU",
             };
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var transcations = new Transcation()
                 {
@@ -270,7 +270,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             {
                 ToAcct = GetAccoutBOC(),
                 ReciepterIdType = "0",
-                ReciepterIdCode = "111222333666555",
+                ReciepterIdCode = "130569996673745123",
                 ReceipterType = "1",
                 TransAmount = 0.01M,
                 TransCur = "CNY",
@@ -321,7 +321,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 SWIFTCode = "BKCHCNBJ",
                 Rate = 6
             };
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var transcations = new Transcation()
                 {
@@ -380,7 +380,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 FeeAcct = "327256085181",
                 FeeType = "1",
                 FromAcct = getFromAcct(),
-                PaymentCur = "RMB",
+                PaymentCur = "CNY",
                 BusinessType = "01",
                 PaymentType = "1",
                 Priority = emPriolv.Urgent,
@@ -402,7 +402,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                         BankName = "中国银行股份有限公司北京人大支行",
                     },
                     TransAmount = 0.01M,
-                    TransCur = "RMB",
+                    TransCur = "CNY",
                     Rate = 1
                 }
                 }
@@ -421,11 +421,11 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 FeeAcct = "327256085181",
                 FeeType = "1",
                 FromAcct = getFromAcct(),
-                PaymentCur = "RMB",
+                PaymentCur = "CNY",
                 BusinessType = "02",
-                PaymentType = "1",
+                PaymentType = "02",
                 Priority = emPriolv.Urgent,
-                Purpose = "薪水",
+                Purpose = "EC",
                 TransDate = DateTime.Now.ToString("yyyyMMdd"),
                 TransTime = DateTime.Now.ToString("HHmmss") + DateTime.Now.Millisecond,
                 TransWay = "01",
@@ -443,97 +443,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                         BankName = "中国银行股份有限公司北京人大支行",
                     },
                     TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
-                    Rate = 1
-                },new TransDetail(){
-                    ReceipterType = "1",
-                    ReciepterIdCode = "130666996689890306",
-                    ReciepterIdType = "1",
-                    SWIFTCode = "BKCHCNBJ",
-                    ToAcct = new Account() {
-                        AcctId = "342856085028",
-                        AcctName = "张宇",
-                        AcctType = "1",
-                        BankId = "40142",
-                        BankName = "中国银行股份有限公司北京人大支行",
-                    },
-                    TransAmount = 0.01M,
-                    TransCur = "RMB",
+                    TransCur = "CNY",
                     Rate = 1
                 }
 
@@ -556,8 +466,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 
                 TranscationItems = new List<ITranscation>() {
                 getPublicTranscation(),
-                getPublicTranscation(),
-                getPublicTranscation()
+                //getPublicTranscation(),
+                //getPublicTranscation()
 
 
             }
@@ -651,8 +561,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 BankService bankService = new BankService();
                 var trans = this.GetSGBRMBTrans();
                 var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
-                //bankService.PaymentTransfer(trans);
-                 Console.WriteLine(tranJson);
+                bankService.PaymentTransfer(trans);
+                // Console.WriteLine(tranJson);
             }
             catch (Exception ex)
             {
@@ -675,8 +585,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             BankService bankService = new BankService();
             var trans = this.GetSGBForeignTrans();
             var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);        
-          //  bankService.PaymentTransfer(trans);           
-            Console.WriteLine(tranJson);
+            bankService.PaymentTransfer(trans);           
+           // Console.WriteLine(tranJson);
 
         }
         
@@ -690,8 +600,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             BankService bankService = new BankService();
             var trans = this.GetSGBInnerTrans();
             var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
-         // bankService.PaymentTransfer(trans);           
-            Console.WriteLine(tranJson);
+            bankService.PaymentTransfer(trans);           
+           // Console.WriteLine(tranJson);
         }
 
         /// <summary>
@@ -705,8 +615,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             BankService bankService = new BankService();
             var trans = this.GetBOCPubllicToPaymentTrans();
            var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
-            //bankService.PaymentTransfer(trans);           
-            Console.WriteLine(tranJson);
+            bankService.PaymentTransfer(trans);           
+           // Console.WriteLine(tranJson);
 
         }
 
@@ -731,10 +641,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         public void TestSGBQueryBankService()
         {
             BankService service = new BankService();
-            // SGBService bankService = new SGBService();
+            //SGBService bankService = new SGBService();
             var trans = GetSGBQueryInfos();
-            Console.WriteLine(JsonConvert.SerializeObject(trans));
-            //bankService.QueryTransStatus(GetSGBQueryInfos());         
+            //Console.WriteLine(JsonConvert.SerializeObject(trans));
+            service.QueryTransStatus(trans);         
             //service.QueryTransStatus(trans);
         }
 
@@ -744,10 +654,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         [TestMethod]
         public void TestBOCQueryBankService()
         {
-            BankService service = new BankService();           
+            BankService bankService = new BankService();           
             var trans = GetBOCQueryInfos();
             Console.WriteLine(JsonConvert.SerializeObject(trans));
-            //bankService.QueryTransStatus(GetSGBQueryInfos());         
+            //bankService.QueryTransStatus(GetBOCQueryInfos());         
             //service.QueryTransStatus(trans);
         }
 
