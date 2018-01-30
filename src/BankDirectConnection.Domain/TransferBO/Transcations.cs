@@ -37,6 +37,12 @@ namespace BankDirectConnection.Domain.TransferBO
 
         public  bool Check()
         {
+            foreach (var item in TranscationItems) {
+                if (item.PaymentCur=="RMB") {
+                    item.PaymentCur = "CNY";
+                }
+            }
+            
             if (string.IsNullOrEmpty(this.TransWay))
                 throw new BusinessException("the value of transferway is null") { Code = "1001006" };
             if (string.IsNullOrEmpty(this.BusinessType))

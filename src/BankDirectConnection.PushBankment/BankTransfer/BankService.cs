@@ -32,7 +32,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 var trans = TransModel.Create(Transcation);
                 TranscationDapperRepository repository = new TranscationDapperRepository();
                 repository.SaveTransList(trans);
-                ////获取银行信息，调用具体银行的服务
+                //获取银行信息，调用具体银行的服务
                 var bankService = BankFactory.CreateBank(Transcation.TransWay);
                 var rt = bankService.PaymentTransfer(Transcation);
 
@@ -79,7 +79,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 foreach (var item in dicTransList)
                 {
                     var bankService = BankFactory.CreateBank(item.Key);
-                    var rt = bankService.QueryTransStatus(item.Value);//item.value==测试类构建交易事物
+                    var rt = bankService.QueryTransStatus(item.Value);
                     if (null == result)
                         result = rt;
                     else
