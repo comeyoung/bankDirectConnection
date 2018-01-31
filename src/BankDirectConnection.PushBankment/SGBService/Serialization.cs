@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.SGB;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.Domain.SGB;
 using BankDirectConnection.Domain.SGB.PaymentMsg;
 using System;
 using System.Collections.Generic;
@@ -132,7 +133,7 @@ namespace BankDirectConnection.PushBankment.SGBService
                                            new XElement("WhyUse", RMBPaymentMsg.WhyUse),
                                            new XElement("Docket", RMBPaymentMsg.Docket),
                                            new XElement("TranType", RMBPaymentMsg.TranType),
-                                           new XElement("Priority", RMBPaymentMsg.Priority),
+                                           new XElement("Priority", EnumHelper.GetValue(RMBPaymentMsg.Priority)),
                                            new XElement("StartTime", RMBPaymentMsg.StartTime),
                                            new XElement("StartDate", RMBPaymentMsg.StartDate)));
             return xdocment.ToString();
