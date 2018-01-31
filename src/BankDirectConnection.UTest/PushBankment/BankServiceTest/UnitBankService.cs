@@ -276,7 +276,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 TransCur = "CNY",
                 SWIFTCode = "",
             };
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var transcations = new Transcation()
                 {
@@ -284,7 +284,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     PaymentCur = "CNY",
                     PaymentType = "1",
                     Purpose = "转账",
-                    Priority = emPriolv.Urgent,
+                    Priority = emPriolv.Normal,
                     TransDate = DateTime.Now.ToString("yyyyMMdd"),
                     TransTime = DateTime.Now.ToString("HHmmss") + DateTime.Now.Millisecond,
                     FeeType = "1",
