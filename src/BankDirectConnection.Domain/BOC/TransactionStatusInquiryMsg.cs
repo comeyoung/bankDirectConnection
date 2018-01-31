@@ -18,14 +18,14 @@ namespace BankDirectConnection.Domain.BOC
     {
         public TransactionStatusInquiryMsg()
         {
-            this.HeaderMessage = new Header();
+            this.HeaderMessage = new Header("b2e0007");
             this.Trans = new List<ITransactionStatusInquiry>();
 
         }
 
         public TransactionStatusInquiryMsg(ITransferQueryDataList TransferQueryDataList)
         {
-            this.HeaderMessage = new Header();
+            this.HeaderMessage = new Header("b2e0007");
             this.Trans = new List<ITransactionStatusInquiry>();
             this.Create(TransferQueryDataList);
             this.Check();
@@ -84,8 +84,9 @@ namespace BankDirectConnection.Domain.BOC
         }
         public TransactionStatusInquiry(ITransferQueryData Data)
         {
-            this.EDIId = Data.ClientId;
+            this.EDIId = Data.EDIId;
             this.Obssid = Data.ObssId;
+            this.ClientId = Data.ClientId;
             this.Check();
         }
         public  bool Check()

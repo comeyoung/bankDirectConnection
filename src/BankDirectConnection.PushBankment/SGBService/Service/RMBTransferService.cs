@@ -36,7 +36,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var res = SGBHttp.PostRequest(transXML);
             var rt = Deserialization.ParseResonseMsg(res);
             //返回结果
-            return ResResult.SGBCreate<IRMBPaymentMsg>(Msg,rt);
+            return ResResult.Create<IRMBPaymentMsg>(Msg,rt);
         }
     }
 }

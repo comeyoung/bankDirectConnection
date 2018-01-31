@@ -46,8 +46,8 @@ namespace BankDirectConnection.PushBankment.BOCService
                 foreach(var item in resDetail)
                 {
                     DetailResponse detailLine = new DetailResponse();
-                    var detailStatus = resDetail.Descendants("status");
-                    foreach(var detailItem in detailStatus)
+                    var detailStatus = resDetail.Descendants("status");                  
+                    foreach (var detailItem in detailStatus)
                     {
                         detailLine.Status.RspCod = GetElementValue(detailItem.Element("rspcod"));
                         detailLine.Status.RspMsg = GetElementValue(detailItem.Element("rspmsg"));

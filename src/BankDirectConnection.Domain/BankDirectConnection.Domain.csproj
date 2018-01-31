@@ -52,6 +52,8 @@
     <Compile Include="BOC\IDetail.cs" />
     <Compile Include="BOC\IFractn.cs" />
     <Compile Include="BOC\IHeader.cs" />
+    <Compile Include="BOC\IPaymentsToPrivateMsg.cs" />
+    <Compile Include="BOC\IPaymentsToPrivateTrans.cs" />
     <Compile Include="BOC\IPaymentsToPublicMsg.cs" />
     <Compile Include="BOC\IPaymentsToPublicTrans.cs" />
     <Compile Include="BOC\IToactn.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="BOC\ITransactionStatusInquiryMsg.cs" />
     <Compile Include="BOC\IWageAndReimbursementMsg.cs" />
     <Compile Include="BOC\IWageAndReimbursementTrans.cs" />
+    <Compile Include="BOC\PaymentsToPrivateMsg.cs" />
     <Compile Include="BOC\ResponseMsg.cs" />
     <Compile Include="Common\BankServiceConfig.cs" />
     <Compile Include="Common\SerialNumber.cs" />

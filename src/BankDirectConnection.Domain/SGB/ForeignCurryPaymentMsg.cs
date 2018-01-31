@@ -28,7 +28,7 @@ namespace BankDirectConnection.Domain.SGB
         public ForeignCurryPaymentMsg(ITranscation Transcation)
         {
             this.Head = new CommonHeader();
-            Create(Transcation);
+            this.Create(Transcation);
             this.Check();
         }
 

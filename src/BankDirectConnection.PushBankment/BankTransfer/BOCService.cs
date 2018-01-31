@@ -10,6 +10,7 @@ using BankDirectConnection.Domain.BOC;
 using System.Collections.Generic;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
+using System.Linq;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -24,6 +25,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
 
         private readonly WageAndReimbursementService wageAndReimbursementService;
         private readonly PaymentsToPublicService paymentsToPublicService;
+        private readonly PaymentsToPrivateService paymentsToPrivateService;
         private readonly TransactionStatusInquiryService transactionStatusInquiryService;
 
 
@@ -32,6 +34,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             this.wageAndReimbursementService = new WageAndReimbursementService();
             this.paymentsToPublicService = new PaymentsToPublicService();
             this.transactionStatusInquiryService = new TransactionStatusInquiryService();
+            this.paymentsToPrivateService = new PaymentsToPrivateService();
         }
         public BOCService(WageAndReimbursementService WageAndReimbursementService, 
                           PaymentsToPublicService PaymentsToPublicService, 
@@ -81,14 +84,29 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     }
                 }
                 return result;
-                
             }
             else
             {
-                var transBO = new PaymentsToPublicMsg(Transcations);
-                transBO.HeaderMessage.Token = response.Token;
-                //获取转账业务
-                return this.paymentsToPublicService.PushPaymentTransferInfo(transBO);
+                IResResult publicTransferResult = new ResResult();
+                //获取对公转账
+                var publicTransMsg = GetPublicTransferMsg(Transcations);
+                if(publicTransMsg.TranscationItems.Count() != 0)
+                {
+                    var publicTransBO = new PaymentsToPublicMsg(publicTransMsg);
+                    publicTransBO.HeaderMessage.Token = response.Token;
+                    //获取转账业务
+                    publicTransferResult = this.paymentsToPublicService.PushPaymentTransferInfo(publicTransBO);
+                }
+                //获取对私转账
+                var privateTransMsg = GetPrivateTransferMsg(Transcations);
+                if(privateTransMsg.TranscationItems.Count == 0)
+                {
+                    var privateTransBO = new PaymentsToPrivateMsg(privateTransMsg);
+                    privateTransBO.HeaderMessage.Token = response.Token;
+                    var privateTransferResult = this.paymentsToPrivateService.PushPaymentTransferInfo(privateTransBO);
+                    return publicTransferResult.MergeResResult(privateTransferResult);
+                }
+                return publicTransferResult;
             }
         }
         /// <summary>
@@ -153,6 +171,25 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             }
             transQueryList.Add(trans); 
             return transQueryList;
+        }
+
+        public ITranscations GetPublicTransferMsg(ITranscations Trans)
+        {
+            return GetTransferMsg(Trans, "0");
+        }
+
+        public ITranscations GetPrivateTransferMsg(ITranscations Trans)
+        {
+            return GetTransferMsg(Trans, "1");
+        }
+
+        private ITranscations GetTransferMsg(ITranscations Trans,string MsgType)
+        {
+            ITranscations trans = new Transcations();
+            trans.TransWay = trans.TransWay;
+            trans.BusinessType = trans.BusinessType;
+            Trans.TranscationItems.ToList().ForEach(c => { if (c.TransDetail.ToList().FirstOrDefault().ToAcct.AcctType == MsgType) trans.TranscationItems.Add(c); });
+            return trans;
         }
     }
 }

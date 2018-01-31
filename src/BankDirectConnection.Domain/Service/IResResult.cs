@@ -25,7 +25,7 @@ namespace BankDirectConnection.Domain.Service
     public interface IResponse
     {
         
-         Status Status { get; set; }
+         IStatus Status { get; set; }
 
         /// <summary>
         /// 客户端生成

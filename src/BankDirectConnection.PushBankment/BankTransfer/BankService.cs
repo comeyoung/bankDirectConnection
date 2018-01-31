@@ -32,7 +32,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 var trans = TransModel.Create(Transcation);
                 TranscationDapperRepository repository = new TranscationDapperRepository();
                 repository.SaveTransList(trans);
-                ////获取银行信息，调用具体银行的服务
+                //获取银行信息，调用具体银行的服务
                 var bankService = BankFactory.CreateBank(Transcation.TransWay);
                 var rt = bankService.PaymentTransfer(Transcation);
 
@@ -53,19 +53,19 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         {
             try
             {
-                Transcation.Check();
+                // Transcation.Check();
                 //查询是根据客户端流水号和EDI流水号来查询，同一请求可能会涉及多个银行的交易查询
                 // 取出各个银行的数据
                 Dictionary<string, ITransferQueryDataList> dicTransList = new Dictionary<string, ITransferQueryDataList>();
                 foreach(var item in Transcation.TransferQueryDatas)
                 {
+                    //选择调用哪个银行的查询服务
                     string key = Instruction.GetBankService(item.EDIId);
                     if (dicTransList.Keys.Contains(key))
                     {
                         ITransferQueryDataList query = dicTransList[key];
                         query.TransferQueryDatas.Add(item);
                     }
-
                     else
                     {
                         ITransferQueryDataList queryList = new TransferQueryDataList();

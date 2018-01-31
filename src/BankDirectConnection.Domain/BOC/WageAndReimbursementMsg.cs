@@ -15,7 +15,7 @@ namespace BankDirectConnection.Domain.BOC
     /// </summary>
     public class WageAndReimbursementMsg : AbastractBOCTranscation, IWageAndReimbursementMsg
     {
-        
+
         public WageAndReimbursementMsg()
         {
             this.HeaderMessage = new Header("b2e0078");
@@ -23,13 +23,13 @@ namespace BankDirectConnection.Domain.BOC
         }
 
 
-        public WageAndReimbursementMsg(ITranscation Transcation):base(Transcation)
+        public WageAndReimbursementMsg(ITranscation Transcation) : base(Transcation)
         {
             this.HeaderMessage = new Header("b2e0078");
             this.Trans = new WageAndReimbursementTrans();
             this.Create(Transcation);
             this.Check();
-            Transcation.Check();
+            this.Trans.Check();
         }
 
         public WageAndReimbursementTrans Trans { get; set; }
@@ -48,22 +48,24 @@ namespace BankDirectConnection.Domain.BOC
 
         private WageAndReimbursementMsg Create(ITranscation Transcation)
         {
+
             //一笔交易只能一个付款方
             // WageAndReimbursementTrans trans = new WageAndReimbursementTrans();
-            this.Trans.EDIId = Transcation.ClientId;
+            this.Trans.EDIId = Transcation.EDIId;
             this.Trans.Pybcur = Transcation.PaymentCur;
-            this.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
             this.Trans.FractnMessage.Actacn = Transcation.FromAcct.AcctId;
             this.Trans.FractnMessage.Actnam = Transcation.FromAcct.AcctName;
             //this.trans.Pybamt = Transcation.TransDetail.ForEach(c=>sum(c.TransAmount));
             this.Trans.Pybnum = Transcation.TransDetail.Count;
-            this.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
             this.Trans.Furinfo = Transcation.Purpose;
             this.Trans.Trfdate = Transcation.TransDate;
-            
+            this.Trans.ClientId = Transcation.ClientId;
+            this.Trans.FractnMessage.Fribkn = Transcation.FromAcct.BankId;
+            this.Trans.Crdtyp = GetCrdtyp(Transcation.PaymentType);
             foreach (var item in Transcation.TransDetail)
             {
-                var line = new Detail() {
+                var line = new Detail()
+                {
                     Toibkn = item.ToAcct.BankId,
                     Tobank = item.ToAcct.BankName,
                     Toactn = item.ToAcct.AcctId,
@@ -71,9 +73,11 @@ namespace BankDirectConnection.Domain.BOC
                     Pydamt = item.TransAmount,
                     Toname = item.ToAcct.AcctName
                 };
+                //对代发类型Crdtyp先进行判断，如果值为5和7，则收款人bankid需赋值为空
+                if (this.Trans.Crdtyp == "5" || this.Trans.Crdtyp == "7")
+                    line.Toibkn = "";
                 this.Trans.DetailMessage.Add(line);
                 this.Trans.Pybamt += item.TransAmount;
-
             }
             return this;
         }
@@ -96,19 +100,19 @@ namespace BankDirectConnection.Domain.BOC
         }
 
     }
-    public class WageAndReimbursementTrans : AbastractBOCTranscation,IWageAndReimbursementTrans
+    public class WageAndReimbursementTrans : AbastractBOCTranscation, IWageAndReimbursementTrans
     {
         public WageAndReimbursementTrans()
         {
             this.DetailMessage = new List<IDetail>();
             this.FractnMessage = new Fractn();
-            
+
         }
         public string Ceitinfo { get; set; }
         public string Transtype { get; set; }
-        
 
-        public string ClientId { get; set; }
+
+
         /// <summary>
         /// 付款人手机号
         /// </summary>
@@ -151,19 +155,24 @@ namespace BankDirectConnection.Domain.BOC
 
         public bool Check()
         {
-           this.DetailMessage.ToList().ForEach(c => c.Check());
+            this.DetailMessage.ToList().ForEach(c => c.Check());
+            if (string.IsNullOrEmpty(this.Pybcur))
+            {
+                throw new BusinessException("1011008", "the value of Pybcur is empty.");
+            }
+           
             return true;
         }
     }
 
 
-    public class Detail:IDetail
+    public class Detail : IDetail
     {
 
         public Detail()
         {
         }
-       
+
         /// <summary>
         /// 收款行人行行号/收款省行标识
         /// </summary>

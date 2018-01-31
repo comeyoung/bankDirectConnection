@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
+﻿using BankDirectConnection.BaseApplication.DataHandle;
+using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.BOC.Message;
 using System;
@@ -48,7 +49,8 @@ namespace BankDirectConnection.PushBankment.BOCService
                new XElement("trans",
                    new XElement("trn-b2e0078-rq",
                        new XElement("b2e0078-rq",
-                           new XElement("insid", WageAndReimbursementMsg.Trans.EDIId),                
+                           new XElement("insid", WageAndReimbursementMsg.Trans.EDIId),
+                           BuildFractnElement(WageAndReimbursementMsg.Trans.FractnMessage),
                            new XElement("pybcur", WageAndReimbursementMsg.Trans.Pybcur),
                            new XElement("pybamt", WageAndReimbursementMsg.Trans.Pybamt),
                            new XElement("pybnum", WageAndReimbursementMsg.Trans.Pybnum),
@@ -65,7 +67,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                                                   new XElement("toactn", item.Toactn),
                                                   new XElement("pydcur", item.Pydcur),
                                                   new XElement("pydamt", item.Pydamt),
-                                                  new XElement("toname", item.Toidet),
+                                                  new XElement("toname", item.Toname),
                                                   new XElement("toidtp", item.Toidtp),
                                                   new XElement("toidet", item.Toidet),
                                                   new XElement("furinfo", item.Furinfo),
@@ -73,8 +75,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                                                   new XElement("reserve1", item.Reserve1),
                                                   new XElement("reserve2", item.Reserve2),
                                                   new XElement("reserve3", item.Reserve3),
-                                                  new XElement("reserve4", item.Reserve4)),
-                          BuildFractnElement(WageAndReimbursementMsg.Trans.FractnMessage))))));
+                                                  new XElement("reserve4", item.Reserve4)))))));
             return xdocment.Declaration + xdocment.ToString();
         }
 
@@ -103,7 +104,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                            new XElement("obssid", item.Obssid),
                            new XElement("trnamt", item.Trnamt),
                            new XElement("trncur", item.Trncur),
-                           new XElement("priolv", item.Priolv),
+                           new XElement("priolv", EnumHelper.GetValue(item.Priolv)),
                            new XElement("furinfo", item.Furinfo),
                            new XElement("trfdate", item.TrfDate),
                            new XElement("trftime", item.TrfTime),
@@ -111,6 +112,40 @@ namespace BankDirectConnection.PushBankment.BOCService
             return xdocment.Declaration + xdocment.ToString();
         }
 
+
+        /// <summary>
+        /// 对私转账
+        /// </summary>
+        /// <param name="PaymentsToPublicMsg"></param>
+        /// <returns></returns>
+        public static string BuildXMLForPaymentsToPrivateByLinq(IPaymentsToPrivateMsg PaymentsToPrivateMsg)
+        {
+            if (null == PaymentsToPrivateMsg)
+                throw new InnerException("", "");
+            XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
+               new XAttribute("version", "100"),
+               new XAttribute("security", "true"),
+               new XAttribute("lang", "chs"),
+               BuildHeadElement(PaymentsToPrivateMsg.HeaderMessage),
+               new XElement("trans",
+                   new XElement("trn-b2e0061-rq",
+                   from item in PaymentsToPrivateMsg.Trans
+                   select
+                  new XElement("b2e0061-rq",
+                           BuildFractnElement(item.Fractn),
+                           BuildToactnElement(item.Toactn),
+                           new XElement("insid", item.EDIId),
+                           new XElement("obssid", item.Obssid),
+                           new XElement("trnamt", item.Trnamt),
+                           new XElement("trncur", item.Trncur),
+                           new XElement("priolv", EnumHelper.GetValue(item.Priolv)),
+                           new XElement("cuspriolv","1"),
+                           new XElement("furinfo", item.Furinfo),
+                           new XElement("trfdate", item.TrfDate),
+                           new XElement("trftime", item.TrfTime),
+                           new XElement("comacn", item.Comacn))))));
+            return xdocment.Declaration + xdocment.ToString();
+        }
 
         /// <summary>
         /// 签出
@@ -152,8 +187,7 @@ namespace BankDirectConnection.PushBankment.BOCService
                     new XElement("trn-b2e0001-rq",
                         new XElement("b2e0001-rq",
                             new XElement("custdt", SignInMsg.Trans.Custdt),
-                            new XElement("oprpwd", SignInMsg.Trans.Oprpwd),
-                            new XElement("ceitinfo", SignInMsg.Trans.Ceitinfo))))));
+                            new XElement("oprpwd", SignInMsg.Trans.Oprpwd))))));
             return xdocment.Declaration + xdocment.ToString();
         }
 

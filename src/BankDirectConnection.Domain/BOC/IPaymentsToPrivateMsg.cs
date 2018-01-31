@@ -1,17 +1,16 @@
-﻿using BankDirectConnection.BaseApplication.BaseTranscation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankDirectConnection.Domain.TransferBO
+namespace BankDirectConnection.Domain.BOC
 {
     /*===============================================================================================================================
-	*	Create by Fancy at 2018/1/12 18:02:26
+	*	Create by Fancy at 2018/1/31 16:52:48
 	===============================================================================================================================*/
-    public interface ITranscations : IBaseTranscations<ITranscation>
+    public interface IPaymentsToPrivateMsg: IBaseBOCTranscation
     {
-         //IList<ITranscation> Transcation { get; set; }
+        IList<IPaymentsToPrivateTrans> Trans { get; set; }
     }
 }

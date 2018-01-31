@@ -34,63 +34,39 @@ namespace BankDirectConnection.Domain.Service
             this.Status.RspMsg = ErrorMsg;
         }
 
-        public static IResResult Create(QueryTransactionResultsResponse rt)
+        public static IResResult Create(QueryTransactionResultsResponse Rt, ITransactionResultsMsg Msg)
         {
             IResResult result = new ResResult();
-            if (null == rt)
+            if (null == Rt)
                 throw new InnerException("2022007", "Response information can not be empty ");
-                result.Status.RspCod = rt.Trans.JnlState;
-                result.Status.RspMsg = rt.Trans.Postscript;
-            if (result.Status.IsSuccess())
+                result.Status.RspCod = Rt.Trans.JnlState;
+                result.Status.RspMsg = Rt.Trans.Postscript;
+
+            var res = new Response();
+            res.EDIId = Rt.Trans.CmeSeqNo;
+            res.ClientId = Msg.ClientId;
+            if (Rt.Trans.IsSuccess())
             {
                 result.Status.RspCod = "0";
                 result.Status.RspMsg = "ok";
-            } 
-                //item.ClientId = rt.Trans.CertSeqNo;
-                //item.ObssId = rt.Trans.HostSeqNo;
-                result.Response.Add(new Response() { ClientId = rt.Trans.CertSeqNo, ObssId = rt.Trans.HostSeqNo, EDIId = Instruction.NewInsSid("02") });                           
-            return result;
-        }
-        
-        /// <summary>
-        /// 处理BOC返回值
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static IResResult Create(ResponseMsg msg)
-        {
-            if (null == msg) {
-                throw new InnerException("2012001", "Internal processing abnormality");
+                res.ObssId = Rt.Trans.HostSeqNo;
+                res.Status = result.Status;
             }
-            IResResult result = new ResResult();
-            result.Status = msg.Status;
-            if (result.Status.IsSuccess())
+            else
             {
-                result.Status.RspCod = "0";                
+                var status = new Status() { RspCod = Rt.Trans.JnlState, RspMsg = Rt.Trans.Postscript };
+                result.Status = status;
+                res.Status = status;
             }
-            foreach (var item in msg.DetailResponses)
-            {
-                Status status = new Status();
-                if(item.Status.IsSuccess())
-                {
-                    status.RspCod = "0";
-                    status.RspMsg = item.Status.RspMsg;
-
-                }
-                else
-                {
-                    //错误处理
-                    // TODO
-                    result.Status.RspCod = item.Status.RspCod;
-                    result.Status.RspMsg = item.Status.RspMsg;
-                }
-                result.Response.Add(new Response() { Status = status, ClientId = item.Insid, ObssId = item.Obssid, EDIId = Instruction.NewInsSid("01") });
-            }
+            result.Response.Add(res);
             return result;
         }
 
         public static IResResult Create<T>(T TransMsg, ResponseMsg Msg) where T : IBaseBOCTranscation
         {
+            if (Msg.DetailResponses.Count()==0) {
+                throw new InnerException("2012008", "返回交易信息处理异常");
+            }
             IResResult result = new ResResult();
             result.Status.RspCod = "0";
             result.Status.RspMsg = "OK";
@@ -102,8 +78,12 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((IWageAndReimbursementMsg)TransMsg).Trans.ClientId;
-                    if (item.Status.IsSuccess())
+                    res.ObssId = item.Obssid;
+                    if (!item.Status.IsSuccess())
+                    {
+                        res.Status = item.Status;
                         result.Status = item.Status;
+                    }
                     else
                     {
                         res.Status.RspCod = "0";
@@ -112,15 +92,19 @@ namespace BankDirectConnection.Domain.Service
                     result.Response.Add(res);
                 }
             }
-            else if(typeof(T) == typeof(IPaymentsToPublicMsg))
+            else if(typeof(T) == typeof(IPaymentsToPublicMsg) || typeof(T) == typeof(IPaymentsToPrivateMsg))
             {
                 foreach (var item in Msg.DetailResponses)
                 {
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;
-                    if (item.Status.IsSuccess())
+                    res.ObssId = item.Obssid;
+                    if (!item.Status.IsSuccess())
+                    {
+                        res.Status = item.Status;
                         result.Status = item.Status;
+                    }
                     else
                     {
                         res.Status.RspCod = "0";
@@ -135,8 +119,12 @@ namespace BankDirectConnection.Domain.Service
                     res = new Response();
                     res.EDIId = item.Insid;
                     res.ClientId = ((ITransactionStatusInquiryMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
-                    if (item.Status.IsSuccess())
+                    res.ObssId = item.Obssid;
+                    if (!item.Status.IsSuccess())
+                    {
                         result.Status = item.Status;
+                        res.Status = item.Status;
+                    }
                     else
                     {
                         res.Status.RspCod = "0";
@@ -148,52 +136,31 @@ namespace BankDirectConnection.Domain.Service
             return result;
         }
 
-        /// <summary>
-        /// 处理SGB返回值
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static IResResult Create(CommonResponseMsg msg)
-        {
-            IResResult result = new ResResult();
 
-            if(null == msg.RespCode)
-                throw new InnerException("2022002", "Transaction information can not be empty ");
-            if (msg.IsSuccess())
-            {
-                result.Status.RspCod = "0";
-                result.Status.RspMsg = msg.RespInfo;
-            }
-            else {
-                result.Status.RspCod = "100";
-                result.Status.RspMsg = "error";
-            }
-            return result;
-        }
-        public static IResResult SGBCreate<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
+        public static IResResult Create<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
         {
+
             IResResult result = new ResResult();
             result.Status.RspCod = "0";
             result.Status.RspMsg = "OK";
             IResponse res;
             if (typeof(T) == typeof(IForeignCurryPaymentMsg))
-            {               
-                    res = new Response();
-                    res.ObssId = Msg.HostSeqNo;
-                    res.ClientId = TransMsg.ClientId;
-                    res.EDIId = TransMsg.EDIId;
-              
-              if (Msg.IsSuccess()) {
+            {
+                res = new Response();
+                res.ObssId = Msg.HostSeqNo;
+                res.ClientId = TransMsg.ClientId;
+                res.EDIId = TransMsg.EDIId;
+                if (Msg.IsSuccess())
+                {
                     res.Status.RspCod = "0";
                     res.Status.RspMsg = "OK";
                 }
                 else
                 {
-                    result.Status.RspMsg = Msg.RespInfo;
+                    res.Status = new BaseApplication.BaseTranscation.Status() { RspCod = Msg.RespCode, RspMsg = Msg.RespInfo };
+                    result.Status = res.Status;
                 }
                 result.Response.Add(res);
-
-
             }
             else if (typeof(T) == typeof(IInnerTransferMsg))
             {
@@ -208,7 +175,8 @@ namespace BankDirectConnection.Domain.Service
                 }
                 else
                 {
-                    result.Status.RspMsg = Msg.RespInfo;
+                    res.Status = new BaseApplication.BaseTranscation.Status() { RspCod = Msg.RespCode, RspMsg = Msg.RespInfo };
+                    result.Status = res.Status;
                 }
                 result.Response.Add(res);
             }
@@ -225,7 +193,8 @@ namespace BankDirectConnection.Domain.Service
                 }
                 else
                 {
-                    result.Status.RspMsg = Msg.RespInfo;
+                    res.Status = new BaseApplication.BaseTranscation.Status() { RspCod = Msg.RespCode, RspMsg = Msg.RespInfo };
+                    result.Status = res.Status;
                 }
                 result.Response.Add(res);
             }
@@ -269,14 +238,14 @@ namespace BankDirectConnection.Domain.Service
 
     }
 
-   
+
 
     public class Response: IResponse
     {
         public Response() {
             this.Status = new Status();
         }
-        public Status Status { get; set; }
+        public IStatus Status { get; set; }
 
         /// <summary>
         /// 客户端生成
@@ -292,7 +261,6 @@ namespace BankDirectConnection.Domain.Service
         /// 网银交易流水号
         /// </summary>
         public string ObssId { get; set; }
-        
 
     }
 }

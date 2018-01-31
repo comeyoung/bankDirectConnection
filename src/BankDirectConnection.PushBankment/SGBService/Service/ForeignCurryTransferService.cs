@@ -38,7 +38,7 @@ namespace BankDirectConnection.PushBankment.SGBService.Service
             var rt = Deserialization.ParseResonseMsg(res);
 
             // 处理返回结果
-            return ResResult.SGBCreate<IForeignCurryPaymentMsg>(Msg, rt);
+            return ResResult.Create<IForeignCurryPaymentMsg>(Msg, rt);
         }
 
       

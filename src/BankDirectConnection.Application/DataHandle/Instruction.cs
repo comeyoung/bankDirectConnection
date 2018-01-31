@@ -73,7 +73,8 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         {
             if (string.IsNullOrEmpty(EDIId))
                 throw new InnerException("1001009", "the value of EDIId is empty");
-            return EDIId.Substring(5, 2);
+            return EDIId.Substring(6, 2);
+            
         }
     }
 }

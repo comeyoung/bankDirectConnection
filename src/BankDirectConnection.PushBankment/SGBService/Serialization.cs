@@ -103,8 +103,8 @@ namespace BankDirectConnection.PushBankment.SGBService
             xElement.Add(new XElement("ReqSeqNo", Head.ReqSeqNo));
             xElement.Add(new XElement("ReqDate", Head.ReqDate));
             xElement.Add(new XElement("ReqTime", Head.ReqTime));
-            xElement.Add(new XElement("ProductId", Head.ProductID));
-            xElement.Add(new XElement("ChannelType", Head.ChannelType));
+            xElement.Add(new XElement("ProductId", "ID"));
+            xElement.Add(new XElement("ChannelType","ERP"));
             return xElement;
 
         }
@@ -200,11 +200,13 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// <returns></returns>
         public static string BuildXMLForQueryTransactionResults(ITransactionResultsMsg TransactionResultsMsg)
         {
+
             XElement xdocment = new XElement("ap", new XElement("CCTransCode", "SGQ010"),
                 BuildXMLForCommonHeader(TransactionResultsMsg.Head),
                 new XElement(
                     "Cmp", new XElement("CmeSeqNo", TransactionResultsMsg.Trans.CmeSeqNo),
-                          new XElement("StartDate", TransactionResultsMsg.Trans.StartDate)));
+                          new XElement("StartDate", TransactionResultsMsg.Trans.StartDate)
+                          ));
             return xdocment.ToString();
 
 
