@@ -52,6 +52,7 @@
     <Compile Include="BOCService\Service\BalanceInquiryService.cs" />
     <Compile Include="BOCService\BOCHttp.cs" />
     <Compile Include="BOCService\Deserialization.cs" />
+    <Compile Include="BOCService\Service\PaymentsToPrivateService.cs" />
     <Compile Include="BOCService\Service\PaymentsToPublicService.cs" />
     <Compile Include="BOCService\Serialization.cs" />
     <Compile Include="BOCService\Service\SignService.cs" />
