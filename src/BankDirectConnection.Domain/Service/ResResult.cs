@@ -51,7 +51,7 @@ namespace BankDirectConnection.Domain.Service
                 result.Status.RspMsg = "ok";
                 res.ObssId = Rt.Trans.HostSeqNo;
                 res.Status = result.Status;
-            } 
+            }
             else
             {
                 var status = new Status() { RspCod = Rt.Trans.JnlState, RspMsg = Rt.Trans.Postscript };
@@ -92,7 +92,7 @@ namespace BankDirectConnection.Domain.Service
                     result.Response.Add(res);
                 }
             }
-            else if(typeof(T) == typeof(IPaymentsToPublicMsg))
+            else if(typeof(T) == typeof(IPaymentsToPublicMsg) || typeof(T) == typeof(IPaymentsToPrivateMsg))
             {
                 foreach (var item in Msg.DetailResponses)
                 {
@@ -136,10 +136,10 @@ namespace BankDirectConnection.Domain.Service
             return result;
         }
 
-        
+
         public static IResResult Create<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
         {
-          
+
             IResResult result = new ResResult();
             result.Status.RspCod = "0";
             result.Status.RspMsg = "OK";
@@ -238,7 +238,7 @@ namespace BankDirectConnection.Domain.Service
 
     }
 
-   
+
 
     public class Response: IResponse
     {

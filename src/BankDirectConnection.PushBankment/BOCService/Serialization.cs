@@ -114,6 +114,40 @@ namespace BankDirectConnection.PushBankment.BOCService
 
 
         /// <summary>
+        /// 对私转账
+        /// </summary>
+        /// <param name="PaymentsToPublicMsg"></param>
+        /// <returns></returns>
+        public static string BuildXMLForPaymentsToPrivateByLinq(IPaymentsToPrivateMsg PaymentsToPrivateMsg)
+        {
+            if (null == PaymentsToPrivateMsg)
+                throw new InnerException("", "");
+            XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
+               new XAttribute("version", "100"),
+               new XAttribute("security", "true"),
+               new XAttribute("lang", "chs"),
+               BuildHeadElement(PaymentsToPrivateMsg.HeaderMessage),
+               new XElement("trans",
+                   new XElement("trn-b2e0061-rq",
+                   from item in PaymentsToPrivateMsg.Trans
+                   select
+                  new XElement("b2e0061-rq",
+                           BuildFractnElement(item.Fractn),
+                           BuildToactnElement(item.Toactn),
+                           new XElement("insid", item.EDIId),
+                           new XElement("obssid", item.Obssid),
+                           new XElement("trnamt", item.Trnamt),
+                           new XElement("trncur", item.Trncur),
+                           new XElement("priolv", EnumHelper.GetValue(item.Priolv)),
+                           new XElement("cuspriolv","1"),
+                           new XElement("furinfo", item.Furinfo),
+                           new XElement("trfdate", item.TrfDate),
+                           new XElement("trftime", item.TrfTime),
+                           new XElement("comacn", item.Comacn))))));
+            return xdocment.Declaration + xdocment.ToString();
+        }
+
+        /// <summary>
         /// 签出
         /// </summary>
         /// <param name="SignOutMsg"></param>

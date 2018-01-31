@@ -17,18 +17,18 @@ namespace BankDirectConnection.Domain.BOC
         public PaymentsToPublicMsg()
         {
             this.HeaderMessage = new Header("b2e0009");
-            this.Trans = new List<PaymentsToPublicTrans>();
+            this.Trans = new List<IPaymentsToPublicTrans>();
         }
 
         public PaymentsToPublicMsg(ITranscations Transcations)
         {
             this.HeaderMessage = new Header("b2e0009");
-            this.Trans = new List<PaymentsToPublicTrans>();
+            this.Trans = new List<IPaymentsToPublicTrans>();
             this.Create(Transcations);
             this.Check();
         }
 
-        public List<PaymentsToPublicTrans> Trans { get; set; }
+        public List<IPaymentsToPublicTrans> Trans { get; set; }
 
         public override bool Check()
         {
@@ -40,14 +40,15 @@ namespace BankDirectConnection.Domain.BOC
         {
             if (null == Transcations)
                 throw new BusinessException("the value of transcation is null") { Code = "1012002" };
-            
-            PaymentsToPublicTrans trans = new PaymentsToPublicTrans();
+            IPaymentsToPublicTrans trans;
             foreach (var Transcation in Transcations.TranscationItems)
             {
-              
                 //以交易明细确定交易笔数
+                if (Transcation.TransDetail.Count != 1)
+                    throw new BusinessException("1001011", "每笔交易不能有多行明细");
                 foreach (var item in Transcation.TransDetail)
                 {
+                    trans = new PaymentsToPublicTrans();
                     trans.EDIId = Transcation.EDIId;
                     trans.ClientId = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
@@ -66,7 +67,6 @@ namespace BankDirectConnection.Domain.BOC
                     this.Trans.Add(trans);
                 }
             }
-
             return this;
         }
     }
@@ -77,8 +77,6 @@ namespace BankDirectConnection.Domain.BOC
             this.Fractn = new Fractn();
             this.Toactn = new Toactn();
         }
-       
-        
 
         /// <summary>
         /// 网银交易流水号
@@ -128,7 +126,7 @@ namespace BankDirectConnection.Domain.BOC
         /// 检查对象
         /// </summary>
         /// <returns></returns>
-        public bool Check()
+        public override bool Check()
         {
             if (string.IsNullOrEmpty(this.Trncur))
             {

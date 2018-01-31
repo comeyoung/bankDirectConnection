@@ -66,7 +66,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                         ITransferQueryDataList query = dicTransList[key];
                         query.TransferQueryDatas.Add(item);
                     }
-
                     else
                     {
                         ITransferQueryDataList queryList = new TransferQueryDataList();
