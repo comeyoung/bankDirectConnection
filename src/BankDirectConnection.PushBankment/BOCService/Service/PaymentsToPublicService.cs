@@ -34,7 +34,7 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
             //调用对公转账接口
             var res = BOCHttp.PostRequest(transXML);
             //处理结果
-            var rt = Deserialization.ParseResponseMsg(res, "b2e0009");//detailResponse在rt里面，BOCHttp返回数据有问题
+            var rt = Deserialization.ParseResponseMsg(res, "b2e0009");
             return ResResult.Create<IPaymentsToPublicMsg>(Msg, rt);
         }
     }

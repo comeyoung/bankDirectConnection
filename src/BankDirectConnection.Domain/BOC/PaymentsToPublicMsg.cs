@@ -134,7 +134,7 @@ namespace BankDirectConnection.Domain.BOC
             {
                 throw new BusinessException("1011008", "the value of Trncur is empty.");
             }
-          
+         
             this.Toactn.Check();
             return true;
         }
@@ -172,6 +172,7 @@ namespace BankDirectConnection.Domain.BOC
 
         public bool Check()
         {
+            
             if (string.IsNullOrEmpty(this.Tobknm))
                 throw new BusinessException("1011016", "the name of receipter's bank is empty.");
             return true;
