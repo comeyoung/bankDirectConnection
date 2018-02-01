@@ -43,6 +43,11 @@ namespace BankDirectConnection.Application.BaseTranscation
             get;set;
         }
 
+        public emBankType BankType
+        {
+            get;set;
+        }
+
         public bool Check()
         {
             if (string.IsNullOrEmpty(this.BankId))
