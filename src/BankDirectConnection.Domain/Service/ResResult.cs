@@ -19,14 +19,14 @@ namespace BankDirectConnection.Domain.Service
     /// <summary>
     /// 对外接口返回
     /// </summary>
-    public class ResResult: IResResult
+    public class ResResult : IResResult
     {
         public ResResult()
         {
             this.Status = new Status();
             this.Response = new List<IResponse>();
         }
-        public ResResult(string ErrorCode,string ErrorMsg)
+        public ResResult(string ErrorCode, string ErrorMsg)
         {
             this.Status = new Status();
             this.Response = new List<IResponse>();
@@ -39,8 +39,8 @@ namespace BankDirectConnection.Domain.Service
             IResResult result = new ResResult();
             if (null == Rt)
                 throw new InnerException("2022007", "Response information can not be empty ");
-                result.Status.RspCod = Rt.Trans.JnlState;
-                result.Status.RspMsg = Rt.Trans.Postscript;
+            result.Status.RspCod = Rt.Trans.JnlState;
+            result.Status.RspMsg = Rt.Trans.Postscript;
 
             var res = new Response();
             res.EDIId = Rt.Trans.CmeSeqNo;
@@ -64,77 +64,65 @@ namespace BankDirectConnection.Domain.Service
 
         public static IResResult Create<T>(T TransMsg, ResponseMsg Msg) where T : IBaseBOCTranscation
         {
-            if (Msg.DetailResponses.Count()==0) {
+            if (Msg.DetailResponses.Count() == 0)
+            {
                 throw new InnerException("2012008", "返回交易信息处理异常");
             }
             IResResult result = new ResResult();
             result.Status.RspCod = "0";
             result.Status.RspMsg = "OK";
             IResponse res;
-            if(typeof(T) == typeof(IWageAndReimbursementMsg))
+
+            foreach (var item in Msg.DetailResponses)
             {
-                foreach (var item in Msg.DetailResponses)
+
+                res = new Response();
+                if (typeof(T) == typeof(IWageAndReimbursementMsg))
                 {
-                    res = new Response();
-                    res.EDIId = item.Insid;
                     res.ClientId = ((IWageAndReimbursementMsg)TransMsg).Trans.ClientId;
-                    res.ObssId = item.Obssid;
-                    if (!item.Status.IsSuccess())
-                    {
-                        res.Status = item.Status;
-                        result.Status = item.Status;
-                    }
-                    else
-                    {
-                        res.Status.RspCod = "0";
-                        res.Status.RspMsg = "OK";
-                    }
-                    result.Response.Add(res);
                 }
-            }
-            else if(typeof(T) == typeof(IPaymentsToPublicMsg) || typeof(T) == typeof(IPaymentsToPrivateMsg))
-            {
-                foreach (var item in Msg.DetailResponses)
+                else if (typeof(T) == typeof(IPaymentsToPublicMsg))
                 {
-                    res = new Response();
-                    res.EDIId = item.Insid;
-                    res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c=>c.EDIId == item.Insid).ClientId;
-                    res.ObssId = item.Obssid;
-                    if (!item.Status.IsSuccess())
-                    {
-                        res.Status = item.Status;
-                        result.Status = item.Status;
-                    }
-                    else
-                    {
-                        res.Status.RspCod = "0";
-                        res.Status.RspMsg = "OK";
-                    }
-                    result.Response.Add(res);
+                    res.ClientId = ((IPaymentsToPublicMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
                 }
-            }else if(typeof(T) == typeof(ITransactionStatusInquiryMsg))
-            {
-                foreach (var item in Msg.DetailResponses)
+                else if (typeof(T) == typeof(IPaymentsToPrivateMsg))
                 {
-                    res = new Response();
-                    res.EDIId = item.Insid;
+                    res.ClientId = ((IPaymentsToPrivateMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
+                }
+                else if (typeof(T) == typeof(ITransactionStatusInquiryMsg))
+                {
                     res.ClientId = ((ITransactionStatusInquiryMsg)TransMsg).Trans.ToList().Find(c => c.EDIId == item.Insid).ClientId;
-                    res.ObssId = item.Obssid;
-                    if (!item.Status.IsSuccess())
-                    {
-                        result.Status = item.Status;
-                        res.Status = item.Status;
-                    }
-                    else
-                    {
-                        res.Status.RspCod = "0";
-                        res.Status.RspMsg = "OK";
-                    }
-                    result.Response.Add(res);
+
                 }
+
+                res.EDIId = item.Insid;
+                res.ObssId = item.Obssid;
+                if (!item.Status.IsSuccess())
+                {
+                    res.Status = item.Status;
+                    result.Status = item.Status;
+                }
+                else
+                {
+                    res.Status.RspCod = "0";
+                    res.Status.RspMsg = "OK";
+                }
+
+                result.Response.Add(res);
+
             }
+
+
             return result;
         }
+
+
+
+
+
+
+
+
 
 
         public static IResResult Create<T>(T TransMsg, CommonResponseMsg Msg) where T : IBaseSGBTranscation
@@ -202,14 +190,15 @@ namespace BankDirectConnection.Domain.Service
         }
         public IResResult MergeResResult(IResResult ResResult)
         {
-            if (string.IsNullOrEmpty(this.Status.RspCod)) {
+            if (string.IsNullOrEmpty(this.Status.RspCod))
+            {
                 this.Status.RspCod = "0";
             }
             else if (this.Status.RspCod == "0" && ResResult.Status.RspCod == "0")
             {
                 this.Status.RspCod = "0";
             }
-            else if(ResResult.Status.RspCod !="0")
+            else if (ResResult.Status.RspCod != "0")
             {
                 this.Status.RspCod = ResResult.Status.RspCod;
                 this.Status.RspMsg = ResResult.Status.RspMsg;
@@ -223,7 +212,7 @@ namespace BankDirectConnection.Domain.Service
 
         public IResResult MergeResResult(IResponse Result)
         {
-            if(!Result.Status.IsSuccess())
+            if (!Result.Status.IsSuccess())
             {
                 this.Status.RspCod = Result.Status.RspCod;
                 this.Status.RspMsg = Result.Status.RspMsg;
@@ -240,9 +229,10 @@ namespace BankDirectConnection.Domain.Service
 
 
 
-    public class Response: IResponse
+    public class Response : IResponse
     {
-        public Response() {
+        public Response()
+        {
             this.Status = new Status();
         }
         public IStatus Status { get; set; }
