@@ -19,7 +19,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         /// </summary>
         string BankId { get; set; }
         /// <summary>
-        /// 银行名称
+        /// 开户行名称
         /// </summary>
         string BankName { get; set; }
         /// <summary>
@@ -38,5 +38,7 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         string AcctType { get; set; }
 
         string Province { get; set; }
+
+
     }
 }

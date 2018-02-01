@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,6 +67,16 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         /// 兴业银行
         /// </summary>
         SG = 309,
+    }
+
+    public enum emBankType
+    {
+        [DefaultValue("01"), Description("中国银行")]
+        emBOC,
+        [DefaultValue("02"), Description("兴业银行")]
+        emSG,
+        [DefaultValue("03"), Description("其他银行")]
+        emOthers
     }
 
     public enum emPriolv
