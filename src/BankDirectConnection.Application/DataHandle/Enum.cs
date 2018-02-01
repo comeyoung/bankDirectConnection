@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,54 +30,42 @@ namespace BankDirectConnection.BaseApplication.DataHandle
     /// </summary>
     public enum emBankService
     {
-        /// <summary>
-        /// 中国银行接口
-        /// </summary>
+        [DefaultValue("01"), Description("中国银行接口")]
         emBOCService,
-        /// <summary>
-        /// 法兴银行接口
-        /// </summary>
+        [DefaultValue("02"), Description("法兴银行接口")]
         emSGBService
     }
-    /// <summary>
-    /// 优先级
-    /// </summary>
-    public enum emPriority
-    {
-        /// <summary>
-        /// 普通
-        /// </summary>
-        emNormal,
-        /// <summary>
-        /// 加急
-        /// </summary>
-        emUrgent
-    }
-
+   
     /// <summary>
     /// 银行号
     /// </summary>
     public enum emBankNo
     {
-        /// <summary>
-        /// 中国银行
-        /// </summary>
-        BOC = 104,
-        /// <summary>
-        /// 兴业银行
-        /// </summary>
+        [DefaultValue("104"), Description("中国银行")]
+        emBOC,
         SG = 309,
+        [DefaultValue("309"), Description("兴业银行")]
+        emSG,
+    }
+
+    [DefaultValue(emEmpty)]
+    public enum emBankType
+    {
+        [DefaultValue("00"), Description("--无--")]
+        emEmpty,
+        [DefaultValue("01"), Description("中国银行")]
+        emBOC,
+        [DefaultValue("02"), Description("兴业银行")]
+        emSG,
+        [DefaultValue("03"), Description("其他银行")]
+        emOthers
     }
 
     public enum emPriolv
     {
-        /// <summary>
-        /// 普通
-        /// </summary>
-        Normal = 0,
-        /// <summary>
-        /// 加急
-        /// </summary>
-        Urgent = 1
+        [DefaultValue("0"), Description("普通")]
+        emNormal = 0,
+        [DefaultValue("1"), Description("加急")]
+        emUrgent = 1
     }
 }

@@ -49,7 +49,7 @@ namespace BankDirectConnection.UTest.PushBankment.BOC
                 PaymentCur = "RMB",
                 BusinessType = "02",
                 PaymentType = "1",
-                Priority = emPriolv.Urgent,
+                Priority = emPriolv.emUrgent,
                 Purpose = "薪水",
                 TransDate = "20160708",
                 TransTime = "142020",

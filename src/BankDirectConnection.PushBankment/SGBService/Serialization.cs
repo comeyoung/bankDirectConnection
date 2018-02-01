@@ -133,7 +133,7 @@ namespace BankDirectConnection.PushBankment.SGBService
                                            new XElement("WhyUse", RMBPaymentMsg.WhyUse),
                                            new XElement("Docket", RMBPaymentMsg.Docket),
                                            new XElement("TranType", RMBPaymentMsg.TranType),
-                                           new XElement("Priority", EnumHelper.GetValue(RMBPaymentMsg.Priority)),
+                                           new XElement("Priority", EnumHelper.GetEnumValue(RMBPaymentMsg.Priority)),
                                            new XElement("StartTime", RMBPaymentMsg.StartTime),
                                            new XElement("StartDate", RMBPaymentMsg.StartDate)));
             return xdocment.ToString();

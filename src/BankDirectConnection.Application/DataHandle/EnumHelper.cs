@@ -13,46 +13,41 @@ namespace BankDirectConnection.BaseApplication.DataHandle
 	===============================================================================================================================*/
     public static class EnumHelper
     {
-        ///<summary>
-        ///返回枚举项的描述信息。
-        ///</summary>
-        ///<paramname="value">要获取描述信息的枚举项。</param>
-        ///<returns>枚举想的描述信息。</returns>
-        public static string GetDescription(this Enum value, bool isTop = false)
-        {
-            Type enumType = value.GetType();
-            DescriptionAttribute attr = null;
-            if (isTop)
-            {
-                attr = (DescriptionAttribute)Attribute.GetCustomAttribute(enumType, typeof(DescriptionAttribute));
-            }
-            else
-            {
-                //获取枚举常数名称。
-                string name = Enum.GetName(enumType, value);
-                if (name != null)
-                {
-                    //获取枚举字段。
-                    FieldInfo fieldInfo = enumType.GetField(name);
-                    if (fieldInfo != null)
-                    {
-                        //获取描述的属性。
-                        attr = Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute), false) as DescriptionAttribute;
-                    }
-                }
-            }
-            if (attr != null && !string.IsNullOrEmpty(attr.Description))
-                return attr.Description;
-            else
-                return string.Empty;
 
+        public static string GetEnumValue<T>(T EnumValue)
+        {
+            Type type = EnumValue.GetType();
+            FieldInfo info = type.GetField(EnumValue.ToString());
+            if (info == null) return null;
+            return (info.GetCustomAttributes(typeof(DefaultValueAttribute), true)[0] as DefaultValueAttribute).Value.ToString();
         }
 
-
-        public static int GetValue(object enumValue)
+        public static T GetEnumValue<T>(string Value)
         {
-            var SGBankNo = (emPriolv)Enum.Parse(typeof(emPriolv), enumValue.ToString());
-            return SGBankNo.GetHashCode();
+            Type type = typeof(T);
+            T emValue = default(T);
+            bool IsExists = false;
+            foreach (var field in type.GetFields())
+            {
+                if (field.FieldType == typeof(T))
+                    if ((field.GetCustomAttributes(typeof(DefaultValueAttribute), true)[0] as DefaultValueAttribute).Value.ToString() == Value)
+                    {
+                        IsExists = true;
+                        emValue = (T)Enum.Parse(typeof(T), field.Name.ToString());
+                    }
+            }
+            if (IsExists)
+                return emValue;
+            else
+                throw (new Exception("枚举数据值不存在。"));
+        }
+
+        public static string GetEnumDescription<T>(T EnumValue)
+        {
+            Type type = EnumValue.GetType();
+            FieldInfo info = type.GetField(EnumValue.ToString());
+            if (info == null) return null;
+            return (info.GetCustomAttributes(typeof(DescriptionAttribute), true)[0] as DescriptionAttribute).Description.ToString();
         }
     }
 }
