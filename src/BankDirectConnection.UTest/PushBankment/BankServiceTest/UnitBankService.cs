@@ -469,7 +469,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 PaymentCur = "CNY",
                 BusinessType = "02",
                 PaymentType = "02",
-                Priority = emPriolv.Urgent,
+                Priority = emPriolv.emUrgent,
                 Purpose = "EC",
                 TransDate = DateTime.Now.ToString("yyyyMMdd"),
                 TransTime = DateTime.Now.ToString("HHmmss") + DateTime.Now.Millisecond,
