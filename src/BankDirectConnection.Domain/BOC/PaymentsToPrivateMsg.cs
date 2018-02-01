@@ -45,12 +45,15 @@ namespace BankDirectConnection.Domain.BOC
                     throw new BusinessException("1001011", "每笔交易不能有多行明细");
                 foreach (var item in Transcation.TransDetail)
                 {
+                    if (item.ToAcct.BankType.Equals(emBankType.emEmpty))
+                        throw new BusinessException("1011017", "收款账户的银行类型为空");
                     trans = new PaymentsToPrivateTrans();
                     trans.EDIId = Transcation.EDIId;
                     trans.ClientId = Transcation.ClientId;
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
                     trans.Fractn.Actacn = Transcation.FromAcct.AcctId;
                     trans.Fractn.Actnam = Transcation.FromAcct.AcctName;
+                    trans.Bocflag = EnumHelper.GetEnumValue(item.ToAcct.BankType);
                     trans.Toactn.ToiBkn = item.ToAcct.BankId;
                     trans.Toactn.Actacn = item.ToAcct.AcctId;
                     trans.Toactn.Tobknm = item.ToAcct.BankName;
