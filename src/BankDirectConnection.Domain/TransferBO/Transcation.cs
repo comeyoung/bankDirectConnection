@@ -118,14 +118,14 @@ namespace BankDirectConnection.Domain.TransferBO
                 return string.Empty;
             var toAcct = this.TransDetail.FirstOrDefault().ToAcct;
             if (!string.IsNullOrEmpty(toAcct.BankName) && toAcct.BankName.Contains("中国银行"))
-                return emBankNo.BOC.ToString();
+                return emBankNo.emBOC.ToString();
             else if ((!string.IsNullOrEmpty(toAcct.BankName) && toAcct.BankName.Contains("兴业")))
                 return emBankNo.SG.ToString();
             if (!string.IsNullOrEmpty(toAcct.BankId) && toAcct.BankId.Length == 12)
             {
                 string bankType = toAcct.BankId.Substring(0, 3);
-                if (bankType == emBankNo.BOC.ToString())
-                    return emBankNo.BOC.ToString();
+                if (bankType == emBankNo.emBOC.ToString())
+                    return emBankNo.emBOC.ToString();
                 if (bankType == emBankNo.SG.ToString())
                     return emBankNo.SG.ToString();
             }
