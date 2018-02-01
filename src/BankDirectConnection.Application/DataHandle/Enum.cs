@@ -69,8 +69,11 @@ namespace BankDirectConnection.BaseApplication.DataHandle
         SG = 309,
     }
 
+    [DefaultValue(emEmpty)]
     public enum emBankType
     {
+        [DefaultValue("00"), Description("--无--")]
+        emEmpty,
         [DefaultValue("01"), Description("中国银行")]
         emBOC,
         [DefaultValue("02"), Description("兴业银行")]
