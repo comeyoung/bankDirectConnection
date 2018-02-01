@@ -486,11 +486,12 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                         AcctType = "1",
                         BankId = "40142",
                         BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
                     },
                     TransAmount = 0.01M,
                     TransCur = "CNY",
                     Rate = 1
-                },new TransDetail(){
+                }, new TransDetail(){
                     ReceipterType = "1",
                     ReciepterIdCode = "130666996689890306",
                     ReciepterIdType = "1",
@@ -501,11 +502,12 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                         AcctType = "1",
                         BankId = "40142",
                         BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
                     },
                     TransAmount = 0.01M,
                     TransCur = "CNY",
                     Rate = 1
-                },new TransDetail(){
+                }, new TransDetail(){
                     ReceipterType = "1",
                     ReciepterIdCode = "130666996689890306",
                     ReciepterIdType = "1",
@@ -516,6 +518,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                         AcctType = "1",
                         BankId = "40142",
                         BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
                     },
                     TransAmount = 0.01M,
                     TransCur = "CNY",
@@ -560,8 +563,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                 BusinessType = "02",
 
                 TranscationItems = new List<ITranscation>() {
+                getPrivateTranscation(),
+                getPrivateTranscation(),
                 getPrivateTranscation()
-               
+
 
             }
             };

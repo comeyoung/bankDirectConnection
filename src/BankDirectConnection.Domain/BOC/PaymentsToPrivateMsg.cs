@@ -53,7 +53,14 @@ namespace BankDirectConnection.Domain.BOC
                     trans.Fractn.Fribkn = Transcation.FromAcct.BankId;
                     trans.Fractn.Actacn = Transcation.FromAcct.AcctId;
                     trans.Fractn.Actnam = Transcation.FromAcct.AcctName;
-                    trans.Bocflag = EnumHelper.GetEnumValue(item.ToAcct.BankType);
+                    if (EnumHelper.GetEnumValue(item.ToAcct.BankType) == "01")
+                    {
+                        trans.Bocflag = "1";
+                    }
+                    else
+                    {
+                        trans.Bocflag = "0";
+                    }
                     trans.Toactn.ToiBkn = item.ToAcct.BankId;
                     trans.Toactn.Actacn = item.ToAcct.AcctId;
                     trans.Toactn.Tobknm = item.ToAcct.BankName;
@@ -80,7 +87,7 @@ namespace BankDirectConnection.Domain.BOC
         }
         public string Bocflag
         {
-            get;set;
+            get; set;
         }
 
         public string Comacn
