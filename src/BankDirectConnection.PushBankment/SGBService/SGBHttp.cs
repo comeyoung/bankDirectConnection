@@ -40,7 +40,7 @@ namespace BankDirectConnection.PushBankment.SGBService
             //var rt = BaseHttpClient.PostRequest(BaseUrl, RequestXML);
             //Logger.Writer("receip from SG:" + rt);
             //return rt;
-            return GetTestQueryStatusResult();
+            return GetTestRMBResult();
             /*===================================生产环境=======================================*/
         }
     }

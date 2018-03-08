@@ -48,7 +48,7 @@ namespace BankDirectConnection.Domain.TransferBO
         public void InitData()
         {
             if (null == this.TranscationItems)
-                throw new InnerException("", "");
+                throw new InnerException("2002002", "the value of TranscationItems is null");
             this.TranscationItems.ToList().ForEach(c => { c.TransWay = this.TransWay; c.BusinessType = this.BusinessType; });
         }
     }
