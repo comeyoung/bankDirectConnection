@@ -17,9 +17,9 @@ namespace BankDirectConnection.Domain.BOC.Message
         public Header() { }
         public Header(string TransType)
         {
-            this.Cusopr = "136140253";
-            this.Custid = "133812368";
-            this.Termid = "E163083136140";
+            this.Cusopr = "";
+            this.Custid = "";
+            this.Termid = "";
             // this.Trnid = DateTime.Now.ToString("yyyyMMddHHmmss");
             this.Trncod = TransType;
         }

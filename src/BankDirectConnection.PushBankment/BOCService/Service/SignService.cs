@@ -1,4 +1,5 @@
-﻿using BankDirectConnection.Domain.BOC;
+﻿using BankDirectConnection.DapperRepository;
+using BankDirectConnection.Domain.BOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,26 @@ namespace BankDirectConnection.PushBankment.BOCService.Service
         public ResponseMsg PushSignIn()
         {
             SignInMsg msg = new SignInMsg();
-            msg.HeaderMessage.Cusopr = "136140253";
-            msg.HeaderMessage.Custid = "133812368";
-            msg.HeaderMessage.Trncod = "b2e0001";
-            msg.HeaderMessage.Trnid = "";
-            msg.HeaderMessage.Termid = "E163083136140";
-            msg.Trans.Custdt = DateTime.Now.ToString("yyyyMMddHHddss");
-            msg.Trans.Oprpwd = "4u7hc9Dy";
+            //msg.HeaderMessage.Cusopr = "136140253";
+            //msg.HeaderMessage.Custid = "133812368";
+            //msg.HeaderMessage.Trncod = "b2e0001";
+            //msg.HeaderMessage.Trnid = "";
+            //msg.HeaderMessage.Termid = "E163083136140";
+            //msg.Trans.Custdt = DateTime.Now.ToString("yyyyMMddHHddss");
+            //msg.Trans.Oprpwd = "4u7hc9Dy";
+            EnterpriseInfoDapperRepository epInfoRepo = new EnterpriseInfoDapperRepository();
+            var epInfo = epInfoRepo.GetEnterprise("BOC").FirstOrDefault();
+            if(epInfo != null)
+            {
+                msg.HeaderMessage.Cusopr = epInfo.Operator;
+                msg.HeaderMessage.Custid = epInfo.GroupNumber;
+                msg.HeaderMessage.Trncod = "b2e0001";
+                msg.HeaderMessage.Trnid = "";
+                msg.HeaderMessage.Termid = "E163083136140";
+                msg.Trans.Custdt = DateTime.Now.ToString("yyyyMMddHHddss");
+                msg.Trans.Oprpwd = epInfo.OperatorPsw;
+            }
+
             string transXML = Serialization.BuildXMLStrForSignInByLinq(msg);
             var rt = BOCHttp.PostRequest(transXML);
             return Deserialization.ParseResponseMsg(rt, "b2e0001");
