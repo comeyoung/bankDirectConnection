@@ -28,7 +28,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
         private readonly PaymentsToPrivateService paymentsToPrivateService;
         private readonly TransactionStatusInquiryService transactionStatusInquiryService;
 
-
         public BOCService()
         {
             this.wageAndReimbursementService = new WageAndReimbursementService();
