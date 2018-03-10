@@ -59,7 +59,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     #region 处理接口调用
                     var detail = item.TransDetail.FirstOrDefault();
                     // 如果收款人账号是我行（法兴）走行内转账.
-                    if (Account.IsSG(detail.ToAcct.BankId))
+                    if (Account.IsSG(detail.ToAcct.BankId)||(!string.IsNullOrEmpty(detail.ToAcct.BankName)&&detail.ToAcct.BankName.Contains("兴业银行")))
                     {
                         rt = this.innerPaymentService.PushPaymentTranscationInfo(new InnerTransferMsg(item));
                     }

@@ -116,7 +116,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <summary>
         /// 对私转账
         /// </summary>
-        /// <param name="PaymentsToPublicMsg"></param>
+        /// <param name="PaymentsToPrivateMsg"></param>
         /// <returns></returns>
         public static string BuildXMLForPaymentsToPrivateByLinq(IPaymentsToPrivateMsg PaymentsToPrivateMsg)
         {
@@ -143,7 +143,9 @@ namespace BankDirectConnection.PushBankment.BOCService
                            new XElement("furinfo", item.Furinfo),
                            new XElement("trfdate", item.TrfDate),
                            new XElement("trftime", item.TrfTime),
-                           new XElement("comacn", item.Comacn))))));
+                           new XElement("comacn", item.Comacn),
+                           new XElement("bocflag", item.Bocflag)
+                           )))));
             return xdocment.Declaration + xdocment.ToString();
         }
 

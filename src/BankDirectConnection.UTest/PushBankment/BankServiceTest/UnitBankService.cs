@@ -356,10 +356,10 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
         private IAccount getFromAcct()
         {
             IAccount FromAcct = new Account();
-            FromAcct.AcctId = "40142";
+            FromAcct.AcctId = "327256085181";
             FromAcct.AcctName = "李飞";
             FromAcct.AcctType = "0";
-            FromAcct.BankId = "104100000004";
+            FromAcct.BankId = "40142";
             FromAcct.BankName = "中国银行总行";
             return FromAcct;
         }
@@ -438,9 +438,87 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
                     ToAcct = new Account() {
                         AcctId = "342856085028",
                         AcctName = "张宇",
+                        AcctType = "0",
+                        BankId = "40142",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "CNY",
+                    Rate = 1
+                },
+
+                }
+
+
+            };
+        }
+
+
+        private ITranscation getPrivateTranscation()
+        {
+            SerialNumberDapperRepository repository = new SerialNumberDapperRepository();
+            return new Transcation()
+            {
+                AgentSign = "Y",
+                ClientId = DateTime.Now.ToString("yyyyMMdd") + DateTime.Now.Millisecond + "001",
+                EDIId = "",
+                Comments = "薪水",
+                FeeAcct = "327256085181",
+                FeeType = "1",
+                FromAcct = getFromAcct(),
+                PaymentCur = "CNY",
+                BusinessType = "02",
+                PaymentType = "02",
+                Priority = emPriolv.emUrgent,
+                Purpose = "EC",
+                TransDate = DateTime.Now.ToString("yyyyMMdd"),
+                TransTime = DateTime.Now.ToString("HHmmss") + DateTime.Now.Millisecond,
+                TransWay = "01",
+                TransDetail = new List<ITransDetail>() {
+                new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "342856085028",
+                        AcctName = "张宇",
                         AcctType = "1",
                         BankId = "40142",
                         BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "CNY",
+                    Rate = 1
+                }, new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "342856085028",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "40142",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
+                    },
+                    TransAmount = 0.01M,
+                    TransCur = "CNY",
+                    Rate = 1
+                }, new TransDetail(){
+                    ReceipterType = "1",
+                    ReciepterIdCode = "130666996689890306",
+                    ReciepterIdType = "1",
+                    SWIFTCode = "BKCHCNBJ",
+                    ToAcct = new Account() {
+                        AcctId = "342856085028",
+                        AcctName = "张宇",
+                        AcctType = "1",
+                        BankId = "40142",
+                        BankName = "中国银行股份有限公司北京人大支行",
+                        BankType = emBankType.emOthers
                     },
                     TransAmount = 0.01M,
                     TransCur = "CNY",
@@ -452,6 +530,8 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
 
             };
         }
+
+
         /// <summary>
         /// 获取中行接口对公转账
         /// </summary>
@@ -474,7 +554,25 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             };
         }
 
-            private ITranscations GetBOCWagePaymentTrans()
+        private ITranscations GetBOCPrivateToPaymentTrans()
+        {
+            //交易信息集合
+            return new Transcations()
+            {
+                TransWay = "01",
+                BusinessType = "02",
+
+                TranscationItems = new List<ITranscation>() {
+                getPrivateTranscation(),
+                getPrivateTranscation(),
+                getPrivateTranscation()
+
+
+            }
+            };
+        }
+
+        private ITranscations GetBOCWagePaymentTrans()
         {
             //交易信息集合
             return new Transcations()
@@ -617,6 +715,23 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
            var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
             bankService.PaymentTransfer(trans);           
            // Console.WriteLine(tranJson);
+
+        }
+
+
+        // <summary>
+        /// 测试中行对私转账
+        /// </summary>
+        [TestMethod]
+        public void TestBOCPrivatePaymentBankService()
+        {
+
+
+            BankService bankService = new BankService();
+            var trans = this.GetBOCPrivateToPaymentTrans();
+            var tranJson = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
+            //bankService.PaymentTransfer(trans);
+             Console.WriteLine(tranJson);
 
         }
 

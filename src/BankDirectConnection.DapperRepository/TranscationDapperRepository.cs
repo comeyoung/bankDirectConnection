@@ -73,7 +73,7 @@ namespace BankDirectConnection.DapperRepository
                    conn.ExecuteScalar(insertSql,
                         new
                         {
-                            EDIId = TransModel.EDIId,//ediid不可重复，如果为22位，肯定出错
+                            EDIId = TransModel.EDIId,
                             ClientId = TransModel.ClientId,
                             TransWay = TransModel.TransWay,
                             BusinessType = TransModel.BusinessType,

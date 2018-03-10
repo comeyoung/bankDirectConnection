@@ -99,7 +99,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 }
                 //获取对私转账
                 var privateTransMsg = GetPrivateTransferMsg(Transcations);
-                if(privateTransMsg.TranscationItems.Count == 0)
+                if(privateTransMsg.TranscationItems.Count != 0)
                 {
                     var privateTransBO = new PaymentsToPrivateMsg(privateTransMsg);
                     privateTransBO.HeaderMessage.Token = response.Token;
