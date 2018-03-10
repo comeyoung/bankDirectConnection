@@ -181,8 +181,8 @@ namespace BankDirectConnection.Domain.BOC
         public string Tobank { get; set; }
         public bool Check()
         {
-            if (string.IsNullOrEmpty(this.Tobank))
-                throw new BusinessException("the Tobank can not be null") { Code = "2012005" };
+            //if (string.IsNullOrEmpty(this.Tobank))
+            //    throw new BusinessException("the Tobank can not be null") { Code = "2012005" };
             return true;
         }
         /// <summary>
