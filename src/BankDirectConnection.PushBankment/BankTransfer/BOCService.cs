@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.DataHandle;
 using System.Linq;
+using BankDirectConnection.DapperRepository;
 
 namespace BankDirectConnection.PushBankment.BankTransfer
 {
@@ -55,10 +56,15 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 foreach (var item in Transcations.TranscationItems)
                 {
                     try
-                    {
+                    {                   
                         // 快捷支付业务一次只能走一笔
                         var transBO = new WageAndReimbursementMsg(item);
+                        EnterpriseInfoDapperRepository epInfoRepo = new EnterpriseInfoDapperRepository();
+                        var epInfo = epInfoRepo.GetEnterprise("BOC").FirstOrDefault();
                         transBO.HeaderMessage.Token = response.Token;
+                        transBO.HeaderMessage.Cusopr = epInfo.Operator;
+                        transBO.HeaderMessage.Custid = epInfo.GroupNumber;
+                        transBO.HeaderMessage.Termid = "E163083136140";
                         //获取代发业务                  
                         var rt = this.wageAndReimbursementService.PushPaymentTransferInfo(transBO);
                         result.MergeResResult(rt);
@@ -77,7 +83,7 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     }
                     catch (Exception ex)
                     {
-                        res.Status.RspCod = "";
+                        res.Status.RspCod = "2022006";
                         res.Status.RspMsg = ex.Message;
                         result.MergeResResult(res);
                     }
@@ -92,7 +98,13 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 if(publicTransMsg.TranscationItems.Count() != 0)
                 {
                     var publicTransBO = new PaymentsToPublicMsg(publicTransMsg);
+                    EnterpriseInfoDapperRepository epInfoRepo = new EnterpriseInfoDapperRepository();
+                    var epInfo = epInfoRepo.GetEnterprise("BOC").FirstOrDefault();
                     publicTransBO.HeaderMessage.Token = response.Token;
+                    publicTransBO.HeaderMessage.Cusopr = epInfo.Operator;
+                    publicTransBO.HeaderMessage.Custid = epInfo.GroupNumber;
+                    publicTransBO.HeaderMessage.Termid = "E163083136140";
+                   
                     //获取转账业务
                     publicTransferResult = this.paymentsToPublicService.PushPaymentTransferInfo(publicTransBO);
                 }
@@ -101,7 +113,12 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 if(privateTransMsg.TranscationItems.Count != 0)
                 {
                     var privateTransBO = new PaymentsToPrivateMsg(privateTransMsg);
+                    EnterpriseInfoDapperRepository epInfoRepo = new EnterpriseInfoDapperRepository();
+                    var epInfo = epInfoRepo.GetEnterprise("BOC").FirstOrDefault();
                     privateTransBO.HeaderMessage.Token = response.Token;
+                    privateTransBO.HeaderMessage.Cusopr = epInfo.Operator;
+                    privateTransBO.HeaderMessage.Custid = epInfo.GroupNumber;
+                    privateTransBO.HeaderMessage.Termid = "E163083136140";
                     var privateTransferResult = this.paymentsToPrivateService.PushPaymentTransferInfo(privateTransBO);
                     return publicTransferResult.MergeResResult(privateTransferResult);
                 }

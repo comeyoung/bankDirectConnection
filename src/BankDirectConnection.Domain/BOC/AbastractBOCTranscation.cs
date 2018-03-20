@@ -33,13 +33,13 @@ namespace BankDirectConnection.Domain.BOC
 
         public virtual bool Check()
         {
-            // TODO 做一些基本的校验
-            if(string.IsNullOrEmpty(this.HeaderMessage.Cusopr))
-                throw new BusinessException("","");
-            if(string.IsNullOrEmpty(this.HeaderMessage.Trncod))
-                throw new BusinessException("","");
-            if(string.IsNullOrEmpty(this.HeaderMessage.Custid))
-                throw new BusinessException("","");
+            //TODO 做一些基本的校验
+            //if (string.IsNullOrEmpty(this.HeaderMessage.Cusopr))
+            //    throw new BusinessException("2002001", "");
+            //if (string.IsNullOrEmpty(this.HeaderMessage.Trncod))
+            //    throw new BusinessException("", "");
+            //if (string.IsNullOrEmpty(this.HeaderMessage.Custid))
+            //    throw new BusinessException("", "");
             return true;
         }
     }

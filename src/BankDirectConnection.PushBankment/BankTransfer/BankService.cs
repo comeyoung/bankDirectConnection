@@ -25,8 +25,36 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
+                IResResult result;
+                IResponse res;
+                TranscationDapperRepository transRepository = new TranscationDapperRepository();
+                Transcation.TranscationItems.ToList().ForEach(c =>
+                {
+                    if (!string.IsNullOrEmpty(c.EDIId)||!string.IsNullOrEmpty(c.ClientId))
+                    {
+                        var transInfo = transRepository.Fetch(c.ClientId);
+                        if (transInfo != null)
+
+                            if (transInfo.TransCode == "0")
+                            {
+                                result = new ResResult();
+                                res = new Response();
+                                res.Status.RspCod = transInfo.TransCode;
+                                res.Status.RspMsg = "支付单已成功付款，请不要重复支付！";
+                                result.MergeResResult(res);
+                            }
+                            else
+                            {
+                                transRepository.DropTransAndDetail(c.ClientId);                                   
+                            }
+                    }
+                    c.EDIId = "";
+                });
+
+
+
                 Transcation.InitData();
-                Transcation.Check();
+                Transcation.Check();//check EDIId             
                 SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
                 Transcation.TranscationItems.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
                 var trans = TransModel.Create(Transcation);
@@ -42,10 +70,15 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             catch (BusinessException ex)
             {
                 throw ex;
+               
             }
-            catch(Exception ex)
+            catch (InnerException ex)
             {
-                throw new BusinessException(ex.Message) { Code = "2002001" };
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

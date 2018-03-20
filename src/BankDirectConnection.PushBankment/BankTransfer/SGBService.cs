@@ -51,6 +51,8 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             {
                 rt = new ResResult();
                 res = new Response();
+                res.ClientId = item.ClientId;
+                res.EDIId = item.EDIId;
                 try
                 {
                     // 明细只能一行

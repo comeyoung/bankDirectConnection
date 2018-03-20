@@ -101,6 +101,7 @@ namespace BankDirectConnection.Domain.Service
                 {
                     res.Status = item.Status;
                     result.Status = item.Status;
+                   
                 }
                 else
                 {

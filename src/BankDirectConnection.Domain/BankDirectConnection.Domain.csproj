@@ -81,6 +81,8 @@
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
     <Compile Include="DataHandle\TransConverter.cs" />
+    <Compile Include="Enterprise\EnterpriseInfo.cs" />
+    <Compile Include="Enterprise\IEnterpriseInfo.cs" />
     <Compile Include="ExceptionMsg\ErrorResult.cs" />
     <Compile Include="Model\TransDetailModel.cs" />
     <Compile Include="Model\TransModel.cs" />
@@ -113,16 +115,16 @@
     <Compile Include="TransferBO\TransDetail.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
-      <Project>{1350D02A-99B2-44D5-AD91-73AB93362F41}</Project>
-      <Name>BankDirectConnection.BaseApplication</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankDirectConnection.Application\BankDirectConnection.BaseApplication.csproj">
+      <Project>{1350d02a-99b2-44d5-ad91-73ab93362f41}</Project>
+      <Name>BankDirectConnection.BaseApplication</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -179,7 +179,7 @@ namespace BankDirectConnection.PushBankment.BOCService
         /// <param name="SignInMsg"></param>
         /// <returns></returns>
         public static string BuildXMLStrForSignInByLinq(SignInMsg SignInMsg)
-        {
+        {  
             XDocument xdocment = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("bocb2e",
                 new XAttribute("version", "100"),
                 new XAttribute("security", "true"),

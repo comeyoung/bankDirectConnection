@@ -1,6 +1,7 @@
 ﻿using BankDirectConnection.BaseApplication.ExceptionMsg;
 using BankDirectConnection.Domain.BOC;
 using BankDirectConnection.Domain.ExceptionMsg;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace BankDirectConnection.PushBankment.BOCService
@@ -25,7 +26,10 @@ namespace BankDirectConnection.PushBankment.BOCService
                 throw new BusinessException("bussinesstype is null") { Code = "3011002" };
             XDocument xDoc = XDocument.Parse(ResponseMsg);
             var xElement = xDoc.Descendants("trn-"+ BussinessType + "-rs");
-            foreach(var item in xElement)
+            if(xElement.Count() == 0)
+                xElement = xDoc.Descendants("trn-" + "b2eerror" + "-rs");
+
+            foreach (var item in xElement)
             {
                 res.Token = GetElementValue(item.Element("token"));             
                 res.Serverdt = GetElementValue(item.Element("serverdt"));
@@ -41,12 +45,13 @@ namespace BankDirectConnection.PushBankment.BOCService
                 }
             }
             var resDetail = xElement.Descendants(BussinessType + "-rs");
-            if(null != resDetail)
+
+            if (null != resDetail && resDetail.Count() != 0)
             {
-                foreach(var item in resDetail)
+                foreach (var item in resDetail)
                 {
                     DetailResponse detailLine = new DetailResponse();
-                    var detailStatus = resDetail.Descendants("status");                  
+                    var detailStatus = resDetail.Descendants("status");
                     foreach (var detailItem in detailStatus)
                     {
                         detailLine.Status.RspCod = GetElementValue(detailItem.Element("rspcod"));
@@ -56,6 +61,16 @@ namespace BankDirectConnection.PushBankment.BOCService
                     detailLine.Obssid = GetElementValue(item.Element("obssid"));
                     res.DetailResponses.Add(detailLine);
                 }
+            }
+            else
+            {
+                DetailResponse detailLine = new DetailResponse();
+                detailLine.Status.RspCod = res.Status.RspCod;
+                detailLine.Status.RspMsg = res.Status.RspMsg;
+                //detailLine.Insid = GetElementValue(item.Element("insid"));
+                //detailLine.Obssid = GetElementValue(item.Element("obssid"));
+                res.DetailResponses.Add(detailLine);
+                
             }
             return res;
         }

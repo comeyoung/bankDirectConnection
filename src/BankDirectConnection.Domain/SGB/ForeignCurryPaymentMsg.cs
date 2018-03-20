@@ -67,7 +67,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT003";
             this.Head.ReqSeqNo = Transcation.EDIId;
             this.Head.ReqDate = Transcation.TransDate;
-            this.Head.ReqTime = Transcation.TransTime;
+            this.Head.ReqTime = Transcation.TransTime + "000";
             this.WhyUse = Transcation.Purpose;
             this.Fees = Transcation.FeeType;
             this.ClientId = Transcation.ClientId;
@@ -120,7 +120,7 @@ namespace BankDirectConnection.Domain.SGB
                     msg.CrAccNo = line.ToAcct.AcctId;
                     msg.CrAccName = line.ToAcct.AcctName;
                     msg.CrCifType = line.ToAcct.AcctType;
-                    msg.ForeignPayee = line.ReceipterType;
+                    msg.ForeignPayee = "1";// line.ReceipterType;
                     msg.BeneSwifCode = line.SWIFTCode;
                     this.UnionDeptId = line.ToAcct.BankId;
                     msg.CrBankName = line.ToAcct.BankName;

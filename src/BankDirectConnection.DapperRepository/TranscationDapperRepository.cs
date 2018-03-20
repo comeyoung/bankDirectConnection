@@ -17,19 +17,17 @@ namespace BankDirectConnection.DapperRepository
     public class TranscationDapperRepository
     {
 
-        public async Task<ITranscations> Fetch(string ClientId)
+        public TransModel Fetch(string ClientId)
         {
-            ITranscations collection = null;
+            TransModel transModel = new TransModel();
             using (var conn = SqlConnectionFactory.CreateSqlConnection())
             {
                 conn.Open();
-
-                //string sql = $"SELECT  top {Param.limit} {Param.select} FROM T_SalesOrder t0 left JOIN T_SalesOrderItem t1 on t0.DocEntry = t1.DocEntry {Param.filter + " " + Param.orderby} ";
-                string sql = @"select *";
+                string sql = $@"select * from T_EDF_Trans t0 inner join T_EDF_TransDetail t1 on t0.ClientId = t1.ClientId where t0.ClientId = '{ClientId}'";
                 try
                 {
-                    //var coll = await conn.QueryParentChildAsync<ITranscations, Transcations, int>(sql, p => p.DocEntry, p => p.SalesOrderItems, splitOn: "DocEntry");
-                    //collection = coll.ToList();
+                    var coll = conn.QueryParentChild<TransModel, TransDetailModel, string>(sql, p => p.ClientId, p => p.TransDetails, splitOn: "ClientId");
+                    transModel = coll.FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
@@ -39,16 +37,83 @@ namespace BankDirectConnection.DapperRepository
                 {
                     conn.Close();
                 }
-                return collection;
+                return transModel;
             }
         }
 
+        public void DropTransAndDetail(String ClientId)
+        {
+            using (var conn = SqlConnectionFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                string transSql = $@"delete from T_EDF_Trans where ClientId = '{ClientId}'";
+                string detailSql = $@"delete from T_EDF_TransDetail where ClientId = '{ClientId}'";
+                try
+                {
+                    conn.ExecuteScalar(transSql);
+                    conn.ExecuteScalar(detailSql);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
 
+            }
+        }
         public void SaveTransList(List<TransModel> Trans)
         {
-            foreach (var item in Trans)
+            using (IDbConnection conn = SqlConnectionFactory.CreateSqlConnection())
             {
-                this.SaveTranscation(item);
+                conn.Open();
+                IDbTransaction dbTransaction = conn.BeginTransaction();
+                try
+                {
+                    foreach (var TransModel in Trans)
+                    {
+                        string insertSql = @"INSERT INTO T_EDF_Trans (EDIId ,ClientId ,TransWay ,BusinessType ,PaymentCur ,PaymentType ,Purpose ,Priority ,TransDate ,TransTime ,FeeType ,FeeAcct ,Comments ,BankId ,BankName ,AcctId ,AcctName ,TransCode ,TransAmount) 
+                                            VALUES (@EDIId ,@ClientId ,@TransWay ,@BusinessType ,@PaymentCur ,@PaymentType ,@Purpose ,@Priority ,@TransDate ,@TransTime ,@FeeType ,@FeeAcct ,@Comments ,@BankId ,@BankName ,@AcctId ,@AcctName ,@TransCode ,@TransAmount)";
+                        string insertItemSql = @"INSERT INTO T_EDF_TransDetail (EDIId ,ClientId ,LineId ,BankId ,BankName ,AcctId ,AcctName ,ReciepterIdType ,ReciepterIdCode ,AcctType ,ReceipterType ,TransAmount ,TransCur ,SWIFTCode ,Rate) 
+                                            VALUES (@EDIId ,@ClientId ,@LineId ,@BankId ,@BankName ,@AcctId ,@AcctName ,@ReciepterIdType ,@ReciepterIdCode ,@AcctType ,@ReceipterType ,@TransAmount ,@TransCur ,@SWIFTCode ,@Rate)";
+                        conn.ExecuteScalar(insertSql,
+                             new
+                             {
+                                 EDIId = TransModel.EDIId,
+                                 ClientId = TransModel.ClientId,
+                                 TransWay = TransModel.TransWay,
+                                 BusinessType = TransModel.BusinessType,
+                                 PaymentCur = TransModel.PaymentCur,
+                                 PaymentType = TransModel.PaymentType,
+                                 Purpose = TransModel.Purpose,
+                                 Priority = TransModel.Priority,
+                                 TransDate = TransModel.TransDate,
+                                 TransTime = TransModel.TransTime,
+                                 FeeType = TransModel.FeeType,
+                                 FeeAcct = TransModel.FeeAcct,
+                                 Comments = TransModel.Comments,
+                                 BankId = TransModel.BankId,
+                                 BankName = TransModel.BankName,
+                                 AcctId = TransModel.AcctId,
+                                 AcctName = TransModel.AcctName,
+                                 TransCode = TransModel.TransCode,
+                                 TransAmount = TransModel.TransAmount
+                             }, dbTransaction);
+                        conn.Execute(insertItemSql, TransModel.TransDetails, dbTransaction);
+                    }
+                    dbTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
         public async Task SaveTransListAsync(List<TransModel> Trans)

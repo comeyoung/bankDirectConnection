@@ -43,8 +43,8 @@ namespace BankDirectConnection.BaseApplication.DataHandle
     {
         [DefaultValue("104"), Description("中国银行")]
         emBOC,
-        SG = 309,
-        [DefaultValue("309"), Description("兴业银行")]
+        SG = 691,
+        [DefaultValue("691"), Description("兴业银行")]
         emSG,
     }
 

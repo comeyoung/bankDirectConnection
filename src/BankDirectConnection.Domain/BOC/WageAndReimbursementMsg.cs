@@ -24,7 +24,7 @@ namespace BankDirectConnection.Domain.BOC
 
 
         public WageAndReimbursementMsg(ITranscation Transcation) : base(Transcation)
-        {
+        {   
             this.HeaderMessage = new Header("b2e0078");
             this.Trans = new WageAndReimbursementTrans();
             this.Create(Transcation);
