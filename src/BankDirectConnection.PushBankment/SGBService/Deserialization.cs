@@ -16,7 +16,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         public static CommonResponseMsg ParseResonseMsg(string ResponseMsg)
         {
             CommonResponseMsg responseMsg = new CommonResponseMsg();
-            XDocument xDoc = XDocument.Parse(ResponseMsg);
+            XDocument xDoc = XDocument.Parse(ResponseMsg.Trim());
             var xElement = xDoc.Descendants("ap");
             foreach (var item in xElement)
             {

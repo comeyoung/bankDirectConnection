@@ -32,6 +32,7 @@ namespace BankDirectConnection.Domain.Service
             this.Response = new List<IResponse>();
             this.Status.RspCod = ErrorCode;
             this.Status.RspMsg = ErrorMsg;
+            this.Response.Add(new Response() { Status = this.Status });
         }
 
         public static IResResult Create(QueryTransactionResultsResponse Rt, ITransactionResultsMsg Msg)
@@ -101,6 +102,7 @@ namespace BankDirectConnection.Domain.Service
                 {
                     res.Status = item.Status;
                     result.Status = item.Status;
+                   
                 }
                 else
                 {

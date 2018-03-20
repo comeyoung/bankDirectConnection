@@ -30,7 +30,7 @@ namespace BankDirectConnection.BaseApplication.ExceptionMsg
         {
             get
             {
-                return "code:" + this.Code + ";message:" + base.Message;
+                return  this.Code + ";Business Error," + base.Message;
             }
         }
     }

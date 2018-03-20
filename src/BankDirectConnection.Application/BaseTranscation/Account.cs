@@ -40,18 +40,18 @@ namespace BankDirectConnection.Application.BaseTranscation
         /// </summary>
         public string Province
         {
-            get;set;
+            get; set;
         }
 
         public emBankType BankType
         {
-            get;set;
+            get; set;
         }
 
         public bool Check()
         {
-            if (string.IsNullOrEmpty(this.BankId))
-                throw new BusinessException("2022002", "Transaction information of BankId can not be empty");
+            //if (string.IsNullOrEmpty(this.BankId))
+            //    throw new BusinessException("2022002", "Transaction information of BankId can not be empty");
             if (string.IsNullOrEmpty(this.AcctId))
                 throw new BusinessException("2022002", "Transaction information of AcctId can not be empty");
             return true;
@@ -62,8 +62,12 @@ namespace BankDirectConnection.Application.BaseTranscation
         /// </summary>
         /// <param name="AccountNo"></param>
         /// <returns></returns>
-        public static bool IsSG(string BankId)
+        public static bool IsSG(string BankId)          
         {
+            //if (string.IsNullOrEmpty(BankId)) {
+            //    throw new BusinessException("2022002", "The ToBankId can not be null!");
+            //}
+
             var SGBankNo = (emBankNo)Enum.Parse(typeof(emBankNo), emBankNo.SG.ToString());
             // TODO 收款人账号为兴业银行
             if (BankId.Length == 12 && BankId.Substring(0, 3) == SGBankNo.GetHashCode().ToString())

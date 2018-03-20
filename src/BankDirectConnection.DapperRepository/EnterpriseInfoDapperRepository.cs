@@ -47,16 +47,17 @@ namespace BankDirectConnection.DapperRepository
         /// </summary>
         /// <param name="BankType"></param>
         /// <returns></returns>
-        public  IList<IEnterpriseInfo> GetEnterprise(string BankType)
+        public  IList<EnterpriseInfo> GetEnterprise(string BankType)
         {
-            var enterpInfo = new List<IEnterpriseInfo>(); ;
+            var enterpInfo = new List<EnterpriseInfo>();
             using (var conn = SqlConnectionFactory.CreateSqlConnection())
             {
                 conn.Open();
                 string sql = $"SELECT * FROM AVA_EP_VIEW_ENTERPRISEINFO WHERE BankType = '{BankType}'";
                 try
                 {
-                    var coll = conn.Query<IEnterpriseInfo>(sql);
+
+                    var coll = conn.Query<EnterpriseInfo>(sql);
                     enterpInfo = coll.ToList();
                 }
                 catch (Exception ex)

@@ -19,6 +19,7 @@ namespace BankDirectConnection.BaseApplication.ExceptionMsg
         public InnerException(string code, string message) : base(message)
         {
             this.Code = code;
+            
         }
 
         public string Code
@@ -29,8 +30,8 @@ namespace BankDirectConnection.BaseApplication.ExceptionMsg
         public override string Message
         {
             get
-            {
-                return "code:" + this.Code + ";message:Inner Error." + base.Message;
+            {              
+                return  this.Code + ";Inner Error," + base.Message;
             }
         }
     }

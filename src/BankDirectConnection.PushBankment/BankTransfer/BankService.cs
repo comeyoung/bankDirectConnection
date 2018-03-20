@@ -25,27 +25,66 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
-                Transcation.InitData();
-                Transcation.Check();
-                SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
-                Transcation.TranscationItems.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
-                var trans = TransModel.Create(Transcation);
-                TranscationDapperRepository repository = new TranscationDapperRepository();
-                repository.SaveTransList(trans);
-                //获取银行信息，调用具体银行的服务
-                var bankService = BankFactory.CreateBank(Transcation.TransWay);
-                var rt = bankService.PaymentTransfer(Transcation);
+                IResResult result = new ResResult();              
+                IResResult ResultPaid;
+                IResponse res;
+                TranscationDapperRepository transRepository = new TranscationDapperRepository();
+                
+                Transcation.TranscationItems.ToList().ForEach(c =>
+                {
+                    if (!string.IsNullOrEmpty(c.EDIId)||!string.IsNullOrEmpty(c.ClientId))
+                    {
+                        var transInfo = transRepository.Fetch(c.ClientId);
+                        if (transInfo != null)
 
-                repository.UpdateTransList(rt);
-                return rt;
+                            if (transInfo.TransCode == "0")
+                            {                              
+                                ResultPaid = new ResResult();
+                                res = new Response();
+                                res.Status.RspCod = transInfo.TransCode;
+                                res.Status.RspMsg = "支付单已成功付款，请不要重复支付！";
+                                res.ClientId = transInfo.ClientId;
+                                res.EDIId = transInfo.EDIId;                            
+                                ResultPaid.Response.Add(res);
+                                result.MergeResResult(ResultPaid);
+                                Transcation.TranscationItems.Remove(c);
+                            }
+                            else
+                            {
+                                transRepository.DropTransAndDetail(c.ClientId);                                   
+                            }
+                    }
+                    c.EDIId = "";                 
+                }
+                );
+                if (Transcation.TranscationItems.Count() > 0) { 
+                    Transcation.InitData();
+                    Transcation.Check();//check EDIId             
+                    SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
+                    Transcation.TranscationItems.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
+                    var trans = TransModel.Create(Transcation);
+                    TranscationDapperRepository repository = new TranscationDapperRepository();
+                    repository.SaveTransList(trans);
+                    //获取银行信息，调用具体银行的服务
+                    var bankService = BankFactory.CreateBank(Transcation.TransWay);
+                    var rt = bankService.PaymentTransfer(Transcation);
+                    repository.UpdateTransList(rt);
+                    result.MergeResResult(rt);
+                }
+                return result;
             }
             catch (BusinessException ex)
             {
                 throw ex;
+               
             }
-            catch(Exception ex)
+            catch (InnerException ex)
             {
-                throw new BusinessException(ex.Message) { Code = "2002001" };
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

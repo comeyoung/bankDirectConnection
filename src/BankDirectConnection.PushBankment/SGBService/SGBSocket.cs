@@ -20,7 +20,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         /// </summary>    
         Dictionary<string, Socket> dicSocket = new Dictionary<string, Socket>();
         private readonly string ServerIP = ConfigurationManager.AppSettings["SGBIP"];
-        private readonly string ServerPort = ConfigurationManager.AppSettings["SGBIP"];
+        private readonly string ServerPort = ConfigurationManager.AppSettings["SGBPort"];
         /// <summary>    
         /// 负责通信的Socket    
         /// </summary>    
@@ -49,8 +49,13 @@ namespace BankDirectConnection.PushBankment.SGBService
                 IPEndPoint port = new IPEndPoint(ip, Convert.ToInt32(ServerPort));
                 //获得要连接的远程服务器应用程序的IP地址和端口号
                 socketSend.Connect(port);
-                byte[] buffer = Encoding.UTF8.GetBytes(Message);
-                int rt = socketSend.Send(buffer);
+                byte[] len = new byte[8];
+                byte[] buffer = Encoding.GetEncoding("GBK").GetBytes(Message);
+                byte[] sendBuffer = new byte[8 + buffer.Length];
+                len = Encoding.UTF8.GetBytes(buffer.Length.ToString("00000000"));
+                len.CopyTo(sendBuffer, 0);
+                buffer.CopyTo(sendBuffer, 8);
+                int rt = socketSend.Send(sendBuffer);
                 ////新建线程，去接收客户端发来的信息    
                 //Thread td = new Thread(AcceptMgs);
                 //td.IsBackground = true;
@@ -73,11 +78,15 @@ namespace BankDirectConnection.PushBankment.SGBService
             {
                 while (true)
                 {
-                    byte[] buffer = new byte[1024 * 1024];
-                    int r = socketSend.Receive(buffer);
+                    byte[] len = new byte[8];
+                    byte[] buffer;
+                    int r = socketSend.Receive(len);
                     if (r != 0)
                     {
-                        string strMsg = Encoding.UTF8.GetString(buffer, 0, 1024);
+                        int bufferLen = Convert.ToInt32(Encoding.GetEncoding("GBK").GetString(len, 0, 8));
+                        buffer = new byte[bufferLen];
+                        socketSend.Receive(buffer);
+                        string strMsg = Encoding.UTF8.GetString(buffer, 0, bufferLen);
                         Console.WriteLine(strMsg);
                         return strMsg;
                     }

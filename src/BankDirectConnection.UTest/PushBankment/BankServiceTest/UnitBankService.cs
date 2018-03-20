@@ -664,7 +664,7 @@ namespace BankDirectConnection.UTest.PushBankment.BankServiceTest
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
 
             //bankService.PaymentTransfer(trans);

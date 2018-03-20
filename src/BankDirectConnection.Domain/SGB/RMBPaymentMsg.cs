@@ -67,7 +67,7 @@ namespace BankDirectConnection.Domain.SGB
             this.Head.CCTransCode = "SGT002";
             this.Head.ReqSeqNo = Transcation.EDIId;
             this.Head.ReqDate = Transcation.TransDate;
-            this.Head.ReqTime = Transcation.TransTime;       
+            this.Head.ReqTime = Transcation.TransTime + "000";
             this.Priority = Transcation.Priority;
             this.WhyUse = Transcation.Purpose;
             this.ClientId = Transcation.ClientId;
@@ -86,7 +86,7 @@ namespace BankDirectConnection.Domain.SGB
                 this.CrAccName = item.ToAcct.AcctName;
                 this.CrCifType = item.ToAcct.AcctType;
                 this.TranType = "0";//实时
-                this.ForeignPayee = item.ReceipterType;
+                this.ForeignPayee = "1";// item.ReceipterType;
                 this.CrBankName = item.ToAcct.BankName;
                 this.UnionDeptId = item.ToAcct.BankId;
                 this.CrCur = item.TransCur;           
