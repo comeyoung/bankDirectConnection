@@ -25,55 +25,17 @@ namespace BankDirectConnection.PushBankment.BankTransfer
             //检查transcation消息
             try
             {
-<<<<<<< HEAD
                 IResResult result = new ResResult();              
                 IResResult ResultPaid;
                 IResponse res;
                 TranscationDapperRepository transRepository = new TranscationDapperRepository();
                 
-=======
-                IResResult result;
-                IResponse res;
-                TranscationDapperRepository transRepository = new TranscationDapperRepository();
->>>>>>> f75329c3d8152376a6eb201fbf89c6341e5cd6c2
                 Transcation.TranscationItems.ToList().ForEach(c =>
                 {
                     if (!string.IsNullOrEmpty(c.EDIId)||!string.IsNullOrEmpty(c.ClientId))
                     {
                         var transInfo = transRepository.Fetch(c.ClientId);
                         if (transInfo != null)
-<<<<<<< HEAD
-=======
-
-                            if (transInfo.TransCode == "0")
-                            {
-                                result = new ResResult();
-                                res = new Response();
-                                res.Status.RspCod = transInfo.TransCode;
-                                res.Status.RspMsg = "支付单已成功付款，请不要重复支付！";
-                                result.MergeResResult(res);
-                            }
-                            else
-                            {
-                                transRepository.DropTransAndDetail(c.ClientId);                                   
-                            }
-                    }
-                    c.EDIId = "";
-                });
-
-
-
-                Transcation.InitData();
-                Transcation.Check();//check EDIId             
-                SerialNumberDapperRepository serialrepository = new SerialNumberDapperRepository();
-                Transcation.TranscationItems.ToList().ForEach(c => { c.NewEDIId(); c.EDIId = c.EDIId + serialrepository.GetSeqNumber(); });
-                var trans = TransModel.Create(Transcation);
-                TranscationDapperRepository repository = new TranscationDapperRepository();
-                repository.SaveTransList(trans);
-                //获取银行信息，调用具体银行的服务
-                var bankService = BankFactory.CreateBank(Transcation.TransWay);
-                var rt = bankService.PaymentTransfer(Transcation);
->>>>>>> f75329c3d8152376a6eb201fbf89c6341e5cd6c2
 
                             if (transInfo.TransCode == "0")
                             {                              
