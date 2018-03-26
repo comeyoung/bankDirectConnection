@@ -36,7 +36,6 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                     {
                         var transInfo = transRepository.Fetch(c.ClientId);
                         if (transInfo != null)
-
                             if (transInfo.TransCode == "0")
                             {                              
                                 ResultPaid = new ResResult();
