@@ -37,7 +37,7 @@ namespace BankDirectConnection.PushBankment.SGBService
         {
             try
             {
-                if(string.IsNullOrEmpty(ServerIP) || string.IsNullOrEmpty(ServerPort))
+                if (string.IsNullOrEmpty(ServerIP) || string.IsNullOrEmpty(ServerPort))
                 {
                     throw new Exception("the IP Address of SG service is empty");
                 }
@@ -65,9 +65,9 @@ namespace BankDirectConnection.PushBankment.SGBService
                 return rtMsg;
 
             }
-            catch(Exception ex) { throw ex; }
+            catch (Exception ex) { throw ex; }
         }
-        
+
 
         /// <summary>    
         /// 客户端接收服务器端返回的数据    
@@ -92,7 +92,7 @@ namespace BankDirectConnection.PushBankment.SGBService
                     }
                 }
             }
-            catch(Exception ex) { throw ex; }
+            catch (Exception ex) { throw ex; }
         }
 
 
