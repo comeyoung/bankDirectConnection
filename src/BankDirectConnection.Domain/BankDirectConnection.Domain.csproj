@@ -81,6 +81,8 @@
     <Compile Include="BOC\WageAndReimbursementMsg.cs" />
     <Compile Include="DataHandle\Date.cs" />
     <Compile Include="DataHandle\TransConverter.cs" />
+    <Compile Include="Enterprise\EnterpriseInfo.cs" />
+    <Compile Include="Enterprise\IEnterpriseInfo.cs" />
     <Compile Include="ExceptionMsg\ErrorResult.cs" />
     <Compile Include="Model\TransDetailModel.cs" />
     <Compile Include="Model\TransModel.cs" />
