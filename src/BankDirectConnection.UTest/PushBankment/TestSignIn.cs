@@ -13,7 +13,7 @@ namespace BankDirectConnection.UTest.PushBankment
         {
             //Mock<SignInMsg> mockSignIn = new Mock<SignInMsg>();
             SignInMsg signInMsg = new SignInMsg();
-            signInMsg.HeaderMessage.Cusopr = "136140253";
+            signInMsg.HeaderMessage.Cusopr = " 207522771";
             signInMsg.HeaderMessage.Custid = "133812368";
             signInMsg.HeaderMessage.Obssmsgid = "100001";
             signInMsg.HeaderMessage.Termid = "100001";
