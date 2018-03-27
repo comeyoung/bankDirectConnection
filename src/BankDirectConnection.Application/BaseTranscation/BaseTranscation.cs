@@ -49,8 +49,8 @@ namespace BankDirectConnection.BaseApplication.BaseTranscation
         {
             if (string.IsNullOrEmpty(FromAcct.AcctId))
                 throw new BusinessException("the value of from account's account id is null .") { Code = "1001001" };
-            if (string.IsNullOrEmpty(FromAcct.BankId))
-                throw new BusinessException("the value of from account's bank id is null .") { Code = "1001002" };
+            //if (string.IsNullOrEmpty(FromAcct.BankId))
+            //    throw new BusinessException("the value of from account's bank id is null .") { Code = "1001002" };
             return true;
         }
 
