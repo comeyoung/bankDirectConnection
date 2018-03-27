@@ -31,11 +31,9 @@ namespace BankDirectConnection.PushBankment.BankTransfer
                 TranscationDapperRepository transRepository = new TranscationDapperRepository();
                 
                 Transcation.TranscationItems.ToList().ForEach(c =>
-                {
-                    if (!string.IsNullOrEmpty(c.EDIId)||!string.IsNullOrEmpty(c.ClientId))
-                    {
+                {             
                         var transInfo = transRepository.Fetch(c.ClientId);
-                        if (transInfo != null)
+                        if (transInfo != null){ 
                             if (transInfo.TransCode == "0")
                             {                              
                                 ResultPaid = new ResResult();
